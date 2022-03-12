@@ -47,9 +47,18 @@ public class ServiceFormation implements IServiceFormation{
 
     @Override
     public void updateFormation(Formation formation, Integer idFormateur) {
-        User formateur = iUserRepo.findById(idFormateur).orElse(null);
-        formation.setFormateur(formateur);
-        iFormationRepo.save(formation);
+        Formation f = iFormationRepo.findById(idFormateur).orElse(null);
+
+        f.setTitle(formation.getTitle());
+        f.setDomain(formation.getDomain());
+        f.setStart(formation.getStart());
+        f.setEnd(formation.getEnd());
+        f.setFrais(formation.getFrais());
+        f.setNbrHeures(formation.getNbrHeures());
+        f.setNbrMaxParticipant(formation.getNbrMaxParticipant());
+
+        //  formation.setFormateur(formateur);
+        iFormationRepo.save(f);
     }
 
     @Override

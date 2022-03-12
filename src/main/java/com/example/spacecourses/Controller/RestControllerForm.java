@@ -30,7 +30,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 @Slf4j
 @RestController
-@RequestMapping("/Coursus")
+@RequestMapping("/form")
 @CrossOrigin()
 public class RestControllerForm {
 

@@ -16,10 +16,6 @@ public interface IUserRepo extends CrudRepository<User,Integer> {
     List<Object[]> getNbrApprenantByFormation();
 
 
-
-
-
-
     @Query(value="select f.apprenant from  Formation f  where f.idFormation = :id")
     List<User> getRevenueByFormation(@Param("id") Integer idFormation);
 

@@ -52,12 +52,12 @@ public class User {
     private Set<Formation> formationF;
 
 
-    @ManyToMany(mappedBy = "apprenant")
+    @ManyToMany(mappedBy = "apprenant", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Formation> formationA;
 
 
-    @OneToMany(mappedBy = "sUser",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sUser",cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JsonIgnore
    private Set<Result> results;
 
