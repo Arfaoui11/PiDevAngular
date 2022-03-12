@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -31,7 +30,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 @Slf4j
 @RestController
-@RequestMapping("/form")
+@RequestMapping("/Coursus")
 @CrossOrigin()
 public class RestControllerForm {
 
