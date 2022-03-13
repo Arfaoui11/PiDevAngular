@@ -2,12 +2,16 @@ package com.example.spacecourses.Services;
 
 
 import com.example.spacecourses.Entity.*;
+import com.example.spacecourses.QrCode.QRCodeGenerator;
 import com.example.spacecourses.Repository.*;
+import com.google.zxing.WriterException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -25,11 +29,12 @@ public class ServiceFormation implements IServiceFormation{
     @Autowired
     private IFormationRepo iFormationRepo;
     @Autowired
-    private IQuestionRepo iQuestionRepo;
-    @Autowired
-    private IQuizRepo iQuizRepo;
+    private IResultRepo iResultRepo;
+
     @Autowired
     private EmailSenderService emailSenderService;
+
+    private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/static/img/QRCode.png";
 
 
 
@@ -180,6 +185,34 @@ public class ServiceFormation implements IServiceFormation{
 
 
         return this.iFormationRepo.getFormateurRemunerationByDateTrie(dd,df);
+
+
+    }
+
+    @Override
+    @Scheduled(cron = "0 0/5 * * * *")
+    public void CertifactionStudents() {
+
+
+        try {
+        for (User u : iUserRepo.getApprenant())
+        {
+            if(iResultRepo.getScore(u.getId()) >= 70 && iResultRepo.getScore(u.getId()) <=100 && iResultRepo.getNbrQuiz(u.getId()) == 5 )
+            {
+
+                QRCodeGenerator.generateQRCodeImage(u.getEmail(),250,250,QR_CODE_IMAGE_PATH);
+                this.emailSenderService.sendEmail(u.getEmail()," congratulations you have finished your reward  " ," Certification At : "+ new Date()+" .");
+            }
+
+        }
+
+
+
+        } catch (WriterException | IOException e) {
+
+            e.printStackTrace();
+        }
+
 
 
     }

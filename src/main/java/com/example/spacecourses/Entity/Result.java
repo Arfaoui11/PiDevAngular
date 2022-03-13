@@ -23,6 +23,7 @@ public class Result {
     private int totalCorrect = 0;
     private int correctAnswer = 0;
     private int inCorrectAnswer = 0;
+    private boolean status;
 
     public Result() {
         super();

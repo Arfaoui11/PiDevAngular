@@ -31,6 +31,11 @@ public interface IServiceFormation {
 
     List<Object> getFormateurRemunerationByDateTrie();
 
+    void CertifactionStudents();
+
+
+
+
 
 
 

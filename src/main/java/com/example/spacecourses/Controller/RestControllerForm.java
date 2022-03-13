@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -47,6 +49,9 @@ public class RestControllerForm {
     private DatabaseFileService fileStorageService;
 
     private final PDFGeneratorService pdfGeneratorService;
+
+    @Autowired
+    private exportPdf export;
 
     private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/static/img/QRCode.png";
 
@@ -82,21 +87,20 @@ public class RestControllerForm {
             // Generate and Return Qr Code in Byte Array
             image = QRCodeGenerator.getQRCodeImage(formateur.getEmail(),250,250);
 
-            QRCodeGenerator.generateQRCodeImage(formateur.getEmail(),250,250,QR_CODE_IMAGE_PATH);
+             QRCodeGenerator.generateQRCodeImage(formateur.getEmail(),250,250,QR_CODE_IMAGE_PATH);
 
             // Generate and Save Qr Code Image in static/image folder
 
         } catch (WriterException | IOException e) {
+
             e.printStackTrace();
         }
         // Convert Byte Array into Base64 Encode String
         String qrcode = Base64.getEncoder().encodeToString(image);
+       // log.info(qrcode);
 
 
-        log.info(qrcode);
-
-
-        generatePDF(response,formateur.getEmail(),formateur.getEmail(),qrcode);
+      //  generatePDF(response,formateur.getEmail(),formateur.getEmail(),qrcode);
         iServiceEmail.sendEmail("mahdijr2015@gmail.com"," add Formateur " ," add succesful ... ");
         iServiceFormation.ajouterFormateur(formateur);
 
@@ -125,11 +129,20 @@ public class RestControllerForm {
         iServiceFormation.deleteFormation(idForm);
     }
 
+    @GetMapping("/exportPDF")
+    @ResponseBody
+    public ResponseEntity<InputStreamResource> exportPDF() throws IOException {
+        ByteArrayInputStream bais = export.FormationPDFReport(iServiceFormation.afficherFormation());
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition","Inline ;filename=formation.pdf");
+        return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(new InputStreamResource(bais));
+    }
 
     @ApiOperation(value = "Retrieve All Formation")
     @GetMapping("/retrieveFormation")
     @ResponseBody
     public List<Formation> afficherFormation(){
+
         return iServiceFormation.afficherFormation();
     }
 
