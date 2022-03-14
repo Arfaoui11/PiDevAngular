@@ -44,7 +44,7 @@ public class Formation {
 
     @ManyToMany
     @JsonIgnore
-    private Set<User> apprenant;
+    private Set<User> apprenant ;
 
     @OneToMany(mappedBy = "formation" ,cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JsonIgnore

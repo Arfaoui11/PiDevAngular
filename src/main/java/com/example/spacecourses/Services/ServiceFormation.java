@@ -182,29 +182,58 @@ public class ServiceFormation implements IServiceFormation{
         Date dd =Date.from(currentdDate1.minusDays(15).atStartOfDay(defaultZoneId).toInstant());
         Date df =Date.from(currentdDate1.plusDays(15).atStartOfDay(defaultZoneId).toInstant());
 
-
-
         return this.iFormationRepo.getFormateurRemunerationByDateTrie(dd,df);
-
-
     }
 
     @Override
-    @Scheduled(cron = "0 0/5 * * * *")
+    @Scheduled(cron = "0 0/1 * * * *")
     public void CertifactionStudents() {
 
+        boolean status = false;
+        Formation fr = new Formation();
+        User user = new User();
 
         try {
-        for (User u : iUserRepo.getApprenant())
-        {
-            if(iResultRepo.getScore(u.getId()) >= 70 && iResultRepo.getScore(u.getId()) <=100 && iResultRepo.getNbrQuiz(u.getId()) == 5 )
-            {
 
-                QRCodeGenerator.generateQRCodeImage(u.getEmail(),250,250,QR_CODE_IMAGE_PATH);
-                this.emailSenderService.sendEmail(u.getEmail()," congratulations you have finished your reward  " ," Certification At : "+ new Date()+" .");
+
+            for (Formation f : iFormationRepo.findAll())
+            {
+                for (User u : iUserRepo.getApprenantByFormation(f.getIdFormation()))
+                {
+                    if(iResultRepo.getScore(u.getId()) >= 200 && iResultRepo.getScore(u.getId()) <=250 && iResultRepo.getNbrQuiz(u.getId()) == 5 )
+                    {
+
+
+                        for (Result r : iResultRepo.getResultByIdUAndAndIdF(u.getId(),f.getIdFormation()))
+                        {
+
+                            if (!r.isStatus())
+                            {
+                                fr=f;
+                                user=u;
+                                r.setStatus(true);
+                                iResultRepo.save(r);
+                            }
+
+                        }
+
+
+
+
+                    }
+
+                }
+
             }
 
-        }
+            if (status==true)
+            {
+                QRCodeGenerator.generateQRCodeImage(fr.getDomain().toString(),150,150,QR_CODE_IMAGE_PATH);
+                this.emailSenderService.sendEmail(user.getEmail()," Congratulations Mr's : "+user.getNom()+" "+user.getPrenom()+" you have finished your Courses  " ," Certification At : "+ new Date()+"  in Courses of Domain "+fr.getDomain()+" "+" And Niveau : " +fr.getNiveau() +" .");
+
+            }
+
+
 
 
 
@@ -270,7 +299,7 @@ public class ServiceFormation implements IServiceFormation{
         Date dd =Date.from(currentdDate1.minusMonths(3).atStartOfDay(defaultZoneId).toInstant());
         Date df =Date.from(currentdDate1.plusMonths(3).atStartOfDay(defaultZoneId).toInstant());
 
-            if (this.iFormationRepo.nbrCoursesParFormateur(idFormateur,dd,df) <2)
+            if (this.iFormationRepo.nbrCoursesParFormateur(idFormateur,dd,df) <2 && formateur.getRole() == Role.FORMATEUR)
             {
                 formation.setLikes(0);
                 formation.setDislikes(0);
@@ -304,7 +333,8 @@ public class ServiceFormation implements IServiceFormation{
         Date dd =Date.from(currentdDate1.minusMonths(3).atStartOfDay(defaultZoneId).toInstant());
         Date df =Date.from(currentdDate1.plusMonths(3).atStartOfDay(defaultZoneId).toInstant());
 
-        if (iFormationRepo.getNbrApprenantByFormationId(idFormation) < formation.getNbrMaxParticipant())
+
+        if (iFormationRepo.getNbrApprenantByFormationId(idFormation) < formation.getNbrMaxParticipant() && apprenant.getRole() == Role.APPRENANT)
         {
 
             if(iFormationRepo.getNbrFormationByApprenant(idApprenant, formation.getDomain(), dd, df) <2)
@@ -385,9 +415,7 @@ public class ServiceFormation implements IServiceFormation{
     @Override
     public Integer getFormateurRemunerationByDate(Integer idFormateur, Date dateDebut, Date dateFin) {
 
-
         return iFormationRepo.getFormateurRemunerationByDate(idFormateur, dateDebut, dateFin);
-
 
     }
 

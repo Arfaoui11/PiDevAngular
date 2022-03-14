@@ -359,9 +359,9 @@ public class RestControllerForm {
 
     @PostMapping("/SaveScore/{idU}/{idQ}")
     @ApiOperation(value = " Save Score Quiz ")
-    public void saveScore(@RequestBody Result result,@PathVariable(name = "idU") Integer idUser,@PathVariable(name = "idQ") Integer idQuiz)
+    public Integer saveScore(@RequestBody Result result,@PathVariable(name = "idU") Integer idUser,@PathVariable(name = "idQ") Integer idQuiz)
     {
-        this.iServicesQuiz.saveScore(result,idUser,idQuiz);
+       return   this.iServicesQuiz.saveScore(result,idUser,idQuiz);
     }
 
 
@@ -426,6 +426,12 @@ public class RestControllerForm {
      return iServicesQuiz.getTopScore();
     }
 
-
+    @ApiOperation(value = " get Score  ")
+    @GetMapping("/getScore/{id}")
+    @ResponseBody
+    public Integer getScore(@PathVariable("id") Integer idU)
+    {
+        return iServicesQuiz.getScore(idU);
+    }
 
 }
