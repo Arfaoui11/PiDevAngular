@@ -34,6 +34,9 @@ public interface IServiceFormation {
     void CertifactionStudents();
 
 
+    List<Formation>  SearchMultiple(String key);
+
+
 
 
 

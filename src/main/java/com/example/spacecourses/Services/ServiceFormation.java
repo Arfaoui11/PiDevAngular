@@ -224,7 +224,6 @@ public class ServiceFormation implements IServiceFormation{
                                 QRCodeGenerator.generateQRCodeImage(f.getDomain().toString(),150,150,QR_CODE_IMAGE_PATH);
                                 this.emailSenderService.sendEmail(u.getEmail()," Congratulations Mr's : "+u.getNom()+" "+u.getPrenom()+" you have finished your Courses  " ," Certification At : "+ new Date()+"  in Courses of Domain "+f.getDomain()+" "+" And Niveau : " +f.getNiveau() +" .");
                                 fin=true;
-
                             }
 
 
@@ -252,6 +251,19 @@ public class ServiceFormation implements IServiceFormation{
         }
 
 
+
+    }
+
+    @Override
+    public List<Formation> SearchMultiple(String key) {
+
+        if (key==null)
+        {
+            return (List<Formation>) iFormationRepo.findAll();
+        }else
+        {
+            return iFormationRepo.rech(key);
+        }
 
     }
 

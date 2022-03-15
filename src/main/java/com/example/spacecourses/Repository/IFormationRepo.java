@@ -34,6 +34,8 @@ public interface IFormationRepo extends CrudRepository<Formation,Integer> {
     Integer getNbrFormationByApprenant(@Param("id") Integer idApp, @Param("domain") Domain domain , @Param("dateD") Date dateDebut, @Param("dateF") Date dateFin);
 
 
+    @Query(value = "select f from Formation f where concat(f.title,f.niveau,f.domain,f.frais,f.nbrHeures,f.nbrMaxParticipant) like %?1%")
+    List<Formation> rech(String keyword);
 
 
     @Query(value = "select count(f.idFormation) from Formation f join f.formateur fr where f.start>=:dateD and f.end<=:dateF and fr.id=:id")
