@@ -190,8 +190,8 @@ public class ServiceFormation implements IServiceFormation{
     public void CertifactionStudents() {
 
         boolean status = false;
-        Formation fr = new Formation();
-        User user = new User();
+        boolean fin;
+
 
         try {
 
@@ -202,18 +202,31 @@ public class ServiceFormation implements IServiceFormation{
                 {
                     if(iResultRepo.getScore(u.getId()) >= 200 && iResultRepo.getScore(u.getId()) <=250 && iResultRepo.getNbrQuiz(u.getId()) == 5 )
                     {
-
+                        fin=false;
 
                         for (Result r : iResultRepo.getResultByIdUAndAndIdF(u.getId(),f.getIdFormation()))
                         {
 
                             if (!r.isStatus())
                             {
-                                fr=f;
-                                user=u;
+
                                 r.setStatus(true);
                                 iResultRepo.save(r);
+                                status=true;
+
+
+                              //  QRCodeGenerator.generateQRCodeImage(f.getDomain().toString(),150,150,QR_CODE_IMAGE_PATH);
+                              //  this.emailSenderService.sendEmail(u.getEmail()," Congratulations Mr's : "+u.getNom()+" "+u.getPrenom()+" you have finished your Courses  " ," Certification At : "+ new Date()+"  in Courses of Domain "+f.getDomain()+" "+" And Niveau : " +f.getNiveau() +" .");
                             }
+                            if (status && !fin)
+                            {
+                                log.info( " Status  true ");
+                                QRCodeGenerator.generateQRCodeImage(f.getDomain().toString(),150,150,QR_CODE_IMAGE_PATH);
+                                this.emailSenderService.sendEmail(u.getEmail()," Congratulations Mr's : "+u.getNom()+" "+u.getPrenom()+" you have finished your Courses  " ," Certification At : "+ new Date()+"  in Courses of Domain "+f.getDomain()+" "+" And Niveau : " +f.getNiveau() +" .");
+                                fin=true;
+
+                            }
+
 
                         }
 
@@ -226,12 +239,8 @@ public class ServiceFormation implements IServiceFormation{
 
             }
 
-            if (status==true)
-            {
-                QRCodeGenerator.generateQRCodeImage(fr.getDomain().toString(),150,150,QR_CODE_IMAGE_PATH);
-                this.emailSenderService.sendEmail(user.getEmail()," Congratulations Mr's : "+user.getNom()+" "+user.getPrenom()+" you have finished your Courses  " ," Certification At : "+ new Date()+"  in Courses of Domain "+fr.getDomain()+" "+" And Niveau : " +fr.getNiveau() +" .");
 
-            }
+
 
 
 
