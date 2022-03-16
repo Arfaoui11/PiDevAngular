@@ -24,6 +24,10 @@ public interface IUserRepo extends CrudRepository<User,Integer> {
     List<User> getApprenantByFormation(@Param("id") Integer idF );
 
 
+    @Query(value = "select f.formateur from  Formation f  where f.idFormation = :id")
+    List<User> getFormateurByFormation(@Param("id") Integer idF );
+
+
     @Query(value= "select SUM(f.nbrHeures*f.formateur.tarifHoraire) from Formation f where f.formateur.id=:id and f.start>=:dateD and f.end<=:dateF")
     Integer getFormateurRemunerationByDate(@Param("id") Integer idFormateur, @Param("dateD") Date dateDebut, @Param("dateF") Date dateFin);
 

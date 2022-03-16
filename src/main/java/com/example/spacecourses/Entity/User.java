@@ -43,6 +43,9 @@ public class User {
     private int age;
 
     @Positive
+    private double salary;
+
+    @Positive
     private Integer tarifHoraire;
     private Role role;
 

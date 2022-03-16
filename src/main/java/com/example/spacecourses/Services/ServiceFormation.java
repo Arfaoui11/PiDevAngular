@@ -11,8 +11,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
@@ -101,50 +103,93 @@ public class ServiceFormation implements IServiceFormation{
 
 
     @Override
-   // @Scheduled(cron = "0 0/5 * * * *")
+    @Scheduled(cron = "0 0/20 * * * *")
+    //@Scheduled(cron = "0 0 9 28 * ?") every 28th of each month.
     public User getFormateurRemunerationMaxSalaire() {
-        int max = 0 ;
+        int max = 0;
 
         TreeMap<Integer, String> map = new TreeMap<Integer, String>();
 
         User u = new User();
 
-        LocalDate currentdDate1 =  LocalDate.now();
+        LocalDate currentdDate1 = LocalDate.now();
+        Date date = new Date(2022,3,1);
+
+        boolean status = false;
+
+
+        Calendar calLast = Calendar.getInstance();
+        Calendar calFirst = Calendar.getInstance();
+        calLast.set(Calendar.DATE, calLast.getActualMaximum(Calendar.DATE));
+        calFirst.set(Calendar.DATE, calFirst.getActualMinimum(Calendar.DATE));
+
+        Date lastDayOfMonth = calLast.getTime();
+        Date firstDayOfMonth = calFirst.getTime();
+
 
         ZoneId defaultZoneId = ZoneId.systemDefault();
 
-        Date dd =Date.from(currentdDate1.minusDays(15).atStartOfDay(defaultZoneId).toInstant());
-        Date df =Date.from(currentdDate1.plusDays(15).atStartOfDay(defaultZoneId).toInstant());
+        Date dd = Date.from(currentdDate1.minusDays(15).atStartOfDay(defaultZoneId).toInstant());
+        Date df = Date.from(currentdDate1.plusDays(15).atStartOfDay(defaultZoneId).toInstant());
 
-        for (Formation f: this.iFormationRepo.findAll()) {
-            if (f.getStart().after(dd) && f.getEnd().before(df) )
-            {
-                map.put(this.iFormationRepo.getFormateurRemunerationByDate(f.getFormateur().getId(),dd,df),f.getFormateur().getId().toString());
-                if(this.iFormationRepo.getFormateurRemunerationByDate(f.getFormateur().getId(),dd,df) > max)
-                {
-                    max =  this.iFormationRepo.getFormateurRemunerationByDate(f.getFormateur().getId(),dd,df);
+
+        log.info("start : " + firstDayOfMonth);
+        log.info("last : " + lastDayOfMonth);
+
+        if (firstDayOfMonth.equals(firstDayOfMonth)) {
+            status = true;
+        }
+
+
+      //   if(lastDayOfMonth.equals(lastDayOfMonth))
+       //  {
+        for (Formation f : this.iFormationRepo.findAll()) {
+            if (f.getStart().after(firstDayOfMonth) && f.getEnd().before(lastDayOfMonth)) {
+
+                map.put(this.iFormationRepo.getFormateurRemunerationByDate(f.getFormateur().getId(), firstDayOfMonth, lastDayOfMonth), f.getFormateur().getId().toString());
+                if (this.iFormationRepo.getFormateurRemunerationByDate(f.getFormateur().getId(), firstDayOfMonth, lastDayOfMonth) > max) {
+                    max = this.iFormationRepo.getFormateurRemunerationByDate(f.getFormateur().getId(), firstDayOfMonth, lastDayOfMonth);
+                }
+
+
+            }
+
+
+        }
+
+
+        if (status) {
+
+
+            for (Formation f : this.iFormationRepo.findAll()) {
+
+                for (User user : iUserRepo.getFormateurByFormation(f.getIdFormation())) {
+                    user.setSalary(this.iFormationRepo.getFormateurRemunerationByDate(user.getId(), firstDayOfMonth, lastDayOfMonth));
+                    iUserRepo.save(user);
+                }
+            }
+            log.info(" liste" + map);
+            log.info(" Max Salaire " + max);
+
+            for (Formation f : this.iFormationRepo.findAll()) {
+                if (f.getStart().after(firstDayOfMonth) && f.getEnd().before(lastDayOfMonth)) {
+                    if (this.iFormationRepo.getFormateurRemunerationByDate(f.getFormateur().getId(), firstDayOfMonth, lastDayOfMonth) == max) {
+
+                        u = this.iUserRepo.findById(f.getFormateur().getId()).orElse(null);
+                    }
                 }
             }
 
+            u.setSalary(max + 200 );
+            iUserRepo.save(u);
+            this.emailSenderService.sendEmail(u.getEmail(), "we have max houre of travel ", "we have max houre of travel we elevate salary : with " + u.getSalary()+ "$  Name " + u.getNom() + "--" + u.getPrenom() + " . ");
+            return u;
         }
 
-        log.info(" liste"+ map);
-        log.info(" Max Salaire " + max);
 
-        for (Formation f: this.iFormationRepo.findAll())
-        {
-            if (f.getStart().after(dd) && f.getEnd().before(df) )
-            {
-        if(this.iFormationRepo.getFormateurRemunerationByDate(f.getFormateur().getId(),dd,df) == max)
-        {
-            u = this.iUserRepo.findById(f.getFormateur().getId()).orElse(null);
-        }
-        }
-        }
-        u.setTarifHoraire(u.getTarifHoraire()+10);
-        iUserRepo.save(u);
-        this.emailSenderService.sendEmail(u.getEmail(),"we have max houre of travel ","we have max houre of travel we elevate salarie "+u.getNom()+"--"+u.getPrenom()+" : ");
-      return u;
+     // }
+      return null;
+
     }
 
 
@@ -177,7 +222,7 @@ public class ServiceFormation implements IServiceFormation{
     public List<Object> getFormateurRemunerationByDateTrie() {
         LocalDate currentdDate1 =  LocalDate.now();
 
-      //  Formation f = iFormationRepo.findById(idFormateur).orElse(null);
+
 
         ZoneId defaultZoneId = ZoneId.systemDefault();
 
@@ -188,7 +233,7 @@ public class ServiceFormation implements IServiceFormation{
     }
 
     @Override
-    @Scheduled(cron = "0 0/1 * * * *")
+   // @Scheduled(cron = "0 0/1 * * * *")
     public void CertifactionStudents() {
 
         boolean status = false;
