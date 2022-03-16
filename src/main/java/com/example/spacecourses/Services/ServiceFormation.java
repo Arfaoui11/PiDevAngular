@@ -103,8 +103,8 @@ public class ServiceFormation implements IServiceFormation{
 
 
     @Override
-    @Scheduled(cron = "0 0/20 * * * *")
-    //@Scheduled(cron = "0 0 9 28 * ?") every 28th of each month.
+//    @Scheduled(cron = "0 0/20 * * * *")
+    @Scheduled(cron = "0 0 9 28 * ?")
     public User getFormateurRemunerationMaxSalaire() {
         int max = 0;
 
