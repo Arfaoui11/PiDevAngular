@@ -11,7 +11,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -103,9 +102,11 @@ public class ServiceFormation implements IServiceFormation{
 
 
     @Override
-//    @Scheduled(cron = "0 0/20 * * * *")
-    @Scheduled(cron = "0 0 9 28 * ?")
+    @Scheduled(cron = "0 0/20 * * * *")
+   // @Scheduled(cron = "0 0 9 28 * ?")
     public User getFormateurRemunerationMaxSalaire() {
+
+
         int max = 0;
 
         TreeMap<Integer, String> map = new TreeMap<Integer, String>();
