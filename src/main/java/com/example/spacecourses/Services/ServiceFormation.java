@@ -103,7 +103,7 @@ public class ServiceFormation implements IServiceFormation{
 
     @Override
     @Scheduled(cron = "0 0/20 * * * *")
-   // @Scheduled(cron = "0 0 9 28 * ?")
+    @Scheduled(cron = "0 0 9 28 * ?")
     public User getFormateurRemunerationMaxSalaire() {
 
 
