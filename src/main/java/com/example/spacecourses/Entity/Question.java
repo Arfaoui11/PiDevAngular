@@ -25,6 +25,7 @@ public class Question {
     private String optionB;
     private String optionC;
     private String optionD;
+    private String optionE;
 
     private int ans;
     private int chose;

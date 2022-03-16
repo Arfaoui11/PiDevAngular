@@ -341,10 +341,10 @@ public class RestControllerForm {
 
 
     @ApiOperation(value = "get Quiz Question")
-    @GetMapping("/getQuizQuestion")
-    public List<Question> getQuizQuestion()
+    @GetMapping("/getQuizQuestion/{id}")
+    public List<Question> getQuizQuestion(@PathVariable("id") Integer idQ)
     {
-        return iServicesQuiz.getQuizQuestion();
+        return iServicesQuiz.getQuizQuestion(idQ);
     }
 
 

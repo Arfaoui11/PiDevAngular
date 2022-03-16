@@ -59,13 +59,13 @@ public class ServiceQuiz implements IServicesQuiz {
 
 
     @Override
-    public List<Question> getQuizQuestion() {
-        List<Question> allQues =  iQuizRepo.getQuizQuestion();
+    public List<Question> getQuizQuestion(Integer idQuiz ) {
+        List<Question> allQues =  iQuizRepo.getQuizQuestion(idQuiz);
         List<Question> qList = new ArrayList<>();
 
         Random random = new Random();
 
-        for(int i=0; i<4; i++) {
+        for(int i=0; i<5; i++) {
             int rand = random.nextInt(allQues.size());
             qList.add(allQues.get(rand));
             allQues.remove(rand);
@@ -83,7 +83,7 @@ public class ServiceQuiz implements IServicesQuiz {
 
         Random random = new Random();
 
-        for(int i=0; i<4; i++) {
+        for(int i=0; i<5; i++) {
             int rand = random.nextInt(allQues.size());
             qList.add(allQues.get(rand));
             allQues.remove(rand);

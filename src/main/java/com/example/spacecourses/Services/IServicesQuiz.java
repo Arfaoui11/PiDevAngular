@@ -14,7 +14,7 @@ public interface IServicesQuiz {
     void addQuestionAndAsigntoQuiz(Question question, Integer idQuiz);
    // void addAnswerAndAsigntoQuestion(Answer answer,Integer idQuestion,Integer idQuiz);
 
-    List<Question> getQuizQuestion();
+    List<Question> getQuizQuestion(Integer idQuiz);
     List<Question> getQuestions();
     int getResult(QuestionForm qForm);
     Integer saveScore(Result result, Integer idUser, Integer idQuiz);
