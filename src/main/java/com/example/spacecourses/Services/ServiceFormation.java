@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -30,6 +29,9 @@ public class ServiceFormation implements IServiceFormation{
     private IFormationRepo iFormationRepo;
     @Autowired
     private IResultRepo iResultRepo;
+    @Autowired
+    private ISearchRepo iSearchRepo;
+
 
     @Autowired
     private EmailSenderService emailSenderService;
@@ -215,15 +217,13 @@ public class ServiceFormation implements IServiceFormation{
                                 status=true;
 
 
-                              //  QRCodeGenerator.generateQRCodeImage(f.getDomain().toString(),150,150,QR_CODE_IMAGE_PATH);
-                              //  this.emailSenderService.sendEmail(u.getEmail()," Congratulations Mr's : "+u.getNom()+" "+u.getPrenom()+" you have finished your Courses  " ," Certification At : "+ new Date()+"  in Courses of Domain "+f.getDomain()+" "+" And Niveau : " +f.getNiveau() +" .");
                             }
                             if (status && !fin)
                             {
                                 log.info( " Status  true ");
                                 QRCodeGenerator.generateQRCodeImage(f.getDomain().toString(),150,150,QR_CODE_IMAGE_PATH);
                                 this.emailSenderService.sendEmail(u.getEmail()," Congratulations Mr's : "+u.getNom()+" "+u.getPrenom()+" you have finished your Courses  " ," Certification At : "+ new Date()+"  in Courses of Domain "+f.getDomain()+" "+" And Niveau : " +f.getNiveau() +" .");
-                                fin=true;
+                                fin=true; /// return /////
                             }
 
 
@@ -268,46 +268,12 @@ public class ServiceFormation implements IServiceFormation{
     }
 
 
-    /*
-        @Override
-        public List<Map.Entry<Integer, User>> getFormateurRemunerationMaxSalaireTrie() {
 
-            TreeMap<Integer, User> map = new TreeMap<>();
-
-
-
-            LocalDate currentdDate1 =  LocalDate.now();
-
-            ZoneId defaultZoneId = ZoneId.systemDefault();
-
-            Date dd =Date.from(currentdDate1.minusDays(15).atStartOfDay(defaultZoneId).toInstant());
-            Date df =Date.from(currentdDate1.plusDays(15).atStartOfDay(defaultZoneId).toInstant());
-
-            for (Formation f: this.iFormationRepo.findAll()) {
-                if (f.getStart().after(dd) && f.getEnd().before(df) )
-                {
-                    map.put(this.iFormationRepo.getFormateurRemunerationByDate(f.getFormateur().getId(),dd,df),f.getFormateur());
-
-                }
-
-            }
-
-            List<Map.Entry<Integer, User>> singleList = map.entrySet().stream().collect(Collectors.toList());
-
-
-
-
-            return singleList;
-        }
-
-
-     */
     @Override
     public void ajouterApprenant(User apprenant) {
             iUserRepo.save(apprenant);
     }
 
-    //@Transactional
     @Override
     public void ajouterEtAffecterFormationAFormateur(Formation formation, Integer idFormateur) {
 
@@ -465,6 +431,28 @@ public class ServiceFormation implements IServiceFormation{
 
         formation.setDislikes(formation.getDislikes()+1);
         iFormationRepo.save(formation);
+
+    }
+
+
+
+
+    //////////////// Search historique ////////////////
+
+    @Override
+    public void SearchHistorique(String keyword) {
+
+        if(keyword!=null)
+        {
+            String s = iSearchRepo.keyWord(keyword);
+            Search search = new Search();
+
+            search.setKeyword(s);
+            search.setAtDate(new Date());
+
+            iSearchRepo.save(search);
+        }
+
 
     }
 

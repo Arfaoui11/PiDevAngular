@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -425,6 +424,14 @@ public class RestControllerForm {
     public List<Formation> SearchMultiple(@PathVariable("keyword") String key)
     {
         return iServiceFormation.SearchMultiple(key);
+    }
+
+    @ApiOperation(value = " Search Historique ")
+    @PostMapping("/SearchHistorique/{keyword}")
+    @ResponseBody
+    public void SearchHistorique(@PathVariable("keyword") String keyword)
+    {
+        iServiceFormation.SearchHistorique(keyword);
     }
 
 

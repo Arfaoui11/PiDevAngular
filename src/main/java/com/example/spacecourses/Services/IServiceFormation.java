@@ -75,6 +75,11 @@ public interface IServiceFormation {
 
 
 
+    void SearchHistorique(String keyword);
+
+
+
+
 
 
 }
