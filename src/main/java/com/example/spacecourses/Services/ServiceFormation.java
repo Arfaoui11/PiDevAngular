@@ -360,32 +360,48 @@ public class ServiceFormation implements IServiceFormation{
         User apprenant = iUserRepo.findById(idApprenant).orElse(null);
 
         LocalDate currentdDate1 =  LocalDate.now();
+        User user = new User();
 
         ZoneId defaultZoneId = ZoneId.systemDefault();
 
         Date dd =Date.from(currentdDate1.minusMonths(3).atStartOfDay(defaultZoneId).toInstant());
         Date df =Date.from(currentdDate1.plusMonths(3).atStartOfDay(defaultZoneId).toInstant());
 
+        ///User with gifts Free for MAx Score
 
-        if (iFormationRepo.getNbrApprenantByFormationId(idFormation) < formation.getNbrMaxParticipant() && apprenant.getRole() == Role.APPRENANT)
-        {
 
-            if(iFormationRepo.getNbrFormationByApprenant(idApprenant, formation.getDomain(), dd, df) <2)
-            {
-                formation.getApprenant().add(apprenant);
-                iFormationRepo.save(formation);
-            }else
-            {
-                this.emailSenderService.sendEmail(apprenant.getEmail(),"we don't have acces to add two coursus in same domain " ,"we have 2 (MAX formation in this domain) NAME : "+apprenant.getNom() +" "+apprenant.getPrenom() +" .");
-                log.info("this apprenant we have 2 (MAX formation in this domain ");
+       for(Formation form : iFormationRepo.listFormationParApprenant(idApprenant)) {
+          if(iUserRepo.getApprenantWithScoreForGifts(form.getIdFormation()).size()!=0)
+           {
+               user = iUserRepo.getApprenantWithScoreForGifts(form.getIdFormation()).get(0);
+                //}
+
+
+                if (iFormationRepo.getNbrApprenantByFormationId(idFormation) < formation.getNbrMaxParticipant() && apprenant.getRole() == Role.APPRENANT) {
+
+                    if (iFormationRepo.getNbrFormationByApprenant(idApprenant, formation.getDomain(), dd, df) < 2 || apprenant.getId().equals(user.getId())) {
+                        if (iFormationRepo.getNbrFormationByApprenant(idApprenant, formation.getDomain(), dd, df) < 3) {
+
+                            log.info("nbr "+iFormationRepo.getNbrFormationByApprenant(idApprenant, formation.getDomain(), dd, df));
+                            formation.getApprenant().add(apprenant);
+                            iFormationRepo.save(formation);
+                        } else {
+                            log.info("this apprenant we have 3 (MAX formation in this domain ");
+                            this.emailSenderService.sendEmail(apprenant.getEmail(), "we don't have acces to add two coursus in same domain ", "we have 2 (MAX formation in this domain) NAME : " + apprenant.getNom() + " " + apprenant.getPrenom() + " .");
+                        }
+
+                    } else {
+                        this.emailSenderService.sendEmail(apprenant.getEmail(), "we don't have acces to add two coursus in same domain ", "we have 2 (MAX formation in this domain) NAME : " + apprenant.getNom() + " " + apprenant.getPrenom() + " .");
+                        log.info("this apprenant we have 2 (MAX formation in this domain ");
+                    }
+                } else {
+                    this.emailSenderService.sendEmail(apprenant.getEmail(), "Learner list complete  ", " We have in this courses " + formation.getNbrMaxParticipant() + " number of learner Maximum" + apprenant.getNom() + " - " + apprenant.getPrenom() + "  .");
+                    log.info(" Learner list complete Max learner " + formation.getNbrMaxParticipant());
+                }
             }
-        }else
-        {
-            this.emailSenderService.sendEmail(apprenant.getEmail(),"Learner list complete  " ," We have in this courses " + formation.getNbrMaxParticipant() + " number of learner Maximum" + apprenant.getNom() + " - "+apprenant.getPrenom() + "  .");
-            log.info(" Learner list complete Max learner " + formation.getNbrMaxParticipant());
-        }
 
 
+    }
 
     }
 /*

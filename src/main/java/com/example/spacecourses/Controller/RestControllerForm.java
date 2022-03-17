@@ -78,7 +78,7 @@ public class RestControllerForm {
 
     @PostMapping("/addFomateur")
     @ApiOperation(value = " ajouter Formateur ")
-    public void ajouterFormateur(@RequestBody User formateur,HttpServletResponse response) throws IOException, DocumentException {
+    public void ajouterFormateur(@RequestBody User formateur,HttpServletResponse response) {
 
 
         byte[] image = new byte[0];

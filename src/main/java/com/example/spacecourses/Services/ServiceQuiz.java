@@ -150,8 +150,8 @@ public class ServiceQuiz implements IServicesQuiz {
     }
 
     @Override
-    @Scheduled(cron = "0 0/1 * * * *")
-   // @Scheduled(cron = "0 0 20 ? * *") every day 20:00
+   // @Scheduled(cron = "0 0/1 * * * *")
+    @Scheduled(cron = "0 0 20 ? * *") //every day 20:00
     public void giftsToUserMaxScoreInCourses() {
         User user = new User();
 
@@ -160,20 +160,24 @@ public class ServiceQuiz implements IServicesQuiz {
 
         for(Formation form : iFormationRepo.findAll())
         {
-            user = iUserRepo.getApprenantWithScoreForGifts(form.getIdFormation()).get(0);
-
-            Date tomorrow = new Date(form.getEnd().getTime() + (1000 * 60 * 60 * 48));
-            log.info("Date : "+tomorrow);
-            if (date.after(form.getEnd()) && date.before(tomorrow))
+            if(iUserRepo.getApprenantWithScoreForGifts(form.getIdFormation()).size()!=0)
             {
-             status=true;
+                user = iUserRepo.getApprenantWithScoreForGifts(form.getIdFormation()).get(0);
+
+                Date tomorrow = new Date(form.getEnd().getTime() + (1000 * 60 * 60 * 48));
+                log.info("Date : "+tomorrow);
+                if (date.after(form.getEnd()) && date.before(tomorrow))
+                {
+                    status=true;
+                }
+
+                if (status)
+                {
+                    this.emailSenderService.sendEmail(user.getEmail(), " we have max Score in courses   ", "Congratulations Mr's : " + user.getNom() + "--" + user.getPrenom() + " We have Courses free and access in all domain Formation Id : "+ form.getIdFormation() + " .");
+                    status=false;
+                }
             }
 
-            if (status)
-            {
-                this.emailSenderService.sendEmail(user.getEmail(), " we have max Score in courses   ", "Congratulations Mr's : " + user.getNom() + "--" + user.getPrenom() + " We have Courses free and access in all domain . ");
-                status=false;
-            }
 
 
         }
