@@ -364,7 +364,7 @@ public class RestControllerForm {
        return   this.iServicesQuiz.saveScore(result,idUser,idQuiz);
     }
 
-
+/*
     @ApiOperation(value = " Apprenent With Max Score In Formation ")
     @GetMapping("/ApprenentwithMaxScoreInFormation/{idF}")
     @ResponseBody
@@ -373,6 +373,8 @@ public class RestControllerForm {
         return this.iServicesQuiz.ApprenentwithMaxScoreInFormation(id);
     }
 
+
+ */
     @ApiOperation(value = " Max Score In Formation")
     @GetMapping("/MaxScoreInFormation")
     @ResponseBody
@@ -417,6 +419,14 @@ public class RestControllerForm {
         return iServicesQuiz.ApprenentwithMaxScore(id);
     }
 
+    @ApiOperation(value = " get Apprenant With Score in All Quiz formation ")
+    @GetMapping("/ApprenentwithMaxScoreQuiz/{idF}")
+    @ResponseBody
+    public User ApprenentwithMaxScoreQuiz(@PathVariable("idF") Integer id)
+    {
+        return iServicesQuiz.ApprenentwithMaxScoreQuiz(id);
+    }
+
 
     @ApiOperation(value = " Search Multiple  ")
     @GetMapping("/SearchMultiple/{keyword}")
@@ -425,6 +435,23 @@ public class RestControllerForm {
     {
         return iServiceFormation.SearchMultiple(key);
     }
+
+    @ApiOperation(value = " get Quiz By Formation ")
+    @GetMapping("/getQuizByFormation/{id}")
+    @ResponseBody
+    public List<Quiz> getQuizByFormation(@PathVariable("id") Integer idF)
+    {
+        return this.iServicesQuiz.getQuizByFormation(idF);
+    }
+
+    @ApiOperation(value = "Delete Quiz")
+    @GetMapping("/DeleteQuiz/{id}")
+    @ResponseBody
+    public void DeleteQuiz(@PathVariable("id") Integer idQ)
+    {
+        this.iServicesQuiz.DeleteQuiz(idQ);
+    }
+
 
     @ApiOperation(value = " Search Historique ")
     @PostMapping("/SearchHistorique/{keyword}")

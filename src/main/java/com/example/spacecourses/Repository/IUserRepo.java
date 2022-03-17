@@ -65,6 +65,11 @@ public interface IUserRepo extends CrudRepository<User,Integer> {
 
 
 
+    @Query(value = "select r.sUser from Result r join r.quiz q join q.formation f where f.idFormation=:id group by r.sUser order by SUM (r.totalCorrect) desc")
+    List<User> getApprenantWithScoreForGifts(@Param("id") Integer id);
+
+
+
 
 
 

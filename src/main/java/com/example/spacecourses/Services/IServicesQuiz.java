@@ -29,6 +29,16 @@ public interface IServicesQuiz {
 
     Integer getScore( Integer idU);
 
+    List<Quiz> getQuizByFormation(Integer idF);
+
+    void DeleteQuiz(Integer idQ);
+
+    User ApprenentwithMaxScoreQuiz(Integer id);
+
+
+    void giftsToUserMaxScoreInCourses();
+
+
 
 
 

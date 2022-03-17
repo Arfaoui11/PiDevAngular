@@ -7,11 +7,11 @@ import com.example.spacecourses.Repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+
 @Slf4j
 @Service
 public class ServiceQuiz implements IServicesQuiz {
@@ -32,6 +32,8 @@ public class ServiceQuiz implements IServicesQuiz {
     QuestionForm qForm;
     @Autowired
     Result result;
+    @Autowired
+    private EmailSenderService emailSenderService;
 
 
 
@@ -40,6 +42,7 @@ public class ServiceQuiz implements IServicesQuiz {
     public void addQuiz(Quiz quiz, Integer idF) {
         Formation formation = this.iFormationRepo.findById(idF).orElse(null);
         quiz.setFormation(formation);
+        quiz.setCreateAt(new Date());
         iQuizRepo.save(quiz);
     }
 
@@ -141,6 +144,44 @@ public class ServiceQuiz implements IServicesQuiz {
     }
 
     @Override
+    public User ApprenentwithMaxScoreQuiz(Integer id) {
+
+        return iUserRepo.getApprenantWithScoreForGifts(id).get(0);
+    }
+
+    @Override
+    @Scheduled(cron = "0 0/1 * * * *")
+   // @Scheduled(cron = "0 0 20 ? * *") every day 20:00
+    public void giftsToUserMaxScoreInCourses() {
+        User user = new User();
+
+        Date date = new Date();
+        boolean status=false;
+
+        for(Formation form : iFormationRepo.findAll())
+        {
+            user = iUserRepo.getApprenantWithScoreForGifts(form.getIdFormation()).get(0);
+
+            Date tomorrow = new Date(form.getEnd().getTime() + (1000 * 60 * 60 * 48));
+            log.info("Date : "+tomorrow);
+            if (date.after(form.getEnd()) && date.before(tomorrow))
+            {
+             status=true;
+            }
+
+            if (status)
+            {
+                this.emailSenderService.sendEmail(user.getEmail(), " we have max Score in courses   ", "Congratulations Mr's : " + user.getNom() + "--" + user.getPrenom() + " We have Courses free and access in all domain . ");
+                status=false;
+            }
+
+
+        }
+
+
+    }
+
+    @Override
     public Integer MaxScoreInFormation() {
         return this.iUserRepo.MaxScoreInFormation();
     }
@@ -160,6 +201,19 @@ public class ServiceQuiz implements IServicesQuiz {
     public Integer getScore(Integer idU) {
         return iResultRepo.getScore(idU);
     }
+
+    @Override
+    public List<Quiz> getQuizByFormation(Integer idF) {
+        return this.iQuizRepo.getQuizByCourses(idF);
+    }
+
+    @Override
+
+    public void DeleteQuiz(Integer idQ) {
+        this.iQuizRepo.deleteById(idQ);
+    }
+
+
 
 
 }

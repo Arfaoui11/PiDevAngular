@@ -17,7 +17,7 @@ public interface IFormationRepo extends CrudRepository<Formation,Integer> {
     @Query(value= "select SUM(f.nbrHeures*f.formateur.tarifHoraire) from Formation f where f.formateur.id=:id and f.start>=:dateD and f.end<=:dateF")
     Integer getFormateurRemunerationByDate(@Param("id") Integer idFormateur, @Param("dateD") Date dateDebut, @Param("dateF") Date dateFin);
 
-    @Query(value= "select SUM(f.nbrHeures*f.formateur.tarifHoraire) ,f.formateur from Formation f where f.start>=:dateD and f.end<=:dateF group by f.formateur order by SUM(f.nbrHeures*f.formateur.tarifHoraire) ")
+    @Query(value= "select SUM(f.nbrHeures*f.formateur.tarifHoraire) ,f.formateur from Formation f where f.start>=:dateD and f.end<=:dateF group by f.formateur order by SUM(f.nbrHeures*f.formateur.tarifHoraire) desc ")
     List<Object> getFormateurRemunerationByDateTrie(@Param("dateD") Date dateDebut, @Param("dateF") Date dateFin);
 
 
@@ -34,7 +34,7 @@ public interface IFormationRepo extends CrudRepository<Formation,Integer> {
     Integer getNbrFormationByApprenant(@Param("id") Integer idApp, @Param("domain") Domain domain , @Param("dateD") Date dateDebut, @Param("dateF") Date dateFin);
 
 
-    @Query(value = "select f from Formation f where concat(f.title,f.niveau,f.domain,f.frais,f.nbrHeures,f.nbrMaxParticipant) like %?1%")
+    @Query(value = "select f from Formation f where concat(f.title,f.niveau,f.domain,f.frais,f.nbrHeures,f.nbrMaxParticipant) like %?1% group by f order by sum(f.likes-f.dislikes) desc")
     List<Formation> rech(String keyword);
 
 

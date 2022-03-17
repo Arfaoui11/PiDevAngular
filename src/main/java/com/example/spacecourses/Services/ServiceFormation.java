@@ -103,18 +103,18 @@ public class ServiceFormation implements IServiceFormation{
 
     @Override
     @Scheduled(cron = "0 0/20 * * * *")
-    @Scheduled(cron = "0 0 9 28 * ?")
+  //  @Scheduled(cron = "0 0 9 28 * ?")
     public User getFormateurRemunerationMaxSalaire() {
 
 
         int max = 0;
 
-        TreeMap<Integer, String> map = new TreeMap<Integer, String>();
+        TreeMap<Integer, String> map = new TreeMap<>();
 
         User u = new User();
 
         LocalDate currentdDate1 = LocalDate.now();
-        Date date = new Date(2022,1,20);
+        Date date = new Date();
 
         boolean status = false;
 
@@ -261,9 +261,8 @@ public class ServiceFormation implements IServiceFormation{
                                 r.setStatus(true);
                                 iResultRepo.save(r);
                                 status=true;
-
-
                             }
+
                             if (status && !fin)
                             {
                                 log.info( " Status  true ");
@@ -303,7 +302,7 @@ public class ServiceFormation implements IServiceFormation{
     @Override
     public List<Formation> SearchMultiple(String key) {
 
-        if (key==null)
+        if (key.equals(""))
         {
             return (List<Formation>) iFormationRepo.findAll();
         }else
@@ -350,6 +349,7 @@ public class ServiceFormation implements IServiceFormation{
     public Formation getFile(Integer fileId) throws FileNotFoundException {
         return iFormationRepo.findById(fileId).orElseThrow(() -> new FileNotFoundException("File not found with id " + fileId));
     }
+
 
     @Override
    // @Scheduled(cron = "*/30 * * * * *")
