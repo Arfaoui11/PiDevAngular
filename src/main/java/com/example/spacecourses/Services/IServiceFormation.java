@@ -62,6 +62,10 @@ public interface IServiceFormation {
     Integer getNbrFormationByApprenant(Integer idApp,Domain domain ,Date dateDebut, Date dateFin);
 
     List<Object[]> getNbrApprenantByFormation();
+
+
+
+
     List<User> getApprenantByFormation(Integer idF);
 
 
