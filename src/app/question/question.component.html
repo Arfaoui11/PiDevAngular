@@ -1,0 +1,165 @@
+<div  class="container" style="height: 450px">
+
+<div class="card-header" >
+  <td>
+    <button  class="btn btn-outline-primary " data-bs-toggle="modal" data-bs-target="#exampleModal"  >Add Quiz</button>
+  </td>
+</div>
+
+
+
+
+  <div class="card-body" *ngIf="listQuiz.length>=1">
+    <table id="example1" class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Content</th>
+        <th>CreateAt</th>
+        <th>Score</th>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>addQuiz</th>
+        <th>QrCode</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let l of listQuiz">
+
+        <td>{{l.title}}</td>
+        <td>{{l.content}}</td>
+        <td> {{l.createAt}}</td>
+        <td>{{l.score}}</td>
+        <td>
+          <button class="btn btn-outline-danger"  (click)="deleteQuiz(l.idQuiz)" >Delete</button>
+        </td>
+        <td>
+          <button  class="btn btn-outline-primary " data-bs-toggle="modal" data-bs-target="#updateModal" (click)="dataId(l.idQuiz)"  >Update</button>
+        </td>
+        <td>
+          <button  class="btn btn-outline-primary " data-bs-toggle="modal" data-bs-target="#exampleModal"  >Add Quiz</button>
+        </td>
+        <td>
+          <ngx-qrcode [elementType]="elementType"  [value]="l.title" [width]="50"  [errorCorrectionLevel]="correctionLevel" ></ngx-qrcode>
+        </td>
+
+      </tr>
+
+      </tbody>
+      <tfoot>
+      <tr>
+        <th>Titre</th>
+        <th>Content</th>
+        <th>CreateAt</th>
+        <th>Score</th>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>addQuiz</th>
+        <th>QrCode</th>
+      </tr>
+      </tfoot>
+    </table>
+
+
+
+  </div>
+  <div *ngIf="listQuiz.length==0" class="container" style="height: 450px">
+    <h2 class="text-info" > Don't have quiz in this courses ! Is empty</h2>
+
+
+
+  </div>
+
+  <div class="container ">
+    <div class="modal fade"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: #00a8c6" >
+
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="exmpleModelLabel"> Add Quiz </h5>
+            <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal" aria-label="Close"  >X</button>
+
+          </div>
+          <div class="modal-body" >
+
+            <form #f="ngForm" class="form-group"   >
+            <div class="input-group  row-cols-md-3 mat-h3 " >
+              <span class="input-groupe-text "> Title </span>
+              <input type="text" name="title" class="form-control" [(ngModel)]="quiz.title" >
+            </div>
+            <div class="input-group row-cols-md-3 mat-h3" >
+              <span class="input-groupe-text "> Content </span>
+              <input type="text" name="content" class="form-control" [(ngModel)]="quiz.content" >
+            </div>
+            <div class="input-group row-cols-md-3 mat-h3" >
+              <span class="input-groupe-text "> Score </span>
+              <input type="number" name="score" class="form-control" [(ngModel)]="quiz.score" >
+            </div>
+
+
+
+            <button type="button" class="btn btn-outline-success" (click)="addQuiz();f.reset()" > Add quiz </button>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+  <div class="container ">
+    <div class="modal fade"  id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: #00a8c6" >
+
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateModelLabel"> Update Quiz </h5>
+            <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal" aria-label="Close"  >X</button>
+
+          </div>
+          <div class="modal-body" >
+
+            <form #f="ngForm" class="form-group"   >
+              <div class="input-group  row-cols-md-3 mat-h3 " >
+                <span class="input-groupe-text "> Title </span>
+                <input type="text" name="title" class="form-control" [(ngModel)]="quiz.title" value="" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Content </span>
+                <input type="text" name="content" class="form-control" [(ngModel)]="quiz.content" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Score </span>
+                <input type="number" name="score" class="form-control" [(ngModel)]="quiz.score" >
+              </div>
+
+
+
+              <button type="button" class="btn btn-outline-success" (click)="addQuiz();f.reset()" > Update quiz </button>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+
+</div>

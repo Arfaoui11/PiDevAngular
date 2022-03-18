@@ -1,0 +1,42 @@
+<div class="doctors-wrapper">
+  <header>
+    <div class="module-title">
+      <div class='title'>COURSES LIST</div>
+      <div class='underline'></div>
+    </div>
+    <div class='add-doctor' >
+      <div class="e-icon-add e-icons"></div>
+      <div class="add-doctor-label">Add New</div>
+    </div>
+  </header>
+  <div class="specialization-detail-wrapper">
+
+    <div  class='specialist-display'>
+      <div  *ngFor="let data of formateur">
+        <div class="e-cards specialist-item" id=Specialist_{{data.id}}>
+          <div class="e-card-content">
+            <div class="specialist-image">
+              <img class="profile" src="assets/images/profile/user-uploads/user-02.jpg" alt="doctor" />
+              <span class='availability {{data.tarifHoraire}}}'></span>
+              <span class='upload icon-upload_photo {{data.id}}'></span>
+            </div>
+          </div>
+          <div class="specialist-detail">
+            <div class="name">Dr. {{data.nom}}</div>
+            <div class="education">{{getEducation(data.prenom)}}</div>
+            <div class="specialist-experience">
+              <div class="specialization">
+                <span class="label-text">Designation</span>
+                <span class="specialization-text">{{data.tarifHoraire}}</span>
+              </div>
+              <div class="experience">
+                <span class="label-text">Experience</span>
+                <span class="specialization-text">{{data.email}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

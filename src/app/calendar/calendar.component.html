@@ -1,0 +1,35 @@
+
+<div class="drag-sample-wrapper droppable">
+<div style="float:left ;width: 800px " class="schedule-container">
+
+  <ejs-schedule #scheduleObj width="820" height="500" [eventSettings]="eventObject" [selectedDate]="StartTime"  [currentView]="setView" [views]="setViews" [firstDayOfWeek]='firstDayOfWeek' [workHours]="workHours" >
+    <ng-template #eventSettingsTemplate let-data >
+      <div class="template-wrapper" >{{data.domain}}</div>
+    </ng-template>
+
+    <e-views>
+      <e-view option="Day"></e-view>
+      <e-view option="Week"></e-view>
+      <e-view option="Month"></e-view>
+      <e-view option="Agenda"></e-view>
+      <e-view option="TimelineWorkWeek" [group]="group"></e-view>
+      <e-view option="TimelineMonth" [group]="group"></e-view>
+    </e-views>
+
+
+    <ng-template #dateHeaderTemplate let-data>
+      <div class="date-text">{{getDateHeaderText(data.date )}}</div>
+    </ng-template>
+
+
+  </ejs-schedule>
+</div>
+
+<div style="width: 100px;float: right;margin-right: 30px" >
+
+  <ejs-treeview [fields]="field"  allowDragAndDrop='allowDragAndDrop' (nodeDragStop)="onTreeDragStartStop($event)" ></ejs-treeview>
+</div>
+
+</div>
+
+
