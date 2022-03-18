@@ -10,6 +10,7 @@ import {HomeComponent} from "./home/home.component";
 import {LayoutComponent} from "./layout/layout.component";
 import {AddFomateurComponent} from "./add-fomateur/add-fomateur.component";
 import {WelcomeComponent} from "./welcome/welcome.component";
+import {QuestionComponent} from "./question/question.component";
 
 const routes: Routes =
   /*[
@@ -41,6 +42,7 @@ const routes: Routes =
           { path: 'quiz', component: QuizComponent },
           { path: 'quizWelcome', component: WelcomeComponent },
           { path: 'Courses', component: CoursesFormComponent },
+          { path: 'Question/:idCourses', component: QuestionComponent },
 
         ]
       },

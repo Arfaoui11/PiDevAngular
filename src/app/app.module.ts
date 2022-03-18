@@ -40,6 +40,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutComponent } from './layout/layout.component';
 import { SidbarComponent } from './sidbar/sidbar.component';
 import {WelcomeComponent} from "./welcome/welcome.component";
+import { QuestionComponent } from './question/question.component';
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin
@@ -63,7 +64,8 @@ FullCalendarModule.registerPlugins([
     NavbarComponent,
     LayoutComponent,
     SidbarComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    QuestionComponent
   ],
   imports: [
     BrowserModule,
