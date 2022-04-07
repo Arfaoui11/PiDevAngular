@@ -3,9 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Formation} from "../core/model/Formation";
 import {User} from "../core/model/User";
-import {Info} from "../core/model/Info";
-import { map } from 'rxjs/operators';
-import { pipe } from 'rxjs';
+
 
 
 
@@ -35,12 +33,12 @@ export class FormationService {
 
 
   getFormateur():Observable<User[]> {
-    return this.http.get<User[]>("http://localhost:8090/SpringMVC/form/retrieveFormateur");
+    return this.http.get<User[]>("http://localhost:8090/Courses/retrieveFormateur");
   }
 
 
   getFormateurRemunerationMaxSalaireTrie():Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:8090/SpringMVC/form/getFormateurMaxSalaireTrie');
+    return this.http.get<any[]>('http://localhost:8090/Courses/getFormateurMaxSalaireTrie');
   }
 
 
@@ -56,7 +54,7 @@ export class FormationService {
     }
 
 
-    xmll.open('get','http://localhost:8090/SpringMVC/form/retrieveFormation',true)
+    xmll.open('get','http://localhost:8090/Courses/retrieveFormation',true)
 
 
     xmll.send(null)
@@ -73,7 +71,7 @@ export class FormationService {
       this.formateur = JSON.parse(xx.responseText)
     }
 
-    xx.open('get','http://localhost:8090/SpringMVC/form/retrieveFormateur',true)
+    xx.open('get','http://localhost:8090/Courses/retrieveFormateur',true)
 
 
     xx.send(null)
@@ -91,40 +89,40 @@ export class FormationService {
 
 
 
-  SerachMultiple(key:string):Observable<Formation[]>
+  SerachMultiple(key:string) :Observable<Formation[]>
   {
-    return this.http.get<Formation[]>('http://localhost:8090/SpringMVC/form/SearchMultiple/'+key);
+    return this.http.get<Formation[]>('http://localhost:8090/Courses/SearchMultiple/'+key);
   }
 
 
   SerachRepi(key : string):Observable<any>
   {
-    return this.http.post<string>("http://localhost:8090/SpringMVC/form/SearchHistorique/"+key,1)
+    return this.http.post<string>("http://localhost:8090/Courses/SearchHistorique/"+key,1)
   }
 
 
   getFormation():Observable<Formation[]> {
-    return this.http.get<Formation[]>("http://localhost:8090/SpringMVC/form/retrieveFormation");
+    return this.http.get<Formation[]>("http://localhost:8090/Courses/retrieveFormation");
   }
 
 
   getApprenantByFormation(i : number):Observable<User[]> {
-    return this.http.get<User[]>("http://localhost:8090/SpringMVC/form/ApprenantByFormation/"+i);
+    return this.http.get<User[]>("http://localhost:8090/Courses/ApprenantByFormation/"+i);
   }
 
 
 
-  addFormation(f : Formation,i:number): Observable<any>
+  addFormation(f : Formation,i:number): Observable<Formation>
   {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(f);
     console.log(body)
-    return this.http.post<Formation>("http://localhost:8090/SpringMVC/form/ajouterEtAffecterFormationAFormateur/"+i,f)
+    return this.http.post<Formation>("http://localhost:8090/Courses/ajouterEtAffecterFormationAFormateur/"+i,f)
   }
 
   deleteFormation(i:number): Observable<any> {
 
-    return this.http.get<number>("http://localhost:8090/SpringMVC/form/deleteFormation/"+i)
+    return this.http.get<number>("http://localhost:8090/Courses/deleteFormation/"+i)
   }
   updateFormation(f:Formation,i:number): Observable<any>
   {
@@ -132,48 +130,48 @@ export class FormationService {
     const body=JSON.stringify(f);
     console.log(body)
     return this.http.put<Formation>
-    ("http://localhost:8090/SpringMVC/form/updateFormation/"+i,f);
+    ("http://localhost:8090/Courses/updateFormation/"+i,f);
   }
 
   affectationApptoFormation(idApp :number , idFor : number,f :Formation): Observable<any>
   {
     const headers = { 'content-type': 'application/json'};
-    return this.http.post<Formation>("http://localhost:8090/SpringMVC/form/affecterApprenantFormation/"+idApp+"/"+idFor+"/",f );
+    return this.http.post<Formation>("http://localhost:8090/Courses/affecterApprenantFormation/"+idApp+"/"+idFor+"/",f );
 
   }
 
   getRevenueByFormation(i :number):Observable<number>
   {
-    return  this.http.get<number>('http://localhost:8090/SpringMVC/form/getRevenueByFormation/'+i)
+    return  this.http.get<number>('http://localhost:8090/Courses/getRevenueByFormation/'+i)
   }
 
   getNbrApprenantByFormation():Observable<Object[]>
   {
 
     return this.http
-      .get<Object[]>("http://localhost:8090/SpringMVC/form/NbrApprenantByFormation")
+      .get<Object[]>("http://localhost:8090/Courses/NbrApprenantByFormation")
   }
 
   addLikes(i:number): Observable<any> {
 
-    return this.http.post<number>("http://localhost:8090/SpringMVC/form/addLikes/"+i,1)
+    return this.http.post<number>("http://localhost:8090/Courses/addLikes/"+i,1)
   }
 
   addDisLikes(i:number): Observable<any> {
 
-    return this.http.post<number>("http://localhost:8090/SpringMVC/form/addDisLikes/"+i,1)
+    return this.http.post<number>("http://localhost:8090/Courses/addDisLikes/"+i,1)
   }
 
 
   uploadFile(file: FormData, i: number): Observable<any>
   {
-    return this.http.post<any>('http://localhost:8090/SpringMVC/form/uploadMultipleFiles/'+i,file);
+    return this.http.post<any>('http://localhost:8090/Courses/uploadMultipleFiles/'+i,file);
   }
 
 
   exportPDF():Observable<Blob>
   {
-    return this.http.get('http://localhost:8090/SpringMVC/form/exportPDF',{responseType:'blob'} );
+    return this.http.get('http://localhost:8090/Courses/exportPDF',{responseType:'blob'} );
   }
 
 

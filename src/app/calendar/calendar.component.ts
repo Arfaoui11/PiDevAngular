@@ -98,13 +98,13 @@ export class CalendarComponent implements OnInit {
       this.formateur = JSON.parse(xx.responseText)
     }
 
-    xx.open('get','http://localhost:8090/SpringMVC/form/retrieveFormateur',true)
+    xx.open('get','http://localhost:8090/Courses/retrieveFormateur',true)
 
 
     xx.send(null)
 
 
-    xmll.open('get','http://localhost:8090/SpringMVC/form/retrieveFormation',true)
+    xmll.open('get','http://localhost:8090/Courses/retrieveFormation',true)
 
 
     xmll.send(null)

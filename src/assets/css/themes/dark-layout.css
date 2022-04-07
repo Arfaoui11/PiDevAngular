@@ -2,7 +2,7 @@
         DARK LAYOUT
 =========================================================*/
 body.dark-layout {
-  background-color : #262C49;
+  background-color : rgba(67, 101, 250, 0.56);
   /********* UI ELEMENTS *********/
   /********* COMPONENTS *********/
   /********** FORMS **********/
@@ -21,7 +21,7 @@ body.dark-layout [class*='border'] {
   border-color : #414561 !important;
 }
 body.dark-layout a:hover {
-  color : #7367F0;
+  color : #4365fa;
 }
 body.dark-layout p, body.dark-layout small, body.dark-layout span, body.dark-layout label {
   color : #C2C6DC;
@@ -54,8 +54,9 @@ body.dark-layout .header-navbar-shadow {
   background : -webkit-linear-gradient(top, rgba(44, 48, 60, 0.9) 44%, rgba(44, 48, 60, 0.43) 73%, rgba(44, 48, 60, 0));
   background :         linear-gradient(180deg, rgba(44, 48, 60, 0.9) 44%, rgba(44, 48, 60, 0.43) 73%, rgba(44, 48, 60, 0));
 }
+
 body.dark-layout .header-navbar {
-  background-color : #10163A;
+  background-color : #fab9f6;
 }
 body.dark-layout .header-navbar .navbar-container .nav .nav-item .nav-link {
   color : #C2C6DC;
@@ -147,6 +148,7 @@ body.dark-layout .header-navbar.navbar-static-top {
 body.dark-layout .header-navbar[class*='bg-'] .navbar-nav .nav-item .nav-link {
   background-color : inherit;
 }
+
 body.dark-layout.blank-page .card.bg-transparent h1, body.dark-layout.blank-page .card.bg-transparent h2, body.dark-layout.blank-page .card.bg-transparent h3, body.dark-layout.blank-page .card.bg-transparent h4, body.dark-layout.blank-page .card.bg-transparent h5, body.dark-layout.blank-page .card.bg-transparent h6 {
   color : #10163A;
 }
@@ -154,41 +156,41 @@ body.dark-layout.blank-page .card.bg-transparent p {
   color : #262C49;
 }
 body.dark-layout .main-menu {
-  background-color : #10163A;
+  background-color : #fdd1ff;
 }
 body.dark-layout .main-menu .shadow-bottom {
   background : -webkit-linear-gradient(top, #0F1642 44%, rgba(15, 22, 66, 0.51) 73%, rgba(44, 48, 60, 0));
   background :         linear-gradient(180deg, #0F1642 44%, rgba(15, 22, 66, 0.51) 73%, rgba(44, 48, 60, 0));
 }
 body.dark-layout .main-menu:not(.expanded) .navigation .sidebar-group-active > a {
-  background-color : #262C49;
+  background-color : #fdd1ff;
 }
 body.dark-layout .main-menu-content .navigation-main {
-  background-color : #10163A;
+  background-color : #fac9e9;
 }
 body.dark-layout .main-menu-content .navigation-main .nav-item i {
   color : #C2C6DC;
 }
 body.dark-layout .main-menu-content .navigation-main .nav-item.open a {
-  background-color : #262C49;
+  background-color : #fac9e9;
 }
 body.dark-layout .main-menu-content .navigation-main .nav-item a:after {
   color : #C2C6DC;
 }
 body.dark-layout .main-menu-content .navigation-main .nav-item .menu-content {
-  background-color : #10163A;
+  background-color : #fac9e9;
 }
 body.dark-layout .main-menu-content .navigation-main .nav-item .menu-content .active .menu-item {
   color : #FFFFFF;
 }
 body.dark-layout .main-menu-content .navigation-main .nav-item .menu-content li:not(.active) a {
-  background-color : #10163A;
+  background-color : #fac9e9;
 }
 body.dark-layout .main-menu-content .navigation-main .active .menu-title, body.dark-layout .main-menu-content .navigation-main .active i {
   color : #FFFFFF;
 }
 body.dark-layout .main-menu-content .navigation-main .sidebar-group-active a {
-  background : #10163A;
+  background : #fac9e9;
   border-radius : 4px;
 }
 body.dark-layout .main-menu-content .navigation-main .sidebar-group-active .menu-content {
@@ -312,6 +314,7 @@ body.dark-layout #component-breadcrumbs .breadcrumb .breadcrumb-item.active {
 body.dark-layout .collapse-bordered .collapse-header {
   border-color : rgba(255, 255, 255, 0.04);
 }
+
 body.dark-layout .collapse-bordered.accordion-shadow {
   box-shadow : 0 0 8px 0 rgba(255, 255, 255, 0.1);
 }

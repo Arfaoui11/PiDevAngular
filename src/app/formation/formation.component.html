@@ -48,7 +48,7 @@
         <tr *ngFor="let l of listFomation">
 
           <td>{{l.title}}</td>
-          <td>{{l.niveau}}</td>
+          <td>{{l.level}}</td>
           <td>{{l.domain}}</td>
           <td>{{l.frais}}</td>
           <td >
@@ -124,7 +124,7 @@
           </div>
           <div class="form-group row-cols-md-3">
             <label  >Niveau</label>
-            <select  #niveau="ngModel" [(ngModel)]="fr.niveau" name="niveau" class="form-control"  required >
+            <select  #niveau="ngModel" [(ngModel)]="fr.level" name="niveau" class="form-control"  required >
               <option selected value="DEBUTANT">DEBUTANT</option>
               <option value="INTERMEDIAIRE">INTERMEDIAIRE</option>
               <option value="AVANCE">AVANCE</option>
@@ -205,32 +205,32 @@
       <form #f="ngForm" class="form-group"   >
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label   >Title</label>
+            <label >Title</label>
             <input type="text" class="form-control"  #titre="ngModel" [(ngModel)]="fr.title" name="title" required placeholder="Email">
           </div>
 
 
           <div class="form-group col-md-6">
-            <label   >nbrMaxParticipant</label>
+            <label >nbrMaxParticipant</label>
             <input type="number" class="form-control" #nbrMaxParticipant="ngModel" [(ngModel)]="fr.nbrMaxParticipant"  name="nbrMaxParticipant" required placeholder="Password">
           </div>
 
         </div>
         <div class="form-group">
-          <label  >nbrHeures</label>
+          <label >nbrHeures</label>
           <input type="number" class="form-control" #nbrHeures="ngModel" [(ngModel)]="fr.nbrHeures"  required name="nbrHeures" placeholder="1234 Main St">
         </div>
         <div class="form-group">
-          <label  >frais</label>
+          <label >frais</label>
           <input type="number" class="form-control"   #frais="ngModel" [(ngModel)]="fr.frais" required name="frais" placeholder="Apartment, studio, or floor">
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label  >dateDebut</label>
+            <label >dateDebut</label>
             <input type="date" class="form-control" #dateDebut="ngModel" [(ngModel)]="fr.start" name="dateDebut"  required >
           </div>
           <div class="form-group col-md-6">
-            <label  >dateFin</label>
+            <label >dateFin</label>
             <input type="date" class="form-control" #dateFin="ngModel" [(ngModel)]="fr.end" name="dateFin" required >
           </div>
 
@@ -244,15 +244,15 @@
 
 
           <div class="form-group col-md-4">
-            <label  >Niveau</label>
-            <select  #niveau="ngModel" [(ngModel)]="fr.niveau" name="niveau" class="form-control"  required >
-              <option selected value="DEBUTANT">DEBUTANT</option>
-              <option value="INTERMEDIAIRE">INTERMEDIAIRE</option>
-              <option value="AVANCE">AVANCE</option>
+            <label >Niveau</label>
+            <select  #niveau="ngModel" [(ngModel)]="fr.level" name="niveau" class="form-control"  required >
+              <option selected value="BEGINNER">BEGINNER</option>
+              <option value="INTERMEDIATE">INTERMEDIATE</option>
+              <option value="ADVANCED">ADVANCED</option>
             </select>
           </div>
           <div class="form-group col-md-4">
-            <label  >Domain</label>
+            <label >Domain</label>
             <select #domain="ngModel" [(ngModel)]="fr.domain" name="domain" class="form-control"  required >
               <option selected value="INFORMATIQUE">INFORMATIQUE</option>
               <option value="ART">ART</option>
@@ -263,8 +263,8 @@
           </div>
 
         </div>
-        <button type="submit" class="btn btn-primary"  (click)="addFormation(idF); f.reset();UpdateTable2()"
-                [disabled]="titre.invalid ||nbrHeures.invalid||nbrMaxParticipant.invalid||frais.invalid||dateDebut.invalid||dateFin.invalid||domain.invalid||niveau.invalid" data-toggle="tooltip" data-placement="right" *ngIf="f.valid" ></button>
+        <button type="submit" class="btn btn-primary" (click)="addFormation(idF); f.reset();UpdateTable2()"
+                [disabled]="titre.invalid ||nbrHeures.invalid||nbrMaxParticipant.invalid||frais.invalid||dateDebut.invalid||dateFin.invalid||domain.invalid||niveau.invalid" data-toggle="tooltip" data-placement="right" *ngIf="f.valid" > Add Courses </button>
       </form>
 
 

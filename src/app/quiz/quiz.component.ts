@@ -13,7 +13,6 @@ import {Result} from "../core/model/Result";
 })
 export class QuizComponent implements OnInit {
 
-  public ListQuiz : Quiz[] ;
   public ListQuestion :Question[]=[] ;
 
   @ViewChild('name') nameKey!: ElementRef;
@@ -100,7 +99,7 @@ export class QuizComponent implements OnInit {
 
       setTimeout(()=>{
         this.isQuizCompleted = true;
-        this.saveScoreQuiz(6,5);
+        this.saveScoreQuiz(4,1);
         this.stopCounter();
       },500);
 
@@ -141,6 +140,7 @@ export class QuizComponent implements OnInit {
     this.progress = "0";
 
   }
+
   getProgressPercent() {
     this.progress = ((this.currentQuestion / this.ListQuestion.length) * 100).toString();
     return this.progress;
@@ -161,7 +161,7 @@ export class QuizComponent implements OnInit {
     this.res.totalCorrect=this.points;
     this.res.correctAnswer=this.correctAnswer;
     this.res.inCorrectAnswer=this.inCorrectAnswer;
-    this.res.username="mahdi";
+    this.res.username=this.name;
     this.questionService.saveScore(this.res,idU,idQ).subscribe(
       res => {console.log(res);});
   }

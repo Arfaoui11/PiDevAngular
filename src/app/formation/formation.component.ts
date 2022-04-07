@@ -17,6 +17,7 @@ export class FormationComponent implements OnInit {
   formation = new Formation();
 
   sowFormateur : boolean = false;
+
   listFomation : Formation[]=[];
 
   key: any;
@@ -52,6 +53,7 @@ export class FormationComponent implements OnInit {
   constructor(private serviceForm : FormationService,private snackbar:MatSnackBar,private service : ShereService) { }
 
   ngOnInit(): void {
+    console.log(this.idF);
     this.getformation()
 
     this.getNbrApprenantByFormation()
@@ -96,7 +98,7 @@ export class FormationComponent implements OnInit {
 
 
 
-    this.serviceForm.uploadFile(formData,4).subscribe(res => {
+    this.serviceForm.uploadFile(formData,2).subscribe(res => {
       console.log(res)
     });
 

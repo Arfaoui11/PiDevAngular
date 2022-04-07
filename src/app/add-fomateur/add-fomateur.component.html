@@ -47,7 +47,7 @@
               </div>
             </div>
           </td>
-          <td class="product-name">{{l.niveau}}</td>
+          <td class="product-name">{{l.level}}</td>
           <td class="product-price">{{l.nbrHeures}} </td>
           <td class="product-name">{{l.domain}}</td>
 
@@ -123,10 +123,10 @@
 
               <div class="col-sm-12 data-field-col">
                 <label for="data-category"> Niveau </label>
-                <select  class="form-control" [(ngModel)]="fr.niveau"  id="data-category" required>
-                  <option value="DEBUTANT">DEBUTANT</option>
-                  <option value="INTERMEDIAIRE">INTERMEDIAIRE</option>
-                  <option value="AVANCE">AVANCE</option>
+                <select  class="form-control" [(ngModel)]="fr.level"  id="data-category" required>
+                  <option value="BEGINNER">BEGINNER</option>
+                  <option value="INTERMEDIATE">INTERMEDIATE</option>
+                  <option value="ADVANCED">ADVANCED</option>
                 </select>
               </div>
 
@@ -157,7 +157,7 @@
         <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
           <div class="add-data-btn">
             <button class="btn btn-primary" *ngIf="show" (click)="UpdateFormation(fr,idF)">Edit Data</button>
-            <button class="btn btn-primary" *ngIf="!show" (click)="addFormation(8)">Add Data</button>
+            <button class="btn btn-primary" *ngIf="!show" (click)="addFormation(2)">Add Data</button>
           </div>
           <div class="cancel-data-btn">
             <button class="btn btn-outline-danger">Cancel</button>

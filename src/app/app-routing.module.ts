@@ -7,7 +7,6 @@ import {ListeFormationComponent} from "./liste-formation/liste-formation.compone
 import {QuizComponent} from "./quiz/quiz.component";
 import {CoursesFormComponent} from "./courses-form/courses-form.component";
 import {HomeComponent} from "./home/home.component";
-import {LayoutComponent} from "./layout/layout.component";
 import {AddFomateurComponent} from "./add-fomateur/add-fomateur.component";
 import {WelcomeComponent} from "./welcome/welcome.component";
 import {QuestionComponent} from "./question/question.component";

@@ -12,6 +12,7 @@ import {Info} from "../core/model/Info";
 export class ListFomateurComponent implements OnInit {
 
   listFormateur  : User[];
+
   name : string;
 
   @Input() idForma : number;
@@ -39,7 +40,7 @@ export class ListFomateurComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+ console.log(this.name);
 
   }
 
