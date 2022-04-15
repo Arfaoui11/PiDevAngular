@@ -1,11 +1,26 @@
 
+<div class="planner-calendar">
+  <div class="doctor-container" style="display:none">
+    <div class="app-doctors"></div>
+    <div class="app-doctor-icon"></div>
+  </div>
 <div class="drag-sample-wrapper droppable">
-<div style="float:left ;width: 800px " class="schedule-container">
+<div  class="schedule-container">
 
-  <ejs-schedule #scheduleObj width="820" height="500" [eventSettings]="eventObject" [selectedDate]="StartTime"  [currentView]="setView" [views]="setViews" [firstDayOfWeek]='firstDayOfWeek' [workHours]="workHours" >
-    <ng-template #eventSettingsTemplate let-data >
-      <div class="template-wrapper" >{{data.domain}}</div>
-    </ng-template>
+  <ejs-schedule #scheduleObj height='500px'  cssClass='doctor-appointment-planner' [showWeekend]='false'
+                [startHour]="startHour" [endHour]='endHour' [selectedDate]="selectedDate" [eventSettings]="eventObject"
+                [timeScale]="timeScale" [workDays]="workDays" [workHours]="workHours" [firstDayOfWeek]='firstDayOfWeek'
+                [currentView]='currentView' (actionBegin)='onActionBegin($event)'
+                 (popupOpen)='onPopupOpen($event)' (eventRendered)='onEventRendered($event)' (navigating)='onNavigation($event)'>
+
+
+
+    <e-resources>
+      <e-resource field='domain' title='Courses Domain' name='Subject'
+                  textField='Text' idField='domain' colorField='Color' [dataSource]='resource'
+                  startHour='start' endHour='end' query='resourceQuery'>
+      </e-resource>
+    </e-resources>
 
     <e-views>
       <e-view option="Day"></e-view>
@@ -16,20 +31,264 @@
       <e-view option="TimelineMonth" [group]="group"></e-view>
     </e-views>
 
-
     <ng-template #dateHeaderTemplate let-data>
-      <div class="date-text">{{getDateHeaderText(data.date )}}</div>
+      <div class="date-text">{{getDateHeaderText(data.date)}}</div>
+    </ng-template>
+
+    <ng-template #quickInfoTemplatesHeader let-data>
+      <div *ngIf="(data.elementType === 'event')">
+        <div class="quick-info-header">
+          <div class="quick-info-header-content"  [ngStyle]=getBackGroundColor(data)>
+            <div class="quick-info-title">Courses Details</div>
+            <div class='duration-text'>{{getEventDetails(data)}}</div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #quickInfoTemplatesContent let-data>
+      <ng-container [ngTemplateOutlet]="data.elementType == 'cell' ? cellContent : eventContent"
+                    [ngTemplateOutletContext]="{data:data}"></ng-container>
+    </ng-template>
+    <ng-template #cellContent let-data="data" >
+      <div class="e-cell-content">
+        <form class="e-schedule-form">
+          <div style="padding:10px">
+            <input class="subject e-field" type="text" name="Subject" placeholder="Title" style="width:100%" />
+          </div>
+          <div style="padding:10px">
+            <input class="location e-field" type="text" name="Location" placeholder="Location" style="width:100%" />
+          </div>
+        </form>
+      </div>
+    </ng-template>
+
+    <ng-template #eventContent let-data="data">
+      <div *ngIf="(data.elementType === 'event')">
+        <div class="event-content">
+          <div class="patient-name-wrap">
+            <label>Courses Title</label>:
+            <div><span>{{data.title}}</span></div>
+          </div>
+          <div class="doctor-name-wrap">
+            <label>{{data.idFormation ? "Former Name" : "Department Name"}}</label>:
+            <div><span>  </span></div>
+          </div>
+          <div class="notes-wrap">
+            <label>Domain</label>:
+            <div><span>{{data.domain.toUpperCase() }}</span></div>
+          </div>
+          <div class="notes-wrap">
+            <label>Number hours</label>:
+            <div><span>{{data.nbrHeures}}</span></div>
+          </div>
+
+          <div class="col-lg-6 col-md-12 mb-1 position-sticky">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button  class="btn btn-primary" [routerLink]="['../videoplaylist',data.idFormation]">Details</button>
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal"   class="btn btn-danger" (click)="dataId(data)" >Update</button>
+              <button  class="btn btn-info" (click)="deleteFormation(data.idFormation);getdata()">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </ng-template>
 
 
-  </ejs-schedule>
-</div>
 
-<div style="width: 100px;float: right;margin-right: 30px" >
+
+
+  </ejs-schedule>
+  </div>
+  <div class="treeview-container">
+    <div class="choose-Specialist-container">
+      <ejs-dropdownlist id='specialist' cssClass="e-specialist-doctors" #dropdownObj
+                        [fields]='field' placeholder='Choose Specialist' popupHeight='auto' popupWidth='221px' showClearButton='true'
+                         (open)='onMultiSelectOpen($event)' [itemTemplate]='itemTemplate'
+                        [footerTemplate]='footerTemplate'></ejs-dropdownlist>
+    </div>
+    <div class="add-event-container" style="display: none;">
+      <button ejs-button (click)='createNewEvent($event)'  class="e-primary">Add Appointment</button>
+    </div>
+    <div class="title-container">
+      <h2 class="title-text">Waiting List</h2>
+    </div>
+    <ejs-treeview #treeObj [fields]='field' cssClass='treeview-external-drag' [allowDragAndDrop]='allowDragAndDrop'
+                  (nodeDragStop)="onTreeDragStartStop($event)" (nodeDragging)="onItemDrag($event)" >
+      <ng-template #nodeTemplate="" let-data="">
+        <div id="waiting">
+          <div id="waitdetails">
+            <img class="round" src="assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="27" width="30">
+            <div id='event-title'>Name : {{data.lastName.toUpperCase()}} </div>
+            <div id="event-time">Hourly rate : {{data.tarifHoraire}} DT </div>
+          </div>
+          <div id="item-icon-container">
+            <span class="item-icon icon-reorder"></span>
+          </div>
+        </div>
+      </ng-template>
+    </ejs-treeview>
+    <ejs-toast #calendarToast [position]='position' [width]='toastWidth' height='70px' showCloseButton='true'>
+      <ng-template #content>
+        <div>{{toastContent}}</div>
+      </ng-template>
+    </ejs-toast>
+  </div>
+
+
+<!--  <div style="width: 100px;float: right;margin-right: 30px" >
 
   <ejs-treeview [fields]="field"  allowDragAndDrop='allowDragAndDrop' (nodeDragStop)="onTreeDragStartStop($event)" ></ejs-treeview>
-</div>
+</div>-->
 
 </div>
+</div>
+
+<div class="specialist-dialog" style="display:none">
+  <ejs-dialog #specialistObj height='200px' [isModal]='true' [visible]='false' cssClass='specialist-selection'
+              [animationSettings]='animationSettings' [showCloseIcon]='false' target='body' width='50%'>
+    <ng-template #header>
+      <div class="specialist-header">
+        <div>
+          <span class="back-icon icon-previous" ></span>
+          <span class="title-text">CHOOSE DOMAIN</span>
+        </div>
+        <div>
+          <button ejs-button cssClass="e-small" >CLEAR</button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #content>
+      <div *ngFor="let list of listFomateur">
+        <div class="specialist-item">
+          <div class="doctor-details">
+            <div class="name">Dr.{{list.lastName}}</div>
+            <div class="designation">{{list.email}}</div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #footerTemplate>
+      <div class="add-doctor" (click)="onAddClick()">
+        <div class="e-icon-add e-icons"></div>
+        <div class="add-doctor-text">Add New Former</div>
+      </div>
+    </ng-template>
+  </ejs-dialog>
+</div>
+<div class="waiting-list-container" style="display:none">
+  <ejs-dialog #waitingObj height='80%' cssClass='waiting-list-dialog' [isModal]='true' [visible]='false'
+              [animationSettings]='animationSettings' [showCloseIcon]='false' target='body' width='100%'
+              >
+    <ng-template #header>
+      <div class="waitlist-header">
+        <div class="text-container">
+          <span class="back-icon icon-previous" ></span>
+          <span class="title-text">Waiting List</span>
+        </div>
+        <div class="button-container">
+          <span class="delete-button">
+            <button ejs-button cssClass="e-flat e-small" >Delete</button>
+          </span>
+          <span class="add-button">
+            <button ejs-button cssClass="e-flat e-small"  (click)='onItemAdd()'>Add</button>
+          </span>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #content>
+      <div class='external-drag-items' *ngFor="let data of listFomation">
+        <div id='waiting-item-check'>
+          <ejs-checkbox #checkbox id={{data.idFormation}} [checked]="false" (change)="onItemChecked($event)">
+          </ejs-checkbox>
+        </div>
+        <div id="waiting">
+          <div id="waitdetails">
+            <div id="waitlist">{{data.domain}}</div>
+            <div id='event-time'>{{data.title}}</div>
+            <div id="waitcategory">{{data.end}} -
+              {{data.start}}</div>
+          </div>
+          <div id="item-icon-container">
+            <span class="item-icon icon-reorder"></span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ejs-dialog>
+</div>
+
+
+<div class="modal fade"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: #00a8c6" *ngIf="formation" >
+
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exmpleModelLabel">Edits Formation :  </h5>
+        <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal" aria-label="Close"  >X</button>
+
+      </div>
+      <div class="modal-body" >
+        <div class="input-group row-cols-md-3" >
+          <span class="input-groupe-text "> Title </span>
+          <input type="text" class="form-control" [(ngModel)]="formation.title"   >
+        </div>
+        <div class="input-group row-cols-md-3" >
+          <span class="input-groupe-text "> nbrMaxParticipant </span>
+          <input type="number" class="form-control" [(ngModel)]="formation.nbrMaxParticipant"  >
+        </div>
+        <div class="input-group row-cols-md-3" >
+          <span class="input-groupe-text "> nbrHeures </span>
+          <input type="number" class="form-control" [(ngModel)]="formation.nbrHeures"  >
+        </div>
+        <div class="input-group row-cols-md-3" >
+          <span class="input-groupe-text "> frais </span>
+          <input type="number" class="form-control" [(ngModel)]="formation.frais"  >
+        </div>
+
+        <div class="input-group row-cols-md-3" >
+          <span class="input-groupe-text "> dateDebut </span>
+          <input type="date" class="form-control" [(ngModel)]="formation.start"  >
+        </div>
+        <div class="input-group row-cols-md-3" >
+          <span class="input-groupe-text "> dateFin </span>
+          <input type="date" class="form-control" [(ngModel)]="formation.end"  >
+        </div>
+        <div class="form-group row-cols-md-3">
+          <label  >Niveau</label>
+          <select  #level="ngModel" [(ngModel)]="formation.level" name="level" class="form-control"  required   >
+            <option selected value="BEGINNER">DEBUTANT</option>
+            <option value="INTERMEDIATE">INTERMEDIATE</option>
+            <option value="ADVANCED">ADVANCED</option>
+          </select>
+        </div>
+        <div class="form-group row-cols-md-3">
+          <label  >Domain</label>
+          <select #domain="ngModel" [(ngModel)]="formation.domain" name="domain" class="form-control"  required   >
+            <option selected value="IT">IT</option>
+            <option value="ART">ART</option>
+            <option value="CINEMA">CINEMA</option>
+            <option value="MUSIQUE">MUSIQUE</option>
+            <option value="DANCE">DANCE</option>
+            <option value="PHY">PHY</option>
+            <option value="ECONOMIC">ECONOMIC</option>
+            <option value="MARKETING">MARKETING</option>
+          </select>
+        </div>
+
+        <button type="button" class="btn btn-outline-success" (click)="UpdateFormation(formation)" > Update </button>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+<app-add-edit-former #addEditFormerObj > </app-add-edit-former>
 
 

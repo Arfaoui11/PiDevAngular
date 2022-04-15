@@ -1,5 +1,6 @@
 <div class="content-body">
   <!-- Data list view starts -->
+
   <section id="data-list-view" class="data-list-view-header">
     <div class="action-btns d-none">
       <div class="btn-dropdown mr-1 mb-1">
@@ -124,9 +125,9 @@
               <div class="col-sm-12 data-field-col">
                 <label for="data-category"> Niveau </label>
                 <select  class="form-control" [(ngModel)]="fr.level"  id="data-category" required>
-                  <option value="BEGINNER">BEGINNER</option>
-                  <option value="INTERMEDIATE">INTERMEDIATE</option>
-                  <option value="ADVANCED">ADVANCED</option>
+                  <option selected value="BEGINNER">DEBUTANT</option>
+                  <option value="INTERMEDIATE">INTERMEDIAIRE</option>
+                  <option value="ADVANCED">AVANCE</option>
                 </select>
               </div>
 
@@ -134,10 +135,14 @@
               <div class="col-sm-12 data-field-col">
                 <label for="data-status">Domain</label>
                 <select   class="form-control" [(ngModel)]="fr.domain"   id="data-status" required>
-                  <option value="ART" >ART</option>
+                  <option selected value="IT">IT</option>
+                  <option value="ART">ART</option>
                   <option value="CINEMA">CINEMA</option>
                   <option value="MUSIQUE">MUSIQUE</option>
                   <option value="DANCE">DANCE</option>
+                  <option value="PHY">PHY</option>
+                  <option value="ECONOMIC">ECONOMIC</option>
+                  <option value="MARKETING">MARKETING</option>
                 </select>
               </div>
 

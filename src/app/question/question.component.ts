@@ -31,7 +31,7 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.idFormation = this.route.snapshot.params['idCourses']
+    this.idFormation = this.route.snapshot.params['idCourses'];
 
     console.log(this.idFormation);
 

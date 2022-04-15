@@ -1,24 +1,43 @@
 <div class="doctors-wrapper">
   <header>
     <div class="module-title">
-      <div class='title'>COURSES LIST</div>
+      <div class='title'>FOMER LIST</div>
       <div class='underline'></div>
     </div>
-    <div class='add-doctor' >
+    <div class='add-doctor' (click)="onAddDoctor()" >
       <div class="e-icon-add e-icons"></div>
       <div class="add-doctor-label">Add New</div>
     </div>
   </header>
   <div class="specialization-detail-wrapper">
 
-    <div  class='specialist-display'>
-      <div  *ngFor="let data of formateur">
+    <div class="specialization-types">
+      <ejs-dropdownlist id='Specialization' #specializationObj [dataSource]='specializationData'
+                        [showClearButton]='true' (change)='onSpecializationChange($event)' [fields]='fields'
+                        placeholder='Select a Specialization' popupWidth='100%' popupHeight='230px'>
+        <ng-template #itemTemplate let-data>
+          <div class="specialist-value">
+            <span class="{{data.Id}}" [style.background]="getColor(data)"></span>
+            <span class="name">{{data.Text}} </span>
+          </div>
+        </ng-template>
+        <ng-template #valueTemplate let-data>
+          <div class="specialist-value department-value">
+            <span class="{{data.Id}}" [style.background]="getColor(data)"></span>
+            <span class="name">{{data.Text}}</span>
+          </div>
+        </ng-template>
+      </ejs-dropdownlist>
+      <button ejs-button cssClass="e-normal" (click)='onAddDoctor()' [isPrimary]="true">Add New Doctor</button>
+    </div>
+    <div #specialistItemObj class='specialist-display'>
+      <div (click)='onDomainClick($event)'  *ngFor="let data of formateur">
         <div class="e-cards specialist-item" id=Specialist_{{data.id}}>
           <div class="e-card-content">
             <div class="specialist-image">
               <img class="profile" src="assets/images/profile/user-uploads/user-02.jpg" alt="doctor" />
               <span class='availability {{data.tarifHoraire}}}'></span>
-              <span class='upload icon-upload_photo {{data.id}}'></span>
+              <span class='upload icon-upload_photo {{data.lastName}}'></span>
             </div>
           </div>
           <div class="specialist-detail">
@@ -40,3 +59,4 @@
     </div>
   </div>
 </div>
+<app-add-edit-former #addEditFormerObj (refreshDoctors)="updateDoctors()"></app-add-edit-former>

@@ -41,6 +41,7 @@
           <th>Delete</th>
           <th>Update</th>
           <th>Add quiz</th>
+          <th>Details</th>
           <th>QrCode</th>
         </tr>
         </thead>
@@ -55,10 +56,13 @@
             <button class="btn btn-outline-danger" (click)="deleteFormation(l.idFormation)">Delete</button>
           </td>
           <td>
-            <button  class="btn btn-outline-primary " data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="dataId(l.idFormation)" >Update</button>
+            <button  class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="dataId(l.idFormation)" >Update</button>
           </td>
           <td>
-            <button class="btn btn-outline-instagram  " [routerLink]="['../Question',l.idFormation]">Add Quiz</button>
+            <button class="btn btn-outline-instagram" [routerLink]="['../Question',l.idFormation]">Add Quiz</button>
+          </td>
+          <td>
+            <button class="btn btn-outline-foursquare" [routerLink]="['../videoplaylist',l.idFormation]">Details</button>
           </td>
           <td>
             <ngx-qrcode [elementType]="elementType"  [value]="l.toString()" [width]="50"  [errorCorrectionLevel]="correctionLevel" ></ngx-qrcode>
@@ -82,6 +86,9 @@
       </table>
 
     </div>
+
+
+
 
 
 
@@ -125,19 +132,22 @@
           <div class="form-group row-cols-md-3">
             <label  >Niveau</label>
             <select  #niveau="ngModel" [(ngModel)]="fr.level" name="niveau" class="form-control"  required >
-              <option selected value="DEBUTANT">DEBUTANT</option>
-              <option value="INTERMEDIAIRE">INTERMEDIAIRE</option>
-              <option value="AVANCE">AVANCE</option>
+              <option selected value="BEGINNER">DEBUTANT</option>
+              <option value="INTERMEDIATE">INTERMEDIAIRE</option>
+              <option value="ADVANCED">AVANCE</option>
             </select>
           </div>
           <div class="form-group row-cols-md-3">
             <label  >Domain</label>
             <select #domain="ngModel" [(ngModel)]="fr.domain" name="domain" class="form-control"  required >
-              <option selected value="INFORMATIQUE">INFORMATIQUE</option>
+              <option selected value="IT">IT</option>
               <option value="ART">ART</option>
               <option value="CINEMA">CINEMA</option>
               <option value="MUSIQUE">MUSIQUE</option>
               <option value="DANCE">DANCE</option>
+              <option value="PHY">PHY</option>
+              <option value="ECONOMIC">ECONOMIC</option>
+              <option value="MARKETING">MARKETING</option>
             </select>
           </div>
 
@@ -254,11 +264,14 @@
           <div class="form-group col-md-4">
             <label >Domain</label>
             <select #domain="ngModel" [(ngModel)]="fr.domain" name="domain" class="form-control"  required >
-              <option selected value="INFORMATIQUE">INFORMATIQUE</option>
+              <option selected value="IT">IT</option>
               <option value="ART">ART</option>
               <option value="CINEMA">CINEMA</option>
               <option value="MUSIQUE">MUSIQUE</option>
               <option value="DANCE">DANCE</option>
+              <option value="PHY">PHY</option>
+              <option value="ECONOMIC">ECONOMIC</option>
+              <option value="MARKETING">MARKETING</option>
             </select>
           </div>
 
@@ -276,8 +289,136 @@
 
   </div>
 
+  <section id="overlay-image-chat-cards">
+    <div class="row">
+
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <div class="card overlay-img-card text-white">
+        <img src="assets/images/pages/card-image-6.jpg" class="card-img" alt="card-img-6">
+        <div class="card-img-overlay overlay-black d-flex flex-column justify-content-between">
+          <h5 class="card-title text-white">Beautiful Overlay</h5>
+          <div class="card-content">
+            Cake sesame snaps cupcake gingerbread danish I love gingerbread. Apple pie pie jujubes chupa chups muffin
+            halvah lollipop.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+
+      <div class="card overlay-img-card text-white">
+        <img src="assets/images/pages/card-image-5.jpg" class="card-img" alt="card-img-6">
+        <div class="card-img-overlay overlay-black">
+          <h5 class="font-medium-5 text-white text-center mt-4">Snowy</h5>
+          <p class="text-white text-center">New York</p>
+          <div class="card-content">
+            <div class="d-flex justify-content-around mt-2">
+              <div class="icon">
+                <i class="feather icon-cloud-snow font-large-5"></i>
+              </div>
+              <div class="temprature mt-3">
+                <p class="font-large-3"> -6 <span class="mt-1">&#176;</span></p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="d-flex justify-content-between mt-4">
+                <div class="precipitation">
+                  <span class="font-medium-3">Precipitation</span>
+                </div>
+                <div class="degree">
+                  <span class="font-medium-3">48%</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between my-2">
+                <div class="humidity">
+                  <span class="font-medium-3">Humidity</span>
+                </div>
+                <div class="degree">
+                  <span class="font-medium-3">60%</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between my-2">
+                <div class="wind">
+                  <span class="font-medium-3">Wind</span>
+                </div>
+                <div class="degree">
+                  <span class="font-medium-3">23 km/h</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="card">
+          <div class="card-content">
+            <img class="card-img-top img-fluid" src="assets/images/pages/content-img-1.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5>Vuexy Admin</h5>
+              <p class="card-text  mb-0">By Pixinvent Creative Studio</p>
+              <span class="card-text">Elite Author</span>
+              <div class="card-btns d-flex justify-content-between mt-2">
+                <a href="#" class="btn gradient-light-primary text-white">Download</a>
+                <a href="#" class="btn btn-outline-primary">View All</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+    <div class="video-player-wrapper">
+
+      <h2>Angular Video Player with Controls </h2>
+
+      <vg-player>
+        <vg-overlay-play></vg-overlay-play>
+        <vg-buffering></vg-buffering>
+
+
+        <vg-scrub-bar [vgSlider]="true">
+          <vg-scrub-bar-current-time [vgSlider]="true"></vg-scrub-bar-current-time>
+          <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+        </vg-scrub-bar>
+
+        <vg-controls>
+          <vg-play-pause></vg-play-pause>
+          <vg-playback-button></vg-playback-button>
+
+          <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+          <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+
+          <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+          <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+          <vg-track-selector></vg-track-selector>
+          <vg-mute></vg-mute>
+          <vg-volume></vg-volume>
+
+          <vg-fullscreen></vg-fullscreen>
+        </vg-controls>
+
+        <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" crossorigin>
+          <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
+
+          <track kind="subtitles" label="English" src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt"
+                 srclang="en" default>
+          <track kind="subtitles" label="Español" src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt"
+                 srclang="es">
+          <track kind="subtitles" label="Arabic" src="http://static.videogular.com/assets/subs/pale-blue-dot-ar.vtt"
+                 srclang="ar">
+        </video>
+      </vg-player>
+
+    </div>
+
 
   </div>
+
 
 
 

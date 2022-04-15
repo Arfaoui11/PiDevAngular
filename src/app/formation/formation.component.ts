@@ -5,6 +5,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {ChartType} from "angular-google-charts";
 import {ShereService} from "../shared/shere.service";
 import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from "ngx-qrcode2";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-formation',
@@ -19,6 +20,8 @@ export class FormationComponent implements OnInit {
   sowFormateur : boolean = false;
 
   listFomation : Formation[]=[];
+
+  Image : any;
 
   key: any;
 
@@ -50,7 +53,7 @@ export class FormationComponent implements OnInit {
 
 
 
-  constructor(private serviceForm : FormationService,private snackbar:MatSnackBar,private service : ShereService) { }
+  constructor(private sanitizer : DomSanitizer,private serviceForm : FormationService,private snackbar:MatSnackBar,private service : ShereService) { }
 
   ngOnInit(): void {
     console.log(this.idF);
@@ -170,6 +173,7 @@ export class FormationComponent implements OnInit {
   data3:any=[]
   data2:any = this.getNbrApprenantByFormation();
   imgURL: any;
+  retrivedImage: any;
 
 
 
@@ -260,6 +264,21 @@ export class FormationComponent implements OnInit {
 
   }
 
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
 
-
+//Gets called when the user clicks on retieve image button to get the image from back end
+  imageName: any;
+  getImage() {
+    //Make a call to Sprinf Boot to get the Image Bytes.
+    this.serviceForm.getFilesFormation(1)
+      .subscribe(
+        res => {
+          this.retrieveResonse = res;
+          this.base64Data = this.retrieveResonse.data;
+          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+        }
+      );
+  }
 }

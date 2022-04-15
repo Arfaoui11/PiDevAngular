@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from "../core/model/User";
+import {DialogComponent} from "@syncfusion/ej2-angular-popups";
+import {AddEditFormerComponent} from "../add-edit-former/add-edit-former.component";
+//import { TimePicker } from '@syncfusion/ej2-angular-calendars';
+//
+// import { EJ2Instance } from '@syncfusion/ej2-angular-schedule';
 
 @Component({
   selector: 'app-courses-form',
@@ -7,6 +12,11 @@ import {User} from "../core/model/User";
   styleUrls: ['./courses-form.component.scss']
 })
 export class CoursesFormComponent implements OnInit {
+
+  @ViewChild('addEditFormerObj') addEditFomerObj: AddEditFormerComponent;
+  @ViewChild('breakHourObj') breakHourObj: DialogComponent;
+  @ViewChild('deleteConfirmationDialogObj') deleteConfirmationDialogObj: DialogComponent;
+
 
   public selectedDepartmentId: string;
 
@@ -76,5 +86,19 @@ export class CoursesFormComponent implements OnInit {
   }
 
 
+  public  onAddDoctor(): void {
+    this.addEditFomerObj.onAddDoctor();
+  }
 
+  onDomainClick($event: MouseEvent) {
+
+  }
+
+  onSpecializationChange($event: any) {
+
+  }
+
+  updateDoctors() {
+
+  }
 }

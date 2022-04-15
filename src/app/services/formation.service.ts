@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Formation} from "../core/model/Formation";
 import {User} from "../core/model/User";
@@ -11,6 +11,10 @@ export interface IPagedResponse {
   total: number;
   data: User[];
 }
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +30,16 @@ export class FormationService {
 
 
 
+
+  register(user:User): Observable<any> {
+    return this.http.post('http://localhost:8090/api/auth/signup', {
+      displayName: user.displayName,
+      email: user.email,
+      password: user.password,
+      matchingPassword: user.password,
+      socialProvider: 'LOCAL'
+    }, httpOptions);
+  }
 
 
 
@@ -94,6 +108,11 @@ export class FormationService {
     return this.http.get<Formation[]>('http://localhost:8090/Courses/SearchMultiple/'+key);
   }
 
+  getFormateurbyFormation(id : number):Observable<User>
+  {
+    return this.http.get<User>('http://localhost:8090/Courses/getFormateurFromFormation/'+id);
+  }
+
 
   SerachRepi(key : string):Observable<any>
   {
@@ -126,9 +145,9 @@ export class FormationService {
   }
   updateFormation(f:Formation,i:number): Observable<any>
   {
-    const headers = { 'content-type': 'application/json'}
+    const headers = { 'content-type': 'application/json'};
     const body=JSON.stringify(f);
-    console.log(body)
+    console.log(body);
     return this.http.put<Formation>
     ("http://localhost:8090/Courses/updateFormation/"+i,f);
   }
@@ -167,6 +186,25 @@ export class FormationService {
   {
     return this.http.post<any>('http://localhost:8090/Courses/uploadMultipleFiles/'+i,file);
   }
+
+  getFile(file: string): Observable<any>
+  {
+    return this.http.get<any>('http://localhost:8090/Courses/get/'+file);
+  }
+
+  DownloadFile(file: string):Observable<Blob>
+  {
+    return this.http.get('http://localhost:8090/Courses/downloadFile/'+file,{responseType:'blob'});
+  }
+
+
+  getFilesFormation( i: number): Observable<any>
+  {
+    return this.http.get<any>('http://localhost:8090/Courses/getFiles/'+i);
+  }
+
+
+
 
 
   exportPDF():Observable<Blob>

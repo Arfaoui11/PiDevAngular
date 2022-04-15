@@ -10,6 +10,10 @@ import {HomeComponent} from "./home/home.component";
 import {AddFomateurComponent} from "./add-fomateur/add-fomateur.component";
 import {WelcomeComponent} from "./welcome/welcome.component";
 import {QuestionComponent} from "./question/question.component";
+import {CalendarCoursesComponent} from "./calendar-courses/calendar-courses.component";
+import {VideoplaylistComponent} from "./videoplaylist/videoplaylist.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
+import {LoginComponent} from "./login/login.component";
 
 const routes: Routes =
   /*[
@@ -33,15 +37,22 @@ const routes: Routes =
         children: [
 
           { path: 'addFormateur', component: AddFomateurComponent },
+          { path: 'dashboard', component: DashboardComponent },
           { path: 'formateur', component: ListFomateurComponent },
           { path: 'addFormation', component: FormationComponent },
           { path: 'listFormateur', component: ListFomateurComponent } ,
           { path: 'calendar', component: CalendarComponent },
+          { path: 'calendarCourses', component: CalendarCoursesComponent },
           { path: 'listFormation', component: ListeFormationComponent },
           { path: 'quiz', component: QuizComponent },
           { path: 'quizWelcome', component: WelcomeComponent },
           { path: 'Courses', component: CoursesFormComponent },
           { path: 'Question/:idCourses', component: QuestionComponent },
+          { path: 'videoplaylist/:idCourses', component: VideoplaylistComponent },
+          { path: 'login', component: LoginComponent },
+
+
+
 
         ]
       },
