@@ -1,0 +1,330 @@
+<div class="feather-icons overflow-hidden row">
+    <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+      <div class="fonticon-wrap"><i class="fa fa-glass"></i></div>
+      <label class="fonticon-classname">fa-glass</label>
+      <label class="fonticon-unit">f000</label>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+      <div class="fonticon-wrap"><i class="fa fa-music"></i></div>
+      <label class="fonticon-classname">fa-music</label>
+      <label class="fonticon-unit">f001</label>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+      <div class="fonticon-wrap"><i class="fa fa-search"></i></div>
+      <label class="fonticon-classname">fa-search</label>
+      <label class="fonticon-unit">f002</label>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+      <div class="fonticon-wrap"><i class="fa fa-envelope-o"></i></div>
+      <label class="fonticon-classname">fa-envelope-o</label>
+      <label class="fonticon-unit">f003</label>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+      <div class="fonticon-wrap"><i class="fa fa-heart"></i></div>
+      <label class="fonticon-classname">fa-heart</label>
+      <label class="fonticon-unit">f004</label>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+      <div class="fonticon-wrap"><i class="fa fa-star"></i></div>
+      <label class="fonticon-classname">fa-star</label>
+      <label class="fonticon-unit">f005</label>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+      <div class="fonticon-wrap"><i class="fa fa-star-o"></i></div>
+      <label class="fonticon-classname">fa-star-o</label>
+      <label class="fonticon-unit">f006</label>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+      <div class="fonticon-wrap"><i class="fa fa-user"></i></div>
+      <label class="fonticon-classname">fa-user</label>
+      <label class="fonticon-unit">f007</label>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+      <div class="fonticon-wrap"><i class="fa fa-file-pdf-o" (click)="openPdf()"> </i></div>
+      <a (click)="openPdf()"></a>
+      <label class="fonticon-classname">file pdf</label>
+      <label class="fonticon-unit">f1c1</label>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+      <div class="fonticon-wrap"><i class="fa fa-file-word-o"></i></div>
+      <label class="fonticon-classname">fa-file-word-o</label>
+      <label class="fonticon-unit">f1c2</label>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+      <div class="fonticon-wrap"><i class="fa fa-file-excel-o"></i></div>
+      <label class="fonticon-classname">fa-file-excel-o</label>
+      <label class="fonticon-unit">f1c3</label>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+      <div class="fonticon-wrap"><i class="fa fa-file-powerpoint-o"></i></div>
+      <label class="fonticon-classname">fa-file-powerpoint-o</label>
+      <label class="fonticon-unit">f1c4</label>
+    </div>
+
+</div>
+
+  <section id="content-types">
+    <div class="row">
+
+      <div class="col-xl-4 col-md-6 col-sm-12">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-body">
+                <h4 class="card-title">Videos </h4>
+              </div>
+              <div class="video-player-wrapper" *ngFor="let vdo of retrieveResonse; let $index = index">
+              <!--  <iframe *ngIf="vdo.fileType.toString().includes('video')" class="img-thumbnail"  [src]="retrievedImage" allowfullscreen></iframe>-->
+                <vg-player (onPlayerReady)="videoPlayerInit($event)">
+                  <vg-overlay-play></vg-overlay-play>
+                  <vg-buffering></vg-buffering>
+
+                  <vg-scrub-bar>
+                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                    <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                  </vg-scrub-bar>
+
+                  <vg-controls>
+                    <vg-play-pause></vg-play-pause>
+                    <vg-playback-button></vg-playback-button>
+
+                    <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+                    <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+                    <vg-mute></vg-mute>
+                    <vg-volume></vg-volume>
+
+                    <vg-fullscreen></vg-fullscreen>
+                  </vg-controls>
+
+                  <video #media *ngIf="vdo.fileType.toString().includes('video')" [vgMedia]="$any(media)" [src]="videoUrl" width='150' height='100'
+                         id="singleVideo"
+                         preload="auto" crossorigin constroles="controles">
+                    <track src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" kind="subtitles" label="English" srclang="en" default>
+                    <track src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt" kind="subtitles" label="Español" srclang="es">
+                  </video>
+                </vg-player>
+
+                <div class="card-body" *ngIf="vdo.fileType.toString().includes('video')">
+                  <p class="card-text">{{ vdo.fileName | slice:0:-4 }}</p>
+                  <a  class="card-link" (click)="playvideo(vdo.id)">Video link</a>
+                  <a  class="card-link" (click)="downloadFiles(vdo.id)" > Download files </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+ <!-- <ul class="player-list">
+    <br>
+    <div *ngFor="let vdo of retrieveResonse; let $index = index" >
+      <button *ngIf="vdo.fileType.toString().includes('video')" (click)="downloadFiles(vdo.id)">
+        {{ vdo.fileName }} - Download fils
+      </button>
+
+    </div>
+  </ul>-->
+
+
+
+
+      <div class="col-xl-4 col-md-12 col-sm-12" *ngIf="toggle">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-body">
+                <h4 class="card-title">files Courses</h4>
+                <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+              </div>
+              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+                <div class="carousel-inner" role="listbox">
+                  <div class="carousel-item active"  *ngIf="retrieveResonse[index].fileType.toString().includes('image')">
+                    <img id="img"  [src]="'data:image/jpeg;base64,'+retrieveResonse[index].data" class="d-block w-100" alt="First slide">
+                  </div>
+                  <div class="carousel-item active"  *ngIf="!retrieveResonse[index].fileType.toString().includes('image')" >
+                    <h4>  we don't have images </h4>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev" (click)="previous()">
+                  <span class="fa fa-angle-left icon-prev" aria-hidden="true"></span>
+                  <span class="sr-only" >Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel-example-generic" role="button" data-slide="next" (click)="next()">
+                  <span class="fa fa-angle-right icon-next" aria-hidden="true"></span>
+                  <span class="sr-only" >Next</span>
+                </a>
+              </div>
+              <div class="card-body">
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt assumenda mollitia
+                  officia dolorum eius quasi.  {{index}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+          <!-- <input type="file" accept="video/*" (change)="onSelectedFile()">
+           <button (click)="onSelectedFile()" > get video  </button>
+           <video
+             *ngIf="videoUrl"
+             [src]="videoUrl"
+             style="width:300px; height:300px;"
+             controls></video>
+
+
+
+             <img *ngIf="file?.type?.toString()?.includes('image')"
+                               [src]="file?.source | secure | async "
+                               height="70px"
+                               width="70px"/>
+         <video *ngIf="file?.type?.toString()?.includes('video')"
+                                 height="70px"
+                                 width="70px"
+                                 [src]="file?.source | secure | async"
+                                 (loadedmetadata)="getDuration($event, i)">-->
+    </div>
+  </section>
+  <div class="content-body">
+  <section id="admin-video">
+    <div class="row">
+      <div class="col-lg-4 col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title w-100">
+              Vuexy Admin
+            </h4>
+            <p class="">by Pixinvent Creative Studio</p>
+            <div class="heading-elements">
+              <ul class="list-inline mb-0">
+                <li><span><i class="feather icon-more-vertical"></i></span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+              <img class="img-fluid" src="assets/images/pages/content-img-4.jpg" alt="img placeholder">
+              <div class="d-flex justify-content-start mt-2">
+                <div class="icon-like mr-2">
+                  <i class="feather icon-thumbs-up text-success font-medium-5 align-middle"></i>
+                  <span>368</span>
+                </div>
+                <div class="icon-comment mr-2">
+                  <i class="feather icon-message-square font-medium-5 align-middle text-primary"></i>
+                  <span>341</span>
+                </div>
+                <div class="icon-dislike">
+                  <i class="feather icon-thumbs-down font-medium-5 align-middle text-danger"></i>
+                  <span>53</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 col-sm-12">
+        <div class="card overflow-hidden">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/mcixldqDIEQ" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    <!-- Timeline Starts -->
+    <section id="timeline-card">
+      <div class="row">
+        <div class="col-lg-6 col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Left Timeline</h4>
+            </div>
+            <div class="card-content">
+              <div class="card-body">
+                <ul class="activity-timeline timeline-left list-unstyled">
+                  <li>
+                    <div class="timeline-icon bg-primary">
+                      <i class="feather icon-plus font-medium-2"></i>
+                    </div>
+                    <div class="timeline-info">
+                      <p class="font-weight-bold">Task Added</p>
+                      <span>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</span>
+                    </div>
+                    <small class="">25 days ago</small>
+                  </li>
+                  <li>
+                    <div class="timeline-icon bg-warning">
+                      <i class="feather icon-alert-circle font-medium-2"></i>
+                    </div>
+                    <div class="timeline-info">
+                      <p class="font-weight-bold">Task Updated</p>
+                      <span>Cupcake gummi bears soufflé caramels candy</span>
+                    </div>
+                    <small class="">15 days ago</small>
+                  </li>
+                  <li>
+                    <div class="timeline-icon bg-success">
+                      <i class="feather icon-check font-medium-2"></i>
+                    </div>
+                    <div class="timeline-info">
+                      <p class="font-weight-bold">Task Completed</p>
+                      <span>Candy ice cream cake. Halvah gummi bears
+                                                    </span>
+                    </div>
+                    <small class="">20 minutes ago</small>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"> Right Timeline</h4>
+            </div>
+            <div class="card-content">
+              <div class="card-body">
+                <ul class="activity-timeline timeline-right list-unstyled">
+                  <li>
+                    <div class="timeline-icon bg-primary">
+                      <i class="feather icon-plus font-medium-2"></i>
+                    </div>
+                    <div class="timeline-info">
+                      <p class="font-weight-bold">Task Added</p>
+                      <span>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</span>
+                    </div>
+                    <small class="">25 days ago</small>
+                  </li>
+                  <li>
+                    <div class="timeline-icon bg-warning">
+                      <i class="feather icon-alert-circle font-medium-2"></i>
+                    </div>
+                    <div class="timeline-info">
+                      <p class="font-weight-bold">Task Updated</p>
+                      <span>Cupcake gummi bears soufflé caramels candy</span>
+                    </div>
+                    <small class="">15 days ago</small>
+                  </li>
+                  <li>
+                    <div class="timeline-icon bg-success">
+                      <i class="feather icon-check font-medium-2"></i>
+                    </div>
+                    <div class="timeline-info">
+                      <p class="font-weight-bold">Task Completed</p>
+                      <span>Candy ice cream cake. Halvah gummi bears
+                                                    </span>
+                    </div>
+                    <small class="">20 minutes ago</small>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Timeline Ends -->
+  </div>

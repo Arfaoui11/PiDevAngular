@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Query, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit , ViewChild, ViewEncapsulation} from '@angular/core';
 
 import {
   DayService, WeekService, WorkWeekService, MonthService, AgendaService, TimelineViewsService,
@@ -6,7 +6,7 @@ import {
   ScheduleComponent, CellClickEventArgs, TimeScaleModel, GroupModel,
   PopupOpenEventArgs, EJ2Instance, getWeekFirstDate, addDays, NavigatingEventArgs, WorkHoursModel
 } from '@syncfusion/ej2-angular-schedule';
-import { DataManager, WebApiAdaptor } from '@syncfusion/ej2-data';
+import { Query,DataManager, WebApiAdaptor } from '@syncfusion/ej2-data';
 import {FormationService} from "../services/formation.service";
 import {Formation} from "../core/model/Formation";
 import { CalendarOptions } from '@fullcalendar/angular';
@@ -63,8 +63,8 @@ export class CalendarComponent implements OnInit {
   public footerTemplate = `<div class="add-doctor"><div class="e-icon-add e-icons"></div>
     <div class="add-doctor-text">Add New Doctor</div></div>`;
 
-  public itemTemplate: string = '<div class="specialist-item"><img class="value" src="./assets/images/${Text}.png" alt="doctor"/>' +
-    '<div class="doctor-details"><div class="name">Dr.${Name}</div><div class="designation">${Designation}</div></div></div>';
+  public itemTemplate: string = '<div class="specialist-item"><img class="value" src="assets/images/profile/user-uploads/user-03.jpg" alt="doctor"/>' +
+    '<div class="doctor-details"><div class="name">Mr.${displayName}</div><div class="designation">${profession}</div></div></div>';
 
   public animationSettings: Record<string, any> = { effect: 'None' };
 
@@ -73,7 +73,7 @@ export class CalendarComponent implements OnInit {
   public currentDate: Date;
   public calendarSettings: CalendarSettings;
   @Input() fr:Formation=new Formation;
-
+  @Input() user:User=new User;
   public scheduleInstance : ScheduleComponent;
 
   public eventSettings: EventSettingsModel;
@@ -91,9 +91,7 @@ export class CalendarComponent implements OnInit {
   public endHour: string;
   idF : number=2;
 
-  title : string ="Calendar Courses ";
 
-  public currentView: string;
 
 
   public allowDragAndDrop = true;
@@ -112,6 +110,15 @@ export class CalendarComponent implements OnInit {
   event :[];
 
   public  field : {[key : string]:any};
+  public fields: Object = { text: 'displayName', value: 'id' };
+  // set the placeholder to DropDownList input element
+  public waterMark: string = 'Select a game';
+  // set the value to select an item based on mapped value at initial rendering
+  public value: string = 'Game3';
+
+  title : string ="Calendar Courses ";
+
+  public currentView: string='Month';
 
   public formateur :User;
 
@@ -158,6 +165,17 @@ export class CalendarComponent implements OnInit {
 
   }
 
+
+  addFormateur()
+  {
+
+    this.serviceForm.register(this.user).subscribe(data=>console.log(data));
+  }
+  getAllFormateur()
+  {
+    this.serviceForm.getFormateur().subscribe((data:User[])=>{this.listFomateur = data});
+
+  }
   UpdateFormation(f: Formation)
   {
     this.serviceForm.updateFormation(f,this.formation.idFormation).subscribe(
@@ -239,7 +257,7 @@ export class CalendarComponent implements OnInit {
       dataSource : this.formateur,id:'id',text : 'firstName'
     };
 
-  },50)
+  },550)
 
 
 

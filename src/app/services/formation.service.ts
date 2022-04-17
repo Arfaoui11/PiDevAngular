@@ -37,6 +37,10 @@ export class FormationService {
       email: user.email,
       password: user.password,
       matchingPassword: user.password,
+      phoneNumber : user.phoneNumber,
+      tarifHoraire : user.tarifHoraire,
+      profession : user.profession,
+      age:user.age,
       socialProvider: 'LOCAL'
     }, httpOptions);
   }
@@ -65,13 +69,15 @@ export class FormationService {
     xmll.onreadystatechange = ()=>
     {
       this.event = JSON.parse(xmll.responseText)
-    }
+    };
 
 
-    xmll.open('get','http://localhost:8090/Courses/retrieveFormation',true)
+    xmll.open('get','http://localhost:8090/Courses/retrieveFormation',true);
 
 
-    xmll.send(null)
+
+    xmll.send(null);
+    return this.event;
 
   }
 
@@ -83,15 +89,15 @@ export class FormationService {
     xx.onreadystatechange = ()=>
     {
       this.formateur = JSON.parse(xx.responseText)
-    }
+    };
 
-    xx.open('get','http://localhost:8090/Courses/retrieveFormateur',true)
-
-
-    xx.send(null)
+    xx.open('get','http://localhost:8090/Courses/retrieveFormateur',true);
 
 
+    xx.send(null);
 
+
+    return this.formateur;
 
   }
 

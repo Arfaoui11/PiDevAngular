@@ -1,0 +1,29 @@
+
+.video-player-wrapper {
+  max-width: 800px;
+  text-align: center;
+  margin: 0 auto;
+}
+.player-list {
+  margin: 0;
+  padding: 0;
+}
+.player-list li {
+  list-style: none;
+  padding: 15px 35px;
+  display: block;
+  background: rgba(169, 15, 23, 0.8);
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 1px;
+}
+li.selected {
+  background: #03A9F4 !important;
+}
+
+#img {
+  width: 200px;
+  height: 155px;
+  display : inline-grid;
+
+}

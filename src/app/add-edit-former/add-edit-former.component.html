@@ -1,0 +1,158 @@
+<div class="new-doctor-container" style="display:none">
+  <ejs-dialog #newDoctorObj width='390px' cssClass='new-doctor-dialog' [isModal]='true' [visible]='false'
+              [animationSettings]='animationSettings' [header]='title' [showCloseIcon]='true' target='body'
+              (beforeOpen)='onBeforeOpen($event)'>
+    <ng-template #content>
+      <form #f="ngForm" class="form-group"   >
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label >Name</label>
+            <input type="text" class="form-control"  #titre="ngModel" [(ngModel)]="user.displayName" name="title" required placeholder="Name">
+          </div>
+          <div class="form-group col-md-6">
+            <label >Email</label>
+            <input type="email" class="form-control"  #titre="ngModel" [(ngModel)]="user.email" name="title" required placeholder="Email">
+          </div>
+
+
+          <div class="form-group col-md-6">
+            <label >Age</label>
+            <input type="number" class="form-control" #nbrMaxParticipant="ngModel" [(ngModel)]="user.age"  name="nbrMaxParticipant" required placeholder="xx">
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label >Phone Number</label>
+          <input type="number" class="form-control"   #frais="ngModel" [(ngModel)]="user.phoneNumber" required name="frais" placeholder="+216 xx xxx xxx">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label >Tarif Horaire</label>
+            <input type="number" class="form-control" #dateDebut="ngModel" [(ngModel)]="user.tarifHoraire" name="dateDebut"  required >
+          </div>
+
+     <!--   <div class="form-group col-md-4">
+            <label  >Add Image </label>
+            <input  type="file"  (change)="onFileSelected($event)" multiple>
+            <img [src]="imgURL" height="100" width="150"  *ngIf="imgURL">
+
+          </div>-->
+
+          <div class="form-group col-md-4">
+            <label >Domain</label>
+            <select #domain="ngModel" [(ngModel)]="user.profession" name="domain" class="form-control"  required >
+              <option selected value="IT">IT</option>
+              <option value="ART">ART</option>
+              <option value="CINEMA">CINEMA</option>
+              <option value="MUSIQUE">MUSIQUE</option>
+              <option value="DANCE">DANCE</option>
+              <option value="PHY">PHY</option>
+              <option value="ECONOMIC">ECONOMIC</option>
+              <option value="MARKETING">MARKETING</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label >Password</label>
+            <input type="password" class="form-control"   #frais="ngModel" [(ngModel)]="user.password" required name="Password" >
+          </div>
+
+
+        </div>
+
+      </form>
+    </ng-template>
+    <ng-template #footerTemplate>
+      <div class="button-container">
+        <button ejs-button cssClass="e-normal" (click)='onCancelClick()'>Cancel</button>
+        <button type="submit" class="btn btn-primary" (click)="addFomateur()"
+                data-toggle="tooltip" data-placement="right"  > Add Courses </button>
+      </div>
+    </ng-template>
+  </ejs-dialog>
+</div>
+<!--
+<div class="modal fade"  id="addFormerModal" tabindex="-1" aria-labelledby="addFormerModalLabel" aria-hidden="true" style="color: #fac9e9"  >
+
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="addFormerModalLabel"> Add Former </h5>
+        <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal" aria-label="Close" >X</button>
+
+      </div>
+      <div class="modal-body" >
+        <form #f="ngForm" class="form-group"   >
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label >Name</label>
+              <input type="text" class="form-control"  #displayName="ngModel" [(ngModel)]="user.displayName"  required placeholder="Name">
+            </div>
+            <div class="form-group col-md-6">
+              <label >Email</label>
+              <input type="email" class="form-control"  #email="ngModel" [(ngModel)]="user.email" required placeholder="Email">
+            </div>
+
+
+            <div class="form-group col-md-6">
+              <label >Age</label>
+              <input type="number" class="form-control" #age="ngModel" [(ngModel)]="user.age"   required placeholder="xx">
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <label >Phone Number</label>
+            <input type="number" class="form-control"   #phoneNumber="ngModel" [(ngModel)]="user.phoneNumber" required  placeholder="+216 xx xxx xxx">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label >Tarif Horaire</label>
+              <input type="number" class="form-control" #tarifHoraire="ngModel" [(ngModel)]="user.tarifHoraire"  required >
+            </div>
+
+               <div class="form-group col-md-4">
+                  <label  >Add Image </label>
+                  <input  type="file"  (change)="onFileSelected($event)" multiple>
+                  <img [src]="imgURL" height="100" width="150"  *ngIf="imgURL">
+
+                </div>
+
+            <div class="form-group col-md-4">
+              <label >Domain</label>
+              <select #profession="ngModel" [(ngModel)]="user.profession"  class="form-control"  required >
+                <option selected value="IT">IT</option>
+                <option value="ART">ART</option>
+                <option value="CINEMA">CINEMA</option>
+                <option value="MUSIQUE">MUSIQUE</option>
+                <option value="DANCE">DANCE</option>
+                <option value="PHY">PHY</option>
+                <option value="ECONOMIC">ECONOMIC</option>
+                <option value="MARKETING">MARKETING</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label >Password</label>
+              <input type="password" class="form-control"   #password="ngModel" [(ngModel)]="user.password" required  >
+            </div>
+
+
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="addFomateur();f.reset()"
+                  data-toggle="tooltip" data-placement="right" [disabled]="f.valid"  > Add Former </button>
+
+        </form>
+
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+-->

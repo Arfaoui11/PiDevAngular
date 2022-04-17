@@ -101,10 +101,13 @@
   </div>
   <div class="treeview-container">
     <div class="choose-Specialist-container">
-      <ejs-dropdownlist id='specialist' cssClass="e-specialist-doctors" #dropdownObj
-                        [fields]='field' placeholder='Choose Specialist' popupHeight='auto' popupWidth='221px' showClearButton='true'
-                         (open)='onMultiSelectOpen($event)' [itemTemplate]='itemTemplate'
-                        [footerTemplate]='footerTemplate'></ejs-dropdownlist>
+      <ejs-dropdownlist id='Former' cssClass="e-specialist-doctors" #dropdownObj [dataSource]='listFomateur' [fields]='fields' [placeholder]='waterMark'
+                        placeholder='List Former ' popupHeight='auto' popupWidth='221px' showClearButton='true'
+                        (open)='onMultiSelectOpen($event)' [itemTemplate]='itemTemplate'
+                        [footerTemplate]='footerTemplate'>  </ejs-dropdownlist>
+    </div>
+    <div>
+      <ejs-dropdownlist id='games' [dataSource]='listFomateur'  [fields]='fields' [placeholder]='waterMark'></ejs-dropdownlist>
     </div>
     <div class="add-event-container" style="display: none;">
       <button ejs-button (click)='createNewEvent($event)'  class="e-primary">Add Appointment</button>
@@ -118,7 +121,7 @@
         <div id="waiting">
           <div id="waitdetails">
             <img class="round" src="assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="27" width="30">
-            <div id='event-title'>Name : {{data.lastName.toUpperCase()}} </div>
+            <div id='event-title'>Name : {{data.displayName.toUpperCase()}} </div>
             <div id="event-time">Hourly rate : {{data.tarifHoraire}} DT </div>
           </div>
           <div id="item-icon-container">
