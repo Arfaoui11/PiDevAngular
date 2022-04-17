@@ -48,6 +48,7 @@ export class AddEditFormerComponent implements OnInit {
   addFomateur()
   {
     this.serviceForm.register(this.user).subscribe(data=>console.log(data));
+    this.refreshDoctors.emit();
   }
 
   public onAddDoctor(): void {
@@ -65,7 +66,7 @@ export class AddEditFormerComponent implements OnInit {
   }
 
   onCancelClick() {
-
+    this.newDoctorObj.hide();
   }
 
   onSaveClick() {

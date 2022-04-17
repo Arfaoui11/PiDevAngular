@@ -130,6 +130,9 @@ export class FormationService {
     return this.http.get<Formation[]>("http://localhost:8090/Courses/retrieveFormation");
   }
 
+  getFormationById(id:number):Observable<Formation> {
+    return this.http.get<Formation>("http://localhost:8090/Courses/getFormationById/"+id);
+  }
 
   getApprenantByFormation(i : number):Observable<User[]> {
     return this.http.get<User[]>("http://localhost:8090/Courses/ApprenantByFormation/"+i);

@@ -57,7 +57,7 @@ export class FormationComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.idF);
-    this.getformation()
+    this.getformation();
 
     this.getNbrApprenantByFormation()
   }

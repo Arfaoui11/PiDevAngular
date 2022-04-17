@@ -159,7 +159,7 @@ export class CalendarComponent implements OnInit {
 
 
        this.getformation();
-       this.getFormateur();
+       this.getAllFormateur();
 
 
 
@@ -191,10 +191,10 @@ export class CalendarComponent implements OnInit {
   getFormateur()
   {
     this.serviceForm.getFormateur().subscribe(
-      data=> {
-        this.listFomateur = data
-      }
-    )
+        (data:User[])=>{this.listFomateur = data}
+
+    );
+    return this.listFomateur;
   }
 
 

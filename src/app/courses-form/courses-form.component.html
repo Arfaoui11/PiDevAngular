@@ -37,16 +37,16 @@
             <div class="specialist-image">
               <img class="profile" src="assets/images/profile/user-uploads/user-02.jpg" alt="doctor" />
               <span class='availability {{data.tarifHoraire}}}'></span>
-              <span class='upload icon-upload_photo {{data.lastName}}'></span>
+              <span class='upload icon-upload_photo '></span>
             </div>
           </div>
           <div class="specialist-detail">
-            <div class="name">Dr. {{data.lastName}}</div>
-            <div class="education">{{getEducation(data.firstName)}}</div>
+            <div class="name">Dr. {{data.displayName}}</div>
+            <div class="education">Domain : {{getEducation(data.profession)}}</div>
             <div class="specialist-experience">
               <div class="specialization">
                 <span class="label-text">Designation</span>
-                <span class="specialization-text">{{data.tarifHoraire}}</span>
+                <span class="specialization-text">Hourly rate :{{data.tarifHoraire}}</span>
               </div>
               <div class="experience">
                 <span class="label-text">Experience</span>
@@ -59,4 +59,4 @@
     </div>
   </div>
 </div>
-<app-add-edit-former #addEditFormerObj (refreshDoctors)="updateDoctors()"></app-add-edit-former>
+<app-add-edit-former #addEditFormerObj (refreshDoctors)="getF()"></app-add-edit-former>

@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from "../core/model/User";
 import {DialogComponent} from "@syncfusion/ej2-angular-popups";
 import {AddEditFormerComponent} from "../add-edit-former/add-edit-former.component";
+import {FormationService} from "../services/formation.service";
+import {Formation} from "../core/model/Formation";
 //import { TimePicker } from '@syncfusion/ej2-angular-calendars';
 //
 // import { EJ2Instance } from '@syncfusion/ej2-angular-schedule';
@@ -29,7 +31,7 @@ export class CoursesFormComponent implements OnInit {
   public formateur :User[];
 
 
-  constructor() {
+  constructor(private serviceForm : FormationService) {
 
    this.specializationData = [
       { DepartmentId: 1, Id: 'generalmedicine', Text: 'General Medicine', Color: '#F538B2' },
@@ -42,8 +44,20 @@ export class CoursesFormComponent implements OnInit {
 
     this.getdata();
   }
-
+  public activeData: User;
+  public formerId: number;
   ngOnInit(): void {
+   // this.dataService.updateActiveItem('doctors');
+  //  this.route.params.subscribe((params: any) => this.doctorId = parseInt(params.id, 10));
+  //  this.doctorData = this.dataService.getDoctorsData();
+    this.activeData = this.formateur.filter(item => item.id === this.formerId)[0];
+    const isDataDiffer: boolean = JSON.stringify(this.activeData) === JSON.stringify(this.formateur);
+    if (!isDataDiffer) {
+      this.formateur.push(this.activeData);
+    }
+   // this.breakDays = JSON.parse(JSON.stringify(this.activeData.WorkDays));
+
+
   }
 
   public getEducation(text: string): string {
@@ -77,7 +91,7 @@ export class CoursesFormComponent implements OnInit {
         dataSource : this.formateur,value:'id',text : 'nom'
       };
 
-    },100)
+    },500)
 
 
 
@@ -100,5 +114,11 @@ export class CoursesFormComponent implements OnInit {
 
   updateDoctors() {
 
+  }
+
+
+  getF()
+  {
+    this.getdata();
   }
 }

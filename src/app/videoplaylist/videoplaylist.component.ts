@@ -3,6 +3,7 @@ import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {FormationService} from "../services/formation.service";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
+import {Formation} from "../core/model/Formation";
 
 @Component({
   selector: 'app-videoplaylist',
@@ -32,10 +33,12 @@ export class VideoplaylistComponent implements OnInit {
    videoUrl: any;
   public idFormation :number;
    toggle: boolean = false;
+  formation : Formation;
+
 
   constructor(private serviceForm : FormationService,private sanitizer : DomSanitizer,private http: HttpClient, private route:ActivatedRoute) {
-    this.getImage();
-
+    //this.getImage();
+    //this.getF();
   }
 
   ngOnInit(): void {
@@ -46,6 +49,10 @@ export class VideoplaylistComponent implements OnInit {
         this.retrieveResonse=data
       }
     );
+
+    this.serviceForm.getFormationById(this.idFormation).subscribe(data => {
+      this.formation = data;
+    });
 
     for(let l in this.retrieveResonse)
     {
@@ -230,7 +237,13 @@ export class VideoplaylistComponent implements OnInit {
     }else {
       this.index++;
     }
-
+  }
+  getF()
+  {
+    this.serviceForm.getFormationById(this.idFormation).subscribe(data => {
+      this.formation = data;
+    });
+    return this.formation;
   }
 
   openPdf() {
