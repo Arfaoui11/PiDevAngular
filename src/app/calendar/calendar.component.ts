@@ -61,7 +61,7 @@ export class CalendarComponent implements OnInit {
   @ViewChild('waitingObj') waitingObj: DialogComponent;
 
   public footerTemplate = `<div class="add-doctor"><div class="e-icon-add e-icons"></div>
-    <div class="add-doctor-text">Add New Doctor</div></div>`;
+    <div class="add-doctor-text">Add New Former</div></div>`;
 
   public itemTemplate: string = '<div class="specialist-item"><img class="value" src="assets/images/profile/user-uploads/user-03.jpg" alt="doctor"/>' +
     '<div class="doctor-details"><div class="name">Mr.${displayName}</div><div class="designation">${profession}</div></div></div>';
@@ -100,8 +100,8 @@ export class CalendarComponent implements OnInit {
     this.getdata();
    // (FieldValidator.prototype as any).errorPlacement = this.dataService.errorPlacement;
   }
-  listFomation : Formation[]=[];
-  listFomateur : User[]=[];
+  public listFomation : Formation[]=[];
+  public listFomateur : User[]=[];
 
 
   public instance: Internationalization = new Internationalization();
@@ -110,6 +110,7 @@ export class CalendarComponent implements OnInit {
   event :[];
 
   public  field : {[key : string]:any};
+
   public fields: Object = { text: 'displayName', value: 'id' };
   // set the placeholder to DropDownList input element
   public waterMark: string = 'Select a game';
@@ -131,22 +132,14 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.getformation();
+    this.getFormateur();
     console.log(this.idF);
+    this.getFormateurByFormation();
 
 
-    this.getdata();
 
-    this.calendarSettings = {
-      bookingColor: 'Doctors',
-      calendar: {
-        start: '08:00',
-        end: '21:00'
-      },
-      currentView: 'Week',
-      interval: 60,
-      firstDayOfWeek: 0
-    };
+
 
     if (this.specialistObj) {
       this.specialistObj.hide();
@@ -156,10 +149,6 @@ export class CalendarComponent implements OnInit {
       addClass([this.dropdownObj.element], 'e-specialist-hide');
     }
 
-
-
-       this.getformation();
-       this.getAllFormateur();
 
 
 
@@ -191,8 +180,9 @@ export class CalendarComponent implements OnInit {
   getFormateur()
   {
     this.serviceForm.getFormateur().subscribe(
-        (data:User[])=>{this.listFomateur = data}
-
+      data=> {
+        this.listFomateur = data
+      }
     );
     return this.listFomateur;
   }
@@ -473,9 +463,9 @@ export class CalendarComponent implements OnInit {
     this.specialistObj.hide();
   }
 
-  getFormateurByFormation(id:number)
+  getFormateurByFormation()
   {
-    this.serviceForm.getFormateurbyFormation(id).subscribe(
+    this.serviceForm.getFormateurbyFormation(this.formateur.id).subscribe(
       (data:User)=>{this.formateur = data}
     );
     return this.formateur;

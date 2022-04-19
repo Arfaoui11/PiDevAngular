@@ -194,9 +194,9 @@
         <div class="card">
           <div class="card-header">
             <h4 class="card-title w-100">
-              Vuexy Admin
+              {{formation.title}}
             </h4>
-            <p class="">by Pixinvent Creative Studio</p>
+            <p class="">by </p>
             <div class="heading-elements">
               <ul class="list-inline mb-0">
                 <li><span><i class="feather icon-more-vertical"></i></span></li>
@@ -208,17 +208,23 @@
               <img class="img-fluid" src="assets/images/pages/content-img-4.jpg" alt="img placeholder">
               <div class="d-flex justify-content-start mt-2">
                 <div class="icon-like mr-2">
-                  <i class="feather icon-thumbs-up text-success font-medium-5 align-middle"></i>
-                  <span>{{formation.rating}}</span>
+                  <!--   <i class="feather icon-thumbs-up text-success font-medium-5 align-middle"></i>-->
+                   <span>{{formation.rating}}</span>
+
+                  <ngb-rating [(rate)]="formation.rating">
+                    <ng-template let-fill="fill" let-index="index">
+                      <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+                    </ng-template>
+                  </ngb-rating>
                 </div>
                 <div class="icon-comment mr-2">
                   <i class="feather icon-message-square font-medium-5 align-middle text-primary"></i>
                   <span>3</span>
                 </div>
-                <div class="icon-dislike">
+              <!--  <div class="icon-dislike">
                   <i class="feather icon-thumbs-down font-medium-5 align-middle text-danger"></i>
                   <span>5</span>
-                </div>
+                </div>-->
               </div>
             </div>
           </div>

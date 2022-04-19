@@ -3,10 +3,7 @@ import {User} from "../core/model/User";
 import {DialogComponent} from "@syncfusion/ej2-angular-popups";
 import {AddEditFormerComponent} from "../add-edit-former/add-edit-former.component";
 import {FormationService} from "../services/formation.service";
-import {Formation} from "../core/model/Formation";
-//import { TimePicker } from '@syncfusion/ej2-angular-calendars';
-//
-// import { EJ2Instance } from '@syncfusion/ej2-angular-schedule';
+
 
 @Component({
   selector: 'app-courses-form',
@@ -34,12 +31,13 @@ export class CoursesFormComponent implements OnInit {
   constructor(private serviceForm : FormationService) {
 
    this.specializationData = [
-      { DepartmentId: 1, Id: 'generalmedicine', Text: 'General Medicine', Color: '#F538B2' },
-      { DepartmentId: 2, Id: 'neurology', Text: 'Neurology', Color: '#33C7E8' },
-      { DepartmentId: 3, Id: 'dermatology', Text: 'Dermatology', Color: '#916DE4' },
-      { DepartmentId: 4, Id: 'orthopedics', Text: 'Orthopedics', Color: '#388CF5' },
-      { DepartmentId: 5, Id: 'diabetology', Text: 'Diabetology', Color: '#60F238' },
-      { DepartmentId: 6, Id: 'cardiology', Text: 'Cardiology', Color: '#F29438' }
+      { DepartmentId: 1, Id: 'IT', Text: 'IT', Color: '#F538B2' },
+      { DepartmentId: 2, Id: 'MUSIC', Text: 'MUSIC', Color: '#33C7E8' },
+      { DepartmentId: 3, Id: 'ART', Text: 'ART', Color: '#916DE4' },
+      { DepartmentId: 4, Id: 'DANCE', Text: 'DANCE', Color: '#388CF5' },
+      { DepartmentId: 5, Id: 'PHY', Text: 'PHY', Color: '#60F238' },
+      { DepartmentId: 6, Id: 'ECONOMIC', Text: 'ECONOMIC', Color: '#F29438' },
+      { DepartmentId: 6, Id: 'MARKETING', Text: 'MARKETING', Color: '#F29438' }
     ];
 
     this.getdata();
@@ -78,7 +76,7 @@ export class CoursesFormComponent implements OnInit {
       this.formateur = JSON.parse(xx.responseText)
     }
 
-    xx.open('get','http://localhost:8090/Courses/retrieveFormateur',true)
+    xx.open('get','http://localhost:8090/Courses/retrieveFormateur',true);
 
 
     xx.send(null)

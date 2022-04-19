@@ -13,7 +13,7 @@ export class ListFomateurComponent implements OnInit {
 
   listFormateur  : User[];
 
-  name : string;
+  name : string='';
 
   @Input() idForma : number;
 
@@ -36,12 +36,12 @@ export class ListFomateurComponent implements OnInit {
   constructor(private serviceForm : FormationService,private service : ShereService) {
    this.getFormateurRemunerationMaxSalaireTrie();
 
-   this.getFormateur();
+
   }
 
   ngOnInit(): void {
  console.log(this.name);
-
+    this.getFormateur();
   }
 
   getFormateur()
@@ -66,10 +66,10 @@ export class ListFomateurComponent implements OnInit {
   }
 
 
-  list88:Object[]=[]
-  values:any=[]
-  array1:any=[]
-  data3:any=[]
+  list88:Object[]=[];
+  values:any=[];
+  array1:any=[];
+  data3:any=[];
  // data2:any = this.getFormateurRemunerationMaxSalaireTrie();
 
   getFormateurRemunerationMaxSalaireTrie( ) {

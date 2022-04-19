@@ -53,13 +53,15 @@ export class FormationComponent implements OnInit {
 
 
 
-  constructor(private sanitizer : DomSanitizer,private serviceForm : FormationService,private snackbar:MatSnackBar,private service : ShereService) { }
+  constructor(private sanitizer : DomSanitizer,private serviceForm : FormationService,private snackbar:MatSnackBar,private service : ShereService) {
+   // this.getNbrApprenantByFormation();
+  }
 
   ngOnInit(): void {
     console.log(this.idF);
     this.getformation();
 
-    this.getNbrApprenantByFormation()
+   // this.getNbrApprenantByFormation();
   }
 
 
@@ -101,7 +103,7 @@ export class FormationComponent implements OnInit {
 
 
 
-    this.serviceForm.uploadFile(formData,2).subscribe(res => {
+    this.serviceForm.uploadFile(formData,1).subscribe(res => {
       console.log(res)
     });
 
@@ -167,10 +169,10 @@ export class FormationComponent implements OnInit {
     return this.data1;
   }
 
-  list88:Object[]=[]
-  values:any=[]
-  array1:any=[]
-  data3:any=[]
+  list:Object[]=[];
+  values:any=[];
+  array1:any=[];
+  data3:any=[];
   data2:any = this.getNbrApprenantByFormation();
   imgURL: any;
   retrivedImage: any;
@@ -181,16 +183,19 @@ export class FormationComponent implements OnInit {
 
   getNbrApprenantByFormation()
   {
+  //  this.data2=[];
+   // this.list=[];
+   // this.values=[];
 
     this.serviceForm.getNbrApprenantByFormation().subscribe
-    ((data:Object[])=>{this.list88 = data})
-    console.log(this.list88)
+    ((data:Object[])=>{this.list = data});
+    console.log(this.list);
 
-    this.values = Array.from(this.list88.values());
+    this.values = Array.from(this.list.values());
     for (let i=0;i<this.values.length;i++) {
       this.array1 = Array.from(this.values[i]);
       //this.array1.push(this.values[i].customer,this.values[i].number_of_orders)
-      this.data3.push(this.array1)
+      this.data3.push(this.array1);
 
       this.data2=this.data3;
       //console.log(this.data3)

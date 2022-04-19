@@ -11,13 +11,13 @@
 <div class="row">
   <div class="col-md-4" *ngFor="let l of listFormateur  , let i=index" >
 
-    <div *ngIf="l.lastName.startsWith(name) || name == null" >
+    <div >
       <div class="card" style="width: 18rem;">
         <img src="assets/images/profile/user-uploads/user-03.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 style="color:red" > l'id : {{ l.id }} </h5>
-          <h5 class="card-title">{{ l.lastName }}</h5>
-          <p class="card-text">{{ l.tarifHoraire }}</p>
+          <h5 class="card-title">Name : {{ l.displayName }}</h5>
+          <p class="card-text">Hourly rate : {{ l.tarifHoraire }}</p>
           <button class="btn btn-danger" >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -39,7 +39,7 @@
 
 </div>
 
-<h2 style="color: greenyellow "> Formateur Remuneration Max Salaire</h2>
+<!--<h2 style="color: greenyellow "> Formateur Remuneration Max Salaire</h2>-->
 
 
 

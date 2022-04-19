@@ -181,7 +181,7 @@
       </div>
     </div>
 
-      <div class="card-body" *ngIf="sowFormateur">
+      <div class="card-body" >
         <div class="chart">
           <google-chart #chart
                         [title]="title"
@@ -216,23 +216,23 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label >Title</label>
-            <input type="text" class="form-control"  #titre="ngModel" [(ngModel)]="fr.title" name="title" required placeholder="Email">
+            <input type="text" class="form-control"  #titre="ngModel" [(ngModel)]="fr.title" name="title" required >
           </div>
 
 
           <div class="form-group col-md-6">
             <label >nbrMaxParticipant</label>
-            <input type="number" class="form-control" #nbrMaxParticipant="ngModel" [(ngModel)]="fr.nbrMaxParticipant"  name="nbrMaxParticipant" required placeholder="Password">
+            <input type="number" class="form-control" #nbrMaxParticipant="ngModel" [(ngModel)]="fr.nbrMaxParticipant"  name="nbrMaxParticipant" required >
           </div>
 
         </div>
         <div class="form-group">
           <label >nbrHeures</label>
-          <input type="number" class="form-control" #nbrHeures="ngModel" [(ngModel)]="fr.nbrHeures"  required name="nbrHeures" placeholder="1234 Main St">
+          <input type="number" class="form-control" #nbrHeures="ngModel" [(ngModel)]="fr.nbrHeures"  required name="nbrHeures" >
         </div>
         <div class="form-group">
           <label >frais</label>
-          <input type="number" class="form-control"   #frais="ngModel" [(ngModel)]="fr.frais" required name="frais" placeholder="Apartment, studio, or floor">
+          <input type="number" class="form-control"   #frais="ngModel" [(ngModel)]="fr.frais" required name="frais">
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">

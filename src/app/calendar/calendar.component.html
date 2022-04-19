@@ -71,7 +71,7 @@
           </div>
           <div class="doctor-name-wrap">
             <label>{{data.idFormation ? "Former Name" : "Department Name"}}</label>:
-            <div><span>  </span></div>
+            <div><span></span></div>
           </div>
           <div class="notes-wrap">
             <label>Domain</label>:
@@ -110,7 +110,7 @@
       <ejs-dropdownlist id='games' [dataSource]='listFomateur'  [fields]='fields' [placeholder]='waterMark'></ejs-dropdownlist>
     </div>
     <div class="add-event-container" style="display: none;">
-      <button ejs-button (click)='createNewEvent($event)'  class="e-primary">Add Appointment</button>
+      <button ejs-button (click)='createNewEvent($event)'  class="e-primary">Add Courses</button>
     </div>
     <div class="title-container">
       <h2 class="title-text">Waiting List</h2>
@@ -120,7 +120,7 @@
       <ng-template #nodeTemplate="" let-data="">
         <div id="waiting">
           <div id="waitdetails">
-            <img class="round" src="assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="27" width="30">
+            <img class="round" src="assets/images/portrait/small/avatar-s-10.jpg" alt="avatar" height="27" width="30">
             <div id='event-title'>Name : {{data.displayName.toUpperCase()}} </div>
             <div id="event-time">Hourly rate : {{data.tarifHoraire}} DT </div>
           </div>

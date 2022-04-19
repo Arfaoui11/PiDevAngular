@@ -4,6 +4,7 @@ import {FormationService} from "../services/formation.service";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import {Formation} from "../core/model/Formation";
+import {User} from "../core/model/User";
 
 @Component({
   selector: 'app-videoplaylist',
@@ -34,7 +35,7 @@ export class VideoplaylistComponent implements OnInit {
   public idFormation :number;
    toggle: boolean = false;
   formation : Formation;
-
+  public formateur :User;
 
   constructor(private serviceForm : FormationService,private sanitizer : DomSanitizer,private http: HttpClient, private route:ActivatedRoute) {
     //this.getImage();
@@ -81,7 +82,13 @@ export class VideoplaylistComponent implements OnInit {
     this.videoUrl = this.retrieveResonse[this.activeIndex];
   }
 
-
+  getFormateurByFormation(id:number)
+  {
+    this.serviceForm.getFormateurbyFormation(id).subscribe(
+      (data:User)=>{this.formateur = data}
+    );
+    return this.formateur;
+  }
 
   initVdo() {
     this.dataa.play();

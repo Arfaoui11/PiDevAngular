@@ -51,7 +51,7 @@ export class FormationService {
 
 
   getFormateur():Observable<User[]> {
-    return this.http.get<User[]>("http://localhost:8090/Courses/retrieveFormateur");
+    return this.http.get<User[]>('http://localhost:8090/Courses/retrieveFormateur');
   }
 
 
