@@ -23,12 +23,19 @@ export class CoursesFormComponent implements OnInit {
 
   public  field : {[key : string]:any};
 
+  public  listNew : {[key : string]:any};
+
   public fields: Record<string, any> = { text: 'Text', value: 'Id' };
 
-  public formateur :User[];
+
+  public formateur: Record<string, any>[];
+
+  public listFormateur: Record<string, any>[];
 
 
   constructor(private serviceForm : FormationService) {
+
+   this.getdata();
 
    this.specializationData = [
       { DepartmentId: 1, Id: 'IT', Text: 'IT', Color: '#F538B2' },
@@ -40,21 +47,38 @@ export class CoursesFormComponent implements OnInit {
       { DepartmentId: 6, Id: 'MARKETING', Text: 'MARKETING', Color: '#F29438' }
     ];
 
-    this.getdata();
+
   }
+
+  public onSpecializationChange(args?: Record<string, any>): void {
+    let filteredData: Record<string, any>[];
+    if (args && args.value) {
+      this.selectedDepartmentId = args ? args.itemData.Id : this.selectedDepartmentId;
+      filteredData = this.formateur.filter((item: any) => item.profession === this.selectedDepartmentId);
+     // filteredData = this.formateur;
+    } else {
+      this.selectedDepartmentId = '';
+      filteredData = this.formateur;
+    }
+    this.listFormateur = filteredData;
+  }
+
   public activeData: User;
   public formerId: number;
   ngOnInit(): void {
+
+    this.getFormateur();
    // this.dataService.updateActiveItem('doctors');
   //  this.route.params.subscribe((params: any) => this.doctorId = parseInt(params.id, 10));
   //  this.doctorData = this.dataService.getDoctorsData();
-    this.activeData = this.formateur.filter(item => item.id === this.formerId)[0];
+   // this.activeData = this.formateur.filter(item => item.id === this.formerId)[0];
     const isDataDiffer: boolean = JSON.stringify(this.activeData) === JSON.stringify(this.formateur);
     if (!isDataDiffer) {
       this.formateur.push(this.activeData);
     }
    // this.breakDays = JSON.parse(JSON.stringify(this.activeData.WorkDays));
 
+  //  this.listFormateur.push(this.formateur[1]);
 
   }
 
@@ -74,12 +98,12 @@ export class CoursesFormComponent implements OnInit {
     xx.onreadystatechange = ()=>
     {
       this.formateur = JSON.parse(xx.responseText)
-    }
+    };
 
     xx.open('get','http://localhost:8090/Courses/retrieveFormateur',true);
 
 
-    xx.send(null)
+    xx.send(null);
 
 
     setTimeout( () =>
@@ -89,7 +113,7 @@ export class CoursesFormComponent implements OnInit {
         dataSource : this.formateur,value:'id',text : 'nom'
       };
 
-    },500)
+    },700)
 
 
 
@@ -106,17 +130,26 @@ export class CoursesFormComponent implements OnInit {
 
   }
 
-  onSpecializationChange($event: any) {
 
-  }
 
   updateDoctors() {
 
   }
 
+  getFormateur()
+  {
+    this.serviceForm.getFormateur().subscribe(
+      (data: User[]) => {this.formateur = data;
+       });
+    return this.formateur;
+  }
+
 
   getF()
   {
-    this.getdata();
+    this.formateur = this.getFormateur();
+    if (this.selectedDepartmentId) {
+      this.listFormateur = this.formateur.filter((item: any) => item.profession === this.selectedDepartmentId);
+    }
   }
 }

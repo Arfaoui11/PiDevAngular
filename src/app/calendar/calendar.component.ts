@@ -270,7 +270,8 @@ export class CalendarComponent implements OnInit {
     this.serviceForm.deleteFormation(i)
       .subscribe(response => {
         this.listFomation = this.listFomation.filter(item => item.idFormation !== i);
-
+        this.getformation();
+        this.getdata();
 
       });
     this.snackbar.open(' delete successfully', 'Undo', {

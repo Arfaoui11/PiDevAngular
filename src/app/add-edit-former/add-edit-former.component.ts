@@ -22,7 +22,7 @@ export class AddEditFormerComponent implements OnInit {
   public activeDoctorData: Record<string, any>;
   public dialogState: string;
   public animationSettings: Record<string, any> = { effect: 'None' };
-  public title = 'New Doctor';
+  public title = 'New Former';
   public selectedGender = 'Male';
   public specializationData: Record<string, any>[];
   public fields: Record<string, any> = { text: 'Text', value: 'Id' };
@@ -53,7 +53,7 @@ export class AddEditFormerComponent implements OnInit {
 
   public onAddDoctor(): void {
     this.dialogState = 'new';
-    this.title = 'New Doctor';
+    this.title = 'New Former';
     this.newDoctorObj.show();
   }
 

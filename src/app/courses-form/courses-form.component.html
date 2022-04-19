@@ -1,7 +1,7 @@
 <div class="doctors-wrapper">
   <header>
     <div class="module-title">
-      <div class='title'>FOMER LIST</div>
+      <div class='title'>FORMER LIST</div>
       <div class='underline'></div>
     </div>
     <div class='add-doctor' (click)="onAddDoctor()" >
@@ -28,10 +28,10 @@
           </div>
         </ng-template>
       </ejs-dropdownlist>
-      <button ejs-button cssClass="e-normal" (click)='onAddDoctor()' [isPrimary]="true">Add New Doctor</button>
+      <button ejs-button cssClass="e-normal" (click)='onAddDoctor()' [isPrimary]="true">Add New Former</button>
     </div>
     <div #specialistItemObj class='specialist-display'>
-      <div (click)='onDomainClick($event)'  *ngFor="let data of formateur">
+      <div (click)='onDomainClick($event)'  *ngFor="let data of listFormateur ">
         <div class="e-cards specialist-item" id=Specialist_{{data.id}}>
           <div class="e-card-content">
             <div class="specialist-image">
