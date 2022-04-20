@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserServicesService} from "../services/user-services.service";
+import {TokenService} from "../services/token.service";
 
 @Component({
   selector: 'app-layout',
@@ -7,10 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
   title: any;
-
-  constructor() { }
-
+  content: string;
+  constructor(private userService: UserServicesService,private token: TokenService) { }
+  currentUser: any;
   ngOnInit(): void {
+
+    this.currentUser = this.token.getUser();
+    this.userService.getPublicContent().subscribe(
+      data => {
+        this.content = data;
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    );
   }
 
 }

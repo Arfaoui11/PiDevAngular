@@ -172,7 +172,7 @@ export class CalendarComponent implements OnInit {
         this.getformation();
         this.getdata();
       });
-    this.snackbar.open(' Produit mis a jours avec succées', 'Undo', {
+    this.snackbar.open(' Produit mise á jours avec succées', 'Undo', {
       duration: 2000
     });
   }
@@ -272,7 +272,6 @@ export class CalendarComponent implements OnInit {
         this.listFomation = this.listFomation.filter(item => item.idFormation !== i);
         this.getformation();
         this.getdata();
-
       });
     this.snackbar.open(' delete successfully', 'Undo', {
       duration: 2000

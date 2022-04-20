@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {FormationService} from "../services/formation.service";
+
+import {ActivatedRoute, Router} from "@angular/router";
+import {TokenService} from "../services/token.service";
+import {UserServicesService} from "../services/user-services.service";
+import {User} from "../core/model/User";
 
 @Component({
   selector: 'app-login',
@@ -7,9 +13,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  form: any = {};
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  currentUser: any;
+
+  constructor(private authService: FormationService,private router:Router, private tokenStorage: TokenService, private route: ActivatedRoute, private userService: UserServicesService) { }
 
   ngOnInit(): void {
+    const token: string | null = this.route.snapshot.queryParamMap.get('token');
+    const error: string | null = this.route.snapshot.queryParamMap.get('error');
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.currentUser = this.tokenStorage.getUser();
+    }
+    else if(token){
+      this.tokenStorage.saveToken(token);
+      this.userService.getCurrentUser().subscribe(
+        data => {
+          this.login(data);
+        },
+        err => {
+          this.errorMessage = err.error.message;
+          this.isLoginFailed = true;
+        }
+      );
+    }
+    else if(error){
+      this.errorMessage = error;
+      this.isLoginFailed = true;
+    }
+  }
+
+  onSubmit(): void {
+    this.authService.login(this.form).subscribe(
+      data => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.login(data.user);
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+    );
+  }
+
+  login(user:User): void {
+    this.tokenStorage.saveUser(user);
+    this.isLoginFailed = false;
+    this.isLoggedIn = true;
+    this.currentUser = this.tokenStorage.getUser();
+    window.location.href = '#/home';
   }
 
 }

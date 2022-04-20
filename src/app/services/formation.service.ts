@@ -29,6 +29,12 @@ export class FormationService {
   public  field : {[key : string]:any};
 
 
+  login(credentials:any): Observable<any> {
+    return this.http.post('http://localhost:8090/api/auth/signin', {
+      email: credentials.username,
+      password: credentials.password
+    }, httpOptions);
+  }
 
 
   register(user:User): Observable<any> {
@@ -122,7 +128,16 @@ export class FormationService {
 
   SerachRepi(key : string):Observable<any>
   {
-    return this.http.post<string>("http://localhost:8090/Courses/SearchHistorique/"+key,1)
+    return this.http.post<string>('http://localhost:8090/Courses/SearchHistorique/'+key,1)
+  }
+
+
+  getFormationByFormateur(id:number):Observable<Formation[]> {
+    return this.http.get<Formation[]>('http://localhost:8090/Courses/getFormationByFormateur/'+id);
+  }
+
+  getFormationByApprenant(id:number):Observable<Formation[]> {
+    return this.http.get<Formation[]>('http://localhost:8090/Courses/getFormationByApprenant/'+id);
   }
 
 
@@ -220,6 +235,8 @@ export class FormationService {
   {
     return this.http.get('http://localhost:8090/Courses/exportPDF',{responseType:'blob'} );
   }
+
+
 
 
 

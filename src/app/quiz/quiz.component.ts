@@ -5,6 +5,7 @@ import {Question} from "../core/model/Question";
 import {Quiz} from "../core/model/Quiz";
 import {Formation} from "../core/model/Formation";
 import {Result} from "../core/model/Result";
+import {TokenService} from "../services/token.service";
 
 @Component({
   selector: 'app-quiz',
@@ -38,10 +39,13 @@ export class QuizComponent implements OnInit {
   interval$: any;
   progress: string = "0";
   isQuizCompleted : boolean = false;
-
-  constructor(private questionService: QuizService) { }
+  currentUser: any;
+  constructor(private questionService: QuizService,private tokenStorageService: TokenService) { }
 
   ngOnInit(): void {
+    this.currentUser = this.tokenStorageService.getUser();
+
+
     this.name = localStorage.getItem("name")!;
     this.getAllQuestions();
     this.startCounter();
@@ -99,7 +103,7 @@ export class QuizComponent implements OnInit {
 
       setTimeout(()=>{
         this.isQuizCompleted = true;
-        this.saveScoreQuiz(4,1);
+        this.saveScoreQuiz(this.currentUser.id,1);
         this.stopCounter();
       },500);
 

@@ -23,21 +23,27 @@
                   <p class="px-2">Welcome back, please login to your account.</p>
                   <div class="card-content">
                     <div class="card-body pt-1">
-                      <form action="index.html">
+                      <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
                         <fieldset class="form-label-group form-group position-relative has-icon-left">
-                          <input type="text" class="form-control" id="user-name" placeholder="Username" required>
+                          <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" placeholder="Username" >
                           <div class="form-control-position">
                             <i class="feather icon-user"></i>
                           </div>
-                          <label for="user-name">Username</label>
+                          <label for="username">Username</label>
+                          <div class="alert alert-danger" role="alert" *ngIf="f.submitted && username.invalid">Username is required!</div>
                         </fieldset>
 
                         <fieldset class="form-label-group position-relative has-icon-left">
-                          <input type="password" class="form-control" id="user-password" placeholder="Password" required>
+                          <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
+                                 #password="ngModel" placeholder="Password">
                           <div class="form-control-position">
                             <i class="feather icon-lock"></i>
                           </div>
-                          <label for="user-password">Password</label>
+                          <label for="password">Password</label>
+                          <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">
+                            <div *ngIf="password.errors?.required">Password is required</div>
+                            <div *ngIf="password.errors?.minlength">Password must be at least 6 characters</div>
+                          </div>
                         </fieldset>
                         <div class="form-group d-flex justify-content-between align-items-center">
                           <div class="text-left">
@@ -57,7 +63,10 @@
                         </div>
                         <a href="auth-register.html" class="btn btn-outline-primary float-left btn-inline">Register</a>
                         <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>
+
+
                       </form>
+                      <div class="alert alert-success" *ngIf="isLoggedIn">Welcome {{currentUser.displayName}} <br>Logged in as {{ currentUser.roles }}.</div>
                     </div>
                   </div>
                   <div class="login-footer">
