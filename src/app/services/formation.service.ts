@@ -3,6 +3,9 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Formation} from "../core/model/Formation";
 import {User} from "../core/model/User";
+import {PostComment} from "../core/model/PostComment";
+import {Likes} from "../core/model/likes";
+import {DisLikes} from "../core/model/DisLikes";
 
 
 
@@ -56,7 +59,8 @@ export class FormationService {
 
 
 
-  getFormateur():Observable<User[]> {
+  getFormateur():Observable<User[]>
+  {
     return this.http.get<User[]>('http://localhost:8090/Courses/retrieveFormateur');
   }
 
@@ -113,7 +117,44 @@ export class FormationService {
   //////////////////// Formation ////////////////////////////////////////
 
 
+  getCommentByFormation(idF : number): Observable<PostComment>
+  {
+    return this.http.get<PostComment>('http://localhost:8090/Courses/getFormateurFromFormation/'+idF);
+  }
 
+  likeComment(id:number): Observable<Likes>
+  {
+    return  this.http.post<Likes>('http://localhost:8090/Courses/addLikes/'+id,null);
+  }
+
+  DisLikesComment(id:number): Observable<DisLikes>
+  {
+    return  this.http.post<DisLikes>('http://localhost:8090/Courses/addLikes/'+id,null);
+  }
+
+
+  getAllComment(): Observable<PostComment[]>
+  {
+    return this.http.get<PostComment[]>('http://localhost:8090/Courses/getAllComments');
+  }
+
+
+  writeComment(mess :PostComment,idF :number , idU : number): Observable<PostComment>
+  {
+    const headers = { 'content-type': 'application/json'};
+    const body=JSON.stringify(mess);
+    console.log(body);
+    return this.http.post<PostComment>("http://localhost:8090/Courses/addComments/"+idF+"/"+idU+"/",mess)
+  }
+
+
+  addFormation(f : Formation,i:number): Observable<Formation>
+  {
+    const headers = { 'content-type': 'application/json'}
+    const body=JSON.stringify(f);
+    console.log(body)
+    return this.http.post<Formation>("http://localhost:8090/Courses/ajouterEtAffecterFormationAFormateur/"+i,f)
+  }
 
   SerachMultiple(key:string) :Observable<Formation[]>
   {
@@ -141,7 +182,8 @@ export class FormationService {
   }
 
 
-  getFormation():Observable<Formation[]> {
+  getFormation():Observable<Formation[]>
+  {
     return this.http.get<Formation[]>("http://localhost:8090/Courses/retrieveFormation");
   }
 
@@ -155,13 +197,7 @@ export class FormationService {
 
 
 
-  addFormation(f : Formation,i:number): Observable<Formation>
-  {
-    const headers = { 'content-type': 'application/json'}
-    const body=JSON.stringify(f);
-    console.log(body)
-    return this.http.post<Formation>("http://localhost:8090/Courses/ajouterEtAffecterFormationAFormateur/"+i,f)
-  }
+
 
   deleteFormation(i:number): Observable<any> {
 
@@ -196,13 +232,22 @@ export class FormationService {
   }
 
   addLikes(i:number): Observable<any> {
-
-    return this.http.post<number>("http://localhost:8090/Courses/addLikes/"+i,1)
+    return this.http.put<any>("http://localhost:8090/Courses/addLikes/"+i,null)
   }
 
   addDisLikes(i:number): Observable<any> {
 
-    return this.http.post<number>("http://localhost:8090/Courses/addDisLikes/"+i,1)
+    return this.http.put<any>("http://localhost:8090/Courses/addDisLikes/"+i,null)
+  }
+
+  getNbrLikes(id:number):Observable<any>
+  {
+    return this.http.get<any>('http://localhost:8090/Courses/getNbrLikesByComment/'+id);
+  }
+
+  getNbrDisLikes(id:number):Observable<any>
+  {
+    return this.http.get<any>('http://localhost:8090/Courses/getNbrDislikesByComment/'+id);
   }
 
 

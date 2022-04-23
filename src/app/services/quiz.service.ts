@@ -25,7 +25,7 @@ export class QuizService {
   {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(re);
-    console.log(body)
+    console.log(body);
     return this.http.post<Result>("http://localhost:8090/Courses/SaveScore/"+idU+"/"+idQ,re)
   }
 

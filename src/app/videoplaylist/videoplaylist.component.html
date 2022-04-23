@@ -30,8 +30,8 @@
       <label class="fonticon-unit">f005</label>
     </div>
     <div class="col-md-4 col-sm-6 col-12 fonticon-container">
-      <div class="fonticon-wrap"><i class="fa fa-star-o"></i></div>
-      <label class="fonticon-classname">fa-star-o</label>
+      <div class="fonticon-wrap"><i class="fa fa-star-o" (click)="getImage()" ></i></div>
+      <label class="fonticon-classname">fa-star-video</label>
       <label class="fonticon-unit">f006</label>
     </div>
     <div class="col-md-4 col-sm-6 col-12 fonticon-container">
@@ -97,7 +97,10 @@
                     <vg-fullscreen></vg-fullscreen>
                   </vg-controls>
 
-                  <video #media *ngIf="vdo.fileType.toString().includes('video')" [vgMedia]="$any(media)" [src]="videoUrl" width='150' height='100'
+                  <div style="width: 400px; height: 300px; border: 2px solid" id="remote-video"></div>
+
+
+                  <video #media *ngIf="vdo.fileType.toString().includes('video')" id="vid2" [vgMedia]="$any(media)"  [src]="'data:video/mp4;base64,'+retrieveResonse[0].data" width='150' height='100'
                          id="singleVideo"
                          preload="auto" crossorigin constroles="controles">
                     <track src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" kind="subtitles" label="English" srclang="en" default>
@@ -115,8 +118,10 @@
           </div>
         </div>
 
+
+
       <div class="col-lg-6 col-12">
-        <div class="card">
+        <div class="card" >
           <div class="card-body">
             <div class="d-flex justify-content-start align-items-center mb-1">
               <div class="avatar mr-1">
@@ -157,22 +162,31 @@
                   </li>
                 </ul>
               </div>
-              <p class="ml-auto d-flex align-items-center">
-                <i class="feather icon-message-square font-medium-2 mr-50"></i>77
-              </p>
+              <p class="ml-auto d-flex align-items-center"> <a (click)="showComment()">
+                <i class="feather icon-message-square font-medium-2 mr-50"></i>{{comment.length}}
+              </a> </p>
             </div>
 
-            <div class="d-flex justify-content-start align-items-center mb-1">
+            <div *ngIf="showC">
+
+            <div class="d-flex justify-content-start align-items-center mb-1" *ngFor="let post of comment">
               <div class="avatar mr-50">
                 <img src="assets/images/portrait/small/avatar-s-6.jpg" alt="Avatar" height="30" width="30">
               </div>
               <div class="user-page-info">
                 <h6 class="mb-0">Kitty Allanson</h6>
-                <span class="font-small-2">orthoplumbate morningtide naphthaline exarteritis</span>
+                <span class="font-small-2">{{post.message}}</span>
               </div>
               <div class="ml-auto cursor-pointer">
-                <i class="feather icon-heart mr-50"></i>
-                <i class="feather icon-message-square"></i>
+                <button class="like" (click)="LikesComment(post.idComn)">
+                  <i class="fa fa-thumbs-o-up" aria-hidden="true"> </i>
+                </button>
+                <label>{{post.nbrLikes}}</label>
+                &nbsp;
+                <button class="dislike" (click)="DisLikesComment(post.idComn)">
+                  <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                </button>
+                <label>{{post.nbrDisLikes}}</label>
               </div>
             </div>
 
@@ -180,11 +194,12 @@
 
 
             <fieldset class="form-label-group mb-50">
-              <textarea class="form-control" id="label-textarea" rows="3" placeholder="Add Comment"></textarea>
+              <textarea class="form-control" id="label-textarea" #message="ngModel" [(ngModel)]="post.message"  rows="3" placeholder="Add Comment"></textarea>
               <label for="label-textarea"  >Add Comment</label>
             </fieldset>
-            <button type="button" class="btn btn-sm btn-primary"> Post Comment </button>
-          </div>
+            <button type="button" class="btn btn-sm btn-primary" (click)="sendComment()" > Post Comment </button>
+            </div>
+            </div>
         </div>
 
       </div>
@@ -414,4 +429,13 @@
     </section>
     <!-- Timeline Ends -->
   </div>
+<audio [src]="'data:audio/mp3;base64,'+retrieveResonse[0].data"  controls >
+</audio>
 
+<br>
+
+
+Audio<audio [src]="audioSource" id="audio" controls #audioTag>
+</audio>
+<br>
+<button id="btn" (click)="loadAudioClick()">load audio</button>
