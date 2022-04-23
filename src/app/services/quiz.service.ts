@@ -18,37 +18,37 @@ export class QuizService {
 
   getQuizQuestion(id:number): Observable<any[]>
   {
-    return this.http.get<any[]>("http://localhost:8090/Courses/getQuizQuestion/"+id);
+    return this.http.get<any[]>("http://localhost:8099/Courses/getQuizQuestion/"+id);
   }
 
   saveScore(re : Result,idU:number,idQ:number):Observable<any>
   {
-    const headers = { 'content-type': 'application/json'}
+    const headers = { 'content-type': 'application/json'};
     const body=JSON.stringify(re);
     console.log(body);
-    return this.http.post<Result>("http://localhost:8090/Courses/SaveScore/"+idU+"/"+idQ,re)
+    return this.http.post<Result>("http://localhost:8099/Courses/SaveScore/"+idU+"/"+idQ,re)
   }
 
 
   addQuiz(quiz : Quiz,idF:number):Observable<Quiz>
   {
-    return this.http.post<Quiz>("http://localhost:8090/Courses/addQuiz/"+idF,quiz);
+    return this.http.post<Quiz>("http://localhost:8099/Courses/addQuiz/"+idF,quiz);
   }
 
   addQuestion(qu : Question,idQuiz:number):Observable<Question>
   {
-    return this.http.post<Question>("http://localhost:8090/Courses/addQuestionAndAsigntoQuiz/"+idQuiz,qu);
+    return this.http.post<Question>("http://localhost:8099/Courses/addQuestionAndAsigntoQuiz/"+idQuiz,qu);
   }
 
   getQuizByForm(id:number):Observable<Quiz[]>
   {
-    return this.http.get<Quiz[]>('http://localhost:8090/Courses/getQuizByFormation/'+id);
+    return this.http.get<Quiz[]>('http://localhost:8099/Courses/getQuizByFormation/'+id);
   }
 
 
   deleteQuiz(i:number): Observable<any> {
 
-    return this.http.get<number>("http://localhost:8090/Courses/DeleteQuiz/"+i)
+    return this.http.get<number>("http://localhost:8099/Courses/DeleteQuiz/"+i)
   }
 
 
