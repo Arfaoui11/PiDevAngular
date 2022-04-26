@@ -180,7 +180,7 @@
                 <h6 class="mb-0">Kitty Allanson</h6>
                 <span class="font-small-2">{{post.message}}</span>
               </div>
-              <div class="ml-auto cursor-pointer">
+              <div class="ml-auto cursor-pointer float-lg-right">
                 <button class="like" (click)="LikesComment(post.idComn)">
                   <i class="fa fa-thumbs-o-up" aria-hidden="true"> </i>
                 </button>
@@ -303,12 +303,17 @@
                 <div class="icon-like mr-2">
                   <!--   <i class="feather icon-thumbs-up text-success font-medium-5 align-middle"></i>-->
                    <span>{{formation.rating}}</span>
+                  <br>
+                  <ng-template #t let-fill="fill">
+                  <span class="star" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                  </span>
+                  </ng-template>
 
-                  <ngb-rating [(rate)]="formation.rating">
-                    <ng-template let-fill="fill" let-index="index">
-                      <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
-                    </ng-template>
-                  </ngb-rating>
+                  <ngb-rating [(rate)]="rating" [starTemplate]="t"  [max]="5" (click)="changeRating()"></ngb-rating>
+
+                  <hr>
+                  <pre>Rate: <b>{{rating}}</b></pre>
                 </div>
                 <div class="icon-comment mr-2">
                   <i class="feather icon-message-square font-medium-5 align-middle text-primary"></i>

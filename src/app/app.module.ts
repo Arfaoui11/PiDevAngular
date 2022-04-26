@@ -11,32 +11,11 @@ import {NgbCollapseModule, NgbModalModule, NgbModule, NgbNavModule, NgbTooltipMo
 import {NgxPaginationModule} from "ngx-pagination";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {CalendarModule, DateAdapter} from "angular-calendar";
-import {adapterFactory} from "angular-calendar/date-adapters/moment";
+
 import {
-  RecurrenceEditorAllModule,
+
   ScheduleAllModule,
-  DayService,
-  WeekService,
-  WorkWeekService,
-  MonthService,
-  AgendaService,
-  TimelineViewsService,
-  TimelineMonthService,
-  ResizeService,
-  DragAndDropService,
-  EventSettingsModel,
-  ActionEventArgs,
-  ScheduleComponent,
-  CellClickEventArgs,
-  TimeScaleModel,
-  GroupModel,
-  PopupOpenEventArgs,
-  EJ2Instance,
-  getWeekFirstDate,
-  addDays,
-  NavigatingEventArgs,
-  WorkHoursModel,
+
   RecurrenceEditorModule, ScheduleModule
 } from "@syncfusion/ej2-angular-schedule";
 import { CalendarComponent } from './calendar/calendar.component';
@@ -56,11 +35,7 @@ import { QuizComponent } from './quiz/quiz.component';
 import { ChangeBgDirective } from './change-bg.directive';
 import {NgxQRCodeModule} from "ngx-qrcode2";
 import { CoursesFormComponent } from './courses-form/courses-form.component';
-import { HomeComponent } from './home/home.component';
-import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { LayoutComponent } from './layout/layout.component';
-import { SidbarComponent } from './sidbar/sidbar.component';
+
 import {WelcomeComponent} from "./welcome/welcome.component";
 import { QuestionComponent } from './question/question.component';
 import {DialogModule} from "@syncfusion/ej2-angular-popups";
@@ -83,6 +58,24 @@ import { VideoplaylistComponent } from './videoplaylist/videoplaylist.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import {DatePickerModule, TimePickerModule} from "@syncfusion/ej2-angular-calendars";
+
+import {NgxWebstorageModule} from "ngx-webstorage";
+import { RoutComponent } from './chat/rout/rout.component';
+import { ChatstreamComponent } from './chat/chatstream/chatstream.component';
+import { ListUserComponent } from './chat/list-user/list-user.component';
+import {ChatComponent} from "./chat/chat/chat.component";
+import { HomeFComponent } from './FontEnd/home-f/home-f.component';
+import { BlogFormationComponent } from './blog-formation/blog-formation.component';
+import {HomeComponent} from "./home/home.component";
+import {FooterComponent} from "./footer/footer.component";
+import {NavbarComponent} from "./navbar/navbar.component";
+import {LayoutComponent} from "./layout/layout.component";
+import {SidbarComponent} from "./sidbar/sidbar.component";
+import {NavbarFComponent} from "./FontEnd/navbar-f/navbar-f.component";
+import {LayoutFComponent} from "./FontEnd/layout-f/layout-f.component";
+import {FooterFComponent} from "./FontEnd/footer-f/footer-f.component";
+import { BlogDetailsComponent } from './blog-details/blog-details.component';
+
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -114,7 +107,17 @@ FullCalendarModule.registerPlugins([
     CalendarCoursesComponent,
     VideoplaylistComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    ChatComponent,
+    RoutComponent,
+    ChatstreamComponent,
+    ListUserComponent,
+    HomeFComponent,
+    BlogFormationComponent,
+    NavbarFComponent,
+    FooterFComponent,
+    LayoutFComponent,
+    BlogDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -155,6 +158,7 @@ FullCalendarModule.registerPlugins([
     ScheduleAllModule,
     NgbNavModule,
     NgbCollapseModule,
+    NgxWebstorageModule.forRoot(),
     NgbTooltipModule,
     ClipboardModule,
     DragAndDropModule,

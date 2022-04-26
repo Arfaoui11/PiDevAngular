@@ -1,3 +1,7 @@
+import {Quiz} from "./Quiz";
+import {PostComment} from "./PostComment";
+import {User} from "./User";
+
 export class Formation {
 
   idFormation!:number;
@@ -10,6 +14,7 @@ export class Formation {
   nbrMaxParticipant!:number;
   frais!:number;
   rating!:number;
+  formateur!:User;
 
 
 }

@@ -117,9 +117,9 @@ export class FormationService {
   //////////////////// Formation ////////////////////////////////////////
 
 
-  getCommentByFormation(idF : number): Observable<PostComment>
+  getCommentByFormation(idF : number): Observable<PostComment[]>
   {
-    return this.http.get<PostComment>('http://localhost:8099/Courses/getFormateurFromFormation/'+idF);
+    return this.http.get<PostComment[]>('http://localhost:8099/Courses/getCommentsByFormation/'+idF);
   }
 
   likeComment(id:number): Observable<Likes>
@@ -139,12 +139,12 @@ export class FormationService {
   }
 
 
-  writeComment(mess :PostComment,idF :number , idU : number): Observable<PostComment>
+  writeComment(mess :PostComment,idF :number , idU : number): Observable<number>
   {
     const headers = { 'content-type': 'application/json'};
     const body=JSON.stringify(mess);
     console.log(body);
-    return this.http.post<PostComment>("http://localhost:8099/Courses/addComments/"+idF+"/"+idU+"/",mess)
+    return this.http.post<number>("http://localhost:8099/Courses/addComments/"+idF+"/"+idU+"/",mess)
   }
 
 
@@ -248,6 +248,11 @@ export class FormationService {
   getNbrDisLikes(id:number):Observable<any>
   {
     return this.http.get<any>('http://localhost:8099/Courses/getNbrDislikesByComment/'+id);
+  }
+
+  addRatingFormation(idF:number,rate :number):Observable<any>
+  {
+    return this.http.put<any>("http://localhost:8099/Courses/FormationWIthRate/"+idF+"/"+rate,null)
   }
 
 

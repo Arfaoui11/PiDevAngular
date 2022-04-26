@@ -1,3 +1,6 @@
+import {Likes} from "./likes";
+import {DisLikes} from "./DisLikes";
+
 export class PostComment {
 
   idComn!:number;
@@ -5,5 +8,6 @@ export class PostComment {
   createAt!:Date;
   nbrLikes!:number;
   nbrDisLikes!:number;
-
+  likes : Likes[];
+  Dislikes:DisLikes[];
 }

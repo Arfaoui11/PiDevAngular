@@ -213,7 +213,7 @@ export class CalendarCoursesComponent implements OnInit {
   }
 
 
-//path : string = "http://localhost:8090/Courses/getFormationByFormateur/{{this.currentUser.id}}";
+//path : string = "http://localhost:8099/Courses/getFormationByFormateur/{{this.currentUser.id}}";
 
   getdata()
   {
@@ -231,13 +231,13 @@ export class CalendarCoursesComponent implements OnInit {
       this.formateur = JSON.parse(xx.responseText)
     };
 
-    xx.open('get','http://localhost:8090/Courses/retrieveFormateur',true);
+    xx.open('get','http://localhost:8099/Courses/retrieveFormateur',true);
 
 
     xx.send(null);
 
 
-    xmll.open('get',"http://localhost:8090/Courses/getFormationByFormateur/"+this.id+"",true);
+    xmll.open('get',"http://localhost:8099/Courses/getFormationByFormateur/"+this.id+"",true);
 
 
     xmll.send(null);

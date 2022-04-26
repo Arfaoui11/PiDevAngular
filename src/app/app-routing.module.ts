@@ -14,22 +14,44 @@ import {CalendarCoursesComponent} from "./calendar-courses/calendar-courses.comp
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {VideoplaylistComponent} from "./videoplaylist/videoplaylist.component";
 import {LoginComponent} from "./login/login.component";
+import {ChatComponent} from "./chat/chat/chat.component";
+import {RoutComponent} from "./chat/rout/rout.component";
+import {ChatstreamComponent} from "./chat/chatstream/chatstream.component";
+import {HomeFComponent} from "./FontEnd/home-f/home-f.component";
+import {BlogFormationComponent} from "./blog-formation/blog-formation.component";
+import {LayoutFComponent} from "./FontEnd/layout-f/layout-f.component";
+import {BlogDetailsComponent} from "./blog-details/blog-details.component";
+
+
 
 
 const routes: Routes =
-  /*[
-  {path : 'formateur' ,component: ListFomateurComponent},
-  {path: 'addFormation',component:FormationComponent},
-  {path: 'listFormateur',component:ListFomateurComponent},
-  {path: 'calendar',component:CalendarComponent},
-  {path: 'listFormation',component:ListeFormationComponent},
-  {path: 'quiz',component:QuizComponent},
-  {path: 'Courses',component:CoursesFormComponent},
 
-
-];*/
    [
+
      {path:'',component: LoginComponent },
+     {path:'homeF',component: HomeFComponent },
+     { path: 'frontOffice',  redirectTo: '/front/homeF', pathMatch: 'full' },
+
+
+     {
+       path: 'front',
+       component: LayoutFComponent,
+       children: [
+         {
+           path: '',
+           children: [
+
+             { path: 'blogF', component: BlogFormationComponent },
+             { path: 'homeF', component: HomeFComponent },
+             { path: 'detailsF/:idCourses', component: BlogDetailsComponent },
+
+
+           ]
+         },
+       ]
+     },
+
   {
     path: 'home',
     component: HomeComponent,
@@ -39,6 +61,7 @@ const routes: Routes =
         children: [
 
           { path: 'addFormateur', component: AddFomateurComponent },
+          { path: 'chat', component: RoutComponent },
           { path: 'dashboard', component: DashboardComponent },
           { path: 'formateur', component: ListFomateurComponent },
           { path: 'addFormation', component: FormationComponent },

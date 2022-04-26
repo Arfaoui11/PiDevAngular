@@ -1,3 +1,5 @@
+import {Formation} from "./Formation";
+
 export class User {
 
   id !: number;
@@ -13,5 +15,9 @@ export class User {
   age!:number;
   password: any;
   matchingPassword: any;
+
+  isOnline: Boolean;
+
+
 
 }
