@@ -57,12 +57,12 @@ export class VideoplaylistComponent implements OnInit {
 
   ngOnInit(): void {
     this.idFormation = this.route.snapshot.params['idCourses'];
-   /* this.serviceForm.getFilesFormation(this.idFormation)
+    this.serviceForm.getFilesFormation(this.idFormation)
       .subscribe(
       data=> {
         this.retrieveResonse=data
       }
-    );*/
+    );
 
     this.serviceForm.getFormationById(this.idFormation).subscribe(data => {
       this.formation = data;
