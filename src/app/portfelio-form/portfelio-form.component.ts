@@ -1,33 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import {Formation} from "../core/model/Formation";
-import {User} from "../core/model/User";
+import {Component, Input, OnInit} from '@angular/core';
 import {FormationService} from "../services/formation.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {DomSanitizer} from "@angular/platform-browser";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import {TokenService} from "../services/token.service";
+import {PostComment} from "../core/model/PostComment";
+import {Formation} from "../core/model/Formation";
+import {User} from "../core/model/User";
 
 @Component({
-  selector: 'app-blog-formation',
-  templateUrl: './blog-formation.component.html',
-  styleUrls: ['./blog-formation.component.scss']
+  selector: 'app-portfelio-form',
+  templateUrl: './portfelio-form.component.html',
+  styleUrls: ['./portfelio-form.component.scss']
 })
-export class BlogFormationComponent implements OnInit {
+export class PortfelioFormComponent implements OnInit {
 
   listFormation  : Formation[];
   toggle = true;
   domain : string;
+  page = 1;
 
   nbrlikes : number;
   nbrDislikes : number;
 
   listApprenent : User[];
   sowFormateur : boolean = false;
-  page = 1;
-  public Items: number;
 
   constructor(private serviceForm : FormationService,private snackbar:MatSnackBar  ,private http: HttpClient, private route:ActivatedRoute,private token: TokenService) { }
+
+
 
   ngOnInit(): void {
 
@@ -40,13 +42,10 @@ export class BlogFormationComponent implements OnInit {
     this.getAllFormation();
   }
 
-
   getAllFormation()
   {
     return  this.serviceForm.getFormation().subscribe(
-      (data : Formation[]) => {this.listFormation = data;
-        this.Items = this.listFormation.length;
-      });
+      (data : Formation[]) => this.listFormation = data);
   }
 
 
@@ -122,5 +121,6 @@ export class BlogFormationComponent implements OnInit {
     }
 
   }
+
 
 }

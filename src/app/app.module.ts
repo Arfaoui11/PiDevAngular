@@ -75,6 +75,10 @@ import {NavbarFComponent} from "./FontEnd/navbar-f/navbar-f.component";
 import {LayoutFComponent} from "./FontEnd/layout-f/layout-f.component";
 import {FooterFComponent} from "./FontEnd/footer-f/footer-f.component";
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
+import { PortfelioFormComponent } from './portfelio-form/portfelio-form.component';
+import { PortfelioFormDetailsComponent } from './portfelio-form-details/portfelio-form-details.component';
+import { ChatBotComponent } from './chat-bot/chat-bot.component';
+import { UserViewComponent } from './user-view/user-view.component';
 
 
 FullCalendarModule.registerPlugins([
@@ -117,7 +121,11 @@ FullCalendarModule.registerPlugins([
     NavbarFComponent,
     FooterFComponent,
     LayoutFComponent,
-    BlogDetailsComponent
+    BlogDetailsComponent,
+    PortfelioFormComponent,
+    PortfelioFormDetailsComponent,
+    ChatBotComponent,
+    UserViewComponent
   ],
   imports: [
     BrowserModule,

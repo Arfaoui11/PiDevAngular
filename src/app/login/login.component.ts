@@ -69,8 +69,15 @@ export class LoginComponent implements OnInit {
     this.appDataService.id = this.currentUser.id;
     this.appDataService.displayName = this.currentUser.displayName;
 
-   window.location.href = '#/front/homeF';
-   // window.location.href = '#/home/Formation-management';
+    if (this.currentUser.roles[0] == "ROLE_ADMIN")
+    {
+       window.location.href = '#/home/Formation-management';
+    }else
+    {
+      window.location.href = '../homeF';
+    }
+
+
   }
 
 }

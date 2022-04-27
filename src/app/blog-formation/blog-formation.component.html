@@ -9,7 +9,7 @@
             <div class="breadcrumb-menu">
               <nav class="breadcrumb-trail breadcrumbs">
                 <ul class="trail-items">
-                  <li class="trail-item trail-begin"><a href="index.html">Home</a></li>
+                  <li class="trail-item trail-begin"><a [routerLink]="['/front/End/homeF']">Home</a></li>
                   <li class="trail-item trail-middle"><i class="far fa-chevron-right"></i></li>
                   <li class="trail-item trail-end"><span>List Courses</span></li>
                 </ul>
@@ -39,16 +39,20 @@
     <div class="container">
       <div class="row mb-30">
 
-        <div class="col-xl-4 col-lg-4 col-md-6" *ngFor="let l of listFormation  , let i=index">
+        <div class="col-xl-4 col-lg-4 col-md-6" *ngFor="let l of listFormation | paginate : {
+            itemsPerPage: 6,
+            currentPage: page,
+            totalItems: Items
+          }  , let i=index">
           <div class="bd-blog mb-30">
-            <div class="bd-blog-img">
-              <a href="blog-details.html"><img src="../../assets/front/img/blog/blog-img-1.jpg" alt="blog image not found"></a>
+            <div class="bd-blog-img" *ngIf="l.databaseFiles[0].fileType.toString().includes('image')">
+              <a href="blog-details.html"><img [src]="'data:image/jpeg;base64,'+l.databaseFiles[0].data" alt="blog image not found"></a>
             </div>
             <div class="bd-blog-text">
               <div class="bd-blog-meta mb-15">
                 <ul>
-                  <li><a href="blog-details.html"><i class="flaticon-calendar"></i>Start : {{l.start }} End : {{l.end}} </a></li>
-                  <li><a href="blog-details.html"><i class="flaticon-chat"></i>12 Comments</a></li>
+                  <li><a href="blog-details.html"><i class="flaticon-calendar"></i>Start : {{l.start | date | slice:0 : 12   }} <br> End : {{l.end | date | slice:0 : 12}} </a></li>
+                  <li><a href="blog-details.html"><i class="flaticon-chat"></i>{{l.postComments.length}} Comments</a></li>
                 </ul>
               </div>
               <h4 class="bd-blog-title mb-40"><a href="blog-details.html"> Title : {{l.title.toUpperCase()}} </a></h4>
@@ -71,7 +75,7 @@
       <div class="row">
         <div class="col-12">
           <div class="basic-pagination">
-            <ul>
+            <!--<ul>
               <li><span aria-current="page" class="page-numbers current">1</span></li>
               <li><a class="page-numbers" href="#">2</a></li>
               <li><a class="page-numbers" href="#">3</a></li>
@@ -79,11 +83,18 @@
                 <i class="fal fa-long-arrow-right"></i>
               </a>
               </li>
-            </ul>
+            </ul>-->
+            <pagination-controls
+              previousLabel="Prev"
+              nextLabel="Next"
+              [responsive]="true"
+              (pageChange)="handlePageChange($event)"
+            ></pagination-controls>
           </div>
         </div>
       </div>
     </div>
   </section>
   <!-- blog area end here -->
+
 

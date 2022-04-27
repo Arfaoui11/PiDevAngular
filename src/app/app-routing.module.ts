@@ -21,6 +21,9 @@ import {HomeFComponent} from "./FontEnd/home-f/home-f.component";
 import {BlogFormationComponent} from "./blog-formation/blog-formation.component";
 import {LayoutFComponent} from "./FontEnd/layout-f/layout-f.component";
 import {BlogDetailsComponent} from "./blog-details/blog-details.component";
+import {PortfelioFormComponent} from "./portfelio-form/portfelio-form.component";
+import {PortfelioFormDetailsComponent} from "./portfelio-form-details/portfelio-form-details.component";
+import {UserViewComponent} from "./user-view/user-view.component";
 
 
 
@@ -29,9 +32,9 @@ const routes: Routes =
 
    [
 
-     {path:'',component: LoginComponent },
+     {path:'login',component: LoginComponent },
      {path:'homeF',component: HomeFComponent },
-     { path: 'frontOffice',  redirectTo: '/front/homeF', pathMatch: 'full' },
+     { path: '',  redirectTo: '/front/End/homeF', pathMatch: 'full' },
 
 
      {
@@ -39,10 +42,12 @@ const routes: Routes =
        component: LayoutFComponent,
        children: [
          {
-           path: '',
+           path: 'End',
            children: [
-
+             { path: 'portForm', component: PortfelioFormComponent },
              { path: 'blogF', component: BlogFormationComponent },
+             { path: 'portF/:idCourses', component: PortfelioFormDetailsComponent },
+             { path: 'chat', component: RoutComponent },
              { path: 'homeF', component: HomeFComponent },
              { path: 'detailsF/:idCourses', component: BlogDetailsComponent },
 
@@ -61,20 +66,21 @@ const routes: Routes =
         children: [
 
           { path: 'addFormateur', component: AddFomateurComponent },
-          { path: 'chat', component: RoutComponent },
           { path: 'dashboard', component: DashboardComponent },
           { path: 'formateur', component: ListFomateurComponent },
           { path: 'addFormation', component: FormationComponent },
           { path: 'listFormateur', component: ListFomateurComponent } ,
           { path: 'calendar', component: CalendarComponent },
-          { path: 'calendarCourses', component: CalendarCoursesComponent },
+          { path: 'calendarCourses/:idFormer', component: CalendarCoursesComponent },
           { path: 'listFormation', component: ListeFormationComponent },
           { path: 'quiz', component: QuizComponent },
           { path: 'quizWelcome', component: WelcomeComponent },
           { path: 'Courses', component: CoursesFormComponent },
           { path: 'Question/:idCourses', component: QuestionComponent },
           { path: 'videoplaylist/:idCourses', component: VideoplaylistComponent },
+          { path: 'userview/:idUser', component: UserViewComponent },
           { path: 'login', component: LoginComponent },
+
 
         ]
       },

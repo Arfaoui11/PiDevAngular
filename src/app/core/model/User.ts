@@ -10,7 +10,7 @@ export class User {
   priceconsultation!:number;
   email !:string;
   tarifHoraire !:number;
-  profession!:string;
+  profession!:String;
   salary! : number;
   age!:number;
   password: any;

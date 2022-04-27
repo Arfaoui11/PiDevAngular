@@ -31,3 +31,45 @@ input::placeholder {
   font-size: 0.9rem;
   color: #999;
 }
+
+
+.chat-message {
+  background: lightskyblue;
+  margin: 4px 0px;
+  padding: 8px;
+}
+
+.chat-username {
+  color: gray;
+  border-bottom: 1px solid gray;
+  font-size: 12px;
+}
+
+.typing-indicator {
+  color: gray;
+  font-style: italic;
+  font-size: 11px;
+  padding-left: 12px;
+}
+.message-form {
+  height: 12%;
+  padding: 20px 10px 20px 10px;
+}
+.users {
+  padding: 10px 0px;
+}
+
+.user {
+  font-size: 18px;
+  padding: 4px 0px;
+}
+
+.online {
+  color: #51f41d;
+}
+
+.offline {
+  color: #f7485a;
+}
+
+

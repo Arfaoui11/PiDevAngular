@@ -38,7 +38,9 @@ export class NavbarFComponent implements OnInit {
   }
   logout(): void {
     this.token.signOut();
-    window.location.reload();
+  //  window.location.reload();
+
+    window.location.href = '/login';
   }
 
 }

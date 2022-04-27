@@ -33,10 +33,10 @@ export class RoutComponent implements OnInit {
         type: 'JOINED',
         from: this.appDataService.id,
         fromUserName: this.appDataService.displayName,
-        message: ""
-      }
+        message: ''
+      };
       this.websocket.send(JSON.stringify(message));
-    }
+    };
     this.initUserList();
     this.startListening2();
 

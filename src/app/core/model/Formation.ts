@@ -1,6 +1,7 @@
 import {Quiz} from "./Quiz";
 import {PostComment} from "./PostComment";
 import {User} from "./User";
+import {Files} from "./files";
 
 export class Formation {
 
@@ -15,6 +16,11 @@ export class Formation {
   frais!:number;
   rating!:number;
   formateur!:User;
+  databaseFiles!:Files[];
+  postComments:PostComment[];
+  apprenant:User[];
+
+
 
 
 }
