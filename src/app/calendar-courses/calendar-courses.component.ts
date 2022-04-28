@@ -40,6 +40,7 @@ import {CalendarOptions} from "@fullcalendar/angular";
 import {DataManager, WebApiAdaptor} from "@syncfusion/ej2-data";
 import {ChangeEventArgs} from "@syncfusion/ej2-angular-inputs";
 import {TokenService} from "../services/token.service";
+import {ActivatedRoute} from "@angular/router";
 
 
 L10n.load({
@@ -108,14 +109,20 @@ export class CalendarCoursesComponent implements OnInit {
   public endHour: string;
   idF : number=2;
 
-
+  public path : string ;
 
 
   public allowDragAndDrop = true;
   @Input() formation: Formation ;
-  constructor(private serviceForm : FormationService,private snackbar:MatSnackBar,private token: TokenService ) {
+  public idFormateur: number;
+  constructor(private serviceForm : FormationService,private snackbar:MatSnackBar,private token: TokenService,private route:ActivatedRoute ) {
     this.getdata();
     this.currentUser = this.token.getUser();
+
+    this.idFormateur = this.route.snapshot.params['idFormer'];
+
+    this.path = "http://localhost:8099/Courses/getFormationByFormateur/"+this.route.snapshot.params['idFormer'];
+
     // (FieldValidator.prototype as any).errorPlacement = this.dataService.errorPlacement;
   }
   public listFomation : Formation[]=[];
@@ -213,7 +220,7 @@ export class CalendarCoursesComponent implements OnInit {
   }
 
 
-//path : string = "http://localhost:8090/Courses/getFormationByFormateur/{{this.currentUser.id}}";
+
 
   getdata()
   {
@@ -231,13 +238,13 @@ export class CalendarCoursesComponent implements OnInit {
       this.formateur = JSON.parse(xx.responseText)
     };
 
-    xx.open('get','http://localhost:8090/Courses/retrieveFormateur',true);
+    xx.open('get','http://localhost:8099/Courses/retrieveFormateur',true);
 
 
     xx.send(null);
 
 
-    xmll.open('get',"http://localhost:8090/Courses/getFormationByFormateur/"+this.id+"",true);
+    xmll.open('get',"http://localhost:8099/Courses/getFormationByFormateur/"+this.route.snapshot.params['idFormer'],true);
 
 
     xmll.send(null);
@@ -272,7 +279,7 @@ export class CalendarCoursesComponent implements OnInit {
         dataSource : this.formateur,id:'id',text : 'firstName'
       };
 
-    },350)
+    },300)
 
 
 

@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {TokenService} from "../services/token.service";
 import {UserServicesService} from "../services/user-services.service";
 import {User} from "../core/model/User";
+import {AppdataService} from "../services/appdata.service";
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   currentUser: any;
 
-  constructor(private authService: FormationService,private router:Router, private tokenStorage: TokenService, private route: ActivatedRoute, private userService: UserServicesService) { }
+  constructor(private appDataService: AppdataService,private authService: FormationService,private router:Router, private tokenStorage: TokenService, private route: ActivatedRoute, private userService: UserServicesService) { }
 
   ngOnInit(): void {
     const token: string | null = this.route.snapshot.queryParamMap.get('token');
@@ -64,7 +65,19 @@ export class LoginComponent implements OnInit {
     this.isLoginFailed = false;
     this.isLoggedIn = true;
     this.currentUser = this.tokenStorage.getUser();
-    window.location.href = '#/home';
+
+    this.appDataService.id = this.currentUser.id;
+    this.appDataService.displayName = this.currentUser.displayName;
+
+    if (this.currentUser.roles[0] == "ROLE_ADMIN")
+    {
+       window.location.href = '#/home/Formation-management';
+    }else
+    {
+      window.location.href = '../homeF';
+    }
+
+
   }
 
 }

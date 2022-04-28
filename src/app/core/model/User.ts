@@ -1,3 +1,5 @@
+import {Formation} from "./Formation";
+
 export class User {
 
   id !: number;
@@ -8,10 +10,14 @@ export class User {
   priceconsultation!:number;
   email !:string;
   tarifHoraire !:number;
-  profession!:string;
+  profession!:String;
   salary! : number;
   age!:number;
   password: any;
   matchingPassword: any;
+
+  isOnline: Boolean;
+
+
 
 }

@@ -1,0 +1,68 @@
+<!--
+<div class="chat-stream">
+  <div class="col-md-12 stream-div">
+    <div class="col-md-8 chat-message" *ngFor="let message of publishedMessage" [class.pull-right] = "loggedinUserId === message.from">
+      <div class="chat-username">{{message.fromUserName}}</div>
+      {{message.message}}
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 message-form">
+  <div *ngIf="showTypingIndicator" class="typing-indicator">{{typingUser}} is typing...</div>
+  <form (ngSubmit)="sendMessage()">
+    <input class="form-control col-md-12" placeholder="Message..." autocomplete="off" type="text" name="message"
+           [(ngModel)]="message" (keypress)="sendTypeIndicator()"/>
+  </form>
+</div>
+-->
+
+    <!-- Users box-->
+
+    <!-- Chat Box-->
+    <div class="col-7 px-0">
+      <div class="px-4 py-5 chat-box bg-white">
+        <!-- Sender Message-->
+
+
+        <!-- Reciever Message-->
+     <!--   <div class="media w-50 ml-auto mb-3" *ngFor="let message of publishedMessage" [class.pull-right] = "loggedinUserId === message.from">
+          <div class="media-body">
+            <div class="bg-primary rounded py-2 px-3 mb-2">
+              <P>{{message.fromUserName}}</P>
+              <p class="text-small mb-0 text-white">{{message.message}}</p>
+            </div>
+            <p class="small text-muted">12:00 PM | Aug 13</p>
+          </div>
+        </div>-->
+
+        <!-- Sender Message-->
+        <div class="media w-50 mb-3" *ngFor="let message of publishedMessage" [class.pull-right] = "loggedinUserId === message.from"><img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="50" class="rounded-circle">
+          <div class="media-body ml-3">
+            <div class="bg-light rounded py-2 px-3 mb-2">
+              <P>{{message.fromUserName}}</P>
+              <p class="text-small mb-0 text-muted">{{message.message}}</p>
+            </div>
+            <p class="small text-muted">12:00 PM | Aug 13</p>
+          </div>
+        </div>
+
+        <!-- Reciever Message-->
+
+
+      </div>
+
+      <!-- Typing area -->
+      <form  class="bg-light" (ngSubmit)="sendMessage()">
+        <div class="input-group">
+          <input  placeholder="Type a message" aria-describedby="button-addon2"  autocomplete="off" type="text" name="message"
+                 [(ngModel)]="message" (keypress)="sendTypeIndicator()" class="form-control rounded-0 border-0 py-4 bg-light">
+          <div class="input-group-append">
+            <button id="button-addon2" type="button" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+

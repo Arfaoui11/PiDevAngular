@@ -33,7 +33,7 @@ export class FormationService {
 
 
   login(credentials:any): Observable<any> {
-    return this.http.post('http://localhost:8090/api/auth/signin', {
+    return this.http.post('http://localhost:8099/api/auth/signin', {
       email: credentials.username,
       password: credentials.password
     }, httpOptions);
@@ -41,7 +41,7 @@ export class FormationService {
 
 
   register(user:User): Observable<any> {
-    return this.http.post('http://localhost:8090/api/auth/signup', {
+    return this.http.post('http://localhost:8099/api/auth/signup', {
       displayName: user.displayName,
       email: user.email,
       password: user.password,
@@ -61,12 +61,12 @@ export class FormationService {
 
   getFormateur():Observable<User[]>
   {
-    return this.http.get<User[]>('http://localhost:8090/Courses/retrieveFormateur');
+    return this.http.get<User[]>('http://localhost:8099/Courses/retrieveFormateur');
   }
 
 
   getFormateurRemunerationMaxSalaireTrie():Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:8090/Courses/getFormateurMaxSalaireTrie');
+    return this.http.get<any[]>('http://localhost:8099/Courses/getFormateurMaxSalaireTrie');
   }
 
 
@@ -82,7 +82,7 @@ export class FormationService {
     };
 
 
-    xmll.open('get','http://localhost:8090/Courses/retrieveFormation',true);
+    xmll.open('get','http://localhost:8099/Courses/retrieveFormation',true);
 
 
 
@@ -101,7 +101,7 @@ export class FormationService {
       this.formateur = JSON.parse(xx.responseText)
     };
 
-    xx.open('get','http://localhost:8090/Courses/retrieveFormateur',true);
+    xx.open('get','http://localhost:8099/Courses/retrieveFormateur',true);
 
 
     xx.send(null);
@@ -117,159 +117,170 @@ export class FormationService {
   //////////////////// Formation ////////////////////////////////////////
 
 
-  getCommentByFormation(idF : number): Observable<PostComment>
+  getCommentByFormation(idF : number): Observable<PostComment[]>
   {
-    return this.http.get<PostComment>('http://localhost:8090/Courses/getFormateurFromFormation/'+idF);
+    return this.http.get<PostComment[]>('http://localhost:8099/Courses/getCommentsByFormation/'+idF);
   }
 
   likeComment(id:number): Observable<Likes>
   {
-    return  this.http.post<Likes>('http://localhost:8090/Courses/addLikes/'+id,null);
+    return  this.http.post<Likes>('http://localhost:8099/Courses/addLikes/'+id,null);
   }
 
   DisLikesComment(id:number): Observable<DisLikes>
   {
-    return  this.http.post<DisLikes>('http://localhost:8090/Courses/addLikes/'+id,null);
+    return  this.http.post<DisLikes>('http://localhost:8099/Courses/addLikes/'+id,null);
   }
 
 
   getAllComment(): Observable<PostComment[]>
   {
-    return this.http.get<PostComment[]>('http://localhost:8090/Courses/getAllComments');
+    return this.http.get<PostComment[]>('http://localhost:8099/Courses/getAllComments');
   }
 
 
-  writeComment(mess :PostComment,idF :number , idU : number): Observable<PostComment>
+  writeComment(mess :PostComment,idF :number , idU : number): Observable<number>
   {
     const headers = { 'content-type': 'application/json'};
     const body=JSON.stringify(mess);
     console.log(body);
-    return this.http.post<PostComment>("http://localhost:8090/Courses/addComments/"+idF+"/"+idU+"/",mess)
+    return this.http.post<number>("http://localhost:8099/Courses/addComments/"+idF+"/"+idU+"/",mess)
   }
 
 
   addFormation(f : Formation,i:number): Observable<Formation>
   {
-    const headers = { 'content-type': 'application/json'}
+    const headers = { 'content-type': 'application/json'};
     const body=JSON.stringify(f);
     console.log(body)
-    return this.http.post<Formation>("http://localhost:8090/Courses/ajouterEtAffecterFormationAFormateur/"+i,f)
+    return this.http.post<Formation>("http://localhost:8099/Courses/ajouterEtAffecterFormationAFormateur/"+i,f)
   }
 
   SerachMultiple(key:string) :Observable<Formation[]>
   {
-    return this.http.get<Formation[]>('http://localhost:8090/Courses/SearchMultiple/'+key);
+    return this.http.get<Formation[]>('http://localhost:8099/Courses/SearchMultiple/'+key);
   }
 
   getFormateurbyFormation(id : number):Observable<User>
   {
-    return this.http.get<User>('http://localhost:8090/Courses/getFormateurFromFormation/'+id);
+    return this.http.get<User>('http://localhost:8099/Courses/getFormateurFromFormation/'+id);
   }
 
 
   SerachRepi(key : string):Observable<any>
   {
-    return this.http.post<string>('http://localhost:8090/Courses/SearchHistorique/'+key,1)
+    return this.http.post<string>('http://localhost:8099/Courses/SearchHistorique/'+key,1)
   }
 
 
   getFormationByFormateur(id:number):Observable<Formation[]> {
-    return this.http.get<Formation[]>('http://localhost:8090/Courses/getFormationByFormateur/'+id);
+    return this.http.get<Formation[]>('http://localhost:8099/Courses/getFormationByFormateur/'+id);
   }
 
   getFormationByApprenant(id:number):Observable<Formation[]> {
-    return this.http.get<Formation[]>('http://localhost:8090/Courses/getFormationByApprenant/'+id);
+    return this.http.get<Formation[]>('http://localhost:8099/Courses/getFormationByApprenant/'+id);
   }
 
 
   getFormation():Observable<Formation[]>
   {
-    return this.http.get<Formation[]>("http://localhost:8090/Courses/retrieveFormation");
+    return this.http.get<Formation[]>("http://localhost:8099/Courses/retrieveFormation");
   }
 
   getFormationById(id:number):Observable<Formation> {
-    return this.http.get<Formation>("http://localhost:8090/Courses/getFormationById/"+id);
+    return this.http.get<Formation>("http://localhost:8099/Courses/getFormationById/"+id);
   }
 
   getApprenantByFormation(i : number):Observable<User[]> {
-    return this.http.get<User[]>("http://localhost:8090/Courses/ApprenantByFormation/"+i);
+    return this.http.get<User[]>("http://localhost:8099/Courses/ApprenantByFormation/"+i);
   }
 
 
 
-
+ // http://localhost:8099/user/deleteUserById/7
 
   deleteFormation(i:number): Observable<any> {
 
-    return this.http.get<number>("http://localhost:8090/Courses/deleteFormation/"+i)
+    return this.http.get<number>("http://localhost:8099/Courses/deleteFormation/"+i)
   }
+
+  deleteFormateur(i:number): Observable<any> {
+
+    return this.http.delete("http://localhost:8099/user/deleteUserById/"+i);
+  }
+
   updateFormation(f:Formation,i:number): Observable<any>
   {
     const headers = { 'content-type': 'application/json'};
     const body=JSON.stringify(f);
     console.log(body);
     return this.http.put<Formation>
-    ("http://localhost:8090/Courses/updateFormation/"+i,f);
+    ("http://localhost:8099/Courses/updateFormation/"+i,f);
   }
 
   affectationApptoFormation(idApp :number , idFor : number,f :Formation): Observable<any>
   {
     const headers = { 'content-type': 'application/json'};
-    return this.http.post<Formation>("http://localhost:8090/Courses/affecterApprenantFormation/"+idApp+"/"+idFor+"/",f );
+    return this.http.post<Formation>("http://localhost:8099/Courses/affecterApprenantFormation/"+idApp+"/"+idFor+"/",f );
 
   }
 
   getRevenueByFormation(i :number):Observable<number>
   {
-    return  this.http.get<number>('http://localhost:8090/Courses/getRevenueByFormation/'+i)
+    return  this.http.get<number>('http://localhost:8099/Courses/getRevenueByFormation/'+i)
   }
 
   getNbrApprenantByFormation():Observable<Object[]>
   {
 
     return this.http
-      .get<Object[]>("http://localhost:8090/Courses/NbrApprenantByFormation")
+      .get<Object[]>("http://localhost:8099/Courses/NbrApprenantByFormation")
   }
 
   addLikes(i:number): Observable<any> {
-    return this.http.put<any>("http://localhost:8090/Courses/addLikes/"+i,null)
+    return this.http.put<any>("http://localhost:8099/Courses/addLikes/"+i,null)
   }
 
   addDisLikes(i:number): Observable<any> {
 
-    return this.http.put<any>("http://localhost:8090/Courses/addDisLikes/"+i,null)
+    return this.http.put<any>("http://localhost:8099/Courses/addDisLikes/"+i,null)
   }
 
   getNbrLikes(id:number):Observable<any>
   {
-    return this.http.get<any>('http://localhost:8090/Courses/getNbrLikesByComment/'+id);
+    return this.http.get<any>('http://localhost:8099/Courses/getNbrLikesByComment/'+id);
   }
 
   getNbrDisLikes(id:number):Observable<any>
   {
-    return this.http.get<any>('http://localhost:8090/Courses/getNbrDislikesByComment/'+id);
+    return this.http.get<any>('http://localhost:8099/Courses/getNbrDislikesByComment/'+id);
+  }
+
+  addRatingFormation(idF:number,rate :number):Observable<any>
+  {
+    return this.http.put<any>("http://localhost:8099/Courses/FormationWIthRate/"+idF+"/"+rate,null)
   }
 
 
   uploadFile(file: FormData, i: number): Observable<any>
   {
-    return this.http.post<any>('http://localhost:8090/Courses/uploadMultipleFiles/'+i,file);
+    return this.http.post<any>('http://localhost:8099/Courses/uploadMultipleFiles/'+i,file);
   }
 
   getFile(file: string): Observable<any>
   {
-    return this.http.get<any>('http://localhost:8090/Courses/get/'+file);
+    return this.http.get<any>('http://localhost:8099/Courses/get/'+file);
   }
 
   DownloadFile(file: string):Observable<Blob>
   {
-    return this.http.get('http://localhost:8090/Courses/downloadFile/'+file,{responseType:'blob'});
+    return this.http.get('http://localhost:8099/Courses/downloadFile/'+file,{responseType:'blob'});
   }
 
 
   getFilesFormation( i: number): Observable<any>
   {
-    return this.http.get<any>('http://localhost:8090/Courses/getFiles/'+i);
+    return this.http.get<any>('http://localhost:8099/Courses/getFiles/'+i);
   }
 
 
@@ -278,7 +289,7 @@ export class FormationService {
 
   exportPDF():Observable<Blob>
   {
-    return this.http.get('http://localhost:8090/Courses/exportPDF',{responseType:'blob'} );
+    return this.http.get('http://localhost:8099/Courses/exportPDF',{responseType:'blob'} );
   }
 
 

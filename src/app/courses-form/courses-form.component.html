@@ -30,9 +30,9 @@
       </ejs-dropdownlist>
       <button ejs-button cssClass="e-normal" (click)='onAddDoctor()' [isPrimary]="true">Add New Former</button>
     </div>
-    <div #specialistItemObj class='specialist-display'>
+    <div #specialistItemObj  class='specialist-display'>
       <div (click)='onDomainClick($event)'  *ngFor="let data of listFormateur || formateur ">
-        <div class="e-cards specialist-item" id=Specialist_{{data.id}}>
+        <div class="e-cards specialist-item" id=Specialist_{{data.id}} [routerLink]="['../userview',data.id]" >
           <div class="e-card-content">
             <div class="specialist-image">
               <img class="profile" src="assets/images/profile/user-uploads/user-02.jpg" alt="doctor" />
@@ -52,9 +52,11 @@
                 <span class="label-text">Experience</span>
                 <span class="specialization-text">{{data.email}}</span>
               </div>
+
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>

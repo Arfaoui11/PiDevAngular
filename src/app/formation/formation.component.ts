@@ -86,7 +86,7 @@ export class FormationComponent implements OnInit {
 
   addFormation(i:number)
   {
-    this.serviceForm.addFormation(this.fr,i).subscribe(
+    this.serviceForm.addFormation(this.fr,3).subscribe(
       data=>{
         this.getformation();
       });

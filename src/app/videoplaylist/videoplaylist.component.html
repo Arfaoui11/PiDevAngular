@@ -41,7 +41,6 @@
     </div>
     <div class="col-md-4 col-sm-6 col-12 fonticon-container">
       <div class="fonticon-wrap"><i class="fa fa-file-pdf-o" (click)="openPdf()"> </i></div>
-      <a (click)="openPdf()"></a>
       <label class="fonticon-classname">file pdf</label>
       <label class="fonticon-unit">f1c1</label>
     </div>
@@ -66,7 +65,7 @@
   <section id="content-types">
     <div class="row">
 
-      <div class="col-xl-4 col-md-6 col-sm-12">
+      <div class="col-lg-8 col-sm-12">
           <div class="card">
             <div class="card-content">
               <div class="card-body">
@@ -84,6 +83,9 @@
                   </vg-scrub-bar>
 
                   <vg-controls>
+
+
+
                     <vg-play-pause></vg-play-pause>
                     <vg-playback-button></vg-playback-button>
 
@@ -93,16 +95,15 @@
 
                     <vg-mute></vg-mute>
                     <vg-volume></vg-volume>
-
+                    <vg-track-selector></vg-track-selector>
                     <vg-fullscreen></vg-fullscreen>
                   </vg-controls>
 
-                  <div style="width: 400px; height: 300px; border: 2px solid" id="remote-video"></div>
 
 
-                  <video #media *ngIf="vdo.fileType.toString().includes('video')" id="vid2" [vgMedia]="$any(media)"  [src]="'data:video/mp4;base64,'+retrieveResonse[0].data" width='150' height='100'
+                  <video #media *ngIf="vdo.fileType.toString().includes('video')" [vgMedia]="$any(media)"  [src]="'data:video/mp4;base64,'+retrieveResonse[0].data" width='150' height='100'
                          id="singleVideo"
-                         preload="auto" crossorigin constroles="controles">
+                         preload="auto" crossorigin controls="controls">
                     <track src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" kind="subtitles" label="English" srclang="en" default>
                     <track src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt" kind="subtitles" label="Español" srclang="es">
                   </video>
@@ -133,6 +134,8 @@
               </div>
               <div class="ml-auto user-like text-danger"><i class="fa fa-heart"></i></div>
             </div>
+            <audio *ngIf="retrieveResonse" [src]="'data:audio/mp3;base64,'+retrieveResonse[0].data"  controls >
+            </audio>
             <p>I love jujubes wafer pie ice cream tiramisu. Chocolate I love pastry pastry sesame snaps wafer. Pastry topping biscuit lollipop topping I love lemon drops sweet roll bonbon. Brownie donut icing.</p>
             <img class="img-fluid card-img-top rounded-sm mb-2" src="assets/images/profile/post-media/2.jpg" alt="avtar img holder">
             <div class="d-flex justify-content-start align-items-center mb-1">
@@ -177,7 +180,7 @@
                 <h6 class="mb-0">Kitty Allanson</h6>
                 <span class="font-small-2">{{post.message}}</span>
               </div>
-              <div class="ml-auto cursor-pointer">
+              <div class="ml-auto cursor-pointer float-lg-right">
                 <button class="like" (click)="LikesComment(post.idComn)">
                   <i class="fa fa-thumbs-o-up" aria-hidden="true"> </i>
                 </button>
@@ -300,12 +303,17 @@
                 <div class="icon-like mr-2">
                   <!--   <i class="feather icon-thumbs-up text-success font-medium-5 align-middle"></i>-->
                    <span>{{formation.rating}}</span>
+                  <br>
+                  <ng-template #t let-fill="fill">
+                  <span class="star" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                  </span>
+                  </ng-template>
 
-                  <ngb-rating [(rate)]="formation.rating">
-                    <ng-template let-fill="fill" let-index="index">
-                      <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
-                    </ng-template>
-                  </ngb-rating>
+                  <ngb-rating [(rate)]="rating" [starTemplate]="t"  [max]="5" (click)="changeRating()"></ngb-rating>
+
+                  <hr>
+                  <pre>Rate: <b>{{rating}}</b></pre>
                 </div>
                 <div class="icon-comment mr-2">
                   <i class="feather icon-message-square font-medium-5 align-middle text-primary"></i>
@@ -429,13 +437,5 @@
     </section>
     <!-- Timeline Ends -->
   </div>
-<audio [src]="'data:audio/mp3;base64,'+retrieveResonse[0].data"  controls >
-</audio>
-
-<br>
 
 
-Audio<audio [src]="audioSource" id="audio" controls #audioTag>
-</audio>
-<br>
-<button id="btn" (click)="loadAudioClick()">load audio</button>

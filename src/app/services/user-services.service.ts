@@ -12,20 +12,20 @@ export class UserServicesService {
   constructor(private http: HttpClient) { }
 
   getPublicContent(): Observable<any> {
-    return this.http.get('http://localhost:8090/api/all', { responseType: 'text' });
+    return this.http.get('http://localhost:8099/api/all', { responseType: 'text' });
   }
 
   getUserBoard(): Observable<any> {
-    return this.http.get('http://localhost:8090/api/user', { responseType: 'text' });
+    return this.http.get('http://localhost:8099/api/user', { responseType: 'text' });
   }
 
 
 
   getAdminBoard(): Observable<any> {
-    return this.http.get('http://localhost:8090/api/admin', { responseType: 'text' });
+    return this.http.get('http://localhost:8099/api/admin', { responseType: 'text' });
   }
 
   getCurrentUser(): Observable<any> {
-    return this.http.get('http://localhost:8090/api/user/me', httpOptions);
+    return this.http.get('http://localhost:8099/api/user/me', httpOptions);
   }
 }
