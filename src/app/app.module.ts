@@ -125,7 +125,7 @@ FullCalendarModule.registerPlugins([
     PortfelioFormComponent,
     PortfelioFormDetailsComponent,
     ChatBotComponent,
-    UserViewComponent
+    UserViewComponent,
   ],
   imports: [
     BrowserModule,

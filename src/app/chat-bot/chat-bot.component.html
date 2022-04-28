@@ -1,1 +1,41 @@
-<p>chat-bot works!</p>
+
+
+
+<section class="bd-error-area">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-12 col-lg-12">
+        <div class="bd-error text-center">
+
+          <h3 class="mb-20">Chat Room Courses </h3>
+
+
+          <div *ngFor="let string of greetings">
+            <div class="container">
+              <p>{{string}}</p>
+            </div>
+          </div>
+          <form #loginForm=ngForm>
+            <div>
+              <br>
+              <textarea autocomplete="off" placeholder="Type Your Message..." name="newmessage" [(ngModel)]="newmessage" required></textarea>
+              <button class="btn btn-primary" (click)="sendMessage()" [disabled]="!loginForm.valid">Send</button>
+            </div>
+          </form>
+
+
+
+          <div class="bd-error-btn text-center">
+            <a href="index.html" class="theme-btn">Back To Home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+

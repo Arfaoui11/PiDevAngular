@@ -71,7 +71,7 @@
                       <li><a href="error.html">Error Page</a></li>
                     </ul>
                   </li>
-                  <li><a href="contact.html">Contact</a></li>
+                  <!--<li><a href="contact.html">Contact</a></li>-->
                 </ul>
               </nav>
             </div>
@@ -93,7 +93,7 @@
                   <img src="../../../assets/front/img/icon/chatting.png" alt="img not found">
                 </div>
                 <div class="bd-header-contacts-text">
-                  <span *ngIf="currentUser"> Welcome {{currentUser.displayName.toUpperCase()}}</span>
+                  <span *ngIf="currentUser"> Welcome {{currentUser.displayName}}</span>
                   <a *ngIf="!currentUser" [routerLink]="['/login']">Login</a>
                   <a  *ngIf="currentUser"  (click)="logout()">Logout</a>
                 </div>
