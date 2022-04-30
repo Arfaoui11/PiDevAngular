@@ -67,11 +67,11 @@
             <div class="event-content">
               <div class="patient-name-wrap">
                 <label>Courses Title</label>:
-                <div><span>{{data.title}}</span></div>
+                <div><span>{{data.title.toString().toUpperCase()}}</span></div>
               </div>
               <div class="doctor-name-wrap">
                 <label>{{data.idFormation ? "Former Name" : "Department Name"}}</label>:
-                <div><span></span></div>
+                <div><span>{{data.formateur.displayName.toUpperCase()}}</span></div>
               </div>
               <div class="notes-wrap">
                 <label>Domain</label>:
@@ -79,12 +79,12 @@
               </div>
               <div class="notes-wrap">
                 <label>Number hours</label>:
-                <div><span>{{data.nbrHeures}}</span></div>
+                <div><span>{{data.nbrHeures}} H </span></div>
               </div>
 
               <div class="col-lg-6 col-md-12 mb-1 position-sticky">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                  <button  class="btn btn-primary" [routerLink]="['../videoplaylist',data.idFormation]">Details</button>
+                  <button  class="btn btn-primary" [routerLink]="['../../videoplaylist',data.idFormation]">Details</button>
                   <button data-bs-toggle="modal" data-bs-target="#exampleModal"   class="btn btn-danger" (click)="dataId(data)" >Update</button>
                   <button  class="btn btn-info" (click)="deleteFormation(data.idFormation);getdata()">Delete</button>
                 </div>

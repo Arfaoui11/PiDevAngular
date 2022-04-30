@@ -94,6 +94,7 @@ export class CalendarComponent implements OnInit {
 
 
 
+
   public allowDragAndDrop = true;
   @Input() formation: Formation ;
   constructor(private serviceForm : FormationService,private snackbar:MatSnackBar ) {
@@ -119,7 +120,7 @@ export class CalendarComponent implements OnInit {
 
   title : string ="Calendar Courses ";
 
-  public currentView: string='Month';
+  public currentView: string = 'Month';
 
   public formateur :User;
 

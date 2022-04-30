@@ -16,18 +16,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class VideoplaylistComponent implements OnInit {
 
-  videoItems = [
-    {
-      name: 'First Video',
-      src: 'data:video/mpeg;base64/Users/macos/Downloads/tn.mp4',
-      type: 'video/mp4'
-    },
-    {
-      name: 'Second Video',
-      src: 'http://static.videogular.com/assets/videos/videogular.mp4',
-      type: 'video/mp4'
-    }
-  ];
+  public filePath :FileList;
 
   public comment: Record<string, any>[];
 
@@ -37,9 +26,14 @@ export class VideoplaylistComponent implements OnInit {
 
   rating: number;
   retrieveResonse : any;
+
+  public retrieveFiles: any[]=[];
+  public retrieveVideo: any[]=[];
+  public retrieveImage: any[]=[];
+
   activeIndex = 0;
   index : number =1;
-  currentVideo = this.videoItems[this.activeIndex];
+
   dataa :any;
   showC : boolean = false;
    videoUrl: any;
@@ -48,6 +42,8 @@ export class VideoplaylistComponent implements OnInit {
   formation : Formation;
   currentUser: any = [];
   public formateur :User;
+
+  PathURL: any;
 
   constructor(private serviceForm : FormationService,private sanitizer : DomSanitizer,private snackbar:MatSnackBar ,private http: HttpClient, private route:ActivatedRoute,private token: TokenService) {
     this.currentUser = this.token.getUser();
@@ -62,6 +58,31 @@ export class VideoplaylistComponent implements OnInit {
       //}
     //);
 
+    this.serviceForm.getFilesFormation(this.idFormation)
+      .subscribe(
+        data=> {
+
+          this.retrieveResonse =data;
+
+          for (let l of this.retrieveResonse)
+          {
+            if(l.fileType.toString().includes('video'))
+            {
+              this.retrieveVideo.push(l)  ;
+            }else if(l.fileType.toString().includes('application'))
+            {
+              this.retrieveFiles.push(l);
+            }
+            else if (l.fileType.toString().includes('image'))
+            {
+              this.retrieveImage.push(l) ;
+            }
+          }
+
+        }
+      );
+
+
     this.getFormation();
 
     setTimeout( () => {
@@ -72,6 +93,62 @@ export class VideoplaylistComponent implements OnInit {
       this.rating = this.formation.rating;
     },2000);
   }
+
+
+  uploadFile()
+  {
+
+    const formData = new FormData();
+
+    for (let i = 0 ;i<this.filePath.length ; i++)
+    {
+      const element  =  this.filePath[i];
+
+      formData.append('files',element);
+    }
+
+
+    this.serviceForm.uploadFile(formData,this.idFormation).subscribe(res => {
+      console.log(res)
+    });
+
+    this.snackbar.open(' files add with succees', 'Undo', {
+      duration: 2000
+    });
+
+  }
+
+
+  onFileSelected(event : any) {
+
+    const file : FileList = event?.target?.files;
+
+    var reader = new FileReader();
+
+    this.filePath = file;
+
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      this.PathURL = reader.result;
+    };
+    const formData = new FormData();
+
+    for (let i = 0 ;i<this.filePath.length ; i++)
+    {
+      const element  =  this.filePath[i];
+
+      formData.append('files',element);
+    }
+    this.serviceForm.uploadFile(formData,this.idFormation).subscribe(res => {
+      console.log(res)
+    });
+
+    this.snackbar.open(' files add with succees', 'Undo', {
+      duration: 2000
+    });
+
+  }
+
 
   getFormation()
   {
@@ -232,19 +309,7 @@ export class VideoplaylistComponent implements OnInit {
    video: any;
 
 
-  getImage() {
-    //Make a call to Sprinf Boot to get the Image Bytes.
-    this.serviceForm.getFilesFormation(this.idFormation)
-      .subscribe(
-        async res => {
-          this.retrieveResonse = res;
-          this.base64Data = this.retrieveResonse;
 
-          this.videoUrl = 'data:video/mp4;base64,'+this.base64Data;
-
-        }
-      );
-  }
 
 
 

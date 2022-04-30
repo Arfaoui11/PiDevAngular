@@ -1,13 +1,13 @@
 <div class="feather-icons overflow-hidden row">
     <div class="col-md-4 col-sm-6 col-12 fonticon-container">
-      <div class="fonticon-wrap"><i class="fa fa-glass"></i></div>
+      <div class="fonticon-wrap"><i class="fa fa-video"></i></div>
       <label class="fonticon-classname">fa-glass</label>
       <label class="fonticon-unit">f000</label>
     </div>
     <div class="col-md-4 col-sm-6 col-12 fonticon-container">
-      <div class="fonticon-wrap"><i class="fa fa-music"></i></div>
-      <label class="fonticon-classname">fa-music</label>
-      <label class="fonticon-unit">f001</label>
+      <div class="fonticon-wrap"><i class="fa fa-upload" ></i></div>
+      <label class="fonticon-classname">upload files to courses </label>
+      <label class="fonticon-unit">pdf,word ,images ,vidoes ..</label>
     </div>
     <div class="col-md-4 col-sm-6 col-12 fonticon-container">
       <div class="fonticon-wrap"><i class="fa fa-search"></i></div>
@@ -30,7 +30,7 @@
       <label class="fonticon-unit">f005</label>
     </div>
     <div class="col-md-4 col-sm-6 col-12 fonticon-container">
-      <div class="fonticon-wrap"><i class="fa fa-star-o" (click)="getImage()" ></i></div>
+      <div class="fonticon-wrap"><i class="fa fa-star-o"  ></i></div>
       <label class="fonticon-classname">fa-star-video</label>
       <label class="fonticon-unit">f006</label>
     </div>
@@ -71,7 +71,7 @@
               <div class="card-body">
                 <h4 class="card-title">Videos </h4>
               </div>
-              <div class="video-player-wrapper" *ngFor="let vdo of retrieveResonse; let $index = index">
+              <div class="video-player-wrapper" >
               <!--  <iframe *ngIf="vdo.fileType.toString().includes('video')" class="img-thumbnail"  [src]="retrievedImage" allowfullscreen></iframe>-->
                 <vg-player (onPlayerReady)="videoPlayerInit($event)">
                   <vg-overlay-play></vg-overlay-play>
@@ -101,7 +101,7 @@
 
 
 
-                  <video #media *ngIf="vdo.fileType.toString().includes('video')" [vgMedia]="$any(media)"  [src]="'data:video/mp4;base64,'+retrieveResonse[0].data" width='150' height='100'
+                  <video #media *ngIf="retrieveVideo[0].fileType.toString().includes('video')" [vgMedia]="$any(media)"  [src]="'data:video/mp4;base64,'+retrieveVideo[0].data" width='150' height='100'
                          id="singleVideo"
                          preload="auto" crossorigin controls="controls">
                     <track src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" kind="subtitles" label="English" srclang="en" default>
@@ -109,15 +109,24 @@
                   </video>
                 </vg-player>
 
-                <div class="card-body" *ngIf="vdo.fileType.toString().includes('video')">
-                  <p class="card-text">{{ vdo.fileName | slice:0:-4 }}</p>
-                  <a  class="card-link" (click)="playvideo(vdo.id)">Video link</a>
-                  <a  class="card-link" (click)="downloadFiles(vdo.id)" > Download files </a>
+                <div class="card-body" *ngIf="retrieveVideo[0].fileType.toString().includes('video')">
+                  <p class="card-text">{{ retrieveVideo[0].fileName | slice:0:-4 }}</p>
+                  <a  class="card-link" (click)="playvideo(retrieveVideo[0].id)">Video link</a>
+                  <a  class="card-link" (click)="downloadFiles(retrieveVideo[0].id)" > Download files </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+      <div class="card-body">
+        <div class="form-group col-md-4">
+          <label  >Add Files </label>
+          <input class="btn btn-secondary"  type="file"  (change)="onFileSelected($event)" multiple>
+
+
+        </div>
+      </div>
 
 
 
@@ -134,7 +143,7 @@
               </div>
               <div class="ml-auto user-like text-danger"><i class="fa fa-heart"></i></div>
             </div>
-            <audio *ngIf="retrieveResonse" [src]="'data:audio/mp3;base64,'+retrieveResonse[0].data"  controls >
+            <audio *ngIf="retrieveVideo" [src]="'data:audio/mp3;base64,'+retrieveVideo[0].data"  controls >
             </audio>
             <p>I love jujubes wafer pie ice cream tiramisu. Chocolate I love pastry pastry sesame snaps wafer. Pastry topping biscuit lollipop topping I love lemon drops sweet roll bonbon. Brownie donut icing.</p>
             <img class="img-fluid card-img-top rounded-sm mb-2" src="assets/images/profile/post-media/2.jpg" alt="avtar img holder">
@@ -232,10 +241,10 @@
               <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
                 <div class="carousel-inner" role="listbox">
-                  <div class="carousel-item active"  *ngIf="retrieveResonse[index].fileType.toString().includes('image')">
-                    <img id="img"  [src]="'data:image/jpeg;base64,'+retrieveResonse[index].data" class="d-block w-100" alt="First slide">
+                  <div class="carousel-item active"  *ngIf="retrievedImage[index].fileType.toString().includes('image')">
+                    <img id="img"  [src]="'data:image/jpeg;base64,'+retrievedImage[index].data" class="d-block w-100" alt="First slide">
                   </div>
-                  <div class="carousel-item active"  *ngIf="!retrieveResonse[index].fileType.toString().includes('image')" >
+                  <div class="carousel-item active"  *ngIf="!retrievedImage[index].fileType.toString().includes('image')" >
                     <h4>  we don't have images </h4>
                   </div>
                 </div>

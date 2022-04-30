@@ -44,13 +44,87 @@
               </table>
             </div>
             <div class="col-12">
-              <a [routerLink]="['/home/Formation-management/calendarCourses',user.id]" class="btn btn-primary mr-1"><i class="feather icon-edit-1"></i> Add to courses </a>
-              <button class="btn btn-outline-danger"  (click)="deleteFormateur(user.id)"><i class="feather icon-trash-2" ></i> Delete</button>
+              <a [routerLink]="['/home/Formation-management/calendarCourses',user.id]" class="btn btn-primary mr-1"><i class="feather icon-calendar"></i> Go to Calendar </a>
+
+              <button class="btn btn-outline-success"  data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="feather icon-upload" ></i> Add to Courses</button>
+
+              <button class="btn btn-outline-danger"   (click)="deleteFormateur()"><i class="feather icon-trash" ></i> Delete</button>
+
             </div>
           </div>
         </div>
       </div>
     </div>
+
+
+    <div class="modal fade"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: #00a8c6" >
+
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="exmpleModelLabel">Add Formation</h5>
+            <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal" aria-label="Close"  >X</button>
+
+          </div>
+          <div class="modal-body" >
+            <div class="input-group row-cols-md-3" >
+              <span class="input-groupe-text "> Title </span>
+              <input type="text" class="form-control" [(ngModel)]="fr.title" >
+            </div>
+            <div class="input-group row-cols-md-3" >
+              <span class="input-groupe-text "> nbrMaxParticipant </span>
+              <input type="number" class="form-control" [(ngModel)]="fr.nbrMaxParticipant" >
+            </div>
+            <div class="input-group row-cols-md-3" >
+              <span class="input-groupe-text "> nbrHeures </span>
+              <input type="number" class="form-control" [(ngModel)]="fr.nbrHeures" >
+            </div>
+            <div class="input-group row-cols-md-3" >
+              <span class="input-groupe-text "> frais </span>
+              <input type="number" class="form-control" [(ngModel)]="fr.frais" >
+            </div>
+
+            <div class="input-group row-cols-md-3" >
+              <span class="input-groupe-text "> dateDebut </span>
+              <input type="date" class="form-control" [(ngModel)]="fr.start" >
+            </div>
+            <div class="input-group row-cols-md-3" >
+              <span class="input-groupe-text "> dateFin </span>
+              <input type="date" class="form-control" [(ngModel)]="fr.end" >
+            </div>
+            <div class="form-group row-cols-md-3">
+              <label  >Niveau</label>
+              <select  #niveau="ngModel" [(ngModel)]="fr.level" name="niveau" class="form-control"  required >
+                <option selected value="BEGINNER">DEBUTANT</option>
+                <option value="INTERMEDIATE">INTERMEDIAIRE</option>
+                <option value="ADVANCED">AVANCE</option>
+              </select>
+            </div>
+            <div class="form-group row-cols-md-3">
+              <label  >Domain</label>
+              <select #domain="ngModel" [(ngModel)]="fr.domain" name="domain" class="form-control"  required >
+                <option selected value="IT">IT</option>
+                <option value="ART">ART</option>
+                <option value="CINEMA">CINEMA</option>
+                <option value="MUSIQUE">MUSIQUE</option>
+                <option value="DANCE">DANCE</option>
+                <option value="PHY">PHY</option>
+                <option value="ECONOMIC">ECONOMIC</option>
+                <option value="MARKETING">MARKETING</option>
+              </select>
+            </div>
+
+            <button type="button" class="btn btn-outline-success"  data-bs-dismiss="modal" aria-label="Close" (click)="addFormation()" > Add </button>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
     <!-- account end -->
     <!-- information start -->
     <div class="col-md-6 col-12 ">

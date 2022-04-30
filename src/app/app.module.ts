@@ -79,6 +79,7 @@ import { PortfelioFormComponent } from './portfelio-form/portfelio-form.componen
 import { PortfelioFormDetailsComponent } from './portfelio-form-details/portfelio-form-details.component';
 import { ChatBotComponent } from './chat-bot/chat-bot.component';
 import { UserViewComponent } from './user-view/user-view.component';
+import {MapComponent} from "./map/map.component";
 
 
 FullCalendarModule.registerPlugins([
@@ -110,6 +111,7 @@ FullCalendarModule.registerPlugins([
     AddEditFormerComponent,
     CalendarCoursesComponent,
     VideoplaylistComponent,
+    MapComponent,
     DashboardComponent,
     LoginComponent,
     ChatComponent,

@@ -206,7 +206,7 @@ export class FormationService {
 
   deleteFormateur(i:number): Observable<any> {
 
-    return this.http.delete("http://localhost:8099/user/deleteUserById/"+i);
+    return this.http.get("http://localhost:8099/user/deleteUserById/"+i);
   }
 
   updateFormation(f:Formation,i:number): Observable<any>

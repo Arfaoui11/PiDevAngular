@@ -22,6 +22,7 @@ import {BlogDetailsComponent} from "./blog-details/blog-details.component";
 import {PortfelioFormComponent} from "./portfelio-form/portfelio-form.component";
 import {PortfelioFormDetailsComponent} from "./portfelio-form-details/portfelio-form-details.component";
 import {UserViewComponent} from "./user-view/user-view.component";
+import {MapComponent} from "./map/map.component";
 
 
 
@@ -46,6 +47,7 @@ const routes: Routes =
              { path: 'blogF', component: BlogFormationComponent },
              { path: 'portF/:idCourses', component: PortfelioFormDetailsComponent },
              { path: 'chat', component: RoutComponent },
+             {path:'map',component: MapComponent },
              { path: 'homeF', component: HomeFComponent },
              { path: 'detailsF/:idCourses', component: BlogDetailsComponent },
 

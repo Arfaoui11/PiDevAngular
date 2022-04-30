@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {User} from "../core/model/User";
 import {FormationService} from "../services/formation.service";
+import {Formation} from "../core/model/Formation";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-user-view',
@@ -14,9 +16,9 @@ export class UserViewComponent implements OnInit {
   public listFomateur: User[];
   public formateur: Record<string, any>[];
 
+  @Input() fr:Formation=new Formation;
 
-
-  constructor(private serviceForm : FormationService, private route:ActivatedRoute) { }
+  constructor(private serviceForm : FormationService, private route:ActivatedRoute,private snackbar:MatSnackBar) { }
 
   ngOnInit(): void {
     this.idUser = this.route.snapshot.params['idUser'];
@@ -34,15 +36,47 @@ export class UserViewComponent implements OnInit {
 
   }
 
-
-  deleteFormateur(id:number)
+  addFormation()
   {
-    this.serviceForm.deleteFormateur(id).subscribe(data => {
+    this.serviceForm.addFormation(this.fr,this.idUser).subscribe(
+      data=>{
+        console.log(data);
+      });
+/*
+    const formData = new FormData();
+
+    for (let i = 0 ;i<this.imagePath.length ; i++)
+    {
+      const element  =  this.imagePath[i];
+
+      formData.append('files',element);
+    }
+
+
+    this.serviceForm.uploadFile(formData,1).subscribe(res => {
+      console.log(res)
+    });
+*/
+    this.snackbar.open(' ajout avec succees', 'Undo', {
+      duration: 2000
+    });
+
+
+  }
+
+
+
+  deleteFormateur()
+  {
+    this.serviceForm.deleteFormateur(this.idUser).subscribe(data => {
       console.log(data);
 
     });
-    window.location.href = '#/home/Formation-management/Courses';
-  }
+
+    setTimeout( () => {
+      window.location.href = '#/home/Formation-management/Courses';
+    },500);
+    }
 
   getFormateur()
   {

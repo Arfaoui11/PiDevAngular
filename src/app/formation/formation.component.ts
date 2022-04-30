@@ -101,8 +101,6 @@ export class FormationComponent implements OnInit {
     }
 
 
-
-
     this.serviceForm.uploadFile(formData,1).subscribe(res => {
       console.log(res)
     });
@@ -110,10 +108,6 @@ export class FormationComponent implements OnInit {
     this.snackbar.open(' ajout avec succees', 'Undo', {
       duration: 2000
     });
-
-
-
-
 
   }
 
