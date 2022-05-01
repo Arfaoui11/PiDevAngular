@@ -2,7 +2,7 @@
 
 <div class="card-header" >
   <td>
-    <button  class="btn btn-outline-primary " data-bs-toggle="modal" data-bs-target="#exampleModal"  >Add Quiz</button>
+    <button  class="btn btn-outline-primary " data-bs-toggle="modal" data-bs-target="#exampleModal"  *ngIf="listQuiz.length < 5" >Add Quiz</button>
   </td>
 </div>
 
@@ -37,7 +37,7 @@
           <button  class="btn btn-outline-primary " data-bs-toggle="modal" data-bs-target="#updateModal" (click)="dataId(l.idQuiz)"  >Update</button>
         </td>
         <td>
-          <button  class="btn btn-outline-primary " data-bs-toggle="modal" data-bs-target="#exampleModal"  >Add Quiz</button>
+          <button  class="btn btn-outline-primary "  [routerLink]="['../../Question',l.idQuiz]"   >Add Question</button>
         </td>
         <td>
           <ngx-qrcode [elementType]="elementType"  [value]="l.title" [width]="50"  [errorCorrectionLevel]="correctionLevel" ></ngx-qrcode>
@@ -77,7 +77,7 @@
 
         <div class="modal-content">
 
-          <div class="modal-header">
+          <div class="modal-header" style="background: #ffdeea">
             <h5 class="modal-title" id="exmpleModelLabel"> Add Quiz </h5>
             <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal" aria-label="Close"  >X</button>
 
@@ -89,6 +89,10 @@
               <span class="input-groupe-text "> Title </span>
               <input type="text" name="title" class="form-control" [(ngModel)]="quiz.title" >
             </div>
+              <div class="input-group  row-cols-md-3 mat-h3 " >
+                <span class="input-groupe-text "> Published At day </span>
+                <input type="date" name="title" class="form-control" [(ngModel)]="quiz.createAt" >
+              </div>
             <div class="input-group row-cols-md-3 mat-h3" >
               <span class="input-groupe-text "> Content </span>
               <input type="text" name="content" class="form-control" [(ngModel)]="quiz.content" >
@@ -100,7 +104,7 @@
 
 
 
-            <button type="button" class="btn btn-outline-success" (click)="addQuiz();f.reset()" > Add quiz </button>
+            <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" aria-label="Close" (click)="addQuiz();f.reset()" > Add quiz </button>
             </form>
 
           </div>

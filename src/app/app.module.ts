@@ -80,6 +80,9 @@ import { PortfelioFormDetailsComponent } from './portfelio-form-details/portfeli
 import { ChatBotComponent } from './chat-bot/chat-bot.component';
 import { UserViewComponent } from './user-view/user-view.component';
 import {MapComponent} from "./map/map.component";
+import { MyCoursesComponent } from './my-courses/my-courses.component';
+import { CalendarFrontComponent } from './calendar-front/calendar-front.component';
+import { QestionQuizCoursesComponent } from './qestion-quiz-courses/qestion-quiz-courses.component';
 
 
 FullCalendarModule.registerPlugins([
@@ -128,6 +131,9 @@ FullCalendarModule.registerPlugins([
     PortfelioFormDetailsComponent,
     ChatBotComponent,
     UserViewComponent,
+    MyCoursesComponent,
+    CalendarFrontComponent,
+    QestionQuizCoursesComponent,
   ],
   imports: [
     BrowserModule,

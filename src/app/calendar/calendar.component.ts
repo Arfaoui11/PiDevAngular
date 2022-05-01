@@ -248,7 +248,7 @@ export class CalendarComponent implements OnInit {
       dataSource : this.formateur,id:'id',text : 'firstName'
     };
 
-  },650)
+  },1000)
 
 
 

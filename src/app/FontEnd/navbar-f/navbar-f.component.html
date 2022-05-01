@@ -56,7 +56,8 @@
                   <li class="menu-item-has-children"><a [routerLink]="['/front/End/blogF']">Courses</a>
                     <ul class="sub-menu">
                       <li><a [routerLink]="['/front/End/blogF']">Courses</a></li>
-                      <li><a href="blog-details.html">Courses Details</a></li>
+                      <li *ngIf="this.currentUser"><a  [routerLink]="['/front/End/myCourses']">My Courses </a></li>
+                      <li *ngIf="this.currentUser"><a [routerLink]="['/front/End/myCalender']">My Calender </a></li>
                     </ul>
                   </li>
                   <li class="menu-item-has-children"><a href="#">Pages</a>

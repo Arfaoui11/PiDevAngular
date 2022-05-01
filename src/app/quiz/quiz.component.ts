@@ -6,6 +6,8 @@ import {Quiz} from "../core/model/Quiz";
 import {Formation} from "../core/model/Formation";
 import {Result} from "../core/model/Result";
 import {TokenService} from "../services/token.service";
+import {HttpClient} from "@angular/common/http";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-quiz',
@@ -27,45 +29,51 @@ export class QuizComponent implements OnInit {
 
 
 
-
+  public idQuiz :number;
 
   public name: string = "";
   public questionList: any = [];
   public currentQuestion: number = 0;
   public points: number = 0;
-  counter = 60;
+  counter = 30;
   correctAnswer: number = 0;
   inCorrectAnswer: number = 0;
   interval$: any;
   progress: string = "0";
   isQuizCompleted : boolean = false;
   currentUser: any;
-  constructor(private questionService: QuizService,private tokenStorageService: TokenService) { }
+
+
+  constructor(private questionService: QuizService,private tokenStorageService: TokenService, private route:ActivatedRoute) {
+
+
+  }
 
   ngOnInit(): void {
     this.currentUser = this.tokenStorageService.getUser();
 
+    this.idQuiz = this.route.snapshot.params['idQuiz'];
 
-    this.name = localStorage.getItem("name")!;
-    this.getAllQuestions();
+   // this.name = localStorage.getItem("name")!;
+   // this.getAllQuestions();
     this.startCounter();
     this.getQuizQuestion();
 
   }
-
+/*
   getAllQuestions() {
     this.questionService.getQuestionJson()
       .subscribe(res => {
         this.questionList = res.questions;
       })
   }
-
+*/
 
 
 
   getQuizQuestion()
   {
-    this.questionService.getQuizQuestion(1)
+    this.questionService.getQuizQuestion(this.idQuiz)
       .subscribe( (data : Question[])=>{this.ListQuestion = data});
     return this.ListQuestion;
   }
@@ -103,7 +111,7 @@ export class QuizComponent implements OnInit {
 
       setTimeout(()=>{
         this.isQuizCompleted = true;
-        this.saveScoreQuiz(this.currentUser.id,1);
+        this.saveScoreQuiz(this.currentUser.id,this.idQuiz);
         this.stopCounter();
       },500);
 
@@ -117,7 +125,7 @@ export class QuizComponent implements OnInit {
         this.counter--;
         if (this.counter === 0) {
           this.currentQuestion++;
-          this.counter = 60;
+          this.counter = 30;
           this.points -= 10;
         }
       });
@@ -168,5 +176,11 @@ export class QuizComponent implements OnInit {
     this.res.username=this.name;
     this.questionService.saveScore(this.res,idU,idQ).subscribe(
       res => {console.log(res);});
+
+    setTimeout( () =>
+    {
+      window.location.replace('#/front/End/detailsF/'+11);
+    },2000);
   }
+
 }

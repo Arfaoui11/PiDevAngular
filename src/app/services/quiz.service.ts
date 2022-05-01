@@ -21,6 +21,11 @@ export class QuizService {
     return this.http.get<any[]>("http://localhost:8099/Courses/getQuizQuestion/"+id);
   }
 
+  getQuestionByQuiz(id:number): Observable<Question[]>
+  {
+    return this.http.get<Question[]>("http://localhost:8099/Courses/getQuestionByQuiz/"+id);
+  }
+
   saveScore(re : Result,idU:number,idQ:number):Observable<any>
   {
     const headers = { 'content-type': 'application/json'};
@@ -53,5 +58,10 @@ export class QuizService {
 
 
 
+
+    deleteQuestion(i:number): Observable<any> {
+
+    return this.http.get<number>(" http://localhost:8099/Courses/DeleteQuestion/"+i)
+  }
 
 }

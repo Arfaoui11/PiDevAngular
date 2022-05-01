@@ -149,9 +149,9 @@ export class FormationComponent implements OnInit {
     });
   }
 
-  assignApprenent(idA : number , idF : number , f : Formation )
+  assignApprenent(idA : number , idF : number )
   {
-    this.serviceForm.affectationApptoFormation(idA, idF, f).subscribe();
+    this.serviceForm.affectationApptoFormation(idA, idF).subscribe();
   }
 
 

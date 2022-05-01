@@ -1,18 +1,55 @@
-<div class="container mt-5">
-    <h1 class="display-5 fw-bold"> Welocme To Test Quiz </h1>
-    <p class="col-md-8 fs-4">This quiz will contains total 5 questions. Each Question holds 10 Points</p>
-    <h4>Rules:</h4>
-    <ol>
-        <li>Correct Question gives you 10 points</li>
-        <li>You will have 60 sec to answer each question</li>
-        <li>Refereshing the page will reset the Quiz</li>
-    </ol>
-    <h1 style="font-family: cursive;text-align:center ;color: #4365fa">All the best!!</h1>
-    <div class="name col-md-4 my-3">
-        <label > Enter Your Full Name : </label>
-        <input #name type="text" class="form-control">
+
+
+<!-- breadcrumb area start -->
+<div class="bd-page-title-area bd-page-title-bg pt-220 pb-155">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="bd-page-title text-center z-index">
+          <h2 class="breadcrumb-title">Quiz Courses</h2>
+          <div class="breadcrumb-menu">
+            <nav class="breadcrumb-trail breadcrumbs">
+              <ul class="trail-items">
+                <li class="trail-item trail-begin"><a href="index.html">Home</a></li>
+                <li class="trail-item trail-middle"><i class="far fa-chevron-right"></i></li>
+                <li class="trail-item trail-end"><span>Quiz Courses</span></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-primary btn-lg" routerLink="/home/Formation-management/quiz" (click)="startQuiz()">Start the Quiz!!</button>
+  </div>
 </div>
+<!-- breadcrumb area end -->
+
+<!-- pricing area start here -->
+<section class="bd-pricing-area gray-bg pb-120">
+  <div class="container">
+
+
+    <div class="tab-content" id="nav-tabContent">
+      <div class="container mt-5">
+        <h1 class="display-5 fw-bold" style="color: #5E50EE"> Welocme To Test Quiz </h1>
+        <p class="col-md-8 fs-4">This quiz will contains total 5 questions. Each Question holds 10 Points</p>
+        <h4>Rules:</h4>
+        <ol>
+          <li>Correct Question gives you 10 points</li>
+          <li>You will have 60 sec to answer each question</li>
+          <li>Refereshing the page will reset the Quiz</li>
+        </ol>
+
+        <div class="name col-md-4 my-3">
+          <label > Enter Your Full Name : </label>
+          <input #name type="text" class="form-control">
+        </div>
+        <button class="btn btn-primary btn-lg" routerLink="../quiz" (click)="startQuiz()">Start the Quiz!!</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- pricing area end here -->
+
 
 

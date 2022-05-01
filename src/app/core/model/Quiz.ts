@@ -1,4 +1,4 @@
-import {Question} from "./Question";
+
 
 export class Quiz {
 
@@ -7,7 +7,5 @@ export class Quiz {
   score !: number;
   createAt !:Date;
   content !: string ;
-
-
 
 }

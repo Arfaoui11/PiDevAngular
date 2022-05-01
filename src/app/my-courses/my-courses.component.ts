@@ -3,31 +3,31 @@ import {Formation} from "../core/model/Formation";
 import {User} from "../core/model/User";
 import {FormationService} from "../services/formation.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {DomSanitizer} from "@angular/platform-browser";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import {TokenService} from "../services/token.service";
 
 @Component({
-  selector: 'app-blog-formation',
-  templateUrl: './blog-formation.component.html',
-  styleUrls: ['./blog-formation.component.scss']
+  selector: 'app-my-courses',
+  templateUrl: './my-courses.component.html',
+  styleUrls: ['./my-courses.component.scss']
 })
-export class BlogFormationComponent implements OnInit {
+export class MyCoursesComponent implements OnInit {
 
   listFormation  : Formation[];
   toggle = true;
   domain : string;
 
-  nbrlikes : number;
-  nbrDislikes : number;
 
+  currentUser: any = [];
   listApprenent : User[];
   sowFormateur : boolean = false;
   page = 1;
   public Items: number;
 
-  constructor(private serviceForm : FormationService,private snackbar:MatSnackBar  ,private http: HttpClient, private route:ActivatedRoute,private token: TokenService) { }
+  constructor(private serviceForm : FormationService,private snackbar:MatSnackBar  ,private http: HttpClient, private route:ActivatedRoute,private token: TokenService) {
+    this.currentUser = this.token.getUser();
+  }
 
   ngOnInit(): void {
 
@@ -43,39 +43,26 @@ export class BlogFormationComponent implements OnInit {
 
   getAllFormation()
   {
-    return  this.serviceForm.getFormation().subscribe(
+    return  this.serviceForm.getFormationByApprenant(this.currentUser.id).subscribe(
       (data : Formation[]) => {this.listFormation = data;
         this.Items = this.listFormation.length;
       });
   }
 
 
-  ToggleForm()
-  {
-    this.sowFormateur = ! this.sowFormateur;
-  }
 
-
-  enableDisableRule() {
-    this.toggle = !this.toggle;
-  }
 
 
   affectationApptoFormation(idApp :number , idFor : number)
   {
     this.serviceForm.affectationApptoFormation(idApp, idFor).subscribe();
-    this.snackbar.open(' ajout avec succees ', 'Back', {
+    this.snackbar.open(' ajoute avec succees ', 'Back', {
       duration: 2000
     });
   }
 
 
-  getApprenantByFormation(i : number)
-  {
-    this.serviceForm.getApprenantByFormation(i).subscribe(
-      (data:User[])=>{this.listApprenent = data});
-    return this.listApprenent;
-  }
+
 
 
   addLikes(i:number)

@@ -83,7 +83,9 @@
                   <li><a [routerLink]="['../../chat']" ><i class="flaticon-chatting"></i> Chat Room Courses </a></li>
                 </ul>
               </div>
-              <h2 class="bd-blog-details-title mb-25">Thoughts On Markdown</h2>
+              <h2 class="bd-blog-details-title mb-25">{{formation.title.toUpperCase()}}</h2>
+
+
               <p class="mb-30">Nancy boy Charles down the pub get stuffed mate easy peasy brown bread car boot squiffy loo, blimey arse over tit it’s your round cup of char horse play chimney pot old. Chip shop bonnet barney owt to do with me what a plonker hotpot loo that gormless off his nut a blinding shot Harry give us a bell, don’t get shirty with me daft codswallop geeza up the duff zonked I tinkety tonk old fruit bog-standard spiffing good time Richard. Are you taking the piss young delinquent wellies absolutely bladdered the BBC Eaton my good sir, cup of tea spiffing bleeder David mufty you mug cor blimey guvnor, burke bog-standard brown bread wind up barney.</p>
               <blockquote>
                 <p>Tosser argy-bargy mush loo at public school Elizabeth up the duff buggered chinwag on your bike mate don’t get shirty with me super, Jeffrey bobby Richard cheesed off spend a penny a load of old tosh blag horse.</p>
@@ -208,8 +210,17 @@
               </form>
             </div>
           </div>
-          <div class="widget mb-45">
-            <h3 class="sidebar__widget--title mb-30">Recent Videos</h3>
+
+          <div  *ngIf="!show" >
+            <a  class="theme-btn w-full mb-20 " style="color: white" (click)="assingAppToCourses()"> Add This Courses</a>
+          </div>
+          <div  *ngIf="go" >
+            <a  class="theme-btn-border w-full mb-20 "  [routerLink]="['../../quiz',this.quiz.idQuiz]"> You Have Quiz </a>
+          </div>
+          <div class="widget mb-45"  *ngIf="show">
+
+            <h3 class="sidebar__widget--title mb-30"  >Recent Videos</h3>
+
             <div class="sidebar--widget__post mb-20" *ngFor="let vdo of retrieveVideo; let $index = index">
               <div class="sidebar__post--thumb">
                 <a  >

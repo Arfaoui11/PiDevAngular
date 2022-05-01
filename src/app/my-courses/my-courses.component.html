@@ -1,0 +1,100 @@
+
+<!-- breadcrumb area start -->
+<div class="bd-page-title-area bd-page-title-bg pt-220 pb-155">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="bd-page-title text-center z-index">
+          <h2 class="breadcrumb-title">Courses</h2>
+          <div class="breadcrumb-menu">
+            <nav class="breadcrumb-trail breadcrumbs">
+              <ul class="trail-items">
+                <li class="trail-item trail-begin"><a [routerLink]="['/front/End/homeF']">Home</a></li>
+                <li class="trail-item trail-middle"><i class="far fa-chevron-right"></i></li>
+                <li class="trail-item trail-end"><span>List Courses</span></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- breadcrumb area end -->
+<br>
+<div class="col-xl-5 col-lg-8 col-md-8 col-sm-8 col-3 order-2 order-xl-3">
+  <div class="bd-header-right bd-header-right-four text-end">
+    <div class="bd-header-input-search bd-header-input-search-six">
+      <form (click)="SearchMultiple(key.value)" class="position-relative">
+        <input type="text" placeholder="Search keywords" #key="ngModel" ngModel
+               name="key">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+
+  </div>
+</div>
+<!-- blog area start here -->
+<section class="bd-blog-area pt-150 pb-145">
+  <div class="container">
+    <div class="row mb-30">
+
+      <div class="col-xl-4 col-lg-4 col-md-6" *ngFor="let l of listFormation | paginate : {
+            itemsPerPage: 6,
+            currentPage: page,
+            totalItems: Items
+          }  , let i=index">
+        <div class="bd-blog mb-30">
+          <div class="bd-blog-img" *ngIf="l.databaseFiles[0].fileType.toString().includes('image')">
+            <a href="blog-details.html"><img [src]="'data:image/jpeg;base64,'+l.databaseFiles[0].data" alt="blog image not found"></a>
+          </div>
+          <div class="bd-blog-text">
+            <div class="bd-blog-meta mb-15">
+              <ul>
+                <li><a href="blog-details.html"><i class="flaticon-calendar"></i>Start : {{l.start | date | slice:0 : 12   }} <br> End : {{l.end | date | slice:0 : 12}} </a></li>
+                <li><a href="blog-details.html"><i class="flaticon-chat"></i>{{l.postComments.length}} Comments</a></li>
+              </ul>
+            </div>
+            <h4 class="bd-blog-title mb-40"><a href="blog-details.html"> Title : {{l.title.toUpperCase()}} </a></h4>
+            <h6 class="bd-blog-title mb-20">Former : {{l.formateur.displayName.toUpperCase()}}</h6>
+            <div class="bd-blog-author">
+              <div class="bd-blog-author-info">
+                <img src="../../assets/front/img/blog/blog-author-1.jpg" alt="author image not found">
+                <h6 class="bd-blog-author-info-title"> {{l.domain}}</h6>
+
+              </div>
+              <div class="bd-blog-author-link">
+                <a href="blog-details.html" [routerLink]="['../detailsF',l.idFormation]" >Read More <i class="far fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="basic-pagination">
+          <!--<ul>
+            <li><span aria-current="page" class="page-numbers current">1</span></li>
+            <li><a class="page-numbers" href="#">2</a></li>
+            <li><a class="page-numbers" href="#">3</a></li>
+            <li><a class="next page-numbers" href="#">
+              <i class="fal fa-long-arrow-right"></i>
+            </a>
+            </li>
+          </ul>-->
+          <pagination-controls
+            previousLabel="Prev"
+            nextLabel="Next"
+            [responsive]="true"
+            (pageChange)="handlePageChange($event)"
+          ></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- blog area end here -->
+
+

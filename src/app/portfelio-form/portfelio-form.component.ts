@@ -60,9 +60,9 @@ export class PortfelioFormComponent implements OnInit {
   }
 
 
-  affectationApptoFormation(idApp :number , idFor : number,f :Formation)
+  affectationApptoFormation(idApp :number , idFor : number)
   {
-    this.serviceForm.affectationApptoFormation(idApp, idFor, f).subscribe();
+    this.serviceForm.affectationApptoFormation(idApp, idFor).subscribe();
     this.snackbar.open(' ajout avec succees ', 'Back', {
       duration: 2000
     });

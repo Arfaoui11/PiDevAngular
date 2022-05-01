@@ -23,6 +23,9 @@ import {PortfelioFormComponent} from "./portfelio-form/portfelio-form.component"
 import {PortfelioFormDetailsComponent} from "./portfelio-form-details/portfelio-form-details.component";
 import {UserViewComponent} from "./user-view/user-view.component";
 import {MapComponent} from "./map/map.component";
+import {MyCoursesComponent} from "./my-courses/my-courses.component";
+import {CalendarFrontComponent} from "./calendar-front/calendar-front.component";
+import {QestionQuizCoursesComponent} from "./qestion-quiz-courses/qestion-quiz-courses.component";
 
 
 
@@ -47,9 +50,13 @@ const routes: Routes =
              { path: 'blogF', component: BlogFormationComponent },
              { path: 'portF/:idCourses', component: PortfelioFormDetailsComponent },
              { path: 'chat', component: RoutComponent },
-             {path:'map',component: MapComponent },
+             {path:  'map',component: MapComponent },
              { path: 'homeF', component: HomeFComponent },
+             { path: 'myCourses', component: MyCoursesComponent },
+             { path: 'myCalender', component: CalendarFrontComponent },
              { path: 'detailsF/:idCourses', component: BlogDetailsComponent },
+             { path: 'quiz/:idQuiz', component: QuizComponent },
+             { path: 'quizWelcome', component: WelcomeComponent },
 
 
            ]
@@ -73,10 +80,11 @@ const routes: Routes =
           { path: 'calendar', component: CalendarComponent },
           { path: 'calendarCourses/:idFormer', component: CalendarCoursesComponent },
           { path: 'listFormation', component: ListeFormationComponent },
-          { path: 'quiz', component: QuizComponent },
-          { path: 'quizWelcome', component: WelcomeComponent },
+
+
           { path: 'Courses', component: CoursesFormComponent },
-          { path: 'Question/:idCourses', component: QuestionComponent },
+          { path: 'Quiz/:idCourses', component: QuestionComponent },
+          { path: 'Question/:idQuiz', component: QestionQuizCoursesComponent },
           { path: 'videoplaylist/:idCourses', component: VideoplaylistComponent },
           { path: 'userview/:idUser', component: UserViewComponent },
           { path: 'login', component: LoginComponent },

@@ -55,17 +55,11 @@ L10n.load({
 declare var $: any;
 
 @Component({
-  selector: 'app-calendar-courses',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './calendar-courses.component.html',
-  styleUrls: ['./calendar-courses.component.scss'],
-  providers: [
-    DayService, WeekService, WorkWeekService, MonthService, AgendaService, TimelineViewsService,
-    TimelineMonthService, ResizeService, DragAndDropService
-  ],
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-calendar-front',
+  templateUrl: './calendar-front.component.html',
+  styleUrls: ['./calendar-front.component.scss']
 })
-export class CalendarCoursesComponent implements OnInit {
+export class CalendarFrontComponent implements OnInit {
 
   @ViewChild('scheduleObj') scheduleObj: ScheduleComponent;
 
@@ -81,7 +75,7 @@ export class CalendarCoursesComponent implements OnInit {
   public footerTemplate = `<div class="add-doctor"><div class="e-icon-add e-icons"></div>
     <div class="add-doctor-text">Add New Former</div></div>`;
 
-  public itemTemplate: string = '<div class="specialist-item"><img class="value" src="assets/images/profile/user-uploads/user-03.jpg" alt="doctor"/>' +
+  public itemTemplate: string = '<div class="specialist-item"><img class="value" style="width: 50px ;height: 50px" src="assets/images/profile/user-uploads/user-03.jpg" alt="doctor"/>' +
     '<div class="doctor-details"><div class="name">Mr.${title}</div><div class="designation">${domain}</div></div></div>';
 
   public animationSettings: Record<string, any> = { effect: 'None' };
@@ -121,9 +115,6 @@ export class CalendarCoursesComponent implements OnInit {
     this.getdata();
     this.currentUser = this.token.getUser();
 
-    this.idFormateur = this.route.snapshot.params['idFormer'];
-
-    this.path = "http://localhost:8099/Courses/getFormationByFormateur/"+this.route.snapshot.params['idFormer'];
     this.getformation();
     // (FieldValidator.prototype as any).errorPlacement = this.dataService.errorPlacement;
   }
@@ -249,7 +240,7 @@ export class CalendarCoursesComponent implements OnInit {
     xx.send(null);
 
 
-    xmll.open('get',"http://localhost:8099/Courses/getFormationByFormateur/"+this.route.snapshot.params['idFormer'],true);
+    xmll.open('get',"http://localhost:8099/Courses/getFormationByApprenant/"+8,true);
 
 
     xmll.send(null);
@@ -265,7 +256,7 @@ export class CalendarCoursesComponent implements OnInit {
 
 
       this.eventObject = {
-        dataSource :this.event,
+        dataSource :this.listFormation,
         fields : {
           subject : {name : 'title',default : " Event "},
           startTime : {name : 'start'},
@@ -275,10 +266,10 @@ export class CalendarCoursesComponent implements OnInit {
 
 
 
-/*
+      /*
 
-*/
-    },1500)
+      */
+    },500)
 
 
 
@@ -415,7 +406,7 @@ export class CalendarCoursesComponent implements OnInit {
 
   getformation(){
 
-    this.serviceForm.getFormationByFormateur(this.idFormateur).subscribe(
+    this.serviceForm.getFormationByApprenant(this.currentUser.id).subscribe(
       (data)=>{this.listFormation = data});
     return this.listFormation;
   }
@@ -692,7 +683,7 @@ export class CalendarCoursesComponent implements OnInit {
     let filteredData: Record<string, any>[];
     if (args && args.value) {
       this.selectedDepartmentId = args ? args.itemData.idFormation : this.selectedDepartmentId;
-     // filteredData = this.listFormation.filter((item: any) => item.apprenant.idFormation === this.selectedDepartmentId);
+      // filteredData = this.listFormation.filter((item: any) => item.apprenant.idFormation === this.selectedDepartmentId);
       filteredData = this.getApprenantByFormation(this.selectedDepartmentId);
       // filteredData = this.formateur;
     } else {

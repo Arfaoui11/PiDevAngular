@@ -182,6 +182,7 @@ export class FormationService {
   }
 
 
+
   getFormation():Observable<Formation[]>
   {
     return this.http.get<Formation[]>("http://localhost:8099/Courses/retrieveFormation");
@@ -194,6 +195,8 @@ export class FormationService {
   getApprenantByFormation(i : number):Observable<User[]> {
     return this.http.get<User[]>("http://localhost:8099/Courses/ApprenantByFormation/"+i);
   }
+
+
 
 
 
@@ -218,10 +221,10 @@ export class FormationService {
     ("http://localhost:8099/Courses/updateFormation/"+i,f);
   }
 
-  affectationApptoFormation(idApp :number , idFor : number,f :Formation): Observable<any>
+  affectationApptoFormation(idApp :number , idFor : number): Observable<any>
   {
-    const headers = { 'content-type': 'application/json'};
-    return this.http.post<Formation>("http://localhost:8099/Courses/affecterApprenantFormation/"+idApp+"/"+idFor+"/",f );
+
+    return this.http.post<any>("http://localhost:8099/Courses/affecterApprenantFormationWithMax/"+idApp+"/"+idFor,null);
 
   }
 

@@ -1,0 +1,224 @@
+<div  class="container" style="height: 450px">
+
+  <div class="card-header" >
+    <td>
+      <button  class="btn btn-outline-primary " data-bs-toggle="modal" data-bs-target="#exampleModal"  *ngIf="ListQuestion.length < 20" >Add Question</button>
+    </td>
+  </div>
+
+
+
+
+  <div class="card-body" *ngIf="ListQuestion.length>=1">
+    <table id="example1" class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>Titre</th>
+        <th>optionA</th>
+        <th>optionB</th>
+        <th>optionC</th>
+        <th>optionD</th>
+        <th>optionE</th>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>QrCode</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let l of ListQuestion | paginate : {
+            itemsPerPage: 3,
+            currentPage: page,
+            totalItems: Items
+          }  ,">
+
+        <td>{{l.title}}</td>
+        <td>{{l.optionA}}</td>
+        <td>{{l.optionB}}</td>
+        <td>{{l.optionC}}</td>
+        <td>{{l.optionD}}</td>
+        <td>{{l.optionE}}</td>
+        <td> {{l.ans}}</td>
+
+        <td>
+          <button class="btn btn-outline-danger"  (click)="deleteQuestion(l.quesId)" >Delete</button>
+        </td>
+        <td>
+          <button  class="btn btn-outline-primary " data-bs-toggle="modal" data-bs-target="#updateModal"  >Update</button>
+        </td>
+        <td>
+          <ngx-qrcode [elementType]="elementType"  [value]="l.title" [width]="50"  [errorCorrectionLevel]="correctionLevel" ></ngx-qrcode>
+        </td>
+
+      </tr>
+
+      </tbody>
+      <tfoot>
+      <tr>
+        <th>Titre</th>
+        <th>Content</th>
+        <th>CreateAt</th>
+        <th>Score</th>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>addQuiz</th>
+        <th>QrCode</th>
+      </tr>
+      </tfoot>
+    </table>
+
+
+    <div class="row">
+      <div class="col-12">
+        <div >
+          <!--<ul>
+            <li><span aria-current="page" class="page-numbers current">1</span></li>
+            <li><a class="page-numbers" href="#">2</a></li>
+            <li><a class="page-numbers" href="#">3</a></li>
+            <li><a class="next page-numbers" href="#">
+              <i class="fal fa-long-arrow-right"></i>
+            </a>
+            </li>
+          </ul>-->
+          <pagination-controls
+            previousLabel="Prev"
+            nextLabel="Next"
+            [responsive]="true"
+            (pageChange)="handlePageChange($event)"
+          ></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="ListQuestion.length==0" class="container" style="height: 450px">
+    <h2 class="text-info" > Don't have Question in this Quiz ! Is empty</h2>
+
+
+
+  </div>
+
+  <div class="container ">
+    <div class="modal fade"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: #00a8c6" >
+
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content">
+
+          <div class="modal-header" style="background: #ffdeea">
+            <h5 class="modal-title" id="exmpleModelLabel"> Add Question </h5>
+            <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal" aria-label="Close"  >X</button>
+
+          </div>
+          <div class="modal-body" >
+
+            <form #f="ngForm" class="form-group"   >
+              <div class="input-group  row-cols-md-3 mat-h3 " >
+                <span class="input-groupe-text "> Title </span>
+                <input type="text" name="title" class="form-control" [(ngModel)]="question.title" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Option 1 </span>
+                <input type="text" name="content" class="form-control" [(ngModel)]="question.optionA" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Option 2  </span>
+                <input type="text" name="content" class="form-control" [(ngModel)]="question.optionB" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Option 3 </span>
+                <input type="text" name="content" class="form-control" [(ngModel)]="question.optionC" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Option 4 </span>
+                <input type="text" name="content" class="form-control" [(ngModel)]="question.optionD" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Option 5 </span>
+                <input type="text" name="content" class="form-control" [(ngModel)]="question.optionE" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Answer </span>
+                <input type="number" name="content" class="form-control" [(ngModel)]="question.ans" >
+              </div>
+
+
+
+              <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" aria-label="Close" (click)="addQuestion();f.reset()" > Add quiz </button>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+  <div class="container ">
+    <div class="modal fade"  id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: #00a8c6" >
+
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateModelLabel"> Update Question </h5>
+            <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal" aria-label="Close"  >X</button>
+
+          </div>
+          <div class="modal-body" >
+
+            <form #f="ngForm" class="form-group"   >
+              <div class="input-group  row-cols-md-3 mat-h3 " >
+                <span class="input-groupe-text "> Title </span>
+                <input type="text" name="title" class="form-control" [(ngModel)]="question.title" value="" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Content </span>
+                <input type="text" name="content" class="form-control" [(ngModel)]="question.optionA" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Content </span>
+                <input type="text" name="content" class="form-control" [(ngModel)]="question.optionB" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Content </span>
+                <input type="text" name="content" class="form-control" [(ngModel)]="question.optionC" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Content </span>
+                <input type="text" name="content" class="form-control" [(ngModel)]="question.optionD" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Content </span>
+                <input type="text" name="content" class="form-control" [(ngModel)]="question.optionE" >
+              </div>
+              <div class="input-group row-cols-md-3 mat-h3" >
+                <span class="input-groupe-text "> Content </span>
+                <input type="number" name="content" class="form-control" [(ngModel)]="question.ans" >
+              </div>
+
+
+
+
+              <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" aria-label="Close" (click)="addQuestion();f.reset()" > Update quiz </button>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+
+</div>

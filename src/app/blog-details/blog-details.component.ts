@@ -8,6 +8,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import {TokenService} from "../services/token.service";
+import {Quiz} from "../core/model/Quiz";
 
 @Component({
   selector: 'app-blog-details',
@@ -26,30 +27,41 @@ export class BlogDetailsComponent implements OnInit {
   retrieveResonse : any;
   activeIndex = 0;
   index : number =0;
-
+  public show : boolean = false ;
+  day :Date = new Date();
   dataa :any;
   showC : boolean = false;
   videoUrl: any;
   public idFormation :number;
-  toggle: boolean = false;
+  toggle: boolean = true;
   formation : Formation;
   currentUser: any = [];
+  ListQuiz : Quiz[];
+  quiz :Quiz;
+
   public formateur :User;
   public retrieveFiles: any[]=[];
   public retrieveVideo: any[]=[];
   public retrieveImage: any[]=[];
+  public go: boolean =false;
 
 
 
 
   constructor(private serviceForm : FormationService,private sanitizer : DomSanitizer,private snackbar:MatSnackBar ,private http: HttpClient, private route:ActivatedRoute,private token: TokenService) {
     this.currentUser = this.token.getUser();
+
   }
 
   ngOnInit(): void {
+
     this.idFormation = this.route.snapshot.params['idCourses'];
-    console.log(this.idFormation);
+
+
+
     this.getFormation();
+
+
 
     setTimeout( () => {
 
@@ -85,10 +97,36 @@ export class BlogDetailsComponent implements OnInit {
 
 
   }
+
+
+  getQuizStart()
+  {
+
+  }
+
+
   getFormation()
   {
     this.serviceForm.getFormationById(this.idFormation).subscribe(data => {
       this.formation = data;
+      for (let app of this.formation.apprenant)
+      {
+        if (app.id == this.currentUser.id)
+        {
+          this.show = true;
+        }
+      }
+      for (let q of this.formation.quizzes)
+      {
+        let createAt = new Date(q.createAt);
+        let today = new Date(Date.parse(Date()));
+      if (createAt < today)
+      {
+        this.quiz = q;
+        this.go = true;
+      }
+      }
+
     });
     return this.formation;
   }
@@ -294,5 +332,16 @@ export class BlogDetailsComponent implements OnInit {
   sendIndex($index: number) {
     this.index =$index;
     this.retrieveVideo[this.index].play();
+  }
+
+  assingAppToCourses() {
+    this.serviceForm.affectationApptoFormation(this.currentUser.id,this.idFormation).subscribe(
+      (data) => {console.log(data);
+        this.snackbar.open(' This Tourses Add To Yours List ', 'Undo', {
+          duration: 2000
+        });
+        this.show = true;
+      }
+    )
   }
 }
