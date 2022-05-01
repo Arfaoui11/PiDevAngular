@@ -1,6 +1,6 @@
 body {
-  background-color: #74EBD5;
-  background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);
+  background-color: #ffdeea;
+  background-image: linear-gradient(90deg, #dd8ceb 0%, #9FACE6 100%);
   min-height: 100vh;
 }
 ::-webkit-scrollbar {
@@ -45,6 +45,7 @@ input::placeholder {
   font-size: 12px;
 }
 
+
 .typing-indicator {
   color: gray;
   font-style: italic;
@@ -60,16 +61,16 @@ input::placeholder {
 }
 
 .user {
-  font-size: 18px;
+  font-size: 28px;
   padding: 4px 0px;
 }
 
 .online {
-  color: #51f41d;
+  color: rgba(81, 244, 29, 0.79);
 }
 
 .offline {
-  color: #f7485a;
+  color: #eb6b8c;
 }
 
 

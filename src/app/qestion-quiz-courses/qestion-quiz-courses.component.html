@@ -19,8 +19,9 @@
         <th>optionC</th>
         <th>optionD</th>
         <th>optionE</th>
+        <th>Answer</th>
         <th>Delete</th>
-        <th>Update</th>
+
         <th>QrCode</th>
       </tr>
       </thead>
@@ -42,9 +43,7 @@
         <td>
           <button class="btn btn-outline-danger"  (click)="deleteQuestion(l.quesId)" >Delete</button>
         </td>
-        <td>
-          <button  class="btn btn-outline-primary " data-bs-toggle="modal" data-bs-target="#updateModal"  >Update</button>
-        </td>
+
         <td>
           <ngx-qrcode [elementType]="elementType"  [value]="l.title" [width]="50"  [errorCorrectionLevel]="correctionLevel" ></ngx-qrcode>
         </td>
@@ -55,12 +54,14 @@
       <tfoot>
       <tr>
         <th>Titre</th>
-        <th>Content</th>
-        <th>CreateAt</th>
-        <th>Score</th>
+        <th>optionA</th>
+        <th>optionB</th>
+        <th>optionC</th>
+        <th>optionD</th>
+        <th>optionE</th>
+        <th>Answer</th>
         <th>Delete</th>
-        <th>Update</th>
-        <th>addQuiz</th>
+
         <th>QrCode</th>
       </tr>
       </tfoot>

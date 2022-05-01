@@ -39,11 +39,24 @@ export class BlogDetailsComponent implements OnInit {
   ListQuiz : Quiz[];
   quiz :Quiz;
 
+  public img: any;
+  public pressure: any;
+  public wind: any;
+  public desc: any;
+  public humidite: any;
+  public lieu: any;
+  public drizzle: any;
+  public lat: any;
+  public lot: any;
+  public temp : any;
+
   public formateur :User;
   public retrieveFiles: any[]=[];
   public retrieveVideo: any[]=[];
   public retrieveImage: any[]=[];
   public go: boolean =false;
+  public isTested: boolean =false;
+  public listFormation: Formation;
 
 
 
@@ -57,9 +70,41 @@ export class BlogDetailsComponent implements OnInit {
 
     this.idFormation = this.route.snapshot.params['idCourses'];
 
-
-
     this.getFormation();
+
+    setTimeout( () => {
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.formation.lieu}&units=metric&appid=50a7aa80fa492fa92e874d23ad061374`)
+        .then(response => response.json())
+        .then(data => {
+          var tempValue = data['main']['temp'];
+          var drizzle = data['weather'][0]['main'];
+
+          var name = data['name'];
+          var pressure = data['main']['pressure'];
+          var humidity = data['main']['humidity'];
+          var descValue = data['weather'][0]['description'];
+          var wind = data['wind']['speed'];
+          this.img = data['weather'][0]['icon'];
+          var lat = data['coord']['lat'];
+          var lot = data['coord']['lon'];
+
+          this.lat = lat;
+          this.lot = lot;
+
+          this.drizzle = drizzle;
+          this.lieu = name;
+          this.wind = wind;
+          this.pressure += pressure;
+          this.humidite = humidity;
+          this.temp = tempValue.toFixed(1);
+
+          this.desc = descValue;
+
+
+        });
+    },1000);
+
+
 
 
 
@@ -71,13 +116,13 @@ export class BlogDetailsComponent implements OnInit {
       this.rating = this.formation.rating;
     },2000);
 
-    this.serviceForm.getFilesFormation(this.idFormation)
+    this.serviceForm.getFormationById(this.idFormation)
      .subscribe(
      data=> {
 
-       this.retrieveResonse =data;
+       this.listFormation =data;
 
-      for (let l of this.retrieveResonse)
+      for (let l of this.listFormation.databaseFiles)
       {
         if(l.fileType.toString().includes('video'))
         {
@@ -99,16 +144,16 @@ export class BlogDetailsComponent implements OnInit {
   }
 
 
-  getQuizStart()
-  {
 
-  }
+
 
 
   getFormation()
   {
     this.serviceForm.getFormationById(this.idFormation).subscribe(data => {
       this.formation = data;
+
+
       for (let app of this.formation.apprenant)
       {
         if (app.id == this.currentUser.id)
@@ -126,6 +171,14 @@ export class BlogDetailsComponent implements OnInit {
         this.go = true;
       }
       }
+      for (let res of this.quiz.results)
+      {
+        if (res.suser.id == this.currentUser.id )
+        {
+          this.isTested =true;
+        }
+      }
+      this.rating = this.formation.rating;
 
     });
     return this.formation;
@@ -195,21 +248,45 @@ export class BlogDetailsComponent implements OnInit {
     );
     return this.comment;
   }
+  public stat : boolean = true;
 
   LikesComment(id:number)
   {
+    let status = true;
+    for (let c of this.comment)
+    {
+      if (c.idComn == id)
+      {
+        for (let l of c.likes)
+        {
 
+          if(l.userL.id == this.currentUser.id)
+          {
+            status=false;
+          }
 
+        }
 
-    this.serviceForm.addLikes(id).subscribe(data=>
-      {console.log(data);
-
-
-        this.getCommentByFormation();
       }
-    );
+
+    }
+
+
+      if (status) {
+        this.serviceForm.addLikes(id, this.currentUser.id).subscribe(data => {
+            console.log(data);
+
+
+            this.getCommentByFormation();
+
+          }
+        );
+      }
+
 
   }
+
+
   public nbrL : number=0;
   public nbrD:number=0;
 
@@ -232,15 +309,50 @@ export class BlogDetailsComponent implements OnInit {
   }
 
 
+  changeRating() {
 
+    this.serviceForm.addRatingFormation(this.idFormation,this.rating).subscribe(
+      data => {
+
+
+        setTimeout(()=>
+        {
+
+         this.getFormation()
+
+        },500);
+
+      }
+    )
+  }
 
   DisLikesComment(id:number)
   {
 
+    let status = true;
+    for (let c of this.comment)
+    {
+      if (c.idComn == id)
+      {
+        for (let l of c.dislikes)
+        {
 
-    this.serviceForm.addDisLikes(id).subscribe(data=> {console.log(data);
-      this.getCommentByFormation();
-    });
+          if(l.userL.id == this.currentUser.id)
+          {
+            status=false;
+          }
+
+        }
+
+      }
+
+    }
+    if (status) {
+      this.serviceForm.addDisLikes(id, this.currentUser.id).subscribe(data => {
+        console.log(data);
+        this.getCommentByFormation();
+      });
+    }
   }
 
   getFormateurByFormation(id:number)
@@ -337,7 +449,7 @@ export class BlogDetailsComponent implements OnInit {
   assingAppToCourses() {
     this.serviceForm.affectationApptoFormation(this.currentUser.id,this.idFormation).subscribe(
       (data) => {console.log(data);
-        this.snackbar.open(' This Tourses Add To Yours List ', 'Undo', {
+        this.snackbar.open(' This Courses Add To Yours List ', 'Undo', {
           duration: 2000
         });
         this.show = true;

@@ -83,6 +83,16 @@
                   <li><a [routerLink]="['../../chat']" ><i class="flaticon-chatting"></i> Chat Room Courses </a></li>
                 </ul>
               </div>
+
+
+              <ng-template #t let-fill="fill">
+                  <span class="star" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&star;</span>&star;
+                  </span>
+              </ng-template>
+
+              <ngb-rating [(rate)]="rating" [starTemplate]="t"  [max]="5" (rateChange)="changeRating()"></ngb-rating>
+              <pre>Rate: <b>{{rating.toString() | slice: 0 : 4  }}</b></pre>
               <h2 class="bd-blog-details-title mb-25">{{formation.title.toUpperCase()}}</h2>
 
 
@@ -132,7 +142,7 @@
                     <div class="comments-text">
 
                       <div class="avatar-name">
-                        <h5>David Angel Makel</h5>
+                        <h5>{{post.userC.displayName.toUpperCase()}}</h5>
                         <div class="ml-auto cursor-pointer" style="float: right">
                           <button class="like" (click)="LikesComment(post.idComn)">
                             <i class="fa fa-thumbs-o-up" aria-hidden="true"> </i>
@@ -144,9 +154,9 @@
                           </button>
                           <label style="color: #f7485a ;font-size: 15px" > {{post.nbrDisLikes}}</label>
                         </div>
-                        <span class="post-meta">February 26, 2022</span>
+                        <span class="post-meta">{{post.createAt | date | slice:0 : 12 }}</span>
                       </div>
-                      <p>{{post.message}}</p>
+                      <p >{{post.message}}</p>
 
                       <a href="#comment" class="comment-reply"><i class="fal fa-reply"></i> Reply</a>
                     </div>
@@ -214,7 +224,7 @@
           <div  *ngIf="!show" >
             <a  class="theme-btn w-full mb-20 " style="color: white" (click)="assingAppToCourses()"> Add This Courses</a>
           </div>
-          <div  *ngIf="go" >
+          <div  *ngIf="go && show && !isTested" >
             <a  class="theme-btn-border w-full mb-20 "  [routerLink]="['../../quiz',this.quiz.idQuiz]"> You Have Quiz </a>
           </div>
           <div class="widget mb-45"  *ngIf="show">
@@ -238,34 +248,80 @@
             </div>
 
           </div>
-
           <div class="widget mb-40">
-            <h3 class="sidebar__widget--title mb-25">Categories</h3>
+            <h3 class="sidebar__widget--title mb-25">This course includes </h3>
             <div class="sidebar--widget__cat mb-20">
               <ul>
-                <li><a href="blog.html">App & Saas</a></li>
-                <li><a href="blog.html">Fresh Products</a></li>
-                <li><a href="blog.html">Graphics</a></li>
-                <li><a href="blog.html">IOS/Android Design</a></li>
-                <li><a href="blog.html">Saas Design</a></li>
-                <li><a href="blog.html">Web Design</a></li>
-                <li><a href="blog.html">Web Development</a></li>
+                <li><p>{{formation.nbrHeures}} hours on-demand video</p></li>
+                <li><p>Full lifetime access</p></li>
+                <li><p>Certificate of completion</p></li>
+                <li>5 Quiz to get Certificate </li>
+                <li></li>
+                <li></li>
+                <li></li>
               </ul>
             </div>
           </div>
-          <div class="widget">
-            <h3 class="sidebar__widget--title mb-30">Tags</h3>
-            <div class="sidebar--widget__tag">
-              <a href="blog.html">Animation</a>
-              <a href="blog.html">Branding</a>
-              <a href="blog.html">Design</a>
-              <a href="blog.html">Ideas</a>
-              <a href="blog.html">Landing</a>
-              <a href="blog.html">Pix Saas Blog</a>
-              <a href="blog.html">The Saas</a>
-              <a href="blog.html">UI/UX</a>
+
+          <div class="widget mb-40">
+
+            <h3 class="sidebar__widget--title mb-25">Weather </h3>
+            <div class="sidebar--widget__cat mb-20">
+              <div class="card overlay-img-card text-white">
+                <img src="../../assets/images/pages/card-image-5.jpg" class="card-img" alt="card-img-6">
+                <div class="card-img-overlay overlay-black">
+                  <h5 class="font-medium-5 text-white text-center mt-4">{{desc}}</h5>
+                  <p class="text-white text-center">{{lieu}}</p>
+                  <div class="card-content">
+                    <div class="d-flex justify-content-around mt-2">
+                      <div class="icon">
+                        <img src="http://openweathermap.org/img/wn/{{img}}.png" alt="">
+                      </div>
+                      <div class="temprature mt-3">
+                        <p class="font-large-3" style="color: white"> {{temp}}  <span class="mt-2">&#176;</span></p>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between mt-4">
+                        <div class="precipitation">
+                          <span class="font-medium-3">Precipitation</span>
+                        </div>
+                        <div class="degree">
+                          <span class="font-medium-3">{{drizzle}}</span>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-between my-2">
+                        <div class="humidity">
+                          <span class="font-medium-3">Humidity</span>
+                        </div>
+                        <div class="degree">
+                          <span class="font-medium-3">{{humidite}} %</span>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-between my-2">
+                        <div class="wind">
+                          <span class="font-medium-3">Wind</span>
+                        </div>
+                        <div class="degree">
+                          <span class="font-medium-3">{{wind}}  km/h</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
+          <div class="widget">
+            <h3 class="sidebar__widget--title mb-30">Association Position In Maps</h3>
+
+              <div class="bd-map mb-30">
+                <app-map [lieu]="formation.lieu" [lat]="lat" [lot]="lot" ></app-map>
+
+              </div>
+            </div>
+
         </div>
       </div>
     </div>

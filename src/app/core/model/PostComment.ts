@@ -1,5 +1,6 @@
 import {Likes} from "./likes";
 import {DisLikes} from "./DisLikes";
+import {User} from "./User";
 
 export class PostComment {
 
@@ -9,5 +10,6 @@ export class PostComment {
   nbrLikes!:number;
   nbrDisLikes!:number;
   likes : Likes[];
-  Dislikes:DisLikes[];
+  dislikes:DisLikes[];
+  userC!:User;
 }

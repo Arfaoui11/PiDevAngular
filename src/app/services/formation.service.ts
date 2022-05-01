@@ -122,15 +122,7 @@ export class FormationService {
     return this.http.get<PostComment[]>('http://localhost:8099/Courses/getCommentsByFormation/'+idF);
   }
 
-  likeComment(id:number): Observable<Likes>
-  {
-    return  this.http.post<Likes>('http://localhost:8099/Courses/addLikes/'+id,null);
-  }
 
-  DisLikesComment(id:number): Observable<DisLikes>
-  {
-    return  this.http.post<DisLikes>('http://localhost:8099/Courses/addLikes/'+id,null);
-  }
 
 
   getAllComment(): Observable<PostComment[]>
@@ -152,7 +144,7 @@ export class FormationService {
   {
     const headers = { 'content-type': 'application/json'};
     const body=JSON.stringify(f);
-    console.log(body)
+    console.log(body);
     return this.http.post<Formation>("http://localhost:8099/Courses/ajouterEtAffecterFormationAFormateur/"+i,f)
   }
 
@@ -169,7 +161,7 @@ export class FormationService {
 
   SerachRepi(key : string):Observable<any>
   {
-    return this.http.post<string>('http://localhost:8099/Courses/SearchHistorique/'+key,1)
+    return this.http.post<any>('http://localhost:8099/Courses/SearchHistorique/'+key,1)
   }
 
 
@@ -240,13 +232,13 @@ export class FormationService {
       .get<Object[]>("http://localhost:8099/Courses/NbrApprenantByFormation")
   }
 
-  addLikes(i:number): Observable<any> {
-    return this.http.put<any>("http://localhost:8099/Courses/addLikes/"+i,null)
+  addLikes(i:number,id:number): Observable<any> {
+    return this.http.put<any>("http://localhost:8099/Courses/addLikes/"+i+"/"+id,null)
   }
 
-  addDisLikes(i:number): Observable<any> {
+  addDisLikes(i:number,id:number): Observable<any> {
 
-    return this.http.put<any>("http://localhost:8099/Courses/addDisLikes/"+i,null)
+    return this.http.put<any>("http://localhost:8099/Courses/addDisLikes/"+i+"/"+id,null)
   }
 
   getNbrLikes(id:number):Observable<any>

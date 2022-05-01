@@ -241,10 +241,10 @@
               <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
                 <div class="carousel-inner" role="listbox">
-                  <div class="carousel-item active"  *ngIf="retrievedImage[index].fileType.toString().includes('image')">
-                    <img id="img"  [src]="'data:image/jpeg;base64,'+retrievedImage[index].data" class="d-block w-100" alt="First slide">
+                  <div class="carousel-item active"  *ngIf="retrieveImage[index].fileType.toString().includes('image')">
+                    <img id="img"  [src]="'data:image/jpeg;base64,'+retrieveImage[index].data" class="d-block w-100" alt="First slide">
                   </div>
-                  <div class="carousel-item active"  *ngIf="!retrievedImage[index].fileType.toString().includes('image')" >
+                  <div class="carousel-item active"  *ngIf="!retrieveImage[index].fileType.toString().includes('image')" >
                     <h4>  we don't have images </h4>
                   </div>
                 </div>

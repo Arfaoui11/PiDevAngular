@@ -7,6 +7,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import {TokenService} from "../services/token.service";
+import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from "ngx-qrcode2";
 
 @Component({
   selector: 'app-blog-formation',
@@ -19,8 +20,9 @@ export class BlogFormationComponent implements OnInit {
   toggle = true;
   domain : string;
 
-  nbrlikes : number;
-  nbrDislikes : number;
+  elementType= NgxQrcodeElementTypes.URL;
+  correctionLevel = NgxQrcodeErrorCorrectionLevels.MEDIUM;
+
 
   listApprenent : User[];
   sowFormateur : boolean = false;
@@ -78,31 +80,7 @@ export class BlogFormationComponent implements OnInit {
   }
 
 
-  addLikes(i:number)
-  {
-    this.serviceForm.addLikes(i).subscribe(
-      data=>{
-        this.getAllFormation();
-      }
-    );
 
-    this.snackbar.open(' ajout Likes avec succees', '', {
-      duration: 2000
-    });
-  }
-
-  addDisLikes(i:number)
-  {
-    this.serviceForm.addDisLikes(i).subscribe(
-      data=>{
-        this.getAllFormation();
-      }
-    );
-
-    this.snackbar.open(' ajout DisLikes avec succees', '', {
-      duration: 2000
-    });
-  }
 
 
 
@@ -123,4 +101,16 @@ export class BlogFormationComponent implements OnInit {
 
   }
 
+  SearchHistoric(value: any) {
+    if (value=='') {
+      this.getAllFormation()
+    }
+    else if (value!=null)
+    {
+      this.serviceForm.SerachRepi(value).subscribe(
+        data => console.log(data)
+
+      );
+    }
+  }
 }

@@ -83,6 +83,7 @@ import {MapComponent} from "./map/map.component";
 import { MyCoursesComponent } from './my-courses/my-courses.component';
 import { CalendarFrontComponent } from './calendar-front/calendar-front.component';
 import { QestionQuizCoursesComponent } from './qestion-quiz-courses/qestion-quiz-courses.component';
+import { E404Component } from './e404/e404.component';
 
 
 FullCalendarModule.registerPlugins([
@@ -134,6 +135,7 @@ FullCalendarModule.registerPlugins([
     MyCoursesComponent,
     CalendarFrontComponent,
     QestionQuizCoursesComponent,
+    E404Component,
   ],
   imports: [
     BrowserModule,

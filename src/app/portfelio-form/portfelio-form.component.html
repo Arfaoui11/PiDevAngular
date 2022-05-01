@@ -32,12 +32,12 @@
           <button  (click)="SearchMultiple('MARKETING')" >Marketing</button>
           <button  (click)="SearchMultiple('ART')" >Art</button>
           <button  (click)="SearchMultiple('CINEMA')" >Cinema</button>
-          <button  (click)="SearchMultiple('MUSIC')" >Music</button>
+          <button  (click)="SearchMultiple('ECONOMIC')" >Economic</button>
         </div>
       </div>
     </div>
     <div class="row bd-portfolio-active mb-30">
-      <div class="col-lg-8 col-md-6 grid-item cat2 cat3">
+      <div class="col-lg-8 col-md-6 grid-item cat1">
         <div class="bd-portfolio bd-portfolio-three mb-30" *ngIf="listFormation[0]">
           <img  *ngIf="listFormation[0].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[0].databaseFiles[0].data" alt="porfolio not found">
           <div class="bd-portfolio-text">
@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 grid-item cat2 cat3" *ngIf="listFormation[1]">
+      <div class="col-lg-4 col-md-6 grid-item cat2" *ngIf="listFormation[1]">
         <div class="bd-portfolio bd-portfolio-three mb-30">
           <img *ngIf="listFormation[1].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[1].databaseFiles[0].data" alt="porfolio not found">
           <div class="bd-portfolio-text">
@@ -59,7 +59,7 @@
       </div>
       <div class="col-12">
         <div class="row">
-          <div class="col-lg-4 col-md-6 grid-item cat1 cat2" *ngIf="listFormation[2]">
+          <div class="col-lg-4 col-md-6 grid-item cat3" *ngIf="listFormation[2]">
             <div class="bd-portfolio bd-portfolio-three mb-30">
               <img *ngIf="listFormation[2].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[2].databaseFiles[0].data" alt="porfolio not found">
               <div class="bd-portfolio-text">
@@ -77,7 +77,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 grid-item cat1 cat2" *ngIf="listFormation[4]">
+          <div class="col-lg-4 col-md-6 grid-item cat2" *ngIf="listFormation[4]">
             <div class="bd-portfolio bd-portfolio-three mb-30">
               <img *ngIf="listFormation[4].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[4].databaseFiles[0].data" alt="porfolio not found">
               <div class="bd-portfolio-text">

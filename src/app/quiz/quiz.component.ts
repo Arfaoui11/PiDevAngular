@@ -159,11 +159,7 @@ export class QuizComponent implements OnInit {
   }
 
   isCorrect(i: number,question :Question)  {
-    if(question.ans == i)
-    {
-      return true;
-    }
-    return false;
+    return question.ans == i;
   }
 
 

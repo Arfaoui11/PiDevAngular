@@ -38,6 +38,7 @@ export class PortfelioFormDetailsComponent implements OnInit {
   public retrieveFiles: any[]=[];
   public retrieveVideo: any[]=[];
   public retrieveImage: any[]=[];
+  public listFormation: Formation;
 
 
   constructor(private serviceForm : FormationService,private sanitizer : DomSanitizer,private snackbar:MatSnackBar ,private http: HttpClient, private route:ActivatedRoute,private token: TokenService) {
@@ -58,13 +59,13 @@ export class PortfelioFormDetailsComponent implements OnInit {
       this.rating = this.formation.rating;
     },2000);
 
-    this.serviceForm.getFilesFormation(this.idFormation)
+    this.serviceForm.getFormationById(this.idFormation)
       .subscribe(
         data=> {
 
-          this.retrieveResonse =data;
+          this.listFormation =data;
 
-          for (let l of this.retrieveResonse)
+          for (let l of this.listFormation.databaseFiles)
           {
             if(l.fileType.toString().includes('video'))
             {
@@ -98,7 +99,7 @@ export class PortfelioFormDetailsComponent implements OnInit {
     this.serviceForm.DownloadFile(s).subscribe(
       x=>
       {
-        const blob = new Blob([x],{type : 'video/mp4'})
+        const blob = new Blob([x],{type : 'video/mp4'});
 
         if(window.navigator && window.navigator.msSaveOrOpenBlob)
         {
@@ -109,6 +110,7 @@ export class PortfelioFormDetailsComponent implements OnInit {
         const data = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = data;
+
 
         link.dispatchEvent( new MouseEvent('click',{bubbles:true,cancelable:true,view:window}))
 

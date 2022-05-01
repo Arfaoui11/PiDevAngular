@@ -26,6 +26,7 @@ import {MapComponent} from "./map/map.component";
 import {MyCoursesComponent} from "./my-courses/my-courses.component";
 import {CalendarFrontComponent} from "./calendar-front/calendar-front.component";
 import {QestionQuizCoursesComponent} from "./qestion-quiz-courses/qestion-quiz-courses.component";
+import {E404Component} from "./e404/e404.component";
 
 
 
@@ -50,13 +51,14 @@ const routes: Routes =
              { path: 'blogF', component: BlogFormationComponent },
              { path: 'portF/:idCourses', component: PortfelioFormDetailsComponent },
              { path: 'chat', component: RoutComponent },
-             {path:  'map',component: MapComponent },
+             { path:  'map',component: MapComponent },
              { path: 'homeF', component: HomeFComponent },
              { path: 'myCourses', component: MyCoursesComponent },
              { path: 'myCalender', component: CalendarFrontComponent },
              { path: 'detailsF/:idCourses', component: BlogDetailsComponent },
              { path: 'quiz/:idQuiz', component: QuizComponent },
              { path: 'quizWelcome', component: WelcomeComponent },
+             { path: '**', pathMatch: 'full',  component: E404Component },
 
 
            ]

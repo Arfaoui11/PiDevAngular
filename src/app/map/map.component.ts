@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import * as L from 'leaflet';
 import {Icon, icon} from "leaflet";
 
@@ -13,11 +13,20 @@ export class MapComponent implements OnInit {
 
   private p2: L.LatLngExpression = [36.9833, 10.1167]; //
 
+  @Input() lat : number;
+  @Input() lot : number;
+  @Input() lieu : string;
+
 
 
   private defaultIcon: Icon = icon({
     iconUrl: 'assets/marker-icon.png',
     shadowUrl: 'assets/marker-shadow.png'
+  });
+
+  private newIcon: Icon = icon({
+    iconUrl: 'assets/placeholder.png',
+
   });
 
   private initMap(): void {
@@ -46,9 +55,15 @@ export class MapComponent implements OnInit {
     ];
 
     for (let i = 0; i < coordinates.length; i++) {
-      let marker = L.marker([coordinates[i][0], coordinates[i][1]],{icon:this.defaultIcon,title:city[i]});
-      marker.addTo(this.map);
+      if (coordinates[i][0] != this.lat)
+      {
+        let marker = L.marker([coordinates[i][0], coordinates[i][1]],{icon:this.defaultIcon,title:"City : "+city[i]});
+        marker.addTo(this.map);
+      }
+
     }
+    let markera = L.marker([this.lat,this.lot],{icon:this.newIcon,title:"City : "+ this.lieu});
+    markera.addTo(this.map);
 
     tiles.addTo(this.map);
 

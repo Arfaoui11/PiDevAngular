@@ -13,6 +13,7 @@ export class User {
   profession!:String;
   salary! : number;
   age!:number;
+  state!:string;
   password: any;
   matchingPassword: any;
 

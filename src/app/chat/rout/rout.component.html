@@ -20,10 +20,10 @@
                   </div>
 
                   <div class="messages-box">
-                    <div class="list-group rounded-0" *ngFor="let user of users"  >
+                    <div class="list-group-item-success rounded-3" *ngFor="let user of users"    >
 
 
-                      <a class="list-group-item list-group-item-action active text-white rounded-0" >
+                      <a class="list-group-item-success list-group-item-action active text-white rounded-0" >
                         <div class="media"  ><img src="assets/images/profile/user-uploads/user-02.jpg" alt="user" width="50" class="rounded-circle">
                           <div class="media-body ml-4">
                             <div  [ngClass]="{'online' : user.isOnline}" [ngClass]="{'offline' : !user.isOnline}">

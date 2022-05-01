@@ -1,3 +1,6 @@
+import {Quiz} from "./Quiz";
+import {User} from "./User";
+
 export class Result {
 
   idR:number;
@@ -5,6 +8,8 @@ export class Result {
   correctAnswer:number;
   inCorrectAnswer:number;
   totalCorrect : number;
+  quiz!:Quiz;
+  suser!:User;
 
 
 

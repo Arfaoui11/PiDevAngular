@@ -1,3 +1,4 @@
+import {Result} from "./Result";
 
 
 export class Quiz {
@@ -7,5 +8,6 @@ export class Quiz {
   score !: number;
   createAt !:Date;
   content !: string ;
+  results!:Result[]
 
 }

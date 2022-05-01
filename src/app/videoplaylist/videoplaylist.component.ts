@@ -32,7 +32,7 @@ export class VideoplaylistComponent implements OnInit {
   public retrieveImage: any[]=[];
 
   activeIndex = 0;
-  index : number =1;
+  index : number =0;
 
   dataa :any;
   showC : boolean = false;
@@ -51,32 +51,30 @@ export class VideoplaylistComponent implements OnInit {
 
   ngOnInit(): void {
     this.idFormation = this.route.snapshot.params['idCourses'];
-    //this.serviceForm.getFilesFormation(this.idFormation)
-     // .subscribe(
-     // data=> {
-       // this.retrieveResonse=data
-      //}
-    //);
 
-    this.serviceForm.getFilesFormation(this.idFormation)
+
+    this.serviceForm.getFormationById(this.idFormation)
       .subscribe(
         data=> {
 
-          this.retrieveResonse =data;
 
-          for (let l of this.retrieveResonse)
+          this.formation =data;
+
+          for (let l of this.formation.databaseFiles)
           {
-            if(l.fileType.toString().includes('video'))
+            if(l.fileType.toString().includes('image'))
             {
-              this.retrieveVideo.push(l)  ;
-            }else if(l.fileType.toString().includes('application'))
+              this.retrieveImage.push(l)  ;
+            }
+             else if (l.fileType.toString().includes('video'))
+            {
+              this.retrieveVideo.push(l) ;
+            }
+            else
             {
               this.retrieveFiles.push(l);
             }
-            else if (l.fileType.toString().includes('image'))
-            {
-              this.retrieveImage.push(l) ;
-            }
+
           }
 
         }
@@ -244,7 +242,7 @@ export class VideoplaylistComponent implements OnInit {
 
 
 
-    this.serviceForm.addLikes(id).subscribe(data=>
+    this.serviceForm.addLikes(id,this.currentUser.id).subscribe(data=>
     {console.log(data);
 
 
@@ -281,7 +279,7 @@ export class VideoplaylistComponent implements OnInit {
   {
 
 
-    this.serviceForm.addDisLikes(id).subscribe(data=> {console.log(data);
+    this.serviceForm.addDisLikes(id,this.currentUser.id).subscribe(data=> {console.log(data);
       this.getCommentByFormation();
     });
   }
@@ -303,10 +301,7 @@ export class VideoplaylistComponent implements OnInit {
     this.videoUrl = item;
   }
 
-  retrievedImage: any;
-  base64Data: any;
 
-   video: any;
 
 
 
@@ -378,18 +373,6 @@ export class VideoplaylistComponent implements OnInit {
   }
 
 
-  fileReady(e:any) {
-    const file: File = e[0];
-    const fileReader = new FileReader();
-    fileReader.onloadend = (event: any) => {
-      const arrayBuffer = event.target.result;
-      const fileType = "video/mp4";
-      const blob = new Blob(arrayBuffer, {type: fileType });
-      const src = URL.createObjectURL(blob);
-      this.video = src;
-    };
-    fileReader.readAsArrayBuffer(file);
-  }
 
   previous() {
     if (this.index === 0) {
@@ -401,7 +384,7 @@ export class VideoplaylistComponent implements OnInit {
   }
 
   next() {
-    if (this.index === this.retrieveResonse.length) {
+    if (this.index === this.retrieveImage.length) {
       this.index = 0;
     }else {
       this.index++;

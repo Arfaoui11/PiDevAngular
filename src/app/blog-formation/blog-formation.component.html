@@ -25,7 +25,7 @@
   <div class="col-xl-5 col-lg-8 col-md-8 col-sm-8 col-3 order-2 order-xl-3">
     <div class="bd-header-right bd-header-right-four text-end">
       <div class="bd-header-input-search bd-header-input-search-six">
-        <form (click)="SearchMultiple(key.value)" class="position-relative">
+        <form (click)="SearchMultiple(key.value);SearchHistoric(key.value)" class="position-relative">
           <input type="text" placeholder="Search keywords" #key="ngModel" ngModel
                  name="key">
           <button type="submit"><i class="fas fa-search"></i></button>
@@ -51,6 +51,9 @@
             <div class="bd-blog-text">
               <div class="bd-blog-meta mb-15">
                 <ul>
+                  <div style="width: 60px;float: right"><ngx-qrcode [elementType]="elementType"  [value]="'http://localhost:4200/#/front/End/detailsF/'+l.idFormation" [width]="10"  [errorCorrectionLevel]="correctionLevel" ></ngx-qrcode></div>
+                </ul>
+                <ul>
                   <li><a href="blog-details.html"><i class="flaticon-calendar"></i>Start : {{l.start | date | slice:0 : 12   }} <br> End : {{l.end | date | slice:0 : 12}} </a></li>
                   <li><a href="blog-details.html"><i class="flaticon-chat"></i>{{l.postComments.length}} Comments</a></li>
                 </ul>
@@ -61,7 +64,6 @@
                 <div class="bd-blog-author-info">
                   <img src="../../assets/front/img/blog/blog-author-1.jpg" alt="author image not found">
                   <h6 class="bd-blog-author-info-title"> {{l.domain}}</h6>
-
                 </div>
                 <div class="bd-blog-author-link">
                   <a href="blog-details.html" [routerLink]="['../detailsF',l.idFormation]" >Read More <i class="far fa-arrow-right"></i></a>

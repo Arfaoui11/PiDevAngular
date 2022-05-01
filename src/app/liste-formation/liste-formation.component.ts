@@ -69,31 +69,7 @@ export class ListeFormationComponent implements OnInit {
   }
 
 
-  addLikes(i:number)
-  {
-    this.serviceForm.addLikes(i).subscribe(
-      data=>{
-        this.getAllFormation();
-      }
-    );
 
-    this.snackbar.open(' ajout Likes avec succees', '', {
-      duration: 2000
-    });
-  }
-
-  addDisLikes(i:number)
-  {
-    this.serviceForm.addDisLikes(i).subscribe(
-      data=>{
-        this.getAllFormation();
-      }
-    );
-
-    this.snackbar.open(' ajout DisLikes avec succees', '', {
-      duration: 2000
-    });
-  }
 
 
 
