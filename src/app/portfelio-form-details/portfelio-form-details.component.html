@@ -27,8 +27,10 @@
       <div class="col-lg-8">
         <div class="bd-service-details mb-20">
           <div class="bd-service-details-img mb-50">
-            <div class="video-player-wrapper" >
-              <!--  <iframe *ngIf="vdo.fileType.toString().includes('video')" class="img-thumbnail"  [src]="retrievedImage" allowfullscreen></iframe>-->
+
+
+           <!-- <div class="video-player-wrapper" >
+
               <vg-player (onPlayerReady)="videoPlayerInit($event)">
                 <vg-overlay-play></vg-overlay-play>
                 <vg-buffering></vg-buffering>
@@ -65,12 +67,50 @@
                 </video>
               </vg-player>
 
-            <!--  <div class="card-body" *ngIf="retrieveVideo[index].fileType.toString().includes('video')">
+              <div class="card-body" *ngIf="retrieveVideo[index].fileType.toString().includes('video')">
                 <p class="card-text">{{ retrieveVideo[index].fileName | slice:0:-4 }}</p>
                 <a  class="card-link" (click)="playvideo(retrieveVideo[index].id)">Video link</a>
                 <a  class="card-link" (click)="downloadFiles(retrieveVideo[index].id)" > Download files </a>
-              </div>-->
-            </div>
+              </div>
+            </div>-->
+              <div class="video-player-wrapper" >
+
+                <vg-player (onPlayerReady)="videoPlayerInit($event)">
+                  <vg-overlay-play></vg-overlay-play>
+                  <vg-buffering></vg-buffering>
+
+                  <vg-scrub-bar>
+                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                    <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                  </vg-scrub-bar>
+
+                  <vg-controls>
+
+
+
+                    <vg-play-pause></vg-play-pause>
+                    <vg-playback-button></vg-playback-button>
+
+                    <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+                    <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+                    <vg-mute></vg-mute>
+                    <vg-volume></vg-volume>
+                    <vg-track-selector></vg-track-selector>
+                    <vg-fullscreen></vg-fullscreen>
+                  </vg-controls>
+
+
+
+                  <video #media *ngIf="retrieveVideo[index].fileType.toString().includes('video')" [vgMedia]="$any(media)"  [src]="'data:video/mp4;base64,'+retrieveVideo[index].data" width='150' height='100'
+                         id="singleVideo"
+                         preload="auto" crossorigin controls="controls">
+                    <track src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" kind="subtitles" label="English" srclang="en" default>
+                    <track src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt" kind="subtitles" label="Español" srclang="es">
+                  </video>
+                </vg-player>
+              </div>
 
 
           </div>
@@ -116,7 +156,28 @@
       </div>
       <div class="col-lg-4">
         <div class="bd-service-sidebar mb-50">
+          <div class="widget mb-45"  >
+
+            <h3 class="sidebar__widget--title mb-30"  >Recent Videos</h3>
+
+            <div class="sidebar--widget__post mb-20" *ngFor="let vdo of retrieveVideo; let $index = index">
+              <div class="sidebar__post--thumb">
+                <a  >
+                  <div class="post__img" >
+                    <img src="../../assets/front/img/blog/b6.jpg" alt="">
+                  </div>
+
+                </a>
+              </div>
+              <div class="sidebar__post--text">
+                <h4 class="sidebar__post--title"><a (click)="sendIndex($index)">{{vdo.fileName}}</a></h4>
+                <span>{{formation.start | date | slice:0 : 12}}</span>
+              </div>
+            </div>
+
+          </div>
           <div class="bd-service-widget gray-bg mb-30">
+
             <div class="bd-service-sidebar-category">
               <h5 class="bd-service-sidebar-category-title mb-20">Information</h5>
               <div class="bd-service-sidebar-infos">

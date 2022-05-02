@@ -153,7 +153,7 @@ export class BlogDetailsComponent implements OnInit {
     this.serviceForm.getFormationById(this.idFormation).subscribe(data => {
       this.formation = data;
 
-
+      this.rating = this.formation.rating;
       for (let app of this.formation.apprenant)
       {
         if (app.id == this.currentUser.id)
@@ -178,7 +178,7 @@ export class BlogDetailsComponent implements OnInit {
           this.isTested =true;
         }
       }
-      this.rating = this.formation.rating;
+
 
     });
     return this.formation;
