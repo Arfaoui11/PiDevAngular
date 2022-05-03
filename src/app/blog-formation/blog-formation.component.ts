@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Formation} from "../core/model/Formation";
 import {User} from "../core/model/User";
 import {FormationService} from "../services/formation.service";
@@ -23,6 +23,8 @@ export class BlogFormationComponent implements OnInit {
   elementType= NgxQrcodeElementTypes.URL;
   correctionLevel = NgxQrcodeErrorCorrectionLevels.MEDIUM;
 
+  @ViewChild('thenfirst', {static: true}) thenfirst: TemplateRef<any>|null = null;
+  @ViewChild('thenSec', {static: true}) thenSec: TemplateRef<any>|null = null;
 
   listApprenent : User[];
   sowFormateur : boolean = false;
@@ -34,7 +36,7 @@ export class BlogFormationComponent implements OnInit {
   ngOnInit(): void {
 
     // Methode  subscribe recuperer la liste de donnee .
-    this.getAllFormation()
+    this.getAllFormation();
   }
 
   handlePageChange(event: number): void {

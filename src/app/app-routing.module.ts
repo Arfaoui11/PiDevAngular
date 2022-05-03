@@ -27,6 +27,7 @@ import {MyCoursesComponent} from "./my-courses/my-courses.component";
 import {CalendarFrontComponent} from "./calendar-front/calendar-front.component";
 import {QestionQuizCoursesComponent} from "./qestion-quiz-courses/qestion-quiz-courses.component";
 import {E404Component} from "./e404/e404.component";
+import {CallVideoComponent} from "./call-video/call-video.component";
 
 
 
@@ -36,6 +37,7 @@ const routes: Routes =
    [
 
      {path:'login',component: LoginComponent },
+     {path:'chatRoom/:idCourses',component: CallVideoComponent },
      {path:'homeF',component: HomeFComponent },
      { path: '',  redirectTo: '/front/End/homeF', pathMatch: 'full' },
 

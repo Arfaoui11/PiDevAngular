@@ -241,6 +241,13 @@ export class FormationService {
     return this.http.put<any>("http://localhost:8099/Courses/addDisLikes/"+i+"/"+id,null)
   }
 
+  desaffecterApprenant(idU:number,idF:number): Observable<any> {
+
+    return this.http.post<any>("http://localhost:8099/Courses/desaffecterApprenant/"+idU+"/"+idF,null)
+  }
+
+
+
   getNbrLikes(id:number):Observable<any>
   {
     return this.http.get<any>('http://localhost:8099/Courses/getNbrLikesByComment/'+id);

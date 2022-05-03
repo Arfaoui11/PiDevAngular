@@ -77,12 +77,12 @@
             </div>
             <div class="ablog__text ablog__text4">
               <div class="bd-blog-meta mb-15">
-                <ul>
-                  <li><a href="blog-details.html"><i class="flaticon-calendar"></i>{{formation.start | date | slice:0 : 12 }} - {{formation.end | date | slice:0 : 12 }}</a></li>
-                  <li><a href="#com"><i class="flaticon-chat"></i>{{formation.postComments.length}} Comments</a></li>
-                  <li><a [routerLink]="['../../chat']" ><i class="flaticon-chatting"></i> Chat Room Courses </a></li>
-                </ul>
-              </div>
+              <ul>
+                <li><a href="blog-details.html"><i class="flaticon-calendar"></i>{{formation.start | date | slice:0 : 12 }} - {{formation.end | date | slice:0 : 12 }}</a></li>
+                <li><a href="#com"><i class="flaticon-chat"></i>{{formation.postComments.length}} Comments</a></li>
+                <li><a [routerLink]="['../../chat']" ><i class="flaticon-chatting"></i> Chat Room </a></li>
+              </ul>
+            </div>
 
 
               <ng-template #t let-fill="fill">

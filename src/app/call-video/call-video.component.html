@@ -1,0 +1,93 @@
+<div class="grid-container">
+  <header class="header">
+    <div class="header__search">
+       &nbsp; &nbsp;<strong> Name :&nbsp;{{ name.toUpperCase() }}</strong>
+      &nbsp;|&nbsp;<strong> Room Id :&nbsp;{{ room }}</strong>
+    </div>
+    <div class="header__avatar"><a (click)="desconnect()" > Disconnect </a></div>
+  </header>
+  <aside class="sidenav">
+    <div class="card-container" *ngFor="let m of messages">
+      <div class="card card-big" [ngClass]="{ me: m.id === name }">
+        <span>{{ m.message }}</span
+        ><br />
+        <small>{{ m.id }}</small>
+      </div>
+    </div>
+    <div class="input" *ngIf="room !== ''" style="padding-left: 20px">
+    <!--  <textarea
+        type="text"
+        rows="3"
+        cols="15"
+        [value]="msg"
+        [(ngModel)]="msg"
+      ></textarea>-->
+      <form  class="bg-light" (ngSubmit)="sendMessage(msg)" >
+
+        <div class="input-group" style="width: 200px">
+
+          <input  placeholder="Type a message" aria-describedby="button-addon2"  autocomplete="off" type="text" name="message"
+                  [(ngModel)]="msg" class="form-control rounded-0 border-0 py-4 bg-light">
+          <div class="input-group-append">
+            <button  type="submit" class="btn btn-link" style="width: 10px;"><i class="fa fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </form>
+
+     <!-- <button class="btn btn-" (click)="sendMessage(msg)">📧</button>-->
+
+
+      </div>
+
+  </aside>
+  <main class="main" >
+    <div class="placeholder" *ngIf="room === ''">
+
+      <div class="form__group field" >
+
+        <label  class="form__label"> Room Space </label>
+
+        <a class="theme-btn w-full mb-12" (click)="setRoom();setName()" style="width: 400px" > Participate In The Meeting 👨‍👩‍👧‍👦 </a>
+      </div>
+    </div>
+
+    <div class="video-grid">
+      <label
+        *ngIf="remoteStreams.length === 0 && room !== ''"
+        (click)="startCall()"
+      >
+        📞
+      </label>
+      <div class="video-card" *ngIf="localStream">
+        <video
+          id="me"
+          height="190"
+          width="257"
+          [srcObject]="localStream"
+          autoplay
+          muted
+        ></video>
+        <div class="user-name" style="color: white">{{ name }}</div>
+      </div>
+      <div
+        class="video-card"
+        *ngFor="let stream of remoteStreams; let i = index"
+      >
+        <video
+          id="me"
+          height="190"
+          width="257"
+          [srcObject]="stream"
+          autoplay
+          muted
+        ></video>
+        <div class="user-name">{{ remoteNames[i] }}</div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="footer__copyright">&copy; 2021 Panthom</div>
+    <div class="footer__signature">Made with <span style="color: lime">Mahdi Jr</span>  and ☕☕☕</div>
+  </footer>
+</div>
+🙊🙈

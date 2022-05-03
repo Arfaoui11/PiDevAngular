@@ -19,15 +19,17 @@
                     <p class="h5 mb-0 py-1">Recent</p>
                   </div>
 
-                  <div class="messages-box">
-                    <div class="list-group-item-success rounded-3" *ngFor="let user of users"    >
+                  <div class="messages-box" style="height: 520px">
+                    <div class="list-group-item-dark rounded-pill" *ngFor="let user of users" style="height: 90px">
 
 
-                      <a class="list-group-item-success list-group-item-action active text-white rounded-0" >
-                        <div class="media"  ><img src="assets/images/profile/user-uploads/user-02.jpg" alt="user" width="50" class="rounded-circle">
+                      <a class="list-group-item-dark active list-group-item-action text-white rounded-pill"  >
+                        <div class="media"  ><img src="assets/images/profile/user-uploads/user-02.jpg" alt="user"   width="80" class="rounded-circle">
                           <div class="media-body ml-4">
                             <div  [ngClass]="{'online' : user.isOnline}" [ngClass]="{'offline' : !user.isOnline}">
-                              <h6 class="mb-0">{{user.displayName}}</h6><small class="small font-weight-bold">{{daysa.getDate().toString().toUpperCase() +" "+daysa.getMonth().toString().toUpperCase() +" "+daysa.getFullYear().toString().toUpperCase() }}</small>
+                              <h6 class="mb-0">{{user.displayName}}</h6>
+                            <!--  <small class="small font-weight-bold">{{daysa.getDate().toString().toUpperCase() +"-"+daysa.getMonth().toString().toUpperCase() +"-"+daysa.getFullYear().toString().toUpperCase() }}</small>-->
+                              <small class="small font-weight-bold">{{user.isOnline ? "Online" : "Offline"}}</small>
                             </div>
                             <p class="font-italic mb-0 text-small">{{user.email}}</p>
                           </div>

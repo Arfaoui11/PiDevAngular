@@ -44,9 +44,11 @@
             currentPage: page,
             totalItems: Items
           }  , let i=index">
-          <div class="bd-blog mb-30">
-            <div class="bd-blog-img" *ngIf="l.databaseFiles[0].fileType.toString().includes('image')">
-              <a href="blog-details.html"><img [src]="'data:image/jpeg;base64,'+l.databaseFiles[0].data" alt="blog image not found"></a>
+          <div class="bd-blog mb-30" >
+            <div class="bd-blog-img" >
+              <div *ngIf="l.databaseFiles[0].fileType.toString().includes('image') ; then thenfirst ; else thenSec"></div>
+              <ng-template #thenfirst > <a href="blog-details.html"><img  [src]="'data:image/jpeg;base64,'+l.databaseFiles[0].data" alt="blog image not found 1"></a></ng-template>
+              <ng-template #thenSec > <a href="blog-details.html"><img  [src]="'data:image/jpeg;base64,'+l.databaseFiles[1].data" alt="blog image not found 2"></a></ng-template>
             </div>
             <div class="bd-blog-text">
               <div class="bd-blog-meta mb-15">

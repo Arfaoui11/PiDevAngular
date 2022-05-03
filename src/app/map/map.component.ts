@@ -62,8 +62,12 @@ export class MapComponent implements OnInit {
       }
 
     }
-    let markera = L.marker([this.lat,this.lot],{icon:this.newIcon,title:"City : "+ this.lieu});
-    markera.addTo(this.map);
+    if (this.lieu)
+    {
+      let markera = L.marker([this.lat,this.lot],{icon:this.newIcon,title:"City : "+ this.lieu});
+      markera.addTo(this.map);
+    }
+
 
     tiles.addTo(this.map);
 

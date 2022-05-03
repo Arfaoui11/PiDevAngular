@@ -58,12 +58,8 @@ import { VideoplaylistComponent } from './videoplaylist/videoplaylist.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import {DatePickerModule, TimePickerModule} from "@syncfusion/ej2-angular-calendars";
-
 import {NgxWebstorageModule} from "ngx-webstorage";
 import { RoutComponent } from './chat/rout/rout.component';
-import { ChatstreamComponent } from './chat/chatstream/chatstream.component';
-import { ListUserComponent } from './chat/list-user/list-user.component';
-import {ChatComponent} from "./chat/chat/chat.component";
 import { HomeFComponent } from './FontEnd/home-f/home-f.component';
 import { BlogFormationComponent } from './blog-formation/blog-formation.component';
 import {HomeComponent} from "./home/home.component";
@@ -77,13 +73,13 @@ import {FooterFComponent} from "./FontEnd/footer-f/footer-f.component";
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { PortfelioFormComponent } from './portfelio-form/portfelio-form.component';
 import { PortfelioFormDetailsComponent } from './portfelio-form-details/portfelio-form-details.component';
-import { ChatBotComponent } from './chat-bot/chat-bot.component';
 import { UserViewComponent } from './user-view/user-view.component';
 import {MapComponent} from "./map/map.component";
 import { MyCoursesComponent } from './my-courses/my-courses.component';
 import { CalendarFrontComponent } from './calendar-front/calendar-front.component';
 import { QestionQuizCoursesComponent } from './qestion-quiz-courses/qestion-quiz-courses.component';
 import { E404Component } from './e404/e404.component';
+import { CallVideoComponent } from './call-video/call-video.component';
 
 
 FullCalendarModule.registerPlugins([
@@ -118,10 +114,7 @@ FullCalendarModule.registerPlugins([
     MapComponent,
     DashboardComponent,
     LoginComponent,
-    ChatComponent,
     RoutComponent,
-    ChatstreamComponent,
-    ListUserComponent,
     HomeFComponent,
     BlogFormationComponent,
     NavbarFComponent,
@@ -130,12 +123,12 @@ FullCalendarModule.registerPlugins([
     BlogDetailsComponent,
     PortfelioFormComponent,
     PortfelioFormDetailsComponent,
-    ChatBotComponent,
     UserViewComponent,
     MyCoursesComponent,
     CalendarFrontComponent,
     QestionQuizCoursesComponent,
     E404Component,
+    CallVideoComponent,
   ],
   imports: [
     BrowserModule,

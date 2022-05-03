@@ -114,6 +114,15 @@
 
 
           </div>
+          <br>
+          <div class="bd-blog-meta mb-15">
+            <ul>
+              <li><a href="blog-details.html"><i class="flaticon-calendar"></i>{{formation.start | date | slice:0 : 12 }} - {{formation.end | date | slice:0 : 12 }}</a></li>
+              <li><a href="#com"><i class="flaticon-chat"></i>{{formation.postComments.length}} Comments</a></li>
+              <li><a (click)="goToChatRoom(formation.idFormation)" ><i class="flaticon-chatting"></i> Chat Room Courses </a></li>
+            </ul>
+          </div>
+
           <h2 class="bd-section-title mb-25">Web Developemnt</h2>
           <p class="mb-30">When I skim through the documentation of popular frameworks, I find the features described in Part 1 straight away. When I read the web platform documentation (for example, on MDN), I find many confusing patterns of how to do things, without a conclusive representation of data-binding, list synchronization, or reactivity. I will try to draw some guidelines of how to approach these problems on the web platform, without requiring a framework (in other words, by going vanilla).</p>
           <h4 class="mb-25">Special Features</h4>

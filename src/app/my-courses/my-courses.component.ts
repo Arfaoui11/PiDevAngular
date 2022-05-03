@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Formation} from "../core/model/Formation";
 import {User} from "../core/model/User";
 import {FormationService} from "../services/formation.service";
@@ -18,7 +18,8 @@ export class MyCoursesComponent implements OnInit {
   toggle = true;
   domain : string;
 
-
+  @ViewChild('first', {static: true}) thenfirst: TemplateRef<any>|null = null;
+  @ViewChild('Sec', {static: true}) thenSec: TemplateRef<any>|null = null;
   currentUser: any = [];
   listApprenent : User[];
   sowFormateur : boolean = false;

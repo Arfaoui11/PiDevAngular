@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/c1d2120b-9ddb-4683-8cd2-466bde14523a/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/cuhm-api",
+    "appService.deploySubpath": "."
+}

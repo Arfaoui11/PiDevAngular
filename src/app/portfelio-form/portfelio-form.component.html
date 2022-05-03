@@ -26,103 +26,160 @@
     <div class="row align-items-center pb-50">
       <div class="col-12">
         <div class="bd-portfolio-three-menu text-center">
-          <button  (click)="SearchMultiple('')" class="active">All</button>
-          <button  (click)="SearchMultiple('IT')" >It</button>
-          <button  (click)="SearchMultiple('PHY')" >Phy</button>
-          <button  (click)="SearchMultiple('MARKETING')" >Marketing</button>
-          <button  (click)="SearchMultiple('ART')" >Art</button>
-          <button  (click)="SearchMultiple('CINEMA')" >Cinema</button>
-          <button  (click)="SearchMultiple('ECONOMIC')" >Economic</button>
+          <button data-filter="*" (click)="SearchMultiple('')" class="active">All</button>
+          <button data-filter=".cat1" (click)="SearchMultiple('IT')" >It</button>
+          <button data-filter=".cat2" (click)="SearchMultiple('PHY')" >Phy</button>
+          <button data-filter=".cat3" (click)="SearchMultiple('MARKETING')" >Marketing</button>
+          <button data-filter=".cat1" (click)="SearchMultiple('ART')" >Art</button>
+          <button data-filter=".cat2" (click)="SearchMultiple('CINEMA')" >Cinema</button>
+          <button data-filter=".cat3" (click)="SearchMultiple('ECONOMIC')" >Economic</button>
         </div>
       </div>
     </div>
     <div class="row bd-portfolio-active mb-30">
-      <div class="col-lg-8 col-md-6 grid-item cat1">
-        <div class="bd-portfolio bd-portfolio-three mb-30" *ngIf="listFormation[0]">
-          <img  *ngIf="listFormation[0].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[0].databaseFiles[0].data" alt="porfolio not found">
-          <div class="bd-portfolio-text">
-            <span>{{listFormation[0].domain}}</span>
-            <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[0].idFormation]">{{listFormation[0].title}}</a></h5>
-            <p>{{listFormation[0].start}}</p>
+
+          <div class="col-lg-8 col-md-6 grid-item cat1" *ngIf="listFormation[0]">
+            <div class="bd-portfolio bd-portfolio-three mb-30" >
+              <div *ngIf="listFormation[0].databaseFiles[0].fileType.toString().includes('image'); then thenfirst ; else thenSec">
+
+
+              </div>
+              <ng-template #thenfirst > <img  *ngIf="listFormation[0].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[0].databaseFiles[0].data" alt="porfolio not found 1"></ng-template>
+              <ng-template #thenSec ><img  *ngIf="listFormation[0].databaseFiles[1].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[0].databaseFiles[1].data" alt="porfolio not found 2"></ng-template>
+
+
+              <div class="bd-portfolio-text">
+                <span>{{listFormation[0].domain}}</span>
+                <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[0].idFormation]">{{listFormation[0].title}}</a></h5>
+                <p>{{listFormation[0].start}}</p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 grid-item cat2" *ngIf="listFormation[1]">
-        <div class="bd-portfolio bd-portfolio-three mb-30">
-          <img *ngIf="listFormation[1].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[1].databaseFiles[0].data" alt="porfolio not found">
-          <div class="bd-portfolio-text">
-            <span>{{listFormation[1].domain}}</span>
-            <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[1].idFormation]">{{listFormation[1].title}}</a></h5>
-            <p>{{listFormation[1].start}}</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="row">
-          <div class="col-lg-4 col-md-6 grid-item cat3" *ngIf="listFormation[2]">
+          <div class="col-lg-4 col-md-6 grid-item cat2" *ngIf="listFormation[1]">
             <div class="bd-portfolio bd-portfolio-three mb-30">
-              <img *ngIf="listFormation[2].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[2].databaseFiles[0].data" alt="porfolio not found">
-              <div class="bd-portfolio-text">
-                <span>{{listFormation[2].domain}}</span>
-                <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[2].idFormation]">{{listFormation[2].title}}</a></h5>
-                <p>{{listFormation[2].start}}</p>
+              <div *ngIf="listFormation[1].databaseFiles[0].fileType.toString().includes('image'); then thenfirst ; else thenSec">
+
+
               </div>
-            </div>
-            <div class="bd-portfolio bd-portfolio-three mb-30" *ngIf="listFormation[3]">
-              <img *ngIf="listFormation[3].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[3].databaseFiles[0].data" alt="porfolio not found">
+              <ng-template #thenfirst > <img  *ngIf="listFormation[1].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[1].databaseFiles[0].data" alt="porfolio not found 1"></ng-template>
+              <ng-template #thenSec ><img  *ngIf="listFormation[1].databaseFiles[1].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[1].databaseFiles[1].data" alt="porfolio not found 2"></ng-template>
+
               <div class="bd-portfolio-text">
-                <span>{{listFormation[3].domain}}</span>
-                <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[3].idFormation]">{{listFormation[3].title}}</a></h5>
-                <p>{{listFormation[3].start}}</p>
+                <span>{{listFormation[1].domain}}</span>
+                <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[1].idFormation]">{{listFormation[1].title}}</a></h5>
+                <p>{{listFormation[1].start}}</p>
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 grid-item cat2" *ngIf="listFormation[4]">
-            <div class="bd-portfolio bd-portfolio-three mb-30">
-              <img *ngIf="listFormation[4].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[4].databaseFiles[0].data" alt="porfolio not found">
-              <div class="bd-portfolio-text">
-                <span>{{listFormation[4].domain}}</span>
-                <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[4].idFormation]">{{listFormation[4].title}}</a></h5>
-                <p>{{listFormation[4].start}}</p>
+
+           <div class="col-lg-4 col-md-6 grid-item cat3" *ngIf="listFormation[2]">
+                <div class="bd-portfolio bd-portfolio-three mb-30">
+                  <div *ngIf="listFormation[2].databaseFiles[0].fileType.toString().includes('image'); then thenfirst ; else thenSec">
+
+
+                  </div>
+                  <ng-template #thenfirst > <img  *ngIf="listFormation[2].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[2].databaseFiles[0].data" alt="porfolio not found 1"></ng-template>
+                  <ng-template #thenSec ><img  *ngIf="listFormation[2].databaseFiles[1].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[2].databaseFiles[1].data" alt="porfolio not found 2"></ng-template>
+
+                  <div class="bd-portfolio-text">
+                    <span>{{listFormation[2].domain}}</span>
+                    <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[2].idFormation]">{{listFormation[2].title}}</a></h5>
+                    <p>{{listFormation[2].start}}</p>
+                  </div>
+                </div>
+           </div>
+           <div class="col-lg-4 col-md-6 grid-item cat1" *ngIf="listFormation[3]">
+                <div class="bd-portfolio bd-portfolio-three mb-30">
+                  <div *ngIf="listFormation[3].databaseFiles[0].fileType.toString().includes('image'); then thenfirst ; else thenSec">
+
+
+                  </div>
+                  <ng-template #thenfirst > <img  *ngIf="listFormation[3].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[3].databaseFiles[0].data" alt="porfolio not found 3"></ng-template>
+                  <ng-template #thenSec ><img  *ngIf="listFormation[3].databaseFiles[1].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[3].databaseFiles[1].data" alt="porfolio not found 3"></ng-template>
+
+                  <div class="bd-portfolio-text">
+                    <span>{{listFormation[3].domain}}</span>
+                    <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[3].idFormation]">{{listFormation[3].title}}</a></h5>
+                    <p>{{listFormation[3].start}}</p>
+                  </div>
+                </div>
+           </div>
+
+
+           <div class="col-lg-4 col-md-6 grid-item cat2" *ngIf="listFormation[4]">
+              <div class="bd-portfolio bd-portfolio-three mb-30">
+                <div *ngIf="listFormation[4].databaseFiles[0].fileType.toString().includes('image'); then thenfirst ; else thenSec">
+
+
+                </div>
+                <ng-template #thenfirst > <img  *ngIf="listFormation[4].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[4].databaseFiles[0].data" alt="porfolio not found 4"></ng-template>
+                <ng-template #thenSec ><img  *ngIf="listFormation[4].databaseFiles[1].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[4].databaseFiles[1].data" alt="porfolio not found 4"></ng-template>
+
+                <div class="bd-portfolio-text">
+                  <span>{{listFormation[4].domain}}</span>
+                  <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[4].idFormation]">{{listFormation[4].title}}</a></h5>
+                  <p>{{listFormation[4].start}}</p>
+                </div>
               </div>
-            </div>
-            <div class="bd-portfolio bd-portfolio-three mb-30" *ngIf="listFormation[5]">
-              <img *ngIf="listFormation[5].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[5].databaseFiles[0].data" alt="porfolio not found">
+           </div>
+           <div class="col-lg-4 col-md-6 grid-item cat3" *ngIf="listFormation[5]">
+           <div class="bd-portfolio bd-portfolio-three mb-30">
+              <div *ngIf="listFormation[5].databaseFiles[0].fileType.toString().includes('image'); then thenfirst ; else thenSec">
+
+
+              </div>
+              <ng-template #thenfirst > <img  *ngIf="listFormation[5].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[5].databaseFiles[0].data" alt="porfolio not found 5"></ng-template>
+              <ng-template #thenSec ><img  *ngIf="listFormation[5].databaseFiles[1].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[5].databaseFiles[1].data" alt="porfolio not found 5"></ng-template>
+
               <div class="bd-portfolio-text">
                 <span>{{listFormation[5].domain}}</span>
                 <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[5].idFormation]">{{listFormation[5].title}}</a></h5>
                 <p>{{listFormation[5].start}}</p>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-6 grid-item cat1">
-            <div class="bd-portfolio bd-portfolio-three mb-30" *ngIf="listFormation[6]">
-              <img *ngIf="listFormation[6].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[6].databaseFiles[0].data" alt="porfolio not found">
-              <div class="bd-portfolio-text">
-                <span>{{listFormation[6].domain}}</span>
-                <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[6].idFormation]">{{listFormation[6].title}}</a></h5>
-                <p>{{listFormation[6].start}}</p>
-              </div>
+           </div>
+
+           <div class="col-lg-4 col-md-6 grid-item cat2" *ngIf="listFormation[6]">
+             <div class="bd-portfolio bd-portfolio-three mb-30" >
+                <div *ngIf="listFormation[6].databaseFiles[0].fileType.toString().includes('image'); then thenfirst ; else thenSec">
+
+
+                </div>
+                <ng-template #thenfirst > <img  *ngIf="listFormation[6].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[6].databaseFiles[0].data" alt="porfolio not found 6"></ng-template>
+                <ng-template #thenSec ><img  *ngIf="listFormation[6].databaseFiles[1].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[6].databaseFiles[1].data" alt="porfolio not found 6"></ng-template>
+
+                <div class="bd-portfolio-text">
+                  <span>{{listFormation[6].domain}}</span>
+                  <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[6].idFormation]">{{listFormation[6].title}}</a></h5>
+                  <p>{{listFormation[6].start}}</p>
+                </div>
+             </div>
             </div>
-            <div class="bd-portfolio bd-portfolio-three mb-30" *ngIf="listFormation[7]">
-              <img *ngIf="listFormation[7].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[7].databaseFiles[0].data" alt="porfolio not found">
-              <div class="bd-portfolio-text">
-                <span>{{listFormation[7].domain}}</span>
-                <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[7].idFormation]">{{listFormation[7].title}}</a></h5>
-                <p>{{listFormation[7].start}}</p>
-              </div>
+            <div class="col-lg-4 col-md-6 grid-item cat1" *ngIf="listFormation[7]">
+               <div class="bd-portfolio bd-portfolio-three mb-30">
+                    <div *ngIf="listFormation[7].databaseFiles[0].fileType.toString().includes('image'); then thenfirst ; else thenSec">
+
+
+                    </div>
+                    <ng-template #thenfirst > <img  *ngIf="listFormation[7].databaseFiles[0].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[7].databaseFiles[0].data" alt="porfolio not found 7"></ng-template>
+                    <ng-template #thenSec ><img  *ngIf="listFormation[7].databaseFiles[1].fileType.toString().includes('image')" [src]="'data:image/jpeg;base64,'+listFormation[7].databaseFiles[1].data" alt="porfolio not found 7"></ng-template>
+
+                    <div class="bd-portfolio-text">
+                      <span>{{listFormation[7].domain}}</span>
+                      <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[7].idFormation]">{{listFormation[7].title}}</a></h5>
+                      <p>{{listFormation[7].start}}</p>
+                    </div>
+                  </div>
+            </div>
+       </div>
+
+        <div class="row" *ngIf="listFormation.length>=2" >
+          <div class="col-12">
+            <div class="bd-portfolio-btn text-center">
+              <a [routerLink]="['/front/End/blogF']" class="theme-btn-border">View All Works</a>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="bd-portfolio-btn text-center">
-          <a [routerLink]="['/front/End/blogF']" class="theme-btn-border">View All Works</a>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 <!-- portfolio area end here -->

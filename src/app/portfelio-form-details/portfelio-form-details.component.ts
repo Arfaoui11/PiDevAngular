@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {PostComment} from "../core/model/PostComment";
 import {Formation} from "../core/model/Formation";
 import {User} from "../core/model/User";
@@ -21,6 +21,9 @@ export class PortfelioFormDetailsComponent implements OnInit {
   public listComment: Record<string, any>[];
 
   @Input() post : PostComment = new PostComment;
+  @ViewChild('thenfirst', {static: true}) thenfirst: TemplateRef<any>|null = null;
+  @ViewChild('thenSec', {static: true}) thenSec: TemplateRef<any>|null = null;
+
 
   rating: number;
   retrieveResonse : any;
@@ -177,4 +180,7 @@ export class PortfelioFormDetailsComponent implements OnInit {
     this.retrieveVideo[this.index].play();
   }
 
+  goToChatRoom(idFormation: number) {
+    window.location.href = '#/chatRoom/'+idFormation;
+  }
 }

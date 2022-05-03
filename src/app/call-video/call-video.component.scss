@@ -1,0 +1,205 @@
+$primary: #f6a1ff;
+$secondary: #ffdeea;
+$white: #fff;
+$gray: #ffdeea;
+$green: #a7a7a7;
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 22px;
+}
+
+.grid-container {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 50px 1fr 50px;
+  grid-template-areas:
+    "sidenav header"
+    "sidenav main"
+    "sidenav footer";
+  height: 100vh;
+}
+
+.header {
+  grid-area: header;
+  background-color: $gray;
+}
+
+.sidenav {
+  grid-area: sidenav;
+  background-color: $secondary;
+  .input {
+    position: fixed;
+    bottom: 0px;
+    textarea {
+      font-size: 22px;
+    }
+    button {
+      font-size: 50px;
+      position: relative;
+      top: -20px;
+    }
+  }
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+
+    .card {
+      border-radius: 4px;
+      border: 1px solid $gray;
+      min-height: 40px;
+      width: 200px;
+      margin: 0 8px 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.2s ease-in-out;
+      line-height: 24px;
+    }
+
+    .card-big {
+      display: block;
+      background-color: $white;
+      &.me {
+        background-color: $green;
+      }
+    }
+  }
+}
+
+.main {
+  grid-area: main;
+  background-color: $green;
+  .placeholder {
+    height: 50%;
+    line-height: 50%;
+    text-align: center;
+    .form__group {
+      position: relative;
+      padding: 15px 0 0;
+      margin-top: 40%;
+      width: 100%;
+      left: 0;
+      button {
+        font-size: 1.3rem;
+        position: relative;
+        margin-left: 76px;
+      }
+    }
+
+    .form__field {
+      font-family: inherit;
+      width: 50%;
+      border: 0;
+      border-bottom: 2px solid $gray;
+      outline: 0;
+      font-size: 1.3rem;
+      color: $white;
+      padding: 7px 0;
+      background: transparent;
+      transition: border-color 0.2s;
+      left: 0px;
+      position: absolute;
+      margin: 0px 15px;
+
+      &::placeholder {
+        color: transparent;
+      }
+
+      &:placeholder-shown ~ .form__label {
+        font-size: 1.3rem;
+        cursor: text;
+        top: 20px;
+      }
+    }
+
+    .form__label {
+      position: absolute;
+      top: 0;
+      display: block;
+      transition: 0.2s;
+      font-size: 1rem;
+      color: $gray;
+      left: 0px;
+      margin: 0px 15px;
+    }
+
+    .form__field:focus {
+      ~ .form__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 1rem;
+        color: $primary;
+        font-weight: 700;
+      }
+      padding-bottom: 6px;
+      font-weight: 700;
+      border-width: 3px;
+      border-image: linear-gradient(to right, $primary, $secondary);
+      border-image-slice: 1;
+    }
+    /* reset input */
+    .form__field {
+      &:required,
+      &:invalid {
+        box-shadow: none;
+      }
+    }
+
+    button {
+      font-size: 300px;
+      display: table-cell;
+      vertical-align: middle;
+      line-height: normal;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      &:active {
+        text-shadow: 5px 5px $gray;
+        transform: translateY(-2px);
+        transform: translateX(-4px);
+      }
+    }
+    // position: relative;
+  }
+
+  .video-grid {
+    display: flex;
+    flex-flow: row wrap;
+    .video-card {
+      margin: 10px;
+      height: 200px;
+      width: 267px;
+      padding: 10px;
+    }
+    .user-name {
+      position: relative;
+      top: -25px;
+      left: 10px;
+    }
+  }
+}
+
+.footer {
+  grid-area: footer;
+  background-color: $gray;
+}
+.header,
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color: $gray;
+}
+

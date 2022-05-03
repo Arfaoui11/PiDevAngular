@@ -94,9 +94,9 @@
                   <img src="../../../assets/front/img/icon/chatting.png" alt="img not found">
                 </div>
                 <div class="bd-header-contacts-text">
-                  <span *ngIf="currentUser"> Welcome {{currentUser.displayName}}</span>
+                  <span *ngIf="currentUser"> Welcome {{currentUser.displayName.toUpperCase()}}</span>
                   <a *ngIf="!currentUser" [routerLink]="['/login']">Login</a>
-                  <a  *ngIf="currentUser"  (click)="logout()">Logout</a>
+                  <button class="theme-btn w-full mb-12" style="width: 30px;height: 55px" *ngIf="currentUser"  (click)="logout()">Logout</button>
                 </div>
               </div>
             </div>

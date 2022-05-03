@@ -1,9 +1,11 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HostListener}     from '@angular/core';
 import {Message} from "../../core/model/Message";
 import {AppdataService} from "../../services/appdata.service";
 import {WebsocketService} from "../../services/websocket.service";
 import {User} from "../../core/model/User";
 import {AppService} from "../../services/app.service";
+import {TokenService} from "../../services/token.service";
 
 @Component({
   selector: 'app-rout',
@@ -19,16 +21,19 @@ export class RoutComponent implements OnInit {
   typingUser: string;
   loggedinUserId: number;
   websocket: WebSocket;
+  currentUser: any = [];
 
   heurs : Date = new Date();
   daysa : Date = new Date();
 
   constructor(private appDataService: AppdataService,
               private appService: AppService,
-              private websocketService: WebsocketService) {
+              private websocketService: WebsocketService,private token: TokenService) {
+    this.currentUser = this.token.getUser();
 
     this.websocket = this.websocketService.createNew();
-    this.websocket.onopen = () => {
+
+    this.websocket.onopen = (event) => {
       let message: Message = {
         type: 'JOINED',
         from: this.appDataService.id,
@@ -42,6 +47,8 @@ export class RoutComponent implements OnInit {
 
 
   }
+
+
 
   ngOnInit(): void {
     this.websocket = this.websocketService.createNew();
@@ -74,6 +81,14 @@ export class RoutComponent implements OnInit {
       fromUserName: this.appDataService.displayName,
       message: msg
     };
+    for (let u of this.users)
+    {
+      if (u.id == this.currentUser.id)
+      {
+        u.isOnline = true;
+      }
+    }
+
     this.websocket.send(JSON.stringify(message));
     this.message = '';
   }
@@ -107,6 +122,7 @@ export class RoutComponent implements OnInit {
     this.websocket.onmessage = (event: MessageEvent) => {
       let message: Message = JSON.parse(event.data);
       if (message.type == 'JOINED') {
+        console.log(message.type);
         this.setUserStatus(message.from, true);
       } else if (message.type == 'LEFT') {
         this.setUserStatus(message.from, false);
@@ -126,8 +142,20 @@ export class RoutComponent implements OnInit {
   }
 
   setUserStatus(userId: Number, isOnline: boolean) {
-    // let user: User = this.users.filter(u => u.id == userId );
-    // user.isOnline = isOnline;
+    // let user: User[] = this.users.filter(u => u.id == userId );
+    // user[0].isOnline = isOnline;
+    // this.users = user;
+    // console.log(user);
+
+    for (let u of this.users)
+    {
+      if (u.id == userId)
+      {
+        u.isOnline = true;
+      }
+    }
+
+
   }
 
   @HostListener('window:beforeunload')

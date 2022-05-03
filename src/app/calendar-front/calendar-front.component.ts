@@ -240,7 +240,7 @@ export class CalendarFrontComponent implements OnInit {
     xx.send(null);
 
 
-    xmll.open('get',"http://localhost:8099/Courses/getFormationByApprenant/"+8,true);
+    xmll.open('get',"http://localhost:8099/Courses/getFormationByApprenant/"+5,true);
 
 
     xmll.send(null);
@@ -269,7 +269,7 @@ export class CalendarFrontComponent implements OnInit {
       /*
 
       */
-    },500)
+    },2200)
 
 
 
@@ -289,11 +289,11 @@ export class CalendarFrontComponent implements OnInit {
 
   deleteFormation(i :number)
   {
-    this.serviceForm.deleteFormation(i)
+    this.serviceForm.desaffecterApprenant(this.currentUser.id,i)
       .subscribe(response => {
         this.listFormation = this.listFormation.filter(item => item.idFormation !== i);
         this.getformation();
-        this.getdata();
+       // this.getdata();
       });
     this.snackbar.open(' delete successfully', 'Undo', {
       duration: 2000
@@ -396,7 +396,7 @@ export class CalendarFrontComponent implements OnInit {
 
   // setViews: View[] = ["Day","Month","Agenda","TimelineMonth","TimelineDay","TimelineWeek"];
   // public setView :View = "Month";
-  public selectedDate : Date = new Date(2022,3,1);
+  public selectedDate : Date = new Date(2022,4,1);
   public timeScale: TimeScaleModel = { enable: true, interval: 60 };
 
   StartTime: Date = new Date(2022, 3, 1, 10, 0);

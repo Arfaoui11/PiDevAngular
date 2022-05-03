@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {TokenService} from "../../services/token.service";
+import {Formation} from "../../core/model/Formation";
+import {FormationService} from "../../services/formation.service";
 
 @Component({
   selector: 'app-home-f',
@@ -19,15 +21,21 @@ export class HomeFComponent implements OnInit {
   public drizzle: any;
   public lat: any;
   public lot: any;
+  public index= 0;
 
-  constructor(private token: TokenService) {
+  @ViewChild('thenfirst', {static: true}) thenfirst: TemplateRef<any>|null = null;
+  @ViewChild('thenSec', {static: true}) thenSec: TemplateRef<any>|null = null;
+
+  constructor(private token: TokenService ,private serviceForm : FormationService) {
     this.currentUser = this.token.getUser();
   }
 
-
+  listFormation  : Formation[];
  public temp : any;
 
   ngOnInit(): void {
+
+    this.getAllFormation();
 
     fetch('https://api.openweathermap.org/data/2.5/weather?q=ariana&units=metric&appid=50a7aa80fa492fa92e874d23ad061374')
       .then(response => response.json())
@@ -63,5 +71,19 @@ export class HomeFComponent implements OnInit {
   }
 
 
+  getAllFormation()
+  {
+    return  this.serviceForm.getFormation().subscribe(
+      (data : Formation[]) => {this.listFormation = data;
 
+      });
+  }
+
+  nextCourses() {
+    this.index++;
+
+    if (this.index === this.listFormation.length) {
+      this.index = 0;
+    }
+  }
 }
