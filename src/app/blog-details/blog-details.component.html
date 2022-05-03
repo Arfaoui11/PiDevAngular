@@ -224,8 +224,8 @@
           <div  *ngIf="!show" >
             <a  class="theme-btn w-full mb-20 " style="color: white" (click)="assingAppToCourses()"> Add This Courses</a>
           </div>
-          <div  *ngIf="go && show && !isTested" >
-            <a  class="theme-btn-border w-full mb-20 "  [routerLink]="['../../quiz',this.quiz.idQuiz]"> You Have Quiz </a>
+          <div  *ngIf="go && show" >
+            <a  class="theme-btn-border w-full mb-20"  [routerLink]="['../../quiz',this.quiz.idQuiz]"> You Have Quiz  {{quiz.createAt | date | slice:0 : 12}}</a>
           </div>
           <div class="widget mb-45"  *ngIf="show">
 

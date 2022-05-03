@@ -69,14 +69,14 @@ export class CalendarComponent implements OnInit {
   public animationSettings: Record<string, any> = { effect: 'None' };
 
   public group: GroupModel = { enableCompactView: false, resources: ['Departments', 'Doctors'] };
-  public comboBox: ComboBox;
+
   public currentDate: Date;
   public calendarSettings: CalendarSettings;
   @Input() fr:Formation=new Formation;
   @Input() user:User=new User;
   public scheduleInstance : ScheduleComponent;
 
-  public eventSettings: EventSettingsModel;
+
 
 
   public position: Record<string, any> = { X: 'Right', Y: 'Bottom' };

@@ -36,7 +36,7 @@ export class BlogDetailsComponent implements OnInit {
   toggle: boolean = true;
   formation : Formation;
   currentUser: any = [];
-  ListQuiz : Quiz[];
+  ListQuiz : any[]=[];
   quiz :Quiz;
 
   public img: any;
@@ -69,6 +69,7 @@ export class BlogDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     this.idFormation = this.route.snapshot.params['idCourses'];
+
 
     this.getFormation();
 
@@ -161,23 +162,43 @@ export class BlogDetailsComponent implements OnInit {
           this.show = true;
         }
       }
-      for (let q of this.formation.quizzes)
+      for (let quiz of this.formation.quizzes)
+      {
+        console.log(quiz);
+        if (quiz.results.length != 0)
+      {
+
+        for (let r of quiz.results)
+        {
+          if (r.suser.id != this.currentUser.id)
+          {
+            this.ListQuiz.push(quiz);
+          }
+        }
+      }else {
+
+        this.ListQuiz.push(quiz);
+      }
+        console.log(this.ListQuiz);
+      }
+
+      for (let q of this.ListQuiz)
       {
         let createAt = new Date(q.createAt);
         let today = new Date(Date.parse(Date()));
-      if (createAt < today)
+      if (createAt < today )
       {
-        this.quiz = q;
+        this.quiz =q;
         this.go = true;
       }
       }
-      for (let res of this.quiz.results)
+    /*  for (let res of this.quiz.results)
       {
         if (res.suser.id == this.currentUser.id )
         {
           this.isTested =true;
         }
-      }
+      }*/
 
 
     });
