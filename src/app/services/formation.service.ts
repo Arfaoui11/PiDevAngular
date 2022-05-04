@@ -180,6 +180,16 @@ export class FormationService {
     return this.http.get<Formation[]>("http://localhost:8099/Courses/retrieveFormation");
   }
 
+  getPourcentage():Observable<Object[]>
+  {
+    return this.http.get<Object[]>("http://localhost:8099/Courses/getPourcentage");
+  }
+
+  getAllSearch():Observable<Object[]>
+  {
+    return this.http.get<Object[]>("http://localhost:8099/Courses/getAllSearch");
+  }
+
   getFormationById(id:number):Observable<Formation> {
     return this.http.get<Formation>("http://localhost:8099/Courses/getFormationById/"+id);
   }

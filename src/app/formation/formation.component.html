@@ -181,19 +181,83 @@
         </div>
       </div>
     </div>
+    <section id="timeline-card">
+      <div class="row">
+        <div class="col-lg-6 col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Courses Domain Percentage</h4>
+            </div>
+            <div class="card-content">
+              <div class="card-body">
 
-      <div class="card-body" >
-        <div class="chart">
-          <google-chart #chart
-                        [title]="title"
-                        [type]="type2"
-                        [data]="data2"
-                        [options]="options"
-                        [width]="width"
-                        [height]="height">
-          </google-chart>
+                  <google-chart #chart
+
+                                [type]="type2"
+                                [data]="pourcentage"
+                                [options]="options"
+                                [width]="width"
+                                [height]="height">
+                  </google-chart>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="col-lg-6 col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"> Number Of Learner </h4>
+            </div>
+            <div class="card-content">
+              <div class="card-body">
+
+
+                    <google-chart #chart
+
+                                  [type]="type2"
+                                  [data]="list"
+                                  [options]="options"
+                                  [width]="width"
+                                  [height]="height">
+                    </google-chart>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title"> Data Shows Most Women Search for Courses Title name </h4>
+                </div>
+                <div class="card-content">
+                  <div class="card-body">
+                    <google-chart #chart
+
+                                  [type]="typ3"
+                                  [data]="SearchList"
+                                  [options]="options"
+                                  [width]="500"
+                                  [height]="500">
+                    </google-chart>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
+    </section>
+
+
       <!-- /.card-body -->
     </div>
     <!--

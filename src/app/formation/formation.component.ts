@@ -34,32 +34,38 @@ export class FormationComponent implements OnInit {
 
 
 
-  type2 = ChartType.Bar;
+  type2 = ChartType.PieChart;
   title = 'Numbre Apprenant By Formation';
-  type = ChartType.PieChart;
+  type = ChartType.BubbleChart;
+  typ3 = ChartType.BarChart;
 
   columnNames = ['Browser', 'Percentage'];
   options = {
   };
-  width = 550;
-  height = 400;
+  width = 530;
+  height = 350;
 
 
   data1:any;
   ArrayListT:any=[];
 
   name : string;
+  public pourcentage: any;
+  public SearchList: any[]=[];
 
 
 
 
   constructor(private sanitizer : DomSanitizer,private serviceForm : FormationService,private snackbar:MatSnackBar,private service : ShereService) {
-   // this.getNbrApprenantByFormation();
+    this.getNbrApprenantByFormation();
+
   }
 
   ngOnInit(): void {
     console.log(this.idF);
     this.getformation();
+    this.getPourcentage();
+    this.getAllSearch();
 
    // this.getNbrApprenantByFormation();
   }
@@ -68,6 +74,21 @@ export class FormationComponent implements OnInit {
   ToggleForm()
   {
     this.sowFormateur = ! this.sowFormateur;
+  }
+
+  getPourcentage()
+  {
+    this.serviceForm.getPourcentage().subscribe(data => this.pourcentage = data);
+    return this.pourcentage;
+  }
+
+
+  getAllSearch()
+  {
+    this.serviceForm.getAllSearch().subscribe((data) =>
+    {
+      this.SearchList = data;
+    });
   }
 
 
@@ -163,7 +184,7 @@ export class FormationComponent implements OnInit {
     return this.data1;
   }
 
-  list:Object[]=[];
+  list:any[]=[];
   values:any=[];
   array1:any=[];
   data3:any=[];

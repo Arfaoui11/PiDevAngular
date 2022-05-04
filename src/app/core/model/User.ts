@@ -1,4 +1,5 @@
 import {Formation} from "./Formation";
+import {Result} from "./Result";
 
 export class User {
 
@@ -16,6 +17,7 @@ export class User {
   state!:string;
   password: any;
   matchingPassword: any;
+  results!:Result[];
 
   isOnline: Boolean;
 

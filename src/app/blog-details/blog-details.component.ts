@@ -9,6 +9,7 @@ import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import {TokenService} from "../services/token.service";
 import {Quiz} from "../core/model/Quiz";
+import {AppService} from "../services/app.service";
 
 @Component({
   selector: 'app-blog-details',
@@ -35,7 +36,7 @@ export class BlogDetailsComponent implements OnInit {
   public idFormation :number;
   toggle: boolean = true;
   formation : Formation;
-  currentUser: any = [];
+  currentUser: User;
   ListQuiz : any[]=[];
   quiz :Quiz;
 
@@ -57,12 +58,16 @@ export class BlogDetailsComponent implements OnInit {
   public go: boolean =false;
   public isTested: boolean =false;
   public listFormation: Formation;
+  public nbrQuiztoCertifcate: number = 5;
+  private counter: number=0;
+  private users: User[]=[];
+  public user: User;
 
 
 
-
-  constructor(private serviceForm : FormationService,private sanitizer : DomSanitizer,private snackbar:MatSnackBar ,private http: HttpClient, private route:ActivatedRoute,private token: TokenService) {
+  constructor(private serviceForm : FormationService,private appService: AppService,private sanitizer : DomSanitizer,private snackbar:MatSnackBar ,private http: HttpClient, private route:ActivatedRoute,private token: TokenService) {
     this.currentUser = this.token.getUser();
+  //  console.log(this.currentUser);
 
   }
 
@@ -88,6 +93,7 @@ export class BlogDetailsComponent implements OnInit {
           this.img = data['weather'][0]['icon'];
           var lat = data['coord']['lat'];
           var lot = data['coord']['lon'];
+
 
           this.lat = lat;
           this.lot = lot;
@@ -144,6 +150,19 @@ export class BlogDetailsComponent implements OnInit {
 
   }
 
+  getUser() {
+    this.appService.listUser().subscribe(response => {
+      this.users = response;
+      for (let u of this.users)
+      {
+        if (u.id == this.currentUser.id)
+        {
+          this.user = u;
+        }
+      }
+    });
+  }
+
 
 
 
@@ -164,23 +183,30 @@ export class BlogDetailsComponent implements OnInit {
       }
       for (let quiz of this.formation.quizzes)
       {
-        console.log(quiz);
         if (quiz.results.length != 0)
-      {
-
-        for (let r of quiz.results)
         {
-          if (r.suser.id != this.currentUser.id)
+
+          for (let r of quiz.results)
           {
-            this.ListQuiz.push(quiz);
-          }
+
+            if (r.suser.id != this.currentUser.id)
+            {
+             console.log(quiz);
+             this.ListQuiz.push(quiz);
+            }else {
+
+              this.counter++;
+            }
         }
-      }else {
+        }else {
 
         this.ListQuiz.push(quiz);
       }
-        console.log(this.ListQuiz);
+
       }
+      console.log(this.ListQuiz);
+
+      this.nbrQuiztoCertifcate -= this.counter;
 
       for (let q of this.ListQuiz)
       {
@@ -192,7 +218,7 @@ export class BlogDetailsComponent implements OnInit {
         this.go = true;
       }
       }
-    /*  for (let res of this.quiz.results)
+     /* for (let res of this.quiz.results)
       {
         if (res.suser.id == this.currentUser.id )
         {
@@ -310,6 +336,7 @@ export class BlogDetailsComponent implements OnInit {
 
   public nbrL : number=0;
   public nbrD:number=0;
+
 
   getnbrLikes(id:number)
   {

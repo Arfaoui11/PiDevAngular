@@ -44,7 +44,7 @@
             currentPage: page,
             totalItems: Items
           }  , let i=index">
-          <div class="bd-blog mb-30" >
+          <div class="bd-blog mb-30" *ngIf="l.databaseFiles[0].fileType.toString().includes('image')">
             <div class="bd-blog-img" >
               <div *ngIf="l.databaseFiles[0].fileType.toString().includes('image') ; then thenfirst ; else thenSec"></div>
               <ng-template #thenfirst > <a href="blog-details.html"><img  [src]="'data:image/jpeg;base64,'+l.databaseFiles[0].data" alt="blog image not found 1"></a></ng-template>

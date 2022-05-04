@@ -28,51 +28,54 @@
         <div class="blog__details--wrapper mr-50 mb-50">
           <div class="ablog ablog-4 mb-60">
             <div class="ablog__img">
-              <img src="../../assets/front/img/portfolio/portfolio-details-1.jpg" alt="img not found">
-            <!--  <div class="video-player-wrapper" >
+              <div *ngIf="formation.databaseFiles[0].fileType.toString().includes('image') ; then thenfirst ; else thenSec"></div>
+              <ng-template #thenfirst > <a href="blog-details.html"><img  [src]="'data:image/jpeg;base64,'+formation.databaseFiles[0].data" alt="blog image not found 1"></a></ng-template>
+              <ng-template #thenSec > <a href="blog-details.html"><img  [src]="'data:image/jpeg;base64,'+formation.databaseFiles[1].data" alt="blog image not found 2"></a></ng-template>
 
-                <vg-player (onPlayerReady)="videoPlayerInit($event)">
-                  <vg-overlay-play></vg-overlay-play>
-                  <vg-buffering></vg-buffering>
+              <!--  <div class="video-player-wrapper" >
 
-                  <vg-scrub-bar>
-                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                    <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-                  </vg-scrub-bar>
+                  <vg-player (onPlayerReady)="videoPlayerInit($event)">
+                    <vg-overlay-play></vg-overlay-play>
+                    <vg-buffering></vg-buffering>
 
-                  <vg-controls>
+                    <vg-scrub-bar>
+                      <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                      <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                    </vg-scrub-bar>
 
-
-
-                    <vg-play-pause></vg-play-pause>
-                    <vg-playback-button></vg-playback-button>
-
-                    <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-
-                    <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-
-                    <vg-mute></vg-mute>
-                    <vg-volume></vg-volume>
-                    <vg-track-selector></vg-track-selector>
-                    <vg-fullscreen></vg-fullscreen>
-                  </vg-controls>
+                    <vg-controls>
 
 
 
-                  <video #media *ngIf="retrieveVideo[index].fileType.toString().includes('video')" [vgMedia]="$any(media)"  [src]="'data:video/mp4;base64,'+retrieveVideo[index].data" width='150' height='100'
-                         id="singleVideo"
-                         preload="auto" crossorigin controls="controls">
-                    <track src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" kind="subtitles" label="English" srclang="en" default>
-                    <track src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt" kind="subtitles" label="Español" srclang="es">
-                  </video>
-                </vg-player>
+                      <vg-play-pause></vg-play-pause>
+                      <vg-playback-button></vg-playback-button>
 
-                <div class="card-body" *ngIf="retrieveVideo[index].fileType.toString().includes('video')">
-                  <p class="card-text">{{ retrieveVideo[index].fileName | slice:0:-4 }}</p>
-                  <a  class="card-link" (click)="playvideo(retrieveVideo[index].id)">Video link</a>
-                  <a  class="card-link" (click)="downloadFiles(retrieveVideo[index].id)" > Download files </a>
-                </div>
-              </div>-->
+                      <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+                      <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+                      <vg-mute></vg-mute>
+                      <vg-volume></vg-volume>
+                      <vg-track-selector></vg-track-selector>
+                      <vg-fullscreen></vg-fullscreen>
+                    </vg-controls>
+
+
+
+                    <video #media *ngIf="retrieveVideo[index].fileType.toString().includes('video')" [vgMedia]="$any(media)"  [src]="'data:video/mp4;base64,'+retrieveVideo[index].data" width='150' height='100'
+                           id="singleVideo"
+                           preload="auto" crossorigin controls="controls">
+                      <track src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" kind="subtitles" label="English" srclang="en" default>
+                      <track src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt" kind="subtitles" label="Español" srclang="es">
+                    </video>
+                  </vg-player>
+
+                  <div class="card-body" *ngIf="retrieveVideo[index].fileType.toString().includes('video')">
+                    <p class="card-text">{{ retrieveVideo[index].fileName | slice:0:-4 }}</p>
+                    <a  class="card-link" (click)="playvideo(retrieveVideo[index].id)">Video link</a>
+                    <a  class="card-link" (click)="downloadFiles(retrieveVideo[index].id)" > Download files </a>
+                  </div>
+                </div>-->
 
             </div>
             <div class="ablog__text ablog__text4">
@@ -255,7 +258,7 @@
                 <li><p>{{formation.nbrHeures}} hours on-demand video</p></li>
                 <li><p>Full lifetime access</p></li>
                 <li><p>Certificate of completion</p></li>
-                <li>5 Quiz to get Certificate </li>
+                <li>{{nbrQuiztoCertifcate}} Quiz to get Certificate </li>
                 <li></li>
                 <li></li>
                 <li></li>

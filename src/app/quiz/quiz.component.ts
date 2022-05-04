@@ -175,7 +175,7 @@ export class QuizComponent implements OnInit {
 
     setTimeout( () =>
     {
-      window.location.replace('#/front/End/detailsF/'+11);
+      window.location.reload();
     },2000);
   }
 

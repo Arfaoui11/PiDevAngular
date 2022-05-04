@@ -40,8 +40,6 @@ const routes: Routes =
      {path:'chatRoom/:idCourses',component: CallVideoComponent },
      {path:'homeF',component: HomeFComponent },
      { path: '',  redirectTo: '/front/End/homeF', pathMatch: 'full' },
-
-
      {
        path: 'front',
        component: LayoutFComponent,
@@ -61,7 +59,6 @@ const routes: Routes =
              { path: 'quiz/:idQuiz', component: QuizComponent },
              { path: 'quizWelcome', component: WelcomeComponent },
              { path: '**', pathMatch: 'full',  component: E404Component },
-
 
            ]
          },

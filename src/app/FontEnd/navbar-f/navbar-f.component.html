@@ -56,7 +56,7 @@
                   <li class="menu-item-has-children"><a [routerLink]="['/front/End/blogF']">Courses</a>
                     <ul class="sub-menu">
                       <li><a [routerLink]="['/front/End/blogF']">Courses</a></li>
-                      <li *ngIf="this.currentUser"><a  [routerLink]="['/front/End/myCourses']">My Courses </a></li>
+                      <li *ngIf="this.currentUser"><a  [routerLink]="['/front/End/myCourses']">My Learning </a></li>
                       <li *ngIf="this.currentUser"><a [routerLink]="['/front/End/myCalender']">My Calender </a></li>
                     </ul>
                   </li>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="bd-header-contacts-text">
                   <span *ngIf="currentUser"> Welcome {{currentUser.displayName.toUpperCase()}}</span>
-                  <a *ngIf="!currentUser" [routerLink]="['/login']">Login</a>
+                  <a class="theme-btn w-full mb-12" style="width: 22px;height: 55px" *ngIf="!currentUser" [routerLink]="['/login']">Login</a>
                   <button class="theme-btn w-full mb-12" style="width: 30px;height: 55px" *ngIf="currentUser"  (click)="logout()">Logout</button>
                 </div>
               </div>
