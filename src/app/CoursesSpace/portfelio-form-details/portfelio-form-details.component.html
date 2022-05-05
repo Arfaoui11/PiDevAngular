@@ -1,0 +1,216 @@
+<div class="bd-page-title-area bd-page-title-bg pt-220 pb-155">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="bd-page-title text-center z-index">
+          <h2 class="breadcrumb-title">Videos</h2>
+          <div class="breadcrumb-menu">
+            <nav class="breadcrumb-trail breadcrumbs">
+              <ul class="trail-items">
+                <li class="trail-item trail-begin"><a [routerLink]="['../../detailsF',idFormation]">Courses details</a></li>
+                <li class="trail-item trail-middle"><i class="far fa-chevron-right"></i></li>
+                <li class="trail-item trail-end"><span> Videos </span></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- breadcrumb area end -->
+
+<!-- service details area start here -->
+<section class="bd-service-details-area pt-150 pb-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="bd-service-details mb-20">
+          <div class="bd-service-details-img mb-50">
+
+
+           <!-- <div class="video-player-wrapper" >
+
+              <vg-player (onPlayerReady)="videoPlayerInit($event)">
+                <vg-overlay-play></vg-overlay-play>
+                <vg-buffering></vg-buffering>
+
+                <vg-scrub-bar>
+                  <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                  <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                </vg-scrub-bar>
+
+                <vg-controls>
+
+
+
+                  <vg-play-pause></vg-play-pause>
+                  <vg-playback-button></vg-playback-button>
+
+                  <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+                  <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+                  <vg-mute></vg-mute>
+                  <vg-volume></vg-volume>
+                  <vg-track-selector></vg-track-selector>
+                  <vg-fullscreen></vg-fullscreen>
+                </vg-controls>
+
+
+
+                <video #media *ngIf="retrieveVideo[index].fileType.toString().includes('video')" [vgMedia]="$any(media)"  [src]="'data:video/mp4;base64,'+retrieveVideo[index].data" width='150' height='100'
+                       id="singleVideo"
+                       preload="auto" crossorigin controls="controls">
+                  <track src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" kind="subtitles" label="English" srclang="en" default>
+                  <track src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt" kind="subtitles" label="Español" srclang="es">
+                </video>
+              </vg-player>
+
+              <div class="card-body" *ngIf="retrieveVideo[index].fileType.toString().includes('video')">
+                <p class="card-text">{{ retrieveVideo[index].fileName | slice:0:-4 }}</p>
+                <a  class="card-link" (click)="playvideo(retrieveVideo[index].id)">Video link</a>
+                <a  class="card-link" (click)="downloadFiles(retrieveVideo[index].id)" > Download files </a>
+              </div>
+            </div>-->
+              <div class="video-player-wrapper" >
+
+                <vg-player (onPlayerReady)="videoPlayerInit($event)">
+                  <vg-overlay-play></vg-overlay-play>
+                  <vg-buffering></vg-buffering>
+
+                  <vg-scrub-bar>
+                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                    <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                  </vg-scrub-bar>
+
+                  <vg-controls>
+
+
+
+                    <vg-play-pause></vg-play-pause>
+                    <vg-playback-button></vg-playback-button>
+
+                    <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+                    <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+                    <vg-mute></vg-mute>
+                    <vg-volume></vg-volume>
+                    <vg-track-selector></vg-track-selector>
+                    <vg-fullscreen></vg-fullscreen>
+                  </vg-controls>
+
+
+
+                  <video #media *ngIf="retrieveVideo[index].fileType.toString().includes('video')" [vgMedia]="$any(media)"  [src]="'data:video/mp4;base64,'+retrieveVideo[index].data" width='150' height='100'
+                         id="singleVideo"
+                         preload="auto" crossorigin controls="controls">
+                    <track src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" kind="subtitles" label="English" srclang="en" default>
+                    <track src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt" kind="subtitles" label="Español" srclang="es">
+                  </video>
+                </vg-player>
+              </div>
+
+
+          </div>
+          <br>
+          <div class="bd-blog-meta mb-15">
+            <ul>
+              <li><a href="blog-details.html"><i class="flaticon-calendar"></i>{{formation.start | date | slice:0 : 12 }} - {{formation.end | date | slice:0 : 12 }}</a></li>
+              <li><a href="#com"><i class="flaticon-chat"></i>{{formation.postComments.length}} Comments</a></li>
+              <li><a (click)="goToChatRoom(formation.idFormation)" ><i class="flaticon-chatting"></i> Chat Room Courses </a></li>
+            </ul>
+          </div>
+
+          <h2 class="bd-section-title mb-25">Web Developemnt</h2>
+          <p class="mb-30">When I skim through the documentation of popular frameworks, I find the features described in Part 1 straight away. When I read the web platform documentation (for example, on MDN), I find many confusing patterns of how to do things, without a conclusive representation of data-binding, list synchronization, or reactivity. I will try to draw some guidelines of how to approach these problems on the web platform, without requiring a framework (in other words, by going vanilla).</p>
+          <h4 class="mb-25">Special Features</h4>
+          <p class="mb-30">When an unknown printer took a galley of type and scrambled it to make a type specimen book has been survived not only five centuries, but also the leap into electronic typesetting.</p>
+          <div class="bd-service-details-feature mb-40">
+            <h5 class="mb-20">Finished Check Steps</h5>
+            <ul>
+              <li><i class="far fa-check"></i> Assets Optimizations</li>
+              <li><i class="far fa-check"></i> Setting Realistic Goals Set</li>
+              <li><i class="far fa-check"></i> Delivery Optimizations</li>
+              <li><i class="far fa-check"></i> Laravel Structure</li>
+              <li><i class="far fa-check"></i> Assets Optimizations</li>
+              <li><i class="far fa-check"></i> Setting Realistic Goals Set</li>
+              <li><i class="far fa-check"></i> Delivery Optimizations</li>
+            </ul>
+          </div>
+          <h4 class="mb-30">Sketch & Planning</h4>
+          <p class="mb-35">When an unknown printer took a galley of type and scrambled it to make a type specimen book has been survived not only five centuries, but also the leap into electronic typesetting. Master the tools that front-end developers use every day.</p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="bd-service mb-30">
+                <div class="bd-service-icon mb-20">
+                  <i class="flaticon-coding"></i>
+                </div>
+                <h4 class="bd-service-title mb-20"><a href="service-details.html">Web Development</a></h4>
+                <p>Reach new audiences with omnichannel commerce anywhere in the world and surpass industry</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="bd-service mb-30">
+                <div class="bd-service-icon mb-20">
+                  <i class="flaticon-notes"></i>
+                </div>
+                <h4 class="bd-service-title mb-20"><a href="service-details.html">Content Writing</a></h4>
+                <p>Use drag-and-drop functionality, custom product recommendations and headless customize your website.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="bd-service-sidebar mb-50">
+          <div class="widget mb-45"  >
+
+            <h3 class="sidebar__widget--title mb-30"  >Recent Videos</h3>
+
+            <div class="sidebar--widget__post mb-20" *ngFor="let vdo of retrieveVideo; let $index = index">
+              <div class="sidebar__post--thumb">
+                <a  >
+                  <div class="post__img" >
+                    <img src="../../../assets/front/img/blog/b6.jpg" alt="">
+                  </div>
+
+                </a>
+              </div>
+              <div class="sidebar__post--text">
+                <h4 class="sidebar__post--title"><a (click)="sendIndex($index)">{{vdo.fileName}}</a></h4>
+                <span>{{formation.start | date | slice:0 : 12}}</span>
+              </div>
+            </div>
+
+          </div>
+          <div class="bd-service-widget gray-bg mb-30">
+
+            <div class="bd-service-sidebar-category">
+              <h5 class="bd-service-sidebar-category-title mb-20">Information</h5>
+              <div class="bd-service-sidebar-infos">
+                <div class="bd-service-sidebar-info mb-25">
+                  <span>Date</span>
+                  <h6>{{formation.start | date | slice:0 : 12 }} - {{formation.end | date | slice:0 : 12 }}</h6>
+                </div>
+                <div class="bd-service-sidebar-info mb-25">
+                  <span>Fomer</span>
+                  <h6>{{formation.formateur.displayName.toUpperCase()}}</h6>
+                </div>
+                <div class="bd-service-sidebar-info">
+                  <span>Domain</span>
+                  <h6>{{formation.domain.toUpperCase()}}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bd-service-sidebar-btn">
+            <a  class="theme-btn w-full mb-20 " style="color: white" (click)="playvideo(retrieveVideo[index].id)">Watch Live</a>
+            <a  class="theme-btn-black w-full" style="color: white" (click)="downloadFiles(retrieveVideo[index].id)">Download Brochure <i class="far fa-arrow-alt-to-bottom"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

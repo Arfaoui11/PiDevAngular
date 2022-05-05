@@ -1,0 +1,333 @@
+<div class="bd-page-title-area bd-page-title-bg pt-220 pb-155">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="bd-page-title text-center z-index">
+          <h2 class="breadcrumb-title">Courses Details</h2>
+          <div class="breadcrumb-menu">
+            <nav class="breadcrumb-trail breadcrumbs">
+              <ul class="trail-items">
+                <li class="trail-item trail-begin"><a [routerLink]="['/front/End/portForm']">Courses</a></li>
+                <li class="trail-item trail-middle"><i class="far fa-chevron-right"></i></li>
+                <li class="trail-item trail-end"><span>Courses Details</span></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- breadcrumb area end -->
+
+<!-- blog area start here -->
+<section class="bd-blog-deatils-area pt-150 pb-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="blog__details--wrapper mr-50 mb-50">
+          <div class="ablog ablog-4 mb-60">
+            <div class="ablog__img">
+              <div *ngIf="formation.databaseFiles[0].fileType.toString().includes('image') ; then thenfirst ; else thenSec"></div>
+              <ng-template #thenfirst > <a href="blog-details.html"><img  [src]="'data:image/jpeg;base64,'+formation.databaseFiles[0].data" alt="blog image not found 1"></a></ng-template>
+              <ng-template #thenSec > <a href="blog-details.html"><img  [src]="'data:image/jpeg;base64,'+formation.databaseFiles[1].data" alt="blog image not found 2"></a></ng-template>
+
+              <!--  <div class="video-player-wrapper" >
+
+                  <vg-player (onPlayerReady)="videoPlayerInit($event)">
+                    <vg-overlay-play></vg-overlay-play>
+                    <vg-buffering></vg-buffering>
+
+                    <vg-scrub-bar>
+                      <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                      <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                    </vg-scrub-bar>
+
+                    <vg-controls>
+
+
+
+                      <vg-play-pause></vg-play-pause>
+                      <vg-playback-button></vg-playback-button>
+
+                      <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+                      <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+                      <vg-mute></vg-mute>
+                      <vg-volume></vg-volume>
+                      <vg-track-selector></vg-track-selector>
+                      <vg-fullscreen></vg-fullscreen>
+                    </vg-controls>
+
+
+
+                    <video #media *ngIf="retrieveVideo[index].fileType.toString().includes('video')" [vgMedia]="$any(media)"  [src]="'data:video/mp4;base64,'+retrieveVideo[index].data" width='150' height='100'
+                           id="singleVideo"
+                           preload="auto" crossorigin controls="controls">
+                      <track src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" kind="subtitles" label="English" srclang="en" default>
+                      <track src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt" kind="subtitles" label="Español" srclang="es">
+                    </video>
+                  </vg-player>
+
+                  <div class="card-body" *ngIf="retrieveVideo[index].fileType.toString().includes('video')">
+                    <p class="card-text">{{ retrieveVideo[index].fileName | slice:0:-4 }}</p>
+                    <a  class="card-link" (click)="playvideo(retrieveVideo[index].id)">Video link</a>
+                    <a  class="card-link" (click)="downloadFiles(retrieveVideo[index].id)" > Download files </a>
+                  </div>
+                </div>-->
+
+            </div>
+            <div class="ablog__text ablog__text4">
+              <div class="bd-blog-meta mb-15">
+              <ul>
+                <li><a href="blog-details.html"><i class="flaticon-calendar"></i>{{formation.start | date | slice:0 : 12 }} - {{formation.end | date | slice:0 : 12 }}</a></li>
+                <li><a href="#com"><i class="flaticon-chat"></i>{{formation.postComments.length}} Comments</a></li>
+                <li><a [routerLink]="['../../chat']" ><i class="flaticon-chatting"></i> Chat Room </a></li>
+              </ul>
+            </div>
+
+
+              <ng-template #t let-fill="fill">
+                  <span class="star" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&star;</span>&star;
+                  </span>
+              </ng-template>
+
+              <ngb-rating [(rate)]="rating" [starTemplate]="t"  [max]="5" (rateChange)="changeRating()"></ngb-rating>
+              <pre>Rate: <b>{{rating.toString() | slice: 0 : 4  }}</b></pre>
+              <h2 class="bd-blog-details-title mb-25">{{formation.title.toUpperCase()}}</h2>
+
+
+              <p class="mb-30">Nancy boy Charles down the pub get stuffed mate easy peasy brown bread car boot squiffy loo, blimey arse over tit it’s your round cup of char horse play chimney pot old. Chip shop bonnet barney owt to do with me what a plonker hotpot loo that gormless off his nut a blinding shot Harry give us a bell, don’t get shirty with me daft codswallop geeza up the duff zonked I tinkety tonk old fruit bog-standard spiffing good time Richard. Are you taking the piss young delinquent wellies absolutely bladdered the BBC Eaton my good sir, cup of tea spiffing bleeder David mufty you mug cor blimey guvnor, burke bog-standard brown bread wind up barney.</p>
+              <blockquote>
+                <p>Tosser argy-bargy mush loo at public school Elizabeth up the duff buggered chinwag on your bike mate don’t get shirty with me super, Jeffrey bobby Richard cheesed off spend a penny a load of old tosh blag horse.</p>
+                <p><cite>Hasibul Hossen</cite></p>
+              </blockquote>
+              <p class="mb-30">Cheeky bugger cracking goal starkers lemon squeezy lost the plot pardon me no biggie the BBC burke gosh boot so I said wellies, zonked a load of old tosh bodge barmy skive off he legged it morish spend a penny my good sir wind up hunky-dory. Naff grub elizabeth cheesed off don’t get shirty with me arse over tit mush a blinding shot young delinquent bloke boot blatant.</p>
+              <div class="blog__details--thumb mb-30">
+                <img src="../../../assets/front/img/blog/b7.jpg" class="img-fluid" alt="img">
+              </div>
+              <h4 class="blog__details--subtitle">Web Design Done Well Perfectly Pointless </h4>
+              <p class="mb-30">Are you taking the piss young delinquent wellies absolutely bladdered the Eaton my good sir, cup of tea spiffing bleeder David mufty you mug cor blimey guvnor, burke bog-standard brown bread wind up barney. Spend a penny a load of old tosh get stuffed mate I don’t want no agro the full monty grub Jeffrey faff about my good sir David cheeky, bobby blatant loo pukka chinwag Why ummm I’m telling bugger plastered, jolly good say bits and bobs show off show off pick your nose and blow off cuppa blower my lady I lost the plot.</p>
+              <p class="mb-40">Cheeky bugger cracking goal starkers lemon squeezy lost the plot pardon me no biggie the BBC burke gosh boot so I said wellies, zonked a load of old tosh bodge barmy skive off he legged it morish spend a penny my good sir wind up hunky-dory. Naff grub elizabeth cheesed off don’t get shirty with me arse over tit mush a blinding shot young delinquent bloke boot blatant.</p>
+              <div class="blog__deatails--tag">
+                <span>Post Tags : </span>
+                <a href="#">Landing</a>
+                <a href="#">Pix Saas Blog</a>
+                <a href="#">The Saas</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="blog__author mb-95 d-sm-flex">
+            <div class="blog__author-img mr-30">
+              <img src="../../../assets/front/img/blog/blog-page-3.jpg" class="img-fluid" alt="img">
+            </div>
+            <div class="blog__author-content">
+              <h5>David Warner</h5>
+              <span>Author</span>
+              <p>I said cracking goal down the pub blag cheeky bugger at public school A bit of how's your father boot.!</p>
+            </div>
+          </div>
+
+          <div class="post-comments mb-95"  id="com">
+            <div class="post-comment-title mb-40">
+              <h3>{{comment.length}} Comments</h3>
+            </div>
+            <div class="latest-comments">
+              <ul>
+                <li *ngFor="let post of comment">
+                  <div class="comments-box">
+                    <div class="comments-avatar">
+                      <img src="../../../assets/front/img/blog/blog-sm-6.png" class="img-fluid" alt="img">
+                    </div>
+                    <div class="comments-text">
+
+                      <div class="avatar-name">
+                        <h5>{{post.userC.displayName.toUpperCase()}}</h5>
+                        <div class="ml-auto cursor-pointer" style="float: right">
+                          <button class="like" (click)="LikesComment(post.idComn)">
+                            <i class="fa fa-thumbs-o-up" aria-hidden="true"> </i>
+                          </button>
+                          <label style="color: black ;font-size: 15px">{{post.nbrLikes }}</label>
+                          &nbsp;
+                          <button class="dislike" (click)="DisLikesComment(post.idComn)">
+                            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                          </button>
+                          <label style="color: #f7485a ;font-size: 15px" > {{post.nbrDisLikes}}</label>
+                        </div>
+                        <span class="post-meta">{{post.createAt | date | slice:0 : 12 }}</span>
+                      </div>
+                      <p >{{post.message}}</p>
+
+                      <a href="#comment" class="comment-reply"><i class="fal fa-reply"></i> Reply</a>
+                    </div>
+                  </div>
+                </li>
+                <li class="children">
+                  <div class="comments-box">
+                    <div class="comments-avatar">
+                      <img src="../../../assets/front/img/blog/blog-sm-7.png" class="img-fluid" alt="img">
+                    </div>
+                    <div class="comments-text">
+                      <div class="avatar-name">
+                        <h5>Bailey Wonger</h5>
+                        <span class="post-meta">February 20, 2022</span>
+                      </div>
+                      <p>Do one say wind up buggered bobby bite your arm off gutted mate, David victoria sponge cup of char chap fanny around.</p>
+                      <a href="#comment" class="comment-reply"><i class="fal fa-reply" ></i> Reply</a>
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+
+          <div id="comment" class="post-comment-form">
+            <h4>Leave a Reply </h4>
+            <span>Your email address will not be published.</span>
+            <div class="bd-contact-form-wrapper mb-30">
+
+                <div class="row">
+
+                  <div class="col-12">
+                    <div class="bd-contact-field mb-30">
+                      <input type="text" placeholder="Subject">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="bd-contact-field mb-30">
+                      <textarea class="form-control"  placeholder="Message"  [(ngModel)]="post.message"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="bd-contact-field">
+                      <button type="submit" class="theme-btn" (click)="sendComments()">Submit</button>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="ablog__sidebar mb-40">
+          <div class="widget">
+            <div class="sidebar--widget__search mb-45">
+              <form action="#">
+                <input type="text" placeholder="Search">
+                <button type="submit"><i class="far fa-search"></i></button>
+              </form>
+            </div>
+          </div>
+
+          <div  *ngIf="!show" >
+            <a  class="theme-btn w-full mb-20 " style="color: white" (click)="assingAppToCourses()"> Add This Courses</a>
+          </div>
+          <div  *ngIf="go && show" >
+            <a  class="theme-btn-border w-full mb-20"  [routerLink]="['../../quiz',this.quiz.idQuiz]"> You Have Quiz  {{quiz.createAt | date | slice:0 : 12}}</a>
+          </div>
+          <div class="widget mb-45"  *ngIf="show">
+
+            <h3 class="sidebar__widget--title mb-30"  >Recent Videos</h3>
+
+            <div class="sidebar--widget__post mb-20" *ngFor="let vdo of retrieveVideo; let $index = index">
+              <div class="sidebar__post--thumb">
+                <a  >
+                  <div class="post__img" >
+                    <img src="../../../assets/front/img/blog/b6.jpg" alt="">
+                  </div>
+
+                </a>
+              </div>
+              <div class="sidebar__post--text">
+              <!--  <h4 class="sidebar__post--title"><a (click)="sendIndex($index)">{{vdo.fileName}}</a></h4>-->
+                <h4 class="sidebar__post--title"><a [routerLink]="['../../portF',formation.idFormation]">{{vdo.fileName}}</a></h4>
+                <span>{{formation.start | date | slice:0 : 12}}</span>
+              </div>
+            </div>
+
+          </div>
+          <div class="widget mb-40">
+            <h3 class="sidebar__widget--title mb-25">This course includes </h3>
+            <div class="sidebar--widget__cat mb-20">
+              <ul>
+                <li><p>{{formation.nbrHeures}} hours on-demand video</p></li>
+                <li><p>Full lifetime access</p></li>
+                <li><p>Certificate of completion</p></li>
+                <li>{{nbrQuiztoCertifcate}} Quiz to get Certificate </li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="widget mb-40">
+
+            <h3 class="sidebar__widget--title mb-25">Weather </h3>
+            <div class="sidebar--widget__cat mb-20">
+              <div class="card overlay-img-card text-white">
+                <img src="../../../assets/images/pages/card-image-5.jpg" class="card-img" alt="card-img-6">
+                <div class="card-img-overlay overlay-black">
+                  <h5 class="font-medium-5 text-white text-center mt-4">{{desc}}</h5>
+                  <p class="text-white text-center">{{lieu}}</p>
+                  <div class="card-content">
+                    <div class="d-flex justify-content-around mt-2">
+                      <div class="icon">
+                        <img src="http://openweathermap.org/img/wn/{{img}}.png" alt="">
+                      </div>
+                      <div class="temprature mt-3">
+                        <p class="font-large-3" style="color: white"> {{temp}}  <span class="mt-2">&#176;</span></p>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between mt-4">
+                        <div class="precipitation">
+                          <span class="font-medium-3">Precipitation</span>
+                        </div>
+                        <div class="degree">
+                          <span class="font-medium-3">{{drizzle}}</span>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-between my-2">
+                        <div class="humidity">
+                          <span class="font-medium-3">Humidity</span>
+                        </div>
+                        <div class="degree">
+                          <span class="font-medium-3">{{humidite}} %</span>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-between my-2">
+                        <div class="wind">
+                          <span class="font-medium-3">Wind</span>
+                        </div>
+                        <div class="degree">
+                          <span class="font-medium-3">{{wind}}  km/h</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="widget">
+            <h3 class="sidebar__widget--title mb-30">Association Position In Maps</h3>
+
+              <div class="bd-map mb-30">
+                <app-map [lieu]="formation.lieu" [lat]="lat" [lot]="lot" ></app-map>
+
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- blog area end here -->

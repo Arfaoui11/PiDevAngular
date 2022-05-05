@@ -1,8 +1,8 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {TokenService} from "../../services/token.service";
+import {TokenService} from "../../CoursesSpace/services/token.service";
 import {Formation} from "../../core/model/Formation";
-import {FormationService} from "../../services/formation.service";
+import {FormationService} from "../../CoursesSpace/services/formation.service";
 
 @Component({
   selector: 'app-home-f',

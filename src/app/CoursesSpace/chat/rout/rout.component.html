@@ -1,0 +1,106 @@
+
+<section class="bd-error-area">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-12 col-lg-12">
+        <div class="bd-error text-center">
+
+          <h3 class="mb-20">Chat Room Courses </h3>
+
+
+          <div class="container py-5 px-4">
+            <!-- For demo purpose-->
+            <div class="row rounded-lg overflow-hidden shadow">
+              <!-- Users box-->
+              <div class="col-5 px-0">
+                <div class="bg-white">
+
+                  <div class="bg-gray px-4 py-2 bg-light">
+                    <p class="h5 mb-0 py-1">Recent</p>
+                  </div>
+
+                  <div class="messages-box" style="height: 520px">
+                    <div class="list-group-item-dark rounded-pill" *ngFor="let user of users" style="height: 90px">
+
+
+                      <a class="list-group-item-dark active list-group-item-action text-white rounded-pill"  >
+                        <div class="media"  ><img src="assets/images/profile/user-uploads/user-02.jpg" alt="user"   width="80" class="rounded-circle">
+                          <div class="media-body ml-4">
+                            <div  [ngClass]="{'online' : user.isOnline}" [ngClass]="{'offline' : !user.isOnline}">
+                              <h6 class="mb-0">{{user.displayName}}</h6>
+                            <!--  <small class="small font-weight-bold">{{daysa.getDate().toString().toUpperCase() +"-"+daysa.getMonth().toString().toUpperCase() +"-"+daysa.getFullYear().toString().toUpperCase() }}</small>-->
+                              <small class="small font-weight-bold">{{user.isOnline ? "Online" : "Offline"}}</small>
+                            </div>
+                            <p class="font-italic mb-0 text-small">{{user.email}}</p>
+                          </div>
+                        </div>
+                      </a>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Chat Box-->
+              <div class="col-7 px-0">
+                <div class="px-4 py-5 chat-box bg-white">
+                  <!-- Sender Message-->
+
+
+                  <!-- Reciever Message-->
+                  <!--   <div class="media w-50 ml-auto mb-3" *ngFor="let message of publishedMessage" [class.pull-right] = "loggedinUserId === message.from">
+                       <div class="media-body">
+                         <div class="bg-primary rounded py-2 px-3 mb-2">
+                           <P>{{message.fromUserName}}</P>
+                           <p class="text-small mb-0 text-white">{{message.message}}</p>
+                         </div>
+                         <p class="small text-muted">12:00 PM | Aug 13</p>
+                       </div>
+                     </div>-->
+
+                  <!-- Sender Message-->
+                  <div class="media w-50 mb-3" *ngFor="let message of publishedMessage" [class.pull-right] = "loggedinUserId === message.from"><img src="../../../../assets/images/profile/user-uploads/user-01.jpg" alt="user" width="50" class="rounded-circle">
+                    <div class="media-body ml-3">
+                      <div class="bg-light rounded py-2 px-3 mb-2">
+                        <P>{{message.fromUserName}}</P>
+                        <p class="text-small mb-0 text-muted" style="color: #0dcaf0">{{message.message}}</p>
+                      </div>
+                      <p class="small text-muted">{{heurs.getHours().toString().toUpperCase()+":"+ heurs.getMinutes() .toString().toUpperCase() }} PM | {{daysa.getDate().toString().toUpperCase() +" "+daysa.getMonth().toString().toUpperCase() +" "+daysa.getFullYear().toString().toUpperCase() }}</p>
+                    </div>
+                  </div>
+
+                  <!-- Reciever Message-->
+
+
+                </div>
+
+                <!-- Typing area -->
+                <form  class="bg-light" (ngSubmit)="sendMessage()">
+                  <div *ngIf="showTypingIndicator" class="typing-indicator">{{typingUser}} is typing...</div>
+                  <div class="input-group">
+
+                    <input  placeholder="Type a message" aria-describedby="button-addon2"  autocomplete="off" type="text" name="message"
+                            [(ngModel)]="message" (keypress)="sendTypeIndicator()" class="form-control rounded-0 border-0 py-4 bg-light">
+                    <div class="input-group-append">
+                      <button  type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+
+            </div>
+          </div>
+
+
+
+          <div class="bd-error-btn text-center">
+            <a href="index.html" class="theme-btn">Back To Home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
