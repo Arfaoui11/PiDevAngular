@@ -58,7 +58,7 @@ export class QuestionComponent implements OnInit {
       data=> {
         this.listQuiz=data
       }
-    )
+    );
     return this.listQuiz;
   }
 

@@ -162,7 +162,7 @@ export class PortfelioFormDetailsComponent implements OnInit {
     this.dataa.getDefaultMedia().subscriptions.ended.subscribe(this.nextVideo.bind(this));
   }
   initVdo() {
-    this.dataa.play();
+    this.dataa.pause();
   }
 
   nextVideo() {

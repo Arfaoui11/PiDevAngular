@@ -278,7 +278,7 @@ export class CalendarCoursesComponent implements OnInit {
 /*
 
 */
-    },1500)
+    },2000)
 
 
 

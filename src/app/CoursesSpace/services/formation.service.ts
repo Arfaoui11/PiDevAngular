@@ -220,6 +220,11 @@ export class FormationService {
     return this.http.get("http://localhost:8099/user/deleteUserById/"+i);
   }
 
+  deleteFiles(i:string): Observable<any> {
+
+    return this.http.get("http://localhost:8099/Courses/deleteFiles/"+i);
+  }
+
   updateFormation(f:Formation,i:number): Observable<any>
   {
     const headers = { 'content-type': 'application/json'};

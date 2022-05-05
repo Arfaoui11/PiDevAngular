@@ -49,6 +49,7 @@ export class VideoplaylistComponent implements OnInit {
 
   public listFormation: Formation;
   PathURL: any;
+  public List: Formation[];
 
   constructor(private serviceForm : FormationService,private sanitizer : DomSanitizer,private snackbar:MatSnackBar ,private http: HttpClient, private route:ActivatedRoute,private token: TokenService) {
     this.currentUser = this.token.getUser();
@@ -58,6 +59,22 @@ export class VideoplaylistComponent implements OnInit {
     this.idFormation = this.route.snapshot.params['idCourses'];
 
   this.getFormation();
+  this.getformationList();
+  this.getData();
+
+   // this.getFormation();
+
+    setTimeout( () => {
+
+      this.getCommentByFormation();
+
+
+      this.rating = this.formation.rating;
+    },2000);
+  }
+
+  getData()
+  {
     this.serviceForm.getFormationById(this.idFormation)
       .subscribe(
         data=> {
@@ -81,16 +98,6 @@ export class VideoplaylistComponent implements OnInit {
 
         }
       );
-
-   // this.getFormation();
-
-    setTimeout( () => {
-
-      this.getCommentByFormation();
-
-
-      this.rating = this.formation.rating;
-    },2000);
   }
 
 
@@ -139,12 +146,29 @@ export class VideoplaylistComponent implements OnInit {
       formData.append('files',element);
     }
     this.serviceForm.uploadFile(formData,this.idFormation).subscribe(res => {
-      console.log(res)
+      console.log(res);
+      this.getData();
+
     });
 
     this.snackbar.open(' files add with succees', 'Undo', {
       duration: 2000
     });
+
+    setTimeout(()=> {    window.location.reload(); },10000);
+
+  }
+
+  deleteFiles(id:string)
+  {
+    this.serviceForm.deleteFiles(id).subscribe(
+      (data) =>{console.log(data);
+        this.getData();
+    } );
+    this.snackbar.open(' files delete with succees', 'Undo', {
+      duration: 2000
+    });
+    setTimeout(()=> {    window.location.reload(); },5000);
 
   }
 
@@ -296,7 +320,7 @@ export class VideoplaylistComponent implements OnInit {
   }
 
   initVdo() {
-    this.dataa.play();
+    this.dataa.pause();
   }
 
   startPlaylistVdo(item :any, index: number) {
@@ -374,8 +398,17 @@ export class VideoplaylistComponent implements OnInit {
     )
 
   }
+  sendIndex($index: number) {
+    this.index =$index;
+    this.retrieveVideo[this.index].play();
+  }
 
+  getformationList(){
 
+    this.serviceForm.getFormationByFormateur(this.currentUser.id).subscribe(
+      (data)=>{this.List = data});
+    return this.listFormation;
+  }
 
   previous() {
     if (this.index === 0) {
@@ -383,6 +416,7 @@ export class VideoplaylistComponent implements OnInit {
     }else {
       this.index--;
     }
+    this.retrieveVideo[this.index].play();
 
   }
 
@@ -392,6 +426,7 @@ export class VideoplaylistComponent implements OnInit {
     }else {
       this.index++;
     }
+    this.retrieveVideo[this.index].play();
   }
   getF()
   {
