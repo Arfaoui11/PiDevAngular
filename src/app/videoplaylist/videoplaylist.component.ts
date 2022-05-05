@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
 import {FormationService} from "../services/formation.service";
 import {HttpClient} from "@angular/common/http";
@@ -15,6 +15,9 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./videoplaylist.component.scss']
 })
 export class VideoplaylistComponent implements OnInit {
+
+  @ViewChild('thenfirst', {static: true}) thenfirst: TemplateRef<any>|null = null;
+  @ViewChild('thenSec', {static: true}) thenSec: TemplateRef<any>|null = null;
 
   public filePath :FileList;
 
@@ -36,13 +39,15 @@ export class VideoplaylistComponent implements OnInit {
 
   dataa :any;
   showC : boolean = false;
-   videoUrl: any;
+  videoUrl: any;
   public idFormation :number;
-   toggle: boolean = false;
+  toggle: boolean = false;
   formation : Formation;
   currentUser: any = [];
   public formateur :User;
 
+
+  public listFormation: Formation;
   PathURL: any;
 
   constructor(private serviceForm : FormationService,private sanitizer : DomSanitizer,private snackbar:MatSnackBar ,private http: HttpClient, private route:ActivatedRoute,private token: TokenService) {
@@ -52,36 +57,32 @@ export class VideoplaylistComponent implements OnInit {
   ngOnInit(): void {
     this.idFormation = this.route.snapshot.params['idCourses'];
 
-
+  this.getFormation();
     this.serviceForm.getFormationById(this.idFormation)
       .subscribe(
         data=> {
 
+          this.listFormation =data;
 
-          this.formation =data;
-
-          for (let l of this.formation.databaseFiles)
+          for (let l of this.listFormation.databaseFiles)
           {
-            if(l.fileType.toString().includes('image'))
+            if(l.fileType.toString().includes('video'))
             {
-              this.retrieveImage.push(l)  ;
-            }
-             else if (l.fileType.toString().includes('video'))
-            {
-              this.retrieveVideo.push(l) ;
-            }
-            else
+              this.retrieveVideo.push(l)  ;
+            }else if(l.fileType.toString().includes('application'))
             {
               this.retrieveFiles.push(l);
             }
-
+            else if (l.fileType.toString().includes('image'))
+            {
+              this.retrieveImage.push(l) ;
+            }
           }
 
         }
       );
 
-
-    this.getFormation();
+   // this.getFormation();
 
     setTimeout( () => {
 
@@ -150,8 +151,10 @@ export class VideoplaylistComponent implements OnInit {
 
   getFormation()
   {
+
     this.serviceForm.getFormationById(this.idFormation).subscribe(data => {
       this.formation = data;
+      this.rating = this.formation.rating;
     });
     return this.formation;
   }
@@ -174,7 +177,7 @@ export class VideoplaylistComponent implements OnInit {
   }
 
   public status: number;
-  sendComment()
+  sendComments()
   {
     this.serviceForm.writeComment(this.post,this.idFormation,this.currentUser.id).subscribe(
       data=>{
@@ -204,31 +207,31 @@ export class VideoplaylistComponent implements OnInit {
     this.serviceForm.getCommentByFormation(this.idFormation).subscribe(
       (data: PostComment[]) => {
         this.comment = data;
-       for (let l of this.comment) {
-         let xx = new XMLHttpRequest();
-         let xmll = new XMLHttpRequest();
+        for (let l of this.comment) {
+          let xx = new XMLHttpRequest();
+          let xmll = new XMLHttpRequest();
 
-        let nbL=0;
-        let nbD=0;
-         xmll.onreadystatechange = ()=>
-         {
-           l.nbrDisLikes = JSON.parse(xmll.responseText)
-         };
-         xx.onreadystatechange = ()=>
-         {
-           l.nbrLikes = JSON.parse(xx.responseText)
-         };
+          let nbL=0;
+          let nbD=0;
+          xmll.onreadystatechange = ()=>
+          {
+            l.nbrDisLikes = JSON.parse(xmll.responseText)
+          };
+          xx.onreadystatechange = ()=>
+          {
+            l.nbrLikes = JSON.parse(xx.responseText)
+          };
 
-         xx.open('get','http://localhost:8099/Courses/getNbrLikesByComment/'+l.idComn,true);
-
-
-         xx.send(null);
+          xx.open('get','http://localhost:8099/Courses/getNbrLikesByComment/'+l.idComn,true);
 
 
-         xmll.open('get','http://localhost:8099/Courses/getNbrDislikesByComment/'+l.idComn,true);
+          xx.send(null);
 
 
-         xmll.send(null);
+          xmll.open('get','http://localhost:8099/Courses/getNbrDislikesByComment/'+l.idComn,true);
+
+
+          xmll.send(null);
 
         }
 
@@ -243,11 +246,11 @@ export class VideoplaylistComponent implements OnInit {
 
 
     this.serviceForm.addLikes(id,this.currentUser.id).subscribe(data=>
-    {console.log(data);
+      {console.log(data);
 
 
-   this.getCommentByFormation();
-    }
+        this.getCommentByFormation();
+      }
     );
 
   }
@@ -257,9 +260,9 @@ export class VideoplaylistComponent implements OnInit {
   getnbrLikes(id:number)
   {
 
-      this.serviceForm.getNbrLikes(id).subscribe(data =>
-        this.nbrL = data);
-      return this.nbrL;
+    this.serviceForm.getNbrLikes(id).subscribe(data =>
+      this.nbrL = data);
+    return this.nbrL;
 
   }
 
@@ -412,9 +415,9 @@ export class VideoplaylistComponent implements OnInit {
     this.serviceForm.addRatingFormation(this.idFormation,this.rating).subscribe(
       data => {
 
-      this.getFormation();
+        this.getFormation();
 
-      //  this.rating = this.formation.rating;
+        //  this.rating = this.formation.rating;
       }
     )
   }

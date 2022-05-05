@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {PostComment} from "../core/model/PostComment";
 import {Formation} from "../core/model/Formation";
 import {User} from "../core/model/User";
@@ -23,6 +23,9 @@ export class BlogDetailsComponent implements OnInit {
   public listComment: Record<string, any>[];
 
   @Input() post : PostComment = new PostComment;
+
+  @ViewChild('thenfirst', {static: true}) thenfirst: TemplateRef<any>|null = null;
+  @ViewChild('thenSec', {static: true}) thenSec: TemplateRef<any>|null = null;
 
   rating: number;
   retrieveResonse : any;
@@ -58,15 +61,19 @@ export class BlogDetailsComponent implements OnInit {
   public go: boolean =false;
   public isTested: boolean =false;
   public listFormation: Formation;
+
   public nbrQuiztoCertifcate: number = 5;
   private counter: number=0;
   private users: User[]=[];
   public user: User;
+  public listQuizTested: any[]=[];
 
 
 
   constructor(private serviceForm : FormationService,private appService: AppService,private sanitizer : DomSanitizer,private snackbar:MatSnackBar ,private http: HttpClient, private route:ActivatedRoute,private token: TokenService) {
     this.currentUser = this.token.getUser();
+   // this.getUserTested();
+    this.getLsitQuizTestByUser();
   //  console.log(this.currentUser);
 
   }
@@ -77,7 +84,7 @@ export class BlogDetailsComponent implements OnInit {
 
 
     this.getFormation();
-
+    this.getLsitQuizTestByUser();
     setTimeout( () => {
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.formation.lieu}&units=metric&appid=50a7aa80fa492fa92e874d23ad061374`)
         .then(response => response.json())
@@ -150,7 +157,7 @@ export class BlogDetailsComponent implements OnInit {
 
   }
 
-  getUser() {
+  getUserTested() {
     this.appService.listUser().subscribe(response => {
       this.users = response;
       for (let u of this.users)
@@ -163,6 +170,13 @@ export class BlogDetailsComponent implements OnInit {
     });
   }
 
+  getLsitQuizTestByUser()
+  {
+    this.serviceForm.getListQuizByUser(this.currentUser.id,this.idFormation).subscribe((data) =>
+    {
+      this.listQuizTested = data;
+    })
+  }
 
 
 
@@ -173,6 +187,8 @@ export class BlogDetailsComponent implements OnInit {
     this.serviceForm.getFormationById(this.idFormation).subscribe(data => {
       this.formation = data;
 
+
+
       this.rating = this.formation.rating;
       for (let app of this.formation.apprenant)
       {
@@ -181,34 +197,14 @@ export class BlogDetailsComponent implements OnInit {
           this.show = true;
         }
       }
-      for (let quiz of this.formation.quizzes)
-      {
-        if (quiz.results.length != 0)
-        {
 
-          for (let r of quiz.results)
-          {
+      this.nbrQuiztoCertifcate =  this.nbrQuiztoCertifcate - ( this.formation.quizzes.length - this.listQuizTested.length);
 
-            if (r.suser.id != this.currentUser.id)
-            {
-             console.log(quiz);
-             this.ListQuiz.push(quiz);
-            }else {
 
-              this.counter++;
-            }
-        }
-        }else {
 
-        this.ListQuiz.push(quiz);
-      }
+      console.log(this.listQuizTested);
 
-      }
-      console.log(this.ListQuiz);
-
-      this.nbrQuiztoCertifcate -= this.counter;
-
-      for (let q of this.ListQuiz)
+      for (let q of this.listQuizTested)
       {
         let createAt = new Date(q.createAt);
         let today = new Date(Date.parse(Date()));
@@ -218,13 +214,7 @@ export class BlogDetailsComponent implements OnInit {
         this.go = true;
       }
       }
-     /* for (let res of this.quiz.results)
-      {
-        if (res.suser.id == this.currentUser.id )
-        {
-          this.isTested =true;
-        }
-      }*/
+
 
 
     });
@@ -338,23 +328,6 @@ export class BlogDetailsComponent implements OnInit {
   public nbrD:number=0;
 
 
-  getnbrLikes(id:number)
-  {
-
-    this.serviceForm.getNbrLikes(id).subscribe(data =>
-      this.nbrL = data);
-    return this.nbrL;
-
-  }
-
-  getnbrDisLikes(id:number)
-  {
-
-    this.serviceForm.getNbrDisLikes(id).subscribe(data =>
-      this.nbrD = data);
-    return this.nbrD;
-
-  }
 
 
   changeRating() {
@@ -403,13 +376,7 @@ export class BlogDetailsComponent implements OnInit {
     }
   }
 
-  getFormateurByFormation(id:number)
-  {
-    this.serviceForm.getFormateurbyFormation(id).subscribe(
-      (data:User)=>{this.formateur = data}
-    );
-    return this.formateur;
-  }
+
 
 
 

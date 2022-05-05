@@ -8,7 +8,7 @@ export class Result {
   correctAnswer:number;
   inCorrectAnswer:number;
   totalCorrect : number;
-  quiz!:Quiz;
+  quiz:Quiz;
   suser!:User;
 
 

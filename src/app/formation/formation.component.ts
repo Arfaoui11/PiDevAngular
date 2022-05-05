@@ -73,7 +73,10 @@ export class FormationComponent implements OnInit {
 
   ToggleForm()
   {
+    this.getNbrApprenantByFormation();
+    this.getPourcentage();
     this.sowFormateur = ! this.sowFormateur;
+
   }
 
   getPourcentage()

@@ -60,11 +60,17 @@ export class CalendarComponent implements OnInit {
   @ViewChild('treeObj') treeObj: TreeViewComponent;
   @ViewChild('waitingObj') waitingObj: DialogComponent;
 
+
+  public ListApprenant: Record<string, any>[];
+
   public footerTemplate = `<div class="add-doctor"><div class="e-icon-add e-icons"></div>
     <div class="add-doctor-text">Add New Former</div></div>`;
 
+ // public itemTemplate: string = '<div class="specialist-item"><img class="value" src="assets/images/profile/user-uploads/user-03.jpg" alt="doctor"/>' +
+   // '<div class="doctor-details"><div class="name">Mr.${displayName}</div><div class="designation">${profession}</div></div></div>';
+
   public itemTemplate: string = '<div class="specialist-item"><img class="value" src="assets/images/profile/user-uploads/user-03.jpg" alt="doctor"/>' +
-    '<div class="doctor-details"><div class="name">Mr.${displayName}</div><div class="designation">${profession}</div></div></div>';
+    '<div class="doctor-details"><div class="name">Mr.${title}</div><div class="designation">${domain}</div></div></div>';
 
   public animationSettings: Record<string, any> = { effect: 'None' };
 
@@ -112,7 +118,8 @@ export class CalendarComponent implements OnInit {
 
   public  field : {[key : string]:any};
 
-  public fields: Object = { text: 'displayName', value: 'id' };
+  //public fields: Object = { text: 'displayName', value: 'id' };
+  public fields: Object = { text: 'domain', value: 'idFormation' };
   // set the placeholder to DropDownList input element
   public waterMark: string = 'Select a game';
   // set the value to select an item based on mapped value at initial rendering
@@ -282,29 +289,32 @@ export class CalendarComponent implements OnInit {
 
 
 
-
-  public waitingList : {[key : string]:Object}[]= [
-
-    {
-      Id:1,
-      Name: 'Steven'
-    }
-
-  ];
-
-
-
-
-
-/*
-  onDragStart(args : DragEventArgs ):void
+  getApprenantByFormation(id:number)
   {
-    args.interval = 1;
-
-    args.navigation?.enable
+    this.serviceForm.getApprenantByFormation(id).subscribe(data => this.ListApprenant = data);
+    return  this.ListApprenant;
   }
 
- */
+  public selectedDepartmentId: number;
+
+  public onSpecializationChange(args?: Record<string, any>): void {
+    let filteredData: Record<string, any>[];
+    if (args && args.value) {
+      this.selectedDepartmentId = args ? args.itemData.idFormation : this.selectedDepartmentId;
+      // filteredData = this.listFormation.filter((item: any) => item.apprenant.idFormation === this.selectedDepartmentId);
+      filteredData = this.getApprenantByFormation(this.selectedDepartmentId);
+      // filteredData = this.formateur;
+    } else {
+      this.selectedDepartmentId = 0;
+      filteredData = [];
+    }
+    this.ListApprenant = filteredData;
+
+    this.field = {
+      dataSource : this.ListApprenant,id:'id',text : 'displayName'
+    };
+  }
+
 
   public onItemDrag(event: any): void {
     if (this.scheduleObj.isAdaptive) {
@@ -389,58 +399,6 @@ export class CalendarComponent implements OnInit {
         (data:Formation[])=>{this.listFomation = data});
       return this.listFomation;
     }
-
-
-  Data: Record<string, any>[] = [
-    {
-      Id: 1000,
-      Name: 'Milka',
-      Subject : 'Test',
-      StartTime: new Date(2022, 7, 5, 10, 30),
-      EndTime: new Date(2022, 7, 5, 11, 30),
-      Disease: 'Bone Fracture',
-      DepartmentName: 'ORTHOPEDICS',
-      DepartmentId: 4,
-      DoctorId: 5,
-      PatientId: 2,
-      Symptoms: 'Swelling or bruising over a bone, Pain in the injured area'
-    }];
-
-
-
-
-    public events : EventSettingsModel = {
-
-
-      dataSource:
-
-        [{
-          idFormation: 1,
-          Subject: "tttt",
-          niveau: "aa",
-          nbrHeures: 12,
-          domain: "IT",
-          nbrMaxParticipant: 10,
-          frais: 56,
-          EndTime: new Date(2022, 3, 20, 4, 0),
-          StartTime: new Date(2022, 3, 20, 4, 0),
-
-
-        },
-          {
-            idFormation: 2,
-            Subject: "new",
-            niveau: "aas",
-            nbrHeures: 8,
-            domain: "ART",
-            nbrMaxParticipant: 20,
-            frais: 56,
-            EndTime: new Date(2022, 3, 13, 4, 0),
-            StartTime: new Date(2022, 3, 13, 4, 0),
-
-          }
-        ]
-    };
 
 
 

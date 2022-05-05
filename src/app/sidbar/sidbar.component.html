@@ -26,18 +26,29 @@
       </li>
       <li class=" nav-item"><a [routerLink]="['/home/']"><i class="feather icon-message-square"></i><span class="menu-title" data-i18n="Chat">Home</span></a>
       </li>-->
-      <li class=" nav-item"><a [routerLink]="['/home/Formation-management/addFormation']"><i class="feather icon-check-square"></i><span class="menu-title" data-i18n="Todo">Formation</span></a>
+
+      <li class=" nav-item"><a [routerLink]="['/home/Formation-management/addFormation']"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Courses Space</span><span class="badge badge badge-warning badge-pill float-right mr-2">3</span></a>
+        <ul class="menu-content">
+          <li><a [routerLink]="['/home/Formation-management/addFormation']"><i class="feather icon-check-square"></i><span class="menu-title" data-i18n="Todo"> Courses </span></a>
+          </li>
+          <li><a [routerLink]="['/home/Formation-management/Courses']"><i class="feather icon-list"></i><span class="menu-title" data-i18n="List"> Former List </span></a>
+          </li>
+          <li><a [routerLink]="['/home/Formation-management/calendar']"><i class="feather icon-calendar"></i><span class="menu-Calender" data-i18n="Todo"> Calendar </span></a>
+          </li>
+        </ul>
       </li>
-      <!--<li class=" nav-item"><a [routerLink]="['/home/Formation-management/quizWelcome']"><i class="feather icon-calendar"></i><span class="menu-title" data-i18n="Calender">Quiz</span></a>
+      <!-- <li class=" nav-item"><a [routerLink]="['/home/Formation-management/addFormation']"><i class="feather icon-check-square"></i><span class="menu-title" data-i18n="Todo">Formation</span></a>
+       </li>-->
+       <!--<li class=" nav-item"><a [routerLink]="['/home/Formation-management/quizWelcome']"><i class="feather icon-calendar"></i><span class="menu-title" data-i18n="Calender">Quiz</span></a>
+       </li>-->
+      <!-- <li class=" nav-item"><a [routerLink]="['/home/Formation-management/Courses']"><i class="feather icon-calendar"></i><span class="menu-title" data-i18n="Calender">Courses</span></a>
+       </li>-->
+       <!--<li class=" nav-item"><a [routerLink]="['/home/Formation-management/listFormation']"><i class="feather icon-calendar"></i><span class="menu-title" data-i18n="Calender">List Formation</span></a>
+      </li>
+      <li class=" nav-item"><a [routerLink]="['/home/Formation-management/Question']"><i class="feather icon-calendar"></i><span class="menu-title" data-i18n="Calender">Question</span></a>
+      </li>
+      <li class=" nav-item"><a [routerLink]="['/home/Formation-management/videoplaylist']"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">Video Playlist</span></a>
       </li>-->
-      <li class=" nav-item"><a [routerLink]="['/home/Formation-management/Courses']"><i class="feather icon-calendar"></i><span class="menu-title" data-i18n="Calender">Courses</span></a>
-      </li>
-      <!--<li class=" nav-item"><a [routerLink]="['/home/Formation-management/listFormation']"><i class="feather icon-calendar"></i><span class="menu-title" data-i18n="Calender">List Formation</span></a>
-     </li>
-     <li class=" nav-item"><a [routerLink]="['/home/Formation-management/Question']"><i class="feather icon-calendar"></i><span class="menu-title" data-i18n="Calender">Question</span></a>
-     </li>
-     <li class=" nav-item"><a [routerLink]="['/home/Formation-management/videoplaylist']"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">Video Playlist</span></a>
-     </li>-->
      <li class=" nav-item"><a href="#"><i class="feather icon-user"></i><span class="menu-title" data-i18n="User">User</span></a>
        <ul class="menu-content">
          <li><a href="app-user-list.html"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">List</span></a>

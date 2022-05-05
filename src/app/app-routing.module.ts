@@ -75,18 +75,17 @@ const routes: Routes =
 
           { path: 'addFormateur', component: AddFomateurComponent },
           { path: 'dashboard', component: DashboardComponent },
+          { path: 'videoplaylist/:idCourses', component: VideoplaylistComponent },
           { path: 'formateur', component: ListFomateurComponent },
           { path: 'addFormation', component: FormationComponent },
           { path: 'listFormateur', component: ListFomateurComponent } ,
           { path: 'calendar', component: CalendarComponent },
           { path: 'calendarCourses/:idFormer', component: CalendarCoursesComponent },
           { path: 'listFormation', component: ListeFormationComponent },
-
-
           { path: 'Courses', component: CoursesFormComponent },
           { path: 'Quiz/:idCourses', component: QuestionComponent },
           { path: 'Question/:idQuiz', component: QestionQuizCoursesComponent },
-          { path: 'videoplaylist/:idCourses', component: VideoplaylistComponent },
+
           { path: 'userview/:idUser', component: UserViewComponent },
           { path: 'login', component: LoginComponent },
 

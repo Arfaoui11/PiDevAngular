@@ -8,6 +8,6 @@ export class Quiz {
   score !: number;
   createAt !:Date;
   content !: string ;
-  results!:Result[]
+  results:Result[]
 
 }

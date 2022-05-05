@@ -439,38 +439,6 @@ export class CalendarCoursesComponent implements OnInit {
 
 
 
-  public events : EventSettingsModel = {
-
-
-    dataSource:
-
-      [{
-        idFormation: 1,
-        Subject: "tttt",
-        niveau: "aa",
-        nbrHeures: 12,
-        domain: "IT",
-        nbrMaxParticipant: 10,
-        frais: 56,
-        EndTime: new Date(2022, 3, 20, 4, 0),
-        StartTime: new Date(2022, 3, 20, 4, 0),
-
-
-      },
-        {
-          idFormation: 2,
-          Subject: "new",
-          niveau: "aas",
-          nbrHeures: 8,
-          domain: "ART",
-          nbrMaxParticipant: 20,
-          frais: 56,
-          EndTime: new Date(2022, 3, 13, 4, 0),
-          StartTime: new Date(2022, 3, 13, 4, 0),
-
-        }
-      ]
-  };
 
 
 

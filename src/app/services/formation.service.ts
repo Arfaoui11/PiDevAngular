@@ -6,6 +6,7 @@ import {User} from "../core/model/User";
 import {PostComment} from "../core/model/PostComment";
 import {Likes} from "../core/model/likes";
 import {DisLikes} from "../core/model/DisLikes";
+import {Quiz} from "../core/model/Quiz";
 
 
 
@@ -171,6 +172,11 @@ export class FormationService {
 
   getFormationByApprenant(id:number):Observable<Formation[]> {
     return this.http.get<Formation[]>('http://localhost:8099/Courses/getFormationByApprenant/'+id);
+  }
+
+  getListQuizByUser(id : number,idf : number):Observable<any[]>
+  {
+    return this.http.get<any[]>('http://localhost:8099/Courses/listQuiqtestedbuUser/'+id+"/"+idf);
   }
 
 

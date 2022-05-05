@@ -3,18 +3,18 @@
   <!-- begin container-fluid -->
   <div class="container-fluid">
     <!-- begin row -->
-    <label> Search </label>
+    <h1> Search </h1>
 
 
     <form  (click)="SearchMultiple(key.value);SearchHistrique(key.value)">
       <div class="from-group row">
-      <div class="col-6 col-sm-3">
-        <input class="form-control ag-row-hover"  type="search"  #key="ngModel" ngModel
+      <div class="col-6 col-sm-5">
+        <input class="form-control ag-row-hover" style="width: 500px;height: 50px ;font-size:large"  type="search"  #key="ngModel" ngModel
                name="key" placeholder="Search Formation" >
       </div>
 
       <div class="col-6 col-sm-3">
-        <button class="btn btn-outline-soundcloud ag-row " type="submit" > Search </button>
+        <button class="theme-btn-border w-full" style="width: 80px" type="submit" > Search </button>
       </div>
       </div>
     </form>
@@ -51,7 +51,7 @@
           <td>{{l.title}}</td>
           <td>{{l.level}}</td>
           <td>{{l.domain}}</td>
-          <td>{{l.frais}}</td>
+          <td>{{l.frais}} DT</td>
           <td >
             <button class="btn btn-outline-danger" (click)="deleteFormation(l.idFormation)">Delete</button>
           </td>
@@ -173,15 +173,15 @@
 
         <div class="card-body">
 
-          <button class="btn btn-outline-microsoft " (click)="this.getNbrApprenantByFormation();ToggleForm()">
-            Nb Apprenant by Formation</button>
+          <button class="btn btn-outline-microsoft " (click)="ToggleForm()">
+            Show Date statistics  </button>
 
 
 
         </div>
       </div>
     </div>
-    <section id="timeline-card">
+    <section id="timeline-card" *ngIf="sowFormateur">
       <div class="row">
         <div class="col-lg-6 col-sm-12">
           <div class="card">
@@ -234,7 +234,7 @@
             <div class="col-lg-6 col-sm-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title"> Data Shows Most Women Search for Courses Title name </h4>
+                  <h4 class="card-title"> Data Shows Most Women Search for Courses </h4>
                 </div>
                 <div class="card-content">
                   <div class="card-body">

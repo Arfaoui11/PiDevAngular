@@ -21,32 +21,32 @@ body.semi-dark-layout .main-menu-content .navigation-main {
   background-color : rgba(255, 211, 238, 0.44);
 }
 body.semi-dark-layout .main-menu-content .navigation-main .nav-item i {
-  color : #262C49;
+  color : black;
 }
 body.semi-dark-layout .main-menu-content .navigation-main .nav-item.open a {
-  background-color : #262C49;
+  background-color : #ffdeea;
 }
 body.semi-dark-layout .main-menu-content .navigation-main .nav-item a:after, body.semi-dark-layout .main-menu-content .navigation-main .nav-item a {
-  color : #262C49;
+  color : black;
 }
 body.semi-dark-layout .main-menu-content .navigation-main .nav-item .menu-content {
-  background-color : #10163A;
+  background-color : black;
 }
 body.semi-dark-layout .main-menu-content .navigation-main .nav-item .menu-content .active .menu-item {
-  color : #262C49;
+  color : black;
 }
 body.semi-dark-layout .main-menu-content .navigation-main .nav-item .menu-content li:not(.active) a {
-  background-color : #10163A;
+  background-color : #ffdeea;
 }
 body.semi-dark-layout .main-menu-content .navigation-main .active .menu-title, body.semi-dark-layout .main-menu-content .navigation-main .active i {
   color : white;
 }
 body.semi-dark-layout .main-menu-content .navigation-main .sidebar-group-active a {
-  background : #10163A;
+  background : #ffdeea;
   border-radius : 4px;
 }
 body.semi-dark-layout .main-menu-content .navigation-main .sidebar-group-active .menu-content {
-  background-color : #10163A;
+  background-color : #ffdeea;
 }
 body.semi-dark-layout .main-menu-content .navigation-main .sidebar-group-active .menu-content .active {
   z-index : 1;
