@@ -136,12 +136,11 @@
 
       <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card overlay-img-card text-white">
-          <img src="../../../assets/images/pages/card-image-6.jpg" class="card-img" alt="card-img-6">
+          <img src="../../../assets/front/img/portfolio/portfolio-img-20.jpg" class="card-img" alt="card-img-6">
           <div class="card-img-overlay overlay-black d-flex flex-column justify-content-between">
-            <h5 class="card-title text-white">Beautiful Overlay</h5>
+            <h5 class="card-title text-white">Beautiful Art</h5>
             <div class="card-content">
-              Cake sesame snaps cupcake gingerbread danish I love gingerbread. Apple pie pie jujubes chupa chups muffin
-              halvah lollipop.
+              A photograph can be either a positive or negative image. Most photographs are created using a camera .
             </div>
           </div>
         </div>
@@ -197,8 +196,6 @@
         <div class="card">
           <div class="card-content">
             <div *ngIf="listFormation[index].databaseFiles[0].fileType.toString().includes('image') ; then thenfirst ; else thenSec">
-
-
             </div>
             <ng-template #thenfirst > <img    class="card-img-top img-fluid"   [src]="'data:image/jpeg;base64,'+listFormation[index].databaseFiles[0].data" alt="Card image cap"></ng-template>
             <ng-template #thenSec ><img    class="card-img-top img-fluid"   [src]="'data:image/jpeg;base64,'+listFormation[index].databaseFiles[1].data" alt="Card image cap"></ng-template>

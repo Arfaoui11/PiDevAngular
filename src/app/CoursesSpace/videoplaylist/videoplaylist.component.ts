@@ -163,7 +163,8 @@ export class VideoplaylistComponent implements OnInit {
   {
     this.serviceForm.deleteFiles(id).subscribe(
       (data) =>{console.log(data);
-        this.getData();
+        this.retrieveVideo = this.retrieveVideo.filter(item => item.id !== id);
+       // this.getData();
     } );
     this.snackbar.open(' files delete with succees', 'Undo', {
       duration: 2000
@@ -216,7 +217,6 @@ export class VideoplaylistComponent implements OnInit {
             duration: 2000
           });
         }
-
       },
 
     );

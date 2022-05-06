@@ -73,7 +73,7 @@ export class BlogDetailsComponent implements OnInit {
   constructor(private serviceForm : FormationService,private appService: AppService,private sanitizer : DomSanitizer,private snackbar:MatSnackBar ,private http: HttpClient, private route:ActivatedRoute,private token: TokenService) {
     this.currentUser = this.token.getUser();
    // this.getUserTested();
-    this.getLsitQuizTestByUser();
+
   //  console.log(this.currentUser);
 
   }
@@ -82,7 +82,7 @@ export class BlogDetailsComponent implements OnInit {
 
     this.idFormation = this.route.snapshot.params['idCourses'];
 
-
+    this.getLsitQuizTestByUser();
     this.getFormation();
     this.getLsitQuizTestByUser();
     setTimeout( () => {
@@ -197,8 +197,11 @@ export class BlogDetailsComponent implements OnInit {
           this.show = true;
         }
       }
+    if (this.formation.quizzes.length >0 )
+    {
+      this.nbrQuiztoCertifcate =   ( this.listQuizTested.length);
+    }
 
-      this.nbrQuiztoCertifcate =  this.nbrQuiztoCertifcate - ( this.formation.quizzes.length - this.listQuizTested.length);
 
 
 

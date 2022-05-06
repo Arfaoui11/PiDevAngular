@@ -60,14 +60,7 @@ export class QuizComponent implements OnInit {
     this.getQuizQuestion();
 
   }
-/*
-  getAllQuestions() {
-    this.questionService.getQuestionJson()
-      .subscribe(res => {
-        this.questionList = res.questions;
-      })
-  }
-*/
+
 
 
 
@@ -131,7 +124,7 @@ export class QuizComponent implements OnInit {
       });
     setTimeout(() => {
       this.interval$.unsubscribe();
-    }, 600000);
+    }, 300000);
   }
   stopCounter() {
     this.interval$.unsubscribe();
@@ -139,7 +132,7 @@ export class QuizComponent implements OnInit {
   }
   resetCounter() {
     this.stopCounter();
-    this.counter = 60;
+    this.counter = 30;
     this.startCounter();
   }
 
@@ -147,7 +140,7 @@ export class QuizComponent implements OnInit {
     this.resetCounter();
     this.getQuizQuestion()
     this.points = 0;
-    this.counter = 60;
+    this.counter = 30;
     this.currentQuestion = 0;
     this.progress = "0";
 
@@ -169,13 +162,13 @@ export class QuizComponent implements OnInit {
     this.res.totalCorrect=this.points;
     this.res.correctAnswer=this.correctAnswer;
     this.res.inCorrectAnswer=this.inCorrectAnswer;
-    this.res.username=this.name;
+    this.res.username=this.currentUser.displayName;
     this.questionService.saveScore(this.res,idU,idQ).subscribe(
       res => {console.log(res);});
 
     setTimeout( () =>
     {
-      window.location.reload();
+      window.location.href = '#/front/End/myCourses';
     },2000);
   }
 

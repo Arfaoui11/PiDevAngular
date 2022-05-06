@@ -206,10 +206,6 @@ export class FormationService {
 
 
 
-
-
- // http://localhost:8099/user/deleteUserById/7
-
   deleteFormation(i:number): Observable<any> {
 
     return this.http.get<number>("http://localhost:8099/Courses/deleteFormation/"+i)

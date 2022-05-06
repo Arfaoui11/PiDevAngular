@@ -258,7 +258,9 @@
                 <li><p>{{formation.nbrHeures}} hours on-demand video</p></li>
                 <li><p>Full lifetime access</p></li>
                 <li><p>Certificate of completion</p></li>
-                <li>{{nbrQuiztoCertifcate}} Quiz to get Certificate </li>
+                <li *ngIf="formation.quizzes.length == 0"> 5 Quiz to get Certificate </li>
+                <li *ngIf="nbrQuiztoCertifcate == 0"> Courses Finished </li>
+                <li *ngIf="formation.quizzes.length>0 && nbrQuiztoCertifcate != 0 ">{{nbrQuiztoCertifcate}} Quiz to get Certificate </li>
                 <li></li>
                 <li></li>
                 <li></li>
