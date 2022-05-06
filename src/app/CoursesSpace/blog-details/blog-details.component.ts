@@ -331,23 +331,29 @@ export class BlogDetailsComponent implements OnInit {
   public nbrD:number=0;
 
 
-
+private ratTrue = false;
 
   changeRating() {
 
-    this.serviceForm.addRatingFormation(this.idFormation,this.rating).subscribe(
-      data => {
+    if (!this.ratTrue)
+    {
+      this.serviceForm.addRatingFormation(this.idFormation,this.rating).subscribe(
+        data => {
 
 
-        setTimeout(()=>
-        {
+          setTimeout(()=>
+          {
 
-         this.getFormation()
+            this.getFormation()
 
-        },500);
+          },500);
 
-      }
-    )
+        }
+      );
+      this.ratTrue= true;
+    }
+
+
   }
 
   DisLikesComment(id:number)

@@ -70,9 +70,15 @@ export class FormationComponent implements OnInit {
    // this.getNbrApprenantByFormation();
   }
 
+  getPourcentages()
+  {
+    this.serviceForm.getpourcentagesMonth().subscribe((data) => console.log(data));
+  }
+
 
   ToggleForm()
   {
+    this.getPourcentages();
     this.getNbrApprenantByFormation();
     this.getPourcentage();
     this.sowFormateur = ! this.sowFormateur;

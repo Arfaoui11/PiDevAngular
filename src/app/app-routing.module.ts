@@ -28,6 +28,15 @@ import {CalendarFrontComponent} from "./CoursesSpace/calendar-front/calendar-fro
 import {QestionQuizCoursesComponent} from "./CoursesSpace/qestion-quiz-courses/qestion-quiz-courses.component";
 import {E404Component} from "./FontEnd/e404/e404.component";
 import {CallVideoComponent} from "./CoursesSpace/call-video/call-video.component";
+import {AddPartnerInstitutionComponent} from "./backup/ExchangeStudents/add-partner-institution/add-partner-institution.component";
+import {ListOfPartnersComponent} from "./backup/ExchangeStudents/list-of-partners/list-of-partners.component";
+import {AddAppointmentComponent} from "./backup/add-appointment/add-appointment.component";
+import {AppointmentListComponent} from "./backup/appointment-list/appointment-list.component";
+import {AddComplaintComponent} from "./backup/add-complaint/add-complaint.component";
+import {ComplaintListComponent} from "./backup/complaint-list/complaint-list.component";
+import {UpdateComplaintComponent} from "./backup/update-complaint/update-complaint.component";
+import {UpdateAppointmentComponent} from "./backup/update-appointment/update-appointment.component";
+import {ListTopicComponent} from "./backup/Forum/list-topic/list-topic.component";
 
 
 
@@ -89,6 +98,41 @@ const routes: Routes =
           { path: 'userview/:idUser', component: UserViewComponent },
           { path: 'login', component: LoginComponent },
 
+
+        ]
+      }
+      ,
+      {
+        path:'Exchange-Student-Management',
+        children: [
+          { path: 'addUniversity', component: AddPartnerInstitutionComponent },
+          { path: 'ListUniversities', component: ListOfPartnersComponent },
+
+
+        ]
+
+      },
+      {
+        path: 'helpSpace-Management',
+        children: [
+
+
+          { path: 'addAppointment', component: AddAppointmentComponent },
+          { path: 'ListAppointment', component: AppointmentListComponent },
+          { path: 'addComplaint', component: AddComplaintComponent },
+          { path: 'ListComplaint', component: ComplaintListComponent } ,
+          { path: 'updateComplaint/:id', component: UpdateComplaintComponent },
+          { path: 'updateAppointment/:id', component: UpdateAppointmentComponent },
+
+        ]
+
+      },
+
+      {
+        path: 'Forum-management',
+        children: [
+
+          { path: 'ListTopic', component: ListTopicComponent },
 
         ]
       },

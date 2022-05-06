@@ -104,68 +104,113 @@
 
         </div>
         <div class="modal-body" >
-          <div class="input-group row-cols-md-3" >
-            <span class="input-groupe-text "> Title </span>
-            <input type="text" #title="ngModel" class="form-control" [(ngModel)]="fr.title" name="title" pattern="[a-zA-Z]*" required  >
-            <div *ngIf="title.invalid && title.touched">
-              <div *ngIf="title.errors?.required" class="alert">
-                Required
-              </div>
-              <div *ngIf="title.errors?.pattern" class="alert">
-                title not accepted use [a-zA-Z] only
+          <form #f="ngForm" class="form-group">
+            <div class="input-group row-cols-md-3" >
+              <span class="input-groupe-text "> Title </span>
+              <input type="text" #title="ngModel" class="form-control" [(ngModel)]="fr.title" name="title" placeholder="Nom of this Courses" pattern="[a-zA-Z]*" required  >
+              <div *ngIf="title.invalid && title.touched" style="color: red">
+                <div *ngIf="title.errors?.required" class="alert">
+                  Required
+                </div>
+                <div *ngIf="title.errors?.pattern" class="alert">
+                  title not accepted use [a-zA-Z] only
+                </div>
               </div>
             </div>
-          </div>
-          <div class="input-group row-cols-md-3" >
-            <span class="input-groupe-text "> nbrMaxParticipant </span>
-            <input type="number" class="form-control" [(ngModel)]="fr.nbrMaxParticipant" >
-          </div>
-          <div class="input-group row-cols-md-3" >
-            <span class="input-groupe-text "> nbrHeures </span>
-            <input type="number" class="form-control" [(ngModel)]="fr.nbrHeures" >
-          </div>
-          <div class="input-group row-cols-md-3" >
-            <span class="input-groupe-text "> frais </span>
-            <input type="number" class="form-control" [(ngModel)]="fr.frais" >
-          </div>
+            <br>
+            <div class="input-group row-cols-md-3" >
+              <span  class="input-groupe-text "> Nbr Leaner Max </span>
+              <input #nbrMaxParticipant="ngModel" type="number" class="form-control" [(ngModel)]="fr.nbrMaxParticipant" placeholder="Nbr Max Leaner" name="nbrMaxParticipant" min="0" max="20" required>
+              <div *ngIf="nbrMaxParticipant.invalid && nbrMaxParticipant.touched" style="color: red">
+                <div *ngIf="nbrMaxParticipant.errors?.required" class="alert">
+                  Required
+                </div>
+                <div *ngIf="nbrMaxParticipant.errors?.max" class="alert">
+                  Max nbr of Leaners is 20 !!!!
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="input-group row-cols-md-3" >
+              <span  class="input-groupe-text "> Nbr Heures </span>
+              <input #nbrHeures="ngModel" type="number" class="form-control" [(ngModel)]="fr.nbrHeures" name="nbrHeures" placeholder="Heures" min="1" max="50" required>
+              <div *ngIf="nbrHeures.invalid && nbrHeures.touched" style="color: red">
+                <div *ngIf="nbrHeures.errors?.required" class="alert">
+                  Required
+                </div>
+                <div *ngIf="nbrHeures.errors?.max" class="alert">
+                  Max nbr of Heures Leaners is 20H !!!!
+                </div>
+                <div *ngIf="nbrHeures.errors?.min" class="alert">
+                  Min nbr of Heures Leaners is 1H !!!!
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="input-group row-cols-md-3">
+              <label for="lieu">Position in maps</label>
+              <select  #lieu="ngModel" [(ngModel)]="fr.lieu" name="lieu" id="lieu" class="form-control" name="lieu" placeholder="Position" required >
+                <option selected value="Bizerte">Bizerte</option>
+                <option value="Ariana">Ariana</option>
+                <option value="Sousse">Sousse</option>
+                <option value="Sfax">Sfax</option>
+              </select>
+            </div>
+            <br>
+            <div class="input-group row-cols-md-3" >
+              <span class="input-groupe-text "> frais </span>
+              <input #frais="ngModel" type="number" class="form-control" [(ngModel)]="fr.frais" name="frais" placeholder="Price" min="100" max="3000" required >
+              <div *ngIf="frais.invalid && frais.touched" style="color: red">
+                <div *ngIf="frais.errors?.required" class="alert">
+                  Required
+                </div>
+                <div *ngIf="frais.errors?.max" class="alert">
+                  Price Max is 3000 DT !!!!
+                </div>
+                <div *ngIf="frais.errors?.min" class="alert">
+                  Price Min is 100 DT !!!!
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="input-group row-cols-md-3" >
+              <label >dateDebut</label>
+              <input type="date" class="form-control" #dateDebut="ngModel" [(ngModel)]="fr.start" name="dateDebut"  required >
+            </div>
+            <br>
+            <div class="input-group row-cols-md-3" >
+              <label >dateFin</label>
+              <input type="date" class="form-control" #dateFin="ngModel" [(ngModel)]="fr.end" name="dateFin" required >
+            </div>
+            <br>
+            <div class="input-group row-cols-md-3">
+              <label for="niveau" > Level</label>
+              <select  #niveau="ngModel" [(ngModel)]="fr.level" name="niveau" id="niveau" class="form-control"  required >
+                <option  value="BEGINNER">BEGINNER</option>
+                <option value="INTERMEDIATE">INTERMEDIATE</option>
+                <option value="ADVANCED">ADVANCED</option>
+              </select>
+            </div>
+            <br>
+            <div class="input-group row-cols-md-3">
+              <label for="domain" >Domain</label>
+              <select #domain="ngModel" [(ngModel)]="fr.domain" name="domain" id="domain" class="form-control"  required >
+                <option  value="IT">IT</option>
+                <option value="ART">ART</option>
+                <option value="CINEMA">CINEMA</option>
+                <option value="MUSIQUE">MUSIQUE</option>
+                <option value="DANCE">DANCE</option>
+                <option value="PHY">PHY</option>
+                <option value="ECONOMIC">ECONOMIC</option>
+                <option value="MARKETING">MARKETING</option>
+              </select>
+            </div>
 
-          <div class="input-group row-cols-md-3" >
-            <span class="input-groupe-text "> dateDebut </span>
-            <input type="date" class="form-control" [(ngModel)]="fr.start" >
-          </div>
-          <div class="input-group row-cols-md-3" >
-            <span class="input-groupe-text "> dateFin </span>
-            <input type="date" class="form-control" [(ngModel)]="fr.end" >
-          </div>
-          <div class="form-group row-cols-md-3">
-            <label for="data-category"> Niveau </label>
-            <select #level="ngModel" class="form-control" [(ngModel)]="fr.level"  id="data-category" required>
-              <option selected value="BEGINNER">BEGINNER</option>
-              <option value="INTERMEDIATE">INTERMEDIATE</option>
-              <option value="ADVANCED">ADVANCED</option>
-            </select>
-          </div>
-          <div class="form-group row-cols-md-3">
-            <label  >Domain</label>
-            <select #domain="ngModel" [(ngModel)]="fr.domain" name="domain" class="form-control"  required >
-              <option selected value="IT">IT</option>
-              <option value="ART">ART</option>
-              <option value="CINEMA">CINEMA</option>
-              <option value="MUSIQUE">MUSIQUE</option>
-              <option value="DANCE">DANCE</option>
-              <option value="PHY">PHY</option>
-              <option value="ECONOMIC">ECONOMIC</option>
-              <option value="MARKETING">MARKETING</option>
-            </select>
-          </div>
+            <button type="button" class="btn btn-primary"  style="float: right" data-bs-dismiss="modal" aria-label="Close" [disabled]="!f.valid" (click)="UpdateFormation(fr,idF);f.reset()" ><i class="feather icon-activity" ></i> Add </button>
 
-          <button class="btn btn-outline-success" data-bs-dismiss="modal" aria-label="Close" (click)="UpdateFormation(fr,idF)" > Update </button>
-
-
+          </form>
         </div>
-
       </div>
-
     </div>
 
 

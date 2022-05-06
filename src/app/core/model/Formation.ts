@@ -22,8 +22,4 @@ export class Formation {
   apprenant!:User[];
   quizzes!:Quiz[];
 
-
-
-
-
 }

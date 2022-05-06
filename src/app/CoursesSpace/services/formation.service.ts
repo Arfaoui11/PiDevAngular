@@ -56,7 +56,10 @@ export class FormationService {
   }
 
 
-
+  getpourcentagesMonth(): Observable<any>
+  {
+    return  this.http.get<any>('http://localhost:8099/Courses/PourcentageCoursesByDomain');
+  }
 
 
 

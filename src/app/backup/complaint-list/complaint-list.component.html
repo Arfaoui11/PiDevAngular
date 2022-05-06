@@ -1,0 +1,42 @@
+<a (click)="ExportPDF()"> <img src="assets/images/icons/pdf.png" alt=""></a>
+<ng-container>
+  <form  (click)="SearchMultiple(key.value)">
+    <div class="from-group row">
+      <div class="col-6 col-sm-3">
+        <input class="form-control ag-row-hover"  type="search"  #key="ngModel" ngModel
+               name="key" placeholder="Search Multiple" >
+      </div>
+
+      <div class="col-6 col-sm-3">
+        <button class="btn btn-outline-soundcloud ag-row " type="submit" > Search </button>
+      </div>
+    </div>
+  </form>
+</ng-container>
+<div class="container">
+  <h2>Complaint List</h2>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Id Complaint</th>
+      <th>Date of Complaint</th>
+      <th>Description</th>
+      <th>Complaint Type</th>
+      <th>Delete</th>
+      <th>Update</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let complaint of comlpaints | paginate: { itemsPerPage: 5, currentPage: page , totalItems: totalLength }">
+      <th scope="row">{{complaint.idCom}}</th>
+      <td>{{complaint.dateCom}}</td>
+      <td>{{complaint.description}}</td>
+      <td>{{complaint.type}}</td>
+      <td><button class="btn btn-danger" title="Delete" (click)=" deleteComplaintById(complaint)" ><i class="fas fa-trash"></i></button></td>
+      <td><button class="btn btn-primary" title="Edit" [routerLink]="['/home/helpSpace-Management/updateComplaint',complaint.idCom] "><i class="fa fa-edit"></i></button></td>
+
+    </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+</div>

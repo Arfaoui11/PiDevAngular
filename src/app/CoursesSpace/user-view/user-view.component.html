@@ -137,25 +137,15 @@
               </div>
             </div>
             <br>
-            <div class="input-group row-cols-md-3" >
-              <span class="input-groupe-text "> Date Start </span>
-              <input #start="ngModel" type="date" value="2022-05-6" class="form-control" [(ngModel)]="fr.start" required>
-              <div *ngIf="start.invalid && start.touched" style="color: red">
-                <div *ngIf="start.errors?.required" class="alert">
-                  Required
-                </div>
+              <div class="input-group row-cols-md-3" >
+                <label >Start Date</label>
+                <input type="date" class="form-control" #dateDebut="ngModel" [(ngModel)]="fr.start" name="dateDebut"  required >
               </div>
-            </div>
-            <br>
-            <div class="input-group row-cols-md-3" >
-              <span class="input-groupe-text "> Date End </span>
-              <input #end="ngModel" type="date" value="2022-05-6" class="form-control" [(ngModel)]="fr.end" required>
-              <div *ngIf="end.invalid && end.touched" style="color: red">
-                <div *ngIf="end.errors?.required" class="alert">
-                  Required
-                </div>
+              <br>
+              <div class="input-group row-cols-md-3" >
+                <label >End Date</label>
+                <input type="date" class="form-control" #dateFin="ngModel" [(ngModel)]="fr.end" name="dateFin" required >
               </div>
-            </div>
             <br>
             <div class="input-group row-cols-md-3">
               <label for="niveau" > Level</label>
