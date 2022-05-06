@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   currentUser: any;
 
+
+
   constructor(private appDataService: AppdataService,private authService: FormationService,private router:Router, private tokenStorage: TokenService, private route: ActivatedRoute, private userService: UserServicesService) { }
 
   ngOnInit(): void {

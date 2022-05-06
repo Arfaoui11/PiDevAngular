@@ -90,6 +90,8 @@ import {AddAppointmentComponent} from "./backup/add-appointment/add-appointment.
 import {UpdateAppointmentComponent} from "./backup/update-appointment/update-appointment.component";
 import {ListTopicComponent} from "./backup/Forum/list-topic/list-topic.component";
 import {OfferListComponent} from "./backup/JobOfferSpace/Offer-List/offer-list.component";
+import { TeamComponent } from './CoursesSpace/team/team.component';
+import {RegisterComponent} from "./BackEnd/register/register.component";
 
 
 
@@ -126,6 +128,7 @@ FullCalendarModule.registerPlugins([
     DashboardComponent,
     LoginComponent,
     RoutComponent,
+    RegisterComponent,
     HomeFComponent,
     BlogFormationComponent,
     NavbarFComponent,
@@ -150,6 +153,7 @@ FullCalendarModule.registerPlugins([
     UpdateAppointmentComponent,
     ListTopicComponent,
     OfferListComponent,
+    TeamComponent,
 
   ],
   imports: [

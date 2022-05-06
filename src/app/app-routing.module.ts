@@ -37,6 +37,8 @@ import {ComplaintListComponent} from "./backup/complaint-list/complaint-list.com
 import {UpdateComplaintComponent} from "./backup/update-complaint/update-complaint.component";
 import {UpdateAppointmentComponent} from "./backup/update-appointment/update-appointment.component";
 import {ListTopicComponent} from "./backup/Forum/list-topic/list-topic.component";
+import {TeamComponent} from "./CoursesSpace/team/team.component";
+import {RegisterComponent} from "./BackEnd/register/register.component";
 
 
 
@@ -46,6 +48,7 @@ const routes: Routes =
    [
 
      {path:'login',component: LoginComponent },
+     {path:'register',component: RegisterComponent },
      {path:'chatRoom/:idCourses',component: CallVideoComponent },
      {path:'homeF',component: HomeFComponent },
      { path: '',  redirectTo: '/front/End/homeF', pathMatch: 'full' },
@@ -56,6 +59,7 @@ const routes: Routes =
          {
            path: 'End',
            children: [
+             { path: 'team',  component: TeamComponent },
              { path: 'portForm', component: PortfelioFormComponent },
              { path: 'blogF', component: BlogFormationComponent },
              { path: 'portF/:idCourses', component: PortfelioFormDetailsComponent },
@@ -68,6 +72,8 @@ const routes: Routes =
              { path: 'quiz/:idQuiz', component: QuizComponent },
              { path: 'quizWelcome', component: WelcomeComponent },
              { path: '**', pathMatch: 'full',  component: E404Component },
+
+
 
            ]
          },
@@ -94,7 +100,6 @@ const routes: Routes =
           { path: 'Courses', component: CoursesFormComponent },
           { path: 'Quiz/:idCourses', component: QuestionComponent },
           { path: 'Question/:idQuiz', component: QestionQuizCoursesComponent },
-
           { path: 'userview/:idUser', component: UserViewComponent },
           { path: 'login', component: LoginComponent },
 

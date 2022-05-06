@@ -81,7 +81,7 @@
             <div class="ablog__text ablog__text4">
               <div class="bd-blog-meta mb-15">
               <ul>
-                <li><a href="blog-details.html"><i class="flaticon-calendar"></i>{{formation.start | date | slice:0 : 12 }} - {{formation.end | date | slice:0 : 12 }}</a></li>
+                <li><a (click)="gotTo404()"  ><i  class="flaticon-calendar"></i>{{formation.start | date | slice:0 : 12 }} - {{formation.end | date | slice:0 : 12 }}</a> <span ></span></li>
                 <li><a href="#com"><i class="flaticon-chat"></i>{{formation.postComments.length}} Comments</a></li>
                 <li><a [routerLink]="['../../chat']" ><i class="flaticon-chatting"></i> Chat Room </a></li>
               </ul>
@@ -223,35 +223,38 @@
               </form>
             </div>
           </div>
+          <div >
 
-          <div  *ngIf="!show" >
-            <a  class="theme-btn w-full mb-20 " style="color: white" (click)="assingAppToCourses()"> Add This Courses</a>
-          </div>
-          <div  *ngIf="go && show" >
-            <a  class="theme-btn-border w-full mb-20"  [routerLink]="['../../quiz',this.quiz.idQuiz]"> You Have Quiz  {{quiz.createAt | date | slice:0 : 12}}</a>
-          </div>
-          <div class="widget mb-45"  *ngIf="show">
-
-            <h3 class="sidebar__widget--title mb-30"  >Recent Videos</h3>
-
-            <div class="sidebar--widget__post mb-20" *ngFor="let vdo of retrieveVideo; let $index = index">
-              <div class="sidebar__post--thumb">
-                <a  >
-                  <div class="post__img" >
-                    <img src="../../../assets/front/img/blog/b6.jpg" alt="">
-                  </div>
-
-                </a>
-              </div>
-              <div class="sidebar__post--text">
-              <!--  <h4 class="sidebar__post--title"><a (click)="sendIndex($index)">{{vdo.fileName}}</a></h4>-->
-                <h4 class="sidebar__post--title"><a [routerLink]="['../../portF',formation.idFormation]">{{vdo.fileName}}</a></h4>
-                <span>{{formation.start | date | slice:0 : 12}}</span>
-              </div>
+            <div  *ngIf="!show && currentUser" >
+              <a  class="theme-btn w-full mb-20 " style="color: white" (click)="assingAppToCourses()"> Add This Courses</a>
             </div>
+            <div  *ngIf="go && show" >
+              <a  class="theme-btn-border w-full mb-20"  [routerLink]="['../../quiz',this.quiz.idQuiz]"> You Have Quiz  {{quiz.createAt | date | slice:0 : 12}}</a>
+            </div>
+            <div class="widget mb-45"  *ngIf="show">
 
+              <h3 class="sidebar__widget--title mb-30"  >Recent Videos</h3>
+
+              <div class="sidebar--widget__post mb-20" *ngFor="let vdo of retrieveVideo; let $index = index">
+                <div class="sidebar__post--thumb">
+                  <a  >
+                    <div class="post__img" >
+                      <img src="../../../assets/front/img/blog/b6.jpg" alt="">
+                    </div>
+
+                  </a>
+                </div>
+                <div class="sidebar__post--text">
+                  <!--  <h4 class="sidebar__post--title"><a (click)="sendIndex($index)">{{vdo.fileName}}</a></h4>-->
+                  <h4 class="sidebar__post--title"><a [routerLink]="['../../portF',formation.idFormation]">{{vdo.fileName}}</a></h4>
+                  <span>{{formation.start | date | slice:0 : 12}}</span>
+                </div>
+              </div>
+
+            </div>
           </div>
-          <div class="widget mb-40">
+
+          <div class="widget mb-40" >
             <h3 class="sidebar__widget--title mb-25">This course includes </h3>
             <div class="sidebar--widget__cat mb-20">
               <ul>

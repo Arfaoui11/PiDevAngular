@@ -13,15 +13,15 @@
                   <h1 class="bd-slider-six-title mb-30 wow fadeInUp" data-wow-delay=".2s">Take Your <span>Life</span> To <br>The Next Level</h1>
                   <div class="bd-slider-video-spacing mb-90">
                     <div class="bd-slider-five-btn wow fadeInUp" data-wow-delay=".4s">
-                      <a href="contact.html" class="theme-btn">Say Hello <i class="flaticon-email-1"></i></a>
+                      <a [routerLink]="['../chat']" class="theme-btn">Say Hello <i class="flaticon-chat"></i></a>
                     </div>
                     <div class="bd-slider-five-video">
                       <div class="bd-slider-five-video-icon wow fadeInUp" data-wow-delay=".6s">
-                        <a href="https://www.youtube.com/watch?v=jdkWIdJobSA" class="play_btn popup-video"><i class="flaticon-play"></i></a>
+                        <a href="https://www.youtube.com/watch?v=VF4ZyJRUxk8" class="play_btn popup-video"><i class="flaticon-play"></i></a>
                       </div>
                       <div class="bd-slider-five-video-text wow fadeInUp" data-wow-delay=".8s">
                         <span>Watch</span>
-                        <h5>How I work</h5>
+                        <h5> Empowering Society </h5>
                       </div>
                     </div>
                   </div>
@@ -36,7 +36,7 @@
                       <li>
                         <div class="bd-slider-fact wow fadeInUp" data-wow-delay="1.2s">
                           <h4 class="bd-slider-fact-title text-heading"><span class="odometer" data-count="18"></span>K</h4>
-                          <span class="bd-slider-fact-subtitle text-heading">Project Cmpleted</span>
+                          <span class="bd-slider-fact-subtitle text-heading">Project Completed</span>
                         </div>
                       </li>
                     </ul>
@@ -147,7 +147,7 @@
       </div>
       <div class="col-lg-3 col-md-2 col-sm-2">
 
-        <div class="card overlay-img-card text-white">
+        <div class="card overlay-img-card text-white" >
           <img src="../../../assets/images/pages/card-image-5.jpg" class="card-img" alt="card-img-6">
           <div class="card-img-overlay overlay-black">
             <h5 class="font-medium-5 text-white text-center mt-4">{{desc}}</h5>
@@ -503,13 +503,13 @@
   <!-- pricing area end here -->
 
   <!-- team area start here -->
-  <section class="bd-team-area pb-145 pt-145">
+  <section class="bd-team-area pb-145 pt-145" >
     <div class="container">
       <div class="row align-items-center pb-25">
         <div class="col-lg-6">
           <div class="bd-section-title-wrapper mb-20">
-            <h5 class="bd-section-subtitle mb-15 subtitle-without-border">Association position in maps </h5>
-            <h2 class="bd-section-title">Our experienced team</h2>
+            <h5 class="bd-section-subtitle mb-15 subtitle-without-border">Our experienced team </h5>
+            <h2 class="bd-section-title">Association Position In Maps</h2>
           </div>
         </div>
         <div class="col-lg-6">
@@ -519,11 +519,11 @@
         </div>
       </div>
 
-      <div class="bd-team-active swiper-container">
+      <div class="bd-team-active swiper-container" id="map">
         <div class="swiper-wrapper pb-40">
           <div class="swiper-slide">
             <div class="bd-map mb-30">
-              <app-map></app-map>
+              <app-map ></app-map>
 
             </div>
           </div>

@@ -47,8 +47,8 @@
         <div class="bd-blog mb-30">
           <div class="bd-blog-img" >
             <div *ngIf="l.databaseFiles[0].fileType.toString().includes('image') ; then first ; else Sec"></div>
-            <ng-template #first > <a href="blog-details.html"><img  [src]="'data:image/jpeg;base64,'+l.databaseFiles[0].data" alt="blog image not found 1"></a></ng-template>
-            <ng-template #Sec > <a href="blog-details.html"><img  [src]="'data:image/jpeg;base64,'+l.databaseFiles[1].data" alt="blog image not found 2"></a></ng-template>
+            <ng-template #first > <a ><img  [src]="'data:image/jpeg;base64,'+l.databaseFiles[0].data" alt="blog image not found 1"></a></ng-template>
+            <ng-template #Sec > <a ><img  [src]="'data:image/jpeg;base64,'+l.databaseFiles[1].data" alt="blog image not found 2"></a></ng-template>
           </div>
           <div class="bd-blog-text">
             <div class="bd-blog-meta mb-15">

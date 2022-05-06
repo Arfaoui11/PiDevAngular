@@ -15,17 +15,8 @@
       </div>
     </div>
     <div class="input" *ngIf="room !== ''" style="padding-left: 20px">
-    <!--  <textarea
-        type="text"
-        rows="3"
-        cols="15"
-        [value]="msg"
-        [(ngModel)]="msg"
-      ></textarea>-->
       <form  class="bg-light" (ngSubmit)="sendMessage(msg)" >
-
         <div class="input-group" style="width: 200px">
-
           <input  placeholder="Type a message" aria-describedby="button-addon2"  autocomplete="off" type="text" name="message"
                   [(ngModel)]="msg" class="form-control rounded-0 border-0 py-4 bg-light">
           <div class="input-group-append">
@@ -33,11 +24,7 @@
           </div>
         </div>
       </form>
-
-     <!-- <button class="btn btn-" (click)="sendMessage(msg)">📧</button>-->
-
-
-      </div>
+    </div>
 
   </aside>
   <main class="main" >
@@ -45,19 +32,20 @@
 
       <div class="form__group field" >
 
-        <label  class="form__label"> Room Space </label>
+        <h1 style="color: white" > Room Space </h1>
 
         <a class="theme-btn w-full mb-12" (click)="setRoom();setName()" style="width: 400px" > Participate In The Meeting 👨‍👩‍👧‍👦 </a>
       </div>
     </div>
 
     <div class="video-grid">
-      <label
+   <!--   <label
         *ngIf="remoteStreams.length === 0 && room !== ''"
         (click)="startCall()"
       >
         📞
-      </label>
+      </label>-->
+
       <div class="video-card" *ngIf="localStream">
         <video
           id="me"
@@ -68,6 +56,7 @@
           muted
         ></video>
         <div class="user-name" style="color: white">{{ name }}</div>
+        <a *ngIf="remoteStreams.length === 0 && room !== ''" class="theme-btn w-full mb-12"   (click)="startCall()" style="width: 250px" > Join with video Call 📞 </a>
       </div>
       <div
         class="video-card"
@@ -86,8 +75,8 @@
     </div>
   </main>
   <footer class="footer">
-    <div class="footer__copyright">&copy; 2021 Panthom</div>
-    <div class="footer__signature">Made with <span style="color: lime">Mahdi Jr</span>  and ☕☕☕</div>
+    <div class="footer__copyright">&copy; 2022 Phantom's </div>
+    <div class="footer__signature">Made with <span style="color: lime"> Mahdi Jr</span>  and ☕☕☕ </div>
   </footer>
 </div>
-🙊🙈
+

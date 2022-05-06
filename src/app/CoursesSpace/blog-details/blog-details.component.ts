@@ -72,7 +72,9 @@ export class BlogDetailsComponent implements OnInit {
 
   constructor(private serviceForm : FormationService,private appService: AppService,private sanitizer : DomSanitizer,private snackbar:MatSnackBar ,private http: HttpClient, private route:ActivatedRoute,private token: TokenService) {
     this.currentUser = this.token.getUser();
-   // this.getUserTested();
+    this.getUserTested();
+
+
 
   //  console.log(this.currentUser);
 
@@ -82,8 +84,12 @@ export class BlogDetailsComponent implements OnInit {
 
     this.idFormation = this.route.snapshot.params['idCourses'];
 
+   if (this.currentUser)
     this.getLsitQuizTestByUser();
+
+
     this.getFormation();
+    if (this.currentUser)
     this.getLsitQuizTestByUser();
     setTimeout( () => {
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.formation.lieu}&units=metric&appid=50a7aa80fa492fa92e874d23ad061374`)
@@ -158,6 +164,7 @@ export class BlogDetailsComponent implements OnInit {
   }
 
   getUserTested() {
+
     this.appService.listUser().subscribe(response => {
       this.users = response;
       for (let u of this.users)
@@ -172,6 +179,7 @@ export class BlogDetailsComponent implements OnInit {
 
   getLsitQuizTestByUser()
   {
+
     this.serviceForm.getListQuizByUser(this.currentUser.id,this.idFormation).subscribe((data) =>
     {
       this.listQuizTested = data;
@@ -189,14 +197,13 @@ export class BlogDetailsComponent implements OnInit {
 
 
 
-      this.rating = this.formation.rating;
-      for (let app of this.formation.apprenant)
+    for (let app of this.formation.apprenant)
+    {
+      if (app.id == this.currentUser.id)
       {
-        if (app.id == this.currentUser.id)
-        {
-          this.show = true;
-        }
+        this.show = true;
       }
+    }
     if (this.formation.quizzes.length >0 )
     {
       this.nbrQuiztoCertifcate =   ( this.listQuizTested.length);
@@ -205,18 +212,21 @@ export class BlogDetailsComponent implements OnInit {
 
 
 
-      console.log(this.listQuizTested);
+    console.log(this.listQuizTested);
 
-      for (let q of this.listQuizTested)
-      {
-        let createAt = new Date(q.createAt);
-        let today = new Date(Date.parse(Date()));
+    for (let q of this.listQuizTested)
+    {
+      let createAt = new Date(q.createAt);
+      let today = new Date(Date.parse(Date()));
       if (createAt < today )
       {
         this.quiz =q;
         this.go = true;
       }
-      }
+    }
+
+
+      this.rating = this.formation.rating;
 
 
 
@@ -479,5 +489,23 @@ private ratTrue = false;
         this.show = true;
       }
     )
+  }
+
+  gotTo404() {
+    if (this.currentUser)
+    {
+      window.location.href = '/front/End/myCalender'
+    }else
+    {
+
+      this.snackbar.open(' Go to Register An Account  ', 'Undo', {
+        duration: 2000
+      });
+      setTimeout(()=> {
+        window.location.href = '#/front/End/asd';
+      },2000 );
+
+    }
+    return false;
   }
 }

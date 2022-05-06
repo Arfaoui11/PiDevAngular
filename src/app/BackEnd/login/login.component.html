@@ -1,5 +1,5 @@
 <!-- BEGIN: Content-->
-<div class="app-content content">
+<!--<div class="app-content content">
   <div class="content-overlay"></div>
   <div class="header-navbar-shadow"></div>
   <div class="content-wrapper">
@@ -61,7 +61,7 @@
                           </div>
                           <div class="text-right"><a href="auth-forgot-password.html" class="card-link">Forgot Password?</a></div>
                         </div>
-                        <a href="auth-register.html" class="btn btn-outline-primary float-left btn-inline">Register</a>
+                        <a [routerLink]="['../register']" class="btn btn-outline-primary float-left btn-inline">Register</a>
                         <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>
 
 
@@ -89,5 +89,71 @@
 
     </div>
   </div>
-</div>
+</div>-->
 <!-- END: Content-->
+<div class="col-md-12">
+  <div class="card card-container">
+    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
+    <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="username">Email</label> <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" />
+        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && username.invalid">Username is required!</div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label> <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
+                                                      #password="ngModel" />
+        <!--        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">-->
+        <!--          <div *ngIf="password.errors.required">Password is required</div>-->
+        <!--          <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>-->
+        <!--        </div>-->
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block"  >Login</button>
+        <p class="content-divider center mt-3">
+          <span>or</span>
+        </p>
+        <p class="social-login text-center">
+          Login with QRCode:
+
+          <input type="file" class="file-upload" onchange="console.log(event.target.files)">
+
+
+
+        </p>
+
+        <p class="content-divider center mt-3">
+          <span>or</span>
+        </p>
+        <p class="social-login text-center">
+
+
+          <button [routerLink]="['../register']" class="btn btn-primary btn-block"  >Register</button>
+
+
+        </p>
+
+
+
+
+      </div>
+      <div class="form-group">
+        <div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">Login failed: {{ errorMessage }}</div>
+      </div>
+      <div class="form-group">
+        <p class="content-divider center mt-3">
+          <span>or</span>
+        </p>
+        <p class="social-login text-center">
+          Sign in with:   </p>
+        <div class="footer-btn d-inline">
+          <a href="#" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>
+          <a href="#" class="btn btn-twitter white"><span class="fa fa-twitter"></span></a>
+          <a href="#" class="btn btn-google"><span class="fa fa-google"></span></a>
+          <a href="#" class="btn btn-github"><span class="fa fa-github-alt"></span></a>
+        </div>
+
+      </div>
+    </form>
+    <div class="alert alert-success" *ngIf="isLoggedIn">Welcome {{currentUser.displayName}} <br>Logged in as {{ currentUser.roles }}.</div>
+  </div>
+</div>
