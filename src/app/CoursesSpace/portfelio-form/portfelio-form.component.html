@@ -52,7 +52,7 @@
               <div class="bd-portfolio-text">
                 <span>{{listFormation[0].domain}}</span>
                 <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[0].idFormation]">{{listFormation[0].title}}</a></h5>
-                <p>{{listFormation[0].start}}</p>
+                <p>{{listFormation[0].start | date | slice:0 : 12}}</p>
               </div>
             </div>
           </div>
@@ -68,7 +68,7 @@
               <div class="bd-portfolio-text">
                 <span>{{listFormation[1].domain}}</span>
                 <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[1].idFormation]">{{listFormation[1].title}}</a></h5>
-                <p>{{listFormation[1].start}}</p>
+                <p>{{listFormation[1].start | date | slice:0 : 12}}</p>
               </div>
             </div>
           </div>
@@ -85,7 +85,7 @@
                   <div class="bd-portfolio-text">
                     <span>{{listFormation[2].domain}}</span>
                     <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[2].idFormation]">{{listFormation[2].title}}</a></h5>
-                    <p>{{listFormation[2].start}}</p>
+                    <p>{{listFormation[2].start | date | slice:0 : 12}}</p>
                   </div>
                 </div>
            </div>
@@ -101,7 +101,7 @@
                   <div class="bd-portfolio-text">
                     <span>{{listFormation[3].domain}}</span>
                     <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[3].idFormation]">{{listFormation[3].title}}</a></h5>
-                    <p>{{listFormation[3].start}}</p>
+                    <p>{{listFormation[3].start | date | slice:0 : 12}}</p>
                   </div>
                 </div>
            </div>
@@ -119,7 +119,7 @@
                 <div class="bd-portfolio-text">
                   <span>{{listFormation[4].domain}}</span>
                   <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[4].idFormation]">{{listFormation[4].title}}</a></h5>
-                  <p>{{listFormation[4].start}}</p>
+                  <p>{{listFormation[4].start | date | slice:0 : 12}}</p>
                 </div>
               </div>
            </div>
@@ -135,7 +135,7 @@
               <div class="bd-portfolio-text">
                 <span>{{listFormation[5].domain}}</span>
                 <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[5].idFormation]">{{listFormation[5].title}}</a></h5>
-                <p>{{listFormation[5].start}}</p>
+                <p>{{listFormation[5].start | date | slice:0 : 12}}</p>
               </div>
             </div>
            </div>
@@ -152,7 +152,7 @@
                 <div class="bd-portfolio-text">
                   <span>{{listFormation[6].domain}}</span>
                   <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[6].idFormation]">{{listFormation[6].title}}</a></h5>
-                  <p>{{listFormation[6].start}}</p>
+                  <p>{{listFormation[6].start | date | slice:0 : 12}}</p>
                 </div>
              </div>
             </div>
@@ -168,7 +168,7 @@
                     <div class="bd-portfolio-text">
                       <span>{{listFormation[7].domain}}</span>
                       <h5 class="bd-portfolio-title"><a [routerLink]="['../detailsF',listFormation[7].idFormation]">{{listFormation[7].title}}</a></h5>
-                      <p>{{listFormation[7].start}}</p>
+                      <p>{{listFormation[7].start | date | slice:0 : 12}}</p>
                     </div>
                   </div>
             </div>

@@ -252,11 +252,6 @@ export class FormationComponent implements OnInit {
 
 
 
-  onUpload() {
-
-
-
-  }
 
 
   onFileSelected(event : any) {
