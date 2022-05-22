@@ -45,6 +45,14 @@
         </ul>
       </li>
 
+      <li class="nav-item" ><a [routerLink]="['/home/Formation-management/calendarCourses/'+currentUser.id]"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Partner Space</span><span class="badge badge badge-warning badge-pill float-right mr-2">3</span></a>
+        <ul class="menu-content">
+          <li><a [routerLink]="['/home/Formation-management/calendarCourses/'+currentUser.id]"><i class="feather icon-check-square"></i><span class="menu-title" data-i18n="Todo"> Calendar </span></a>
+          </li>
+
+        </ul>
+      </li>
+
       <li class=" nav-item" *ngIf="currentUser.roles[0] == 'ROLE_ADMIN'"><a [routerLink]="['/home/helpSpace-Management/ListAppointment']"><i class="feather icon-calendar"></i><span class="menu-title" data-i18n="Calender">List of Appointment</span></a>
       </li>
       <li class=" nav-item" *ngIf="currentUser.roles[0] == 'ROLE_ADMIN'"><a [routerLink]="['/home/helpSpace-Management/addAppointment']"><i class="feather icon-mail"></i><span class="menu-title" data-i18n="Email">Appointment</span></a>
